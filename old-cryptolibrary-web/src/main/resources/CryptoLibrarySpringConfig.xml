@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+       http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd" xmlns:aop="http://www.springframework.org/schema/aop">
+
+	<!--  Utilizzato per accedere al contesto Spring -->
+    <bean id="applicationConextProvider"  class="it.eng.crypto.context.CryptoSignerApplicationContextProvider"></bean> 
+
+
+    <bean id="timeStampValidityDateFormat" class="java.text.SimpleDateFormat">
+        <constructor-arg value="dd-MM-yyyy" />
+    </bean>
+
+    <bean id="customEditorConfigurer"
+          class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+        <!--  Costrutture deprecato, poduce un WARNING su spring 3. Da spring 4 in poi non funziona.    
+        <property name="customEditors">
+            <map>
+                <entry key="java.util.Date" >
+                    <bean class="org.springframework.beans.propertyeditors.CustomDateEditor">
+                        <constructor-arg index="0">
+                            <bean class="java.text.SimpleDateFormat">
+                                <constructor-arg value="dd-MM-yyyy" />
+                            </bean>
+                        </constructor-arg>
+                        <constructor-arg index="1" value="false" />
+                    </bean>
+                </entry>
+            </map>
+        </property> -->
+        <!-- Costruttore non deprecato --> 
+        <property name="propertyEditorRegistrars">
+            <list>
+                <bean class="it.eng.crypto.context.CustomDateEditorRegistrar"/>
+            </list>
+        </property>
+    </bean>
+
+
+    <bean id="MasterTimeStamp" class="it.eng.crypto.controller.MasterTimeStampController"  scope="prototype">
+        <property name="controllers">
+            <list>
+                <bean class="it.eng.crypto.controller.impl.timestamp.TimeStampExtraction"
+                      scope="prototype">
+                    <property name="critical" value="true" />
+                </bean>
+
+                <bean class="it.eng.crypto.controller.impl.timestamp.TSAReliability"
+                      scope="prototype">
+                    <property name="critical" value="false" />
+                </bean>
+                <bean class="it.eng.crypto.controller.impl.timestamp.TSARevocation"
+                      scope="prototype">
+                    <property name="critical" value="false" />
+                </bean>		
+            </list>
+        </property>		
+        <property name="checks">
+            <map>
+                <!-- Flag per indicare di effettuare il controllo di attendibilità dei certificati di firma (rispetto a quelli accreditati da CNIPA) -->
+                <entry key="performTSAReliability" value="true" />
+                <!-- Flag per indicare di effettuare il controllo di validità dei certificati rispetto alla scadenza -->
+                <entry key="performTSARevocation" value="true" />
+            </map>
+        </property>
+		
+        <property name="timeStampValidity">
+            <list>
+                <bean class="it.eng.crypto.controller.bean.TimeStampValidityBean">
+                    <property name="end" 	value="03-12-2004" />
+                    <property name="years" 	value="5" />
+                </bean>
+                <bean class="it.eng.crypto.controller.bean.TimeStampValidityBean">
+                    <property name="begin" 	value="04-12-2004" />
+                    <property name="years" 	value="20" />
+                </bean>
+            </list>
+        </property>
+        <property name="timeStampValidator">
+            <bean class="it.eng.crypto.controller.impl.timestamp.TimeStampValidator"/>
+        </property>
+    </bean>
+
+    <bean id="VersamentoSigner" class="it.eng.crypto.controller.MasterSignerController" scope="prototype">
+        <property name="controllers">
+            <list>
+                <bean class="it.eng.crypto.controller.impl.signature.ContentExtraction"
+                      scope="prototype">
+                    <property name="critical" value="true" />
+                </bean>
+                <bean class="it.eng.crypto.controller.impl.signature.SignatureExtraction"
+                      scope="prototype">
+                    <property name="critical" value="true" />
+                    <property name="performCounterSignaturesCheck" value="true" />
+                   
+                </bean>
+                
+                <bean class="it.eng.crypto.controller.impl.signature.FormatValidity"
+                      scope="prototype">
+                    <property name="critical" value="false" />
+                    <property name="performCounterSignaturesCheck" value="true" />
+                    <property name="validityProperties">
+                        <props>
+                        <!--
+                               P7M, CADES_BES, CADES_T, CADES_C, CADES_X_Long, XML_DSIG, XADES, XADES_BES, 
+                               XADES_T, XADES_C, XADES_X, XADES_XL, PDF_DSIG, PADES, PADES_BES, PADES_T, PADES_C, TSR, M7M
+                        -->
+                            <prop key="P7M">01/07/2011</prop>
+                            <prop key="P7S">01/07/2011</prop>
+                            <prop key="XML_DSIG">01/07/2011</prop>
+                            <prop key="PDF_DSIG">01/07/2011</prop>
+                            <prop key="M7M">01/07/2011</prop>
+                        </props>
+                    </property>
+                </bean>                
+                <bean class="it.eng.crypto.controller.impl.signature.SignatureAssociation"
+                      scope="prototype">
+                    <property name="critical" value="false" />
+                    <property name="performCounterSignaturesCheck" value="true" />
+                </bean>
+                <bean class="it.eng.crypto.controller.impl.signature.CertificateReliability"
+                      scope="prototype">
+                    <property name="critical" value="false" />
+                    <property name="performCounterSignaturesCheck" value="true" />
+                </bean>
+                <bean class="it.eng.crypto.controller.impl.signature.CertificateExpiration"
+                      scope="prototype">
+                    <property name="critical" value="false" />
+                    <property name="performCounterSignaturesCheck" value="true" />
+                </bean>
+                <bean class="it.eng.crypto.controller.impl.signature.CertificateAssociation"
+                      scope="prototype">
+                    <property name="critical" value="false" />
+                    <property name="performCounterSignaturesCheck" value="true" />
+                </bean>
+				
+                <bean class="it.eng.crypto.controller.impl.signature.CertificateRevocation"
+                      scope="prototype">
+                    <property name="critical" value="false" />
+                    <property name="performCounterSignaturesCheck" value="true" />
+                </bean>
+            </list>
+        </property>
+        <property name="checks">
+            <map>
+                <entry key="performFormatValidity"  value="true" />
+                <entry key="performSignatureAssociation"  value="true" />				
+                <entry key="performCertificateReliability" value="true" />
+                <entry key="performCertificateExpiration" value="true" />
+                <entry key="performCertificateAssociation" value="true" />
+                <entry key="performCertificateRevocation" value="true" />				
+            </map>
+        </property>
+
+    </bean>
+	
+    <bean id="ChiusuraVolSigner" class="it.eng.crypto.controller.MasterSignerController"
+          scope="prototype">
+        <property name="controllers">
+            <list>
+                <bean class="it.eng.crypto.controller.impl.signature.ContentExtraction" scope="prototype">
+                    <property name="critical" value="true" />
+                    <!--<property name="performCounterSignaturesCheck" value="true" />-->
+                </bean>
+                <bean class="it.eng.crypto.controller.impl.signature.SignatureExtraction" scope="prototype">
+                    <property name="critical" value="true" />
+                    <property name="performCounterSignaturesCheck" value="true" />
+                    
+                </bean>
+                <bean class="it.eng.crypto.controller.impl.signature.FormatValidity" scope="prototype">
+                    <property name="critical" value="false" />
+                    <property name="performCounterSignaturesCheck" value="true" />
+                    <property name="validityProperties">
+                        <props>
+                            <!--
+                                   P7M, CADES_BES, CADES_T, CADES_C, CADES_X_Long, XML_DSIG, XADES, XADES_BES, 
+                               XADES_T, XADES_C, XADES_X, XADES_XL, PDF_DSIG, PADES, PADES_BES, PADES_T, PADES_C, TSR, M7M
+                            -->
+                            <prop key="P7M">01/07/2011</prop>
+                            <prop key="P7S">01/07/2011</prop>
+                            <prop key="XML_DSIG">01/07/2011</prop>
+                            <prop key="PDF_DSIG">01/07/2011</prop>
+                            <prop key="M7M">01/07/2011</prop>
+                        </props>
+                    </property>
+                </bean>
+
+                <bean class="it.eng.crypto.controller.impl.signature.SignatureAssociation" scope="prototype">
+                    <property name="critical" value="false" />
+                    <property name="performCounterSignaturesCheck" value="true" />
+                </bean>
+                <bean class="it.eng.crypto.controller.impl.signature.CertificateReliability" scope="prototype">
+                    <property name="critical" value="false" />
+                    <property name="performCounterSignaturesCheck" value="true" />
+                </bean>
+                <bean class="it.eng.crypto.controller.impl.signature.CertificateExpiration"	scope="prototype">
+                    <property name="critical" value="false" />
+                    <property name="performCounterSignaturesCheck" value="true" />
+                </bean>
+                <bean class="it.eng.crypto.controller.impl.signature.CertificateAssociation" scope="prototype">
+                    <property name="critical" value="false" />
+                    <property name="performCounterSignaturesCheck" value="true" />
+                </bean>				
+                <bean class="it.eng.crypto.controller.impl.signature.CertificateRevocation" scope="prototype">
+                    <property name="critical" value="false" />
+                    <property name="performCounterSignaturesCheck" value="true" />
+                    <property name="checkCertificateExpiration" value="false" />
+                </bean>
+            </list>
+        </property>
+        <property name="checks">
+            <map>			
+                <entry key="performFormatValidity"  value="false" />
+                <entry key="performSignatureAssociation"  value="false" />
+                <entry key="performCertificateReliability" value="false" />                
+                <entry key="performCertificateAssociation" value="false" />
+                <entry key="performCertificateExpiration" value="true" />
+                <entry key="performCertificateRevocation" value="true" />
+            </map>
+        </property>
+    </bean>
+	
+
+    <bean id="CryptoConfiguration" class="it.eng.crypto.CryptoConfiguration" scope="singleton">
+        <property name="scheduleCARevoke" value="* * * * *" />
+        <property name="scheduleCAUpdate" value="* * * * *" />        
+        <property name="proxyUser" value="" />
+        <property name="proxyPassword" value="" />
+        <property name="userDomain" value="" />
+        <property name="userHost" value="" />		
+        <property name="proxyHost" value="" />
+        <property name="proxyPort" value="" />
+        <!-- Modifica per adeguamento EIDAS vedi http://www.agid.gov.it/agenda-digitale/infrastrutture-architetture/firme-elettroniche/certificati -->
+        <!--<property name="qualifiedCertificatesURL" value="https://applicazioni.cnipa.gov.it/TSL/IT_TSL_signed.xml" />-->
+         <!--<property name="qualifiedCertificatesURL" value="https://eidas.agid.gov.it/TL/TSL-IT.xml" />-->
+        <property name="qualifiedCertificatesURL" value="https://ec.europa.eu/tools/lotl/eu-lotl.xml" />
+        
+    </bean>
+	
+    
+<!--    <bean id="CRLStorage"   cass="it.eng.parer.crypto.web.service.helper.CRLHelper"></bean>
+    <bean id="ConfigStorage" class="it.eng.parer.crypto.web.service.helper.ConfigHelper"></bean>
+    <bean id="CAStorage" class="it.eng.parer.crypto.web.service.helper.CAHelper"></bean>-->
+        
+	<!-- EJB PERSISTENCE	
+        
+        
+        
+    <bean id="CRLStorage" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName" value="java:module/CRLHelper"/>
+        <property name="lookupOnStartup" value="false"></property>
+        <property name="proxyInterface" value="it.eng.crypto.storage.ICRLStorage"></property>
+    </bean>
+	
+    <bean id="ConfigStorage" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName" value="java:module/ConfigHelper"/>
+        <property name="lookupOnStartup" value="false"></property>
+        <property name="proxyInterface" value="it.eng.crypto.storage.IConfigStorage"></property>
+    </bean>
+	
+    <bean id="CAStorage" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName" value="java:module/pollo"/>
+        <property name="lookupOnStartup" value="false"></property>
+        <property name="proxyInterface" value="it.eng.crypto.storage.ICAStorage"></property>
+    </bean>
+    -->
+    
+    <!--
+	
+     <jee:local-slsb id="CRLStorage" jndi-name="java:comp/env/CRLHelper"
+     business-interface="it.eng.crypto.storage.ICRLStorage"/>
+     <jee:local-slsb id="ConfigStorage" jndi-name="java:comp/env/ConfigHelper"
+     business-interface="it.eng.crypto.storage.IConfigStorage"/>
+     <jee:local-slsb id="CAStorage" jndi-name="java:comp/env/CAHelper"
+     business-interface="it.eng.crypto.storage.ICAStorage"/>
+    -->     
+       
+
+    <!--<bean id="CertificateAuthorityUpdate" class="it.eng.crypto.ca.impl.TSLCertificateAuthority"	scope="prototype"></bean>-->	
+	
+    <bean id="DataSigner" class="it.eng.crypto.data.DataSigner"	scope="prototype">
+        <property name="signersManager">
+            <list>
+                <bean class="it.eng.crypto.data.M7MSigner" scope="prototype" />
+                <bean class="it.eng.crypto.data.TsdSigner" scope="prototype" />
+                <bean class="it.eng.crypto.data.TsrSigner" scope="prototype" />
+                <bean class="it.eng.crypto.data.CMSSigner" scope="prototype" />                
+                <bean class="it.eng.crypto.data.XMLSigner" scope="prototype" >
+                    <property name="parserPool" ref="XmlParserPool" />
+                </bean>
+                <bean class="it.eng.crypto.data.PdfSigner" scope="prototype" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="XmlParserPool" class="it.eng.crypto.data.util.XmlParserPool" scope="singleton" >
+        <!-- Setto il maxPoolSize -->
+        <constructor-arg  index="0" value="50" />       
+    </bean>
+
+    <bean id="VersamentoManager" class="it.eng.crypto.manager.SignatureManager"	scope="prototype">
+        <property name="masterTimeStampController" ref="MasterTimeStamp" />
+        <property name="masterSignerController" ref="VersamentoSigner" />
+        <property name="useExternalReferenceTime" value="false" />
+    </bean>
+	
+    <bean id="ChiusuraVolManager" class="it.eng.crypto.manager.SignatureManager" scope="prototype">
+        <property name="masterTimeStampController" ref="MasterTimeStamp" />
+        <property name="masterSignerController" ref="ChiusuraVolSigner" />
+        <property name="useExternalReferenceTime" value="true" />
+    </bean>
+	
+
+
+
+</beans>

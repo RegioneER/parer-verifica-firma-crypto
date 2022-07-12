@@ -1,0 +1,50 @@
+spec:
+  template:
+    metadata:
+      labels:
+         ambiente: svil
+    spec:
+      volumes:
+      - name: crypto-config
+        configMap:
+          name: crypto-config-svil
+      containers:
+      - env:
+        - name: SPRING_CONFIG_VOLUME
+          value: /etc/crypto/config
+        - name: H2_USER
+          valueFrom:
+            secretKeyRef:
+              key: database-user
+              name: crypto-secrets-svil
+        - name: H2_PWD
+          valueFrom:
+            secretKeyRef:
+              key: database-password
+              name: crypto-secrets-svil
+        - name: ADMIN_USER
+          valueFrom:
+            secretKeyRef:
+              key: admin-user
+              name: crypto-secrets-svil
+        - name: ADMIN_PWD
+          valueFrom:
+            secretKeyRef:
+              key: admin-password
+              name: crypto-secrets-svil
+        volumeMounts:
+        - name: crypto-config
+          readOnly: true
+          mountPath: /etc/crypto/config
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 180
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 30

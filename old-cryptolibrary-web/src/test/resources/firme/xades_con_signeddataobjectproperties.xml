@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><p:FatturaElettronica xmlns:p="http://www.fatturapa.gov.it/sdi/fatturapa/v1.1" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" versione="1.1">
+	<FatturaElettronicaHeader>
+		<DatiTrasmissione>
+			<IdTrasmittente>
+				<IdPaese>IT</IdPaese>
+				<IdCodice>07155170157</IdCodice>
+			</IdTrasmittente>
+			<ProgressivoInvio>1275</ProgressivoInvio>
+			<FormatoTrasmissione>SDI11</FormatoTrasmissione>
+			<CodiceDestinatario>UFX3JZ</CodiceDestinatario>
+			<ContattiTrasmittente>
+				<Telefono>028914031</Telefono>
+				<Email>assistenza@fabersystem.it</Email>
+			</ContattiTrasmittente>
+		</DatiTrasmissione>
+		<CedentePrestatore>
+			<DatiAnagrafici>
+				<IdFiscaleIVA>
+					<IdPaese>IT</IdPaese>
+					<IdCodice>00801720152</IdCodice>
+				</IdFiscaleIVA>
+				<CodiceFiscale>00801720152</CodiceFiscale>
+				<Anagrafica>
+					<Denominazione>Bio-Rad Laboratories S.r.l.</Denominazione>
+				</Anagrafica>
+				<RegimeFiscale>RF01</RegimeFiscale>
+			</DatiAnagrafici>
+			<Sede>
+				<Indirizzo>Via Cellini, 18/a</Indirizzo>
+				<CAP>20090</CAP>
+				<Comune>Segrate</Comune>
+				<Provincia>MI</Provincia>
+				<Nazione>IT</Nazione>
+			</Sede>
+			<IscrizioneREA>
+				<Ufficio>MI</Ufficio>
+				<NumeroREA>807526</NumeroREA>
+				<CapitaleSociale>568102.70</CapitaleSociale>
+				<SocioUnico>SM</SocioUnico>
+				<StatoLiquidazione>LN</StatoLiquidazione>
+			</IscrizioneREA>
+		</CedentePrestatore>
+		<CessionarioCommittente>
+			<DatiAnagrafici>
+				<CodiceFiscale>01295950388</CodiceFiscale>
+				<Anagrafica>
+					<Denominazione>AZIENDA OSPEDALIERA UNIVER. S. . LOCALITA' CONA</Denominazione>
+				</Anagrafica>
+			</DatiAnagrafici>
+			<Sede>
+				<Indirizzo>VIA ALDO MORO 8</Indirizzo>
+				<CAP>44124</CAP>
+				<Comune>FERRARA</Comune>
+				<Provincia>FE</Provincia>
+				<Nazione>IT</Nazione>
+			</Sede>
+		</CessionarioCommittente>
+	</FatturaElettronicaHeader>
+	<FatturaElettronicaBody>
+		<DatiGenerali>
+			<DatiGeneraliDocumento>
+				<TipoDocumento>TD01</TipoDocumento>
+				<Divisa>EUR</Divisa>
+				<Data>2015-04-08</Data>
+				<Numero>S01/21510022</Numero>
+				<ScontoMaggiorazione>
+					<Tipo>SC</Tipo>
+					<Percentuale>0.00</Percentuale>
+					<Importo>0.00</Importo>
+				</ScontoMaggiorazione>
+				<ImportoTotaleDocumento>2635.20</ImportoTotaleDocumento>
+			</DatiGeneraliDocumento>
+			<DatiOrdineAcquisto>
+				<IdDocumento>4500161127</IdDocumento>
+				<Data>2015-01-27</Data>
+				<CodiceCIG>: 6064970B90</CodiceCIG>
+			</DatiOrdineAcquisto>
+			<DatiDDT>
+				<NumeroDDT>IDSE-011338514</NumeroDDT>
+				<DataDDT>2015-04-01</DataDDT>
+			</DatiDDT>
+			<DatiTrasporto>
+				<IndirizzoResa>
+					<Indirizzo>OSPEDALE S.ANNA.FARMACIA INTERNA - orario 8/12</Indirizzo>
+					<CAP>44100</CAP>
+					<Comune>FERRARA</Comune>
+					<Provincia>FE</Provincia>
+					<Nazione>IT</Nazione>
+				</IndirizzoResa>
+			</DatiTrasporto>
+		</DatiGenerali>
+		<DatiBeniServizi>
+			<DettaglioLinee>
+				<NumeroLinea>90</NumeroLinea>
+				<TipoCessionePrestazione>SC</TipoCessionePrestazione>
+				<CodiceArticolo>
+					<CodiceTipo>CODICE_FORNITORE</CodiceTipo>
+					<CodiceValore>30029090</CodiceValore>
+				</CodiceArticolo>
+				<Descrizione>TUMOR MARKER PLUS 1 LYPH</Descrizione>
+				<Quantita>3.00</Quantita>
+				<UnitaMisura>PEZZI</UnitaMisura>
+				<PrezzoUnitario>360.00</PrezzoUnitario>
+				<ScontoMaggiorazione>
+					<Tipo>SC</Tipo>
+					<Percentuale>0.00</Percentuale>
+					<Importo>0.00</Importo>
+				</ScontoMaggiorazione>
+				<PrezzoTotale>1080.00</PrezzoTotale>
+				<AliquotaIVA>22.00</AliquotaIVA>
+			</DettaglioLinee>
+			<DettaglioLinee>
+				<NumeroLinea>100</NumeroLinea>
+				<TipoCessionePrestazione>SC</TipoCessionePrestazione>
+				<CodiceArticolo>
+					<CodiceTipo>CODICE_FORNITORE</CodiceTipo>
+					<CodiceValore>30029090</CodiceValore>
+				</CodiceArticolo>
+				<Descrizione>TUMOR MARKER PLUS 2 LYPH</Descrizione>
+				<Quantita>3.00</Quantita>
+				<UnitaMisura>PEZZI</UnitaMisura>
+				<PrezzoUnitario>360.00</PrezzoUnitario>
+				<ScontoMaggiorazione>
+					<Tipo>SC</Tipo>
+					<Percentuale>0.00</Percentuale>
+					<Importo>0.00</Importo>
+				</ScontoMaggiorazione>
+				<PrezzoTotale>1080.00</PrezzoTotale>
+				<AliquotaIVA>22.00</AliquotaIVA>
+			</DettaglioLinee>
+			<DatiRiepilogo>
+				<AliquotaIVA>22.00</AliquotaIVA>
+				<ImponibileImporto>2160.00</ImponibileImporto>
+				<Imposta>475.20</Imposta>
+				<EsigibilitaIVA>S</EsigibilitaIVA>
+				<RiferimentoNormativo>IVA 22% SPLIT PAYMENT</RiferimentoNormativo>
+			</DatiRiepilogo>
+		</DatiBeniServizi>
+		<DatiPagamento>
+			<CondizioniPagamento>TP02</CondizioniPagamento>
+			<DettaglioPagamento>
+				<ModalitaPagamento>MP05</ModalitaPagamento>
+				<DataRiferimentoTerminiPagamento>2015-04-08</DataRiferimentoTerminiPagamento>
+				<ImportoPagamento>2160.00</ImportoPagamento>
+				<IBAN>IT91Z0306920604000004106123</IBAN>
+				<BIC>BCITITMM</BIC>
+			</DettaglioPagamento>
+		</DatiPagamento>
+	</FatturaElettronicaBody>
+<ds:Signature Id="S-4519ea5d-93c0-415c-85b8-8c4b24f1cd22">
+<ds:SignedInfo>
+<ds:CanonicalizationMethod Algorithm="http://www.w3.org/2006/12/xml-c14n11"/>
+<ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+<ds:Reference Id="R-06265019-9337-4442-a597-ecf2458157c0" URI="">
+<ds:Transforms>
+<ds:Transform Algorithm="http://www.w3.org/2002/06/xmldsig-filter2">
+<dsig-xpath:XPath xmlns:dsig-xpath="http://www.w3.org/2002/06/xmldsig-filter2" Filter="subtract">/descendant::ds:Signature</dsig-xpath:XPath>
+</ds:Transform>
+<ds:Transform Algorithm="http://www.w3.org/2006/12/xml-c14n11"/>
+</ds:Transforms>
+<ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+<ds:DigestValue>Tgypz7kjxML1Ef9sPz4EqZxAD4tlw1GOjtK64aLNDXU=</ds:DigestValue>
+</ds:Reference>
+<ds:Reference Type="http://uri.etsi.org/01903#SignedProperties" URI="#SP-b7c7daf5-21c0-4f1b-8542-49fed5c0423a">
+<ds:Transforms>
+<ds:Transform Algorithm="http://www.w3.org/2006/12/xml-c14n11"/>
+</ds:Transforms>
+<ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+<ds:DigestValue>XnT9DgWNPWXYOtO3y/AMG66nf7/8L/jYCaZyfgfn/Vg=</ds:DigestValue>
+</ds:Reference>
+<ds:Reference URI="#KI-926f685d-5a50-44f4-b858-18070cd5252c">
+<ds:Transforms>
+<ds:Transform Algorithm="http://www.w3.org/2006/12/xml-c14n11"/>
+</ds:Transforms>
+<ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+<ds:DigestValue>jZH1YSM4KqTrdm7iFHNIE+XT0V9153+b0AY7x0HyPv0=</ds:DigestValue>
+</ds:Reference>
+</ds:SignedInfo>
+<ds:SignatureValue>
+FrgUC199UiQhZ+Lw5UBigCmQz0C9ObYqPkWGU1jRh8/H5u0i7zV5dmH7fKkVnWLZ7sszWvQEvziD
+IOsMkLwNT9lxjxCjebsqiIgiKibv3kHBtOt2dTxHnZi1ODPdErJPTSAhClih5eb9VxJXJ44Ro54a
+f3HsGO16KLxAxEnZ4zQ=
+</ds:SignatureValue>
+<ds:KeyInfo Id="KI-926f685d-5a50-44f4-b858-18070cd5252c">
+<ds:X509Data>
+<ds:X509Certificate>
+MIIGpjCCBY6gAwIBAgIIL1uLSIfY64wwDQYJKoZIhvcNAQELBQAwgZQxCzAJBgNVBAYTAklUMSMw
+IQYDVQQKDBpBY3RhbGlzIFMucC5BLi8wMzM1ODUyMDk2NzExMC8GA1UECwwoUXVhbGlmaWVkIENl
+cnRpZmljYXRpb24gU2VydmljZSBQcm92aWRlcjEtMCsGA1UEAwwkQWN0YWxpcyBRdWFsaWZpZWQg
+Q2VydGlmaWNhdGVzIENBIEcxMB4XDTEzMDIyNjE2MjcxNVoXDTE2MDIyNjE2MjcxNVowgbExCzAJ
+BgNVBAYTAklUMSEwHwYDVQQKDBhGQUJFUiBTWVNURU0vMDcxNTUxNzAxNTcxDjAMBgNVBAQMBVJP
+U1NJMRYwFAYDVQQqDA1NQVRURU8gRU5SSUNPMRwwGgYDVQQFExNJVDpSU1NNVE43NUIwMkYyMDVY
+MRwwGgYDVQQDDBNNQVRURU8gRU5SSUNPIFJPU1NJMRswGQYDVQQuExIxMDgzLTExNjg4NjkyOTQ5
+NDIwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAKzp4tPI4dvxuYFnpoHZssVOpw30+C87d3HK
+xnk7/zOmEcIgzYff+HrAimk0O0dnP++gUcPQ4rEgDvox22WRy86hZwU/knCnIIlAu9gWLGQIA6C+
+LamSYxip5G6R52fDu9b4ezBCiPxiaMGpRRpXirP4z8d1OuALOSKDxh1fQrKrAgMBAAGjggNfMIID
+WzBHBggrBgEFBQcBAQQ7MDkwNwYIKwYBBQUHMAGGK2h0dHA6Ly9wb3J0YWwuYWN0YWxpcy5pdC9W
+QS9RdWFsaWZpZWQtQ0EtRzEwHQYDVR0OBBYEFFLxqr+k/9BGN1gWFqCYHhZWAZTiMAkGA1UdEwQC
+MAAwHwYDVR0jBBgwFoAUa85kPSv4T4tD7/Ayve+RVA2tvvgwOwYIKwYBBQUHAQMELzAtMAoGCCsG
+AQUFBwsCMAgGBgQAjkYBATALBgYEAI5GAQMCARQwCAYGBACORgEEMIIBMgYDVR0gBIIBKTCCASUw
+ggEhBgYrgR8BBQEwggEVMIHLBggrBgEFBQcCAjCBvgyBu0lsIHByZXNlbnRlIGNlcnRpZmljYXRv
+IGUnIHZhbGlkbyBzb2xvIHBlciBmaXJtZSBhcHBvc3RlIGNvbiBwcm9jZWR1cmEgYXV0b21hdGlj
+YS4gTGEgcHJlc2VudGUgZGljaGlhcmF6aW9uZSBjb3N0aXR1aXNjZSBldmlkZW56YSBkZWxsYSBh
+ZG96aW9uZSBkaSB0YWxlIHByb2NlZHVyYSBwZXIgaSBkb2N1bWVudGkgZmlybWF0aS4wRQYIKwYB
+BQUHAgEWOWh0dHBzOi8vcG9ydGFsLmFjdGFsaXMuaXQvUmVwb3NpdG9yeS9Qb2xpY3kvUXVhbGlm
+aWVkL0NQUzCCARgGA1UdHwSCAQ8wggELMIHQoIHNoIHKhoHHbGRhcDovL2xkYXAuYWN0YWxpcy5p
+dC9jbiUzZEFjdGFsaXMlMjBRdWFsaWZpZWQlMjBDZXJ0aWZpY2F0ZXMlMjBDQSUyMEcxLG91JTNk
+UXVhbGlmaWVkJTIwQ2VydGlmaWNhdGlvbiUyMFNlcnZpY2UlMjBQcm92aWRlcixvJTNkQWN0YWxp
+cyUyMFMucC5BLiUyZjAzMzU4NTIwOTY3LGMlM2RJVD9jZXJ0aWZpY2F0ZVJldm9jYXRpb25MaXN0
+O2JpbmFyeTA2oDSgMoYwaHR0cDovL3BvcnRhbC5hY3RhbGlzLml0L1JlcG9zaXRvcnkvUUxGRzEv
+Z2V0Q1JMMA4GA1UdDwEB/wQEAwIGQDAmBgNVHREEHzAdgRttYXR0ZW8ucm9zc2lAZmFiZXJzeXN0
+ZW0uaXQwDQYJKoZIhvcNAQELBQADggEBAMRCTlo+hXZK1UDJcbon9j22FIOmvH7+NtseSIp/UNhO
+l3spdNj3PJVK9I9JR+kbme++rI0RoILFUr1I59F6CBImiRLW/MrrzSeFADoCh9s0T1R7uPP+4ct9
+kWEjO8tvtC3TfqA2o3BcS6yPqp7GiCEOhwYs3j3HufLo+RSyRCsjR+AH8XKNMmGJMhjGHIDa6c0v
+AhUnd63zrjTuNSouos+xS/U92L+GLCBtEXXofVmQIORg3KElFLkmYP+seRHmxT6FBuGrSb7Qh6ZS
+lTcvMmAFbvFEIKQdqm4kRUezkHhsbBnZw7dHx2rLhIqrqQgKKXXFmauB0pu68lDJg2eeFr4=
+</ds:X509Certificate>
+</ds:X509Data>
+</ds:KeyInfo>
+<ds:Object>
+<xades:QualifyingProperties xmlns:xades="http://uri.etsi.org/01903/v1.3.2#" Target="#S-4519ea5d-93c0-415c-85b8-8c4b24f1cd22">
+<xades:SignedProperties Id="SP-b7c7daf5-21c0-4f1b-8542-49fed5c0423a">
+<xades:SignedSignatureProperties>
+<xades:SigningTime>2015-04-13T13:15:45Z</xades:SigningTime>
+<xades:SigningCertificate>
+<xades:Cert>
+<xades:CertDigest>
+<ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+<ds:DigestValue>MfQn+9lyiZZnFtY/9+pT4WvHfGqWd4VuIkQBqKZaasM=</ds:DigestValue>
+</xades:CertDigest>
+<xades:IssuerSerial>
+<ds:X509IssuerName>CN=Actalis Qualified Certificates CA G1,OU=Qualified Certification Service Provider,O=Actalis S.p.A./03358520967,C=IT</ds:X509IssuerName>
+<ds:X509SerialNumber>3412474286296329100</ds:X509SerialNumber>
+</xades:IssuerSerial>
+</xades:Cert>
+</xades:SigningCertificate>
+</xades:SignedSignatureProperties>
+<xades:SignedDataObjectProperties>
+<xades:DataObjectFormat ObjectReference="#R-06265019-9337-4442-a597-ecf2458157c0">
+<xades:MimeType>application/xml</xades:MimeType>
+</xades:DataObjectFormat>
+</xades:SignedDataObjectProperties>
+</xades:SignedProperties>
+</xades:QualifyingProperties>
+</ds:Object>
+</ds:Signature></p:FatturaElettronica>

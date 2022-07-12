@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Route
+metadata:
+  name: crypto-prod
+  namespace: parer
+spec:
+  host: crypto.parer-apps.ente.regione.emr.it
+  port:
+    targetPort: 8080
+  to:
+    kind: Service
+    name: crypto-prod
+    weight: 100

@@ -1,0 +1,20 @@
+# /etc/systemd/system/crypto.service
+
+[Unit]
+Description=Verifica firma CRYPTO
+After=syslog.target network.target
+	 
+[Service]
+Type=simple
+User=<utente con cui viene eseguito il processo>
+Restart=on-failure
+RestartSec=3s
+
+WorkingDirectory=<directory completa con installazione crypto>
+
+ExecStart=<directory completa con installazione crypto>/bin/crypto 
+SuccessExitStatus=143 
+
+[Install] 
+WantedBy=multi-user.target
+

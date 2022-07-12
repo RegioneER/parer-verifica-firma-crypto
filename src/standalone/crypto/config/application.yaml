@@ -1,0 +1,82 @@
+server:
+  port: 9081
+
+# LOGGING
+logging: 
+  file:
+    name: logs/crypto.log
+  pattern:
+    console: ""
+    file: "%d %-5p [%c] \\(%t\\) [%X{uuid}] %m %n"
+  level:
+    root: INFO
+    org.springframework: INFO
+    org.apache: INFO
+    org.hibernate: INFO
+    it.eng.parer.crypto: INFO
+
+spring:
+  jmx:
+    enabled: true
+  profiles:
+    active: daemon
+  security: 
+    user:
+     name: crypto
+     password: passw0rd!
+     roles: ADMIN
+  datasource:
+    url: jdbc:h2:file:./db/cryptodb;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE 
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+    hikari:
+      #idle-timeout: 10000
+      maximum-pool-size: 20
+      #minimum-idle: 5
+      pool-name: ParerCryptoHikariPool
+  jpa:
+    open-in-view: false
+    database-platform: org.hibernate.dialect.H2Dialect
+    show_sql: false
+    hibernate:
+      max_fetch_depth: 3
+      ddl-auto: update
+      hbm2ddl:
+        auto: update
+  h2:
+    console:
+      enabled: true
+      path: /admin/h2-console
+      settings:
+        web-allow-others: true
+  main:
+    allow-bean-definition-overriding: true
+
+        
+# CRON  
+cron:
+  thread:
+    pool:
+      size: 2
+  ca:
+   enable: true
+   initial-delay: 180000
+   # ogni 15 minuti
+   delay: 900000
+  crl:
+   enable: true    
+   initial-delay: 240000
+   # ogni 15 minuti
+   delay: 900000
+
+
+# CRYPTO
+parer:
+  crypto:
+    TSAServiceURL: https://timestamp.test.namirialtsp.com
+    TSAAuthScope: timestamp.test.namirialtsp.com
+    TSAUser: io
+    TSAPass: io
+
+      

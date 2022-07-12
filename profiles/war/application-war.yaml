@@ -1,0 +1,77 @@
+
+spring:
+  profiles:
+    active: war
+    
+  security: 
+    user:
+      name: admin
+      password: admin
+      roles: ADMIN
+        
+  datasource:
+    url: jdbc:h2:~/cryptodb
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+    #data: file:/<path>/data.sql
+    
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      max_fetch_depth: 3
+      hbm2ddl:
+        auto: update
+      show_sql: true
+      
+  h2:
+    console:
+      enabled: true
+      path: /admin/h2-console
+      settings:
+        web-allow-others: true
+  main:
+    allow-bean-definition-overriding: true
+
+        
+# LOGGING
+logging: 
+  pattern:
+    console: "%d %5p | %t | %-55logger{55} | %m %n"
+  level:
+    root: INFO
+    org.springframework: INFO
+    org.apache: INFO
+    org.hibernate: INFO
+    it.eng.parer.crypto: INFO
+
+# CRON  
+cron:
+  thread:
+    pool:
+      size: 2
+  ca:
+   enable: true
+   initial-delay: 180000
+   delay: 300000
+  crl:
+   enable: true    
+   initial-delay: 240000
+   delay: 300000
+
+# CRYPTO
+parer:
+  crypto:
+    TSAServiceURL: https://timestamp.test.namirialtsp.com
+    TSAAuthScope: timestamp.test.namirialtsp.com
+    TSAUser: io
+    TSAPass: io
+# BEAN
+it:
+  eng:
+    parer:
+      core:
+        viewhelper:
+          propstoskip: .*H2_USER.*|.*H2_PWD.*|.*ADMIN_USER.*|.*ADMIN_PWD.*|.*password.*|.*email.*      
+      
+

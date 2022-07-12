@@ -1,0 +1,2806 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<registrazione versione="2.0">
+    <operazione>
+        <data formato="ISO8601">2008-12-31T09:32:41+01:00</data>
+        <archiviatore>
+            <codice>RTNMSM64L20A944N</codice>
+        </archiviatore>
+        <controlli>
+            <blocca-crl-scadute>si</blocca-crl-scadute>
+            <catena-trust>si</catena-trust>
+            <certificato-valido>si</certificato-valido>
+            <controllo-crl>si</controllo-crl>
+            <verifica-crittografica>si</verifica-crittografica>
+        </controlli>
+    </operazione>
+    <documenti>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587370</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>tRFrO8nCcv3j2p7opZxtM19bCQQ=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>ALESSANDRO</nome>
+            <cognome>SPADARI</cognome>
+            <codFisc>SPDLSN62S02A944I</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>426678</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=ALESSANDRO SPADARI,GIVENNAME=ALESSANDRO,SURNAME=SPADARI,SERIALNUMBER=IT:SPDLSN62S02A944I,DN=18-1224166995834,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>MONIKA</nome>
+            <cognome>JOECHLER</cognome>
+            <codFisc>JCHMNK56M71F132J</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>426692</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=MONIKA JOECHLER,GIVENNAME=MONIKA,SURNAME=JOECHLER,SERIALNUMBER=IT:JCHMNK56M71F132J,DN=unim-6622-170467,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587371</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>foaTGyXDqUQ4wiGnCUIozraA8bQ=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>MONIKA</nome>
+            <cognome>JOECHLER</cognome>
+            <codFisc>JCHMNK56M71F132J</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>426692</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=MONIKA JOECHLER,GIVENNAME=MONIKA,SURNAME=JOECHLER,SERIALNUMBER=IT:JCHMNK56M71F132J,DN=unim-6622-170467,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>ALESSANDRO</nome>
+            <cognome>SPADARI</cognome>
+            <codFisc>SPDLSN62S02A944I</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>426678</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=ALESSANDRO SPADARI,GIVENNAME=ALESSANDRO,SURNAME=SPADARI,SERIALNUMBER=IT:SPDLSN62S02A944I,DN=18-1224166995834,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587372</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>tR0P7N9UiEfvEPuX4p2sHQHCcwA=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>GRAZIA</nome>
+            <cognome>MEZZETTI</cognome>
+            <codFisc>MZZGRZ46P50A944H</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>275248</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=GRAZIA MEZZETTI,GIVENNAME=GRAZIA,SURNAME=MEZZETTI,SERIALNUMBER=IT:MZZGRZ46P50A944H,DN=unim-6563-171638,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>MAURIZIO</nome>
+            <cognome>MUSSONI</cognome>
+            <codFisc>MSSMRZ70B01H294K</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>394152</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MAURIZIO MUSSONI,GIVENNAME=MAURIZIO,SURNAME=MUSSONI,SERIALNUMBER=IT:MSSMRZ70B01H294K,DN=18-1149764738447,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587373</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>C0LVXE4EfymAmE05VSO1vk2RZms=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>MAURIZIO</nome>
+            <cognome>MUSSONI</cognome>
+            <codFisc>MSSMRZ70B01H294K</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>394152</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MAURIZIO MUSSONI,GIVENNAME=MAURIZIO,SURNAME=MUSSONI,SERIALNUMBER=IT:MSSMRZ70B01H294K,DN=18-1149764738447,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>GRAZIA</nome>
+            <cognome>MEZZETTI</cognome>
+            <codFisc>MZZGRZ46P50A944H</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>275248</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=GRAZIA MEZZETTI,GIVENNAME=GRAZIA,SURNAME=MEZZETTI,SERIALNUMBER=IT:MZZGRZ46P50A944H,DN=unim-6563-171638,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587374</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>0i/MeRcDOY9ilKcOZ6TqiKO4WAs=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>VINCENZO</nome>
+            <cognome>PARENTI CASTELLI</cognome>
+            <codFisc>PRNVCN49T15A944D</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>506175</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=VINCENZO PARENTI CASTELLI,GIVENNAME=VINCENZO,SURNAME=PARENTI CASTELLI,SERIALNUMBER=IT:PRNVCN49T15A944D,DN=unim-6202-171063,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>MARCO</nome>
+            <cognome>TRONCOSSI</cognome>
+            <codFisc>TRNMRC75T13H199Y</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>318271</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MARCO TRONCOSSI,GIVENNAME=MARCO,SURNAME=TRONCOSSI,SERIALNUMBER=IT:TRNMRC75T13H199Y,DN=18-1127987245863,T=RICERCATORE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587375</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>ViRmfXQjetQ5EDv5IAHUr8T4YpE=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>NICOLA</nome>
+            <cognome>SOLDATI</cognome>
+            <codFisc>SLDNCL67L25F257C</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>332777</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=NICOLA SOLDATI,GIVENNAME=NICOLA,SURNAME=SOLDATI,SERIALNUMBER=IT:SLDNCL67L25F257C,DN=unim-6168-156048,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>GIOVANNI BATTISTA</nome>
+            <cognome>BARILLA'</cognome>
+            <codFisc>BRLGNN76D08A944N</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>397347</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=GIOVANNI BATTISTA BARILLA',GIVENNAME=GIOVANNI BATTISTA,SURNAME=BARILLA',SERIALNUMBER=IT:BRLGNN76D08A944N,DN=18-1210864892108,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587376</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>45KmlkddNnn3OvmBkT2Pd4+MmoI=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>MAURIZIO</nome>
+            <cognome>MUSSONI</cognome>
+            <codFisc>MSSMRZ70B01H294K</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>394152</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MAURIZIO MUSSONI,GIVENNAME=MAURIZIO,SURNAME=MUSSONI,SERIALNUMBER=IT:MSSMRZ70B01H294K,DN=18-1149764738447,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>GRAZIA</nome>
+            <cognome>MEZZETTI</cognome>
+            <codFisc>MZZGRZ46P50A944H</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>275248</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=GRAZIA MEZZETTI,GIVENNAME=GRAZIA,SURNAME=MEZZETTI,SERIALNUMBER=IT:MZZGRZ46P50A944H,DN=unim-6563-171638,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587377</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>REuztg+WQi2tRCsikHiYV0ybHJY=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>GRAZIA</nome>
+            <cognome>MEZZETTI</cognome>
+            <codFisc>MZZGRZ46P50A944H</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>275248</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=GRAZIA MEZZETTI,GIVENNAME=GRAZIA,SURNAME=MEZZETTI,SERIALNUMBER=IT:MZZGRZ46P50A944H,DN=unim-6563-171638,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>MAURIZIO</nome>
+            <cognome>MUSSONI</cognome>
+            <codFisc>MSSMRZ70B01H294K</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>394152</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MAURIZIO MUSSONI,GIVENNAME=MAURIZIO,SURNAME=MUSSONI,SERIALNUMBER=IT:MSSMRZ70B01H294K,DN=18-1149764738447,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587378</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>LcWzAbwA5siqCz+TapKNCGDbK3A=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>ANDREA</nome>
+            <cognome>SACCANI</cognome>
+            <codFisc>SCCNDR62P27F257X</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>268429</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=ANDREA SACCANI,GIVENNAME=ANDREA,SURNAME=SACCANI,SERIALNUMBER=IT:SCCNDR62P27F257X,DN=unim-6204-171269,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>MARIA</nome>
+            <cognome>BIGNOZZI</cognome>
+            <codFisc>BGNMRA66C61A944I</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>279767</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MARIA  BIGNOZZI,GIVENNAME=MARIA,SURNAME=BIGNOZZI,SERIALNUMBER=IT:BGNMRA66C61A944I,DN=18-1173957674620,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587379</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>xv4ajLzuNVncSrytodtXtAsPRMw=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>ANDREA</nome>
+            <cognome>SACCANI</cognome>
+            <codFisc>SCCNDR62P27F257X</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>268429</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=ANDREA SACCANI,GIVENNAME=ANDREA,SURNAME=SACCANI,SERIALNUMBER=IT:SCCNDR62P27F257X,DN=unim-6204-171269,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>MARIA</nome>
+            <cognome>BIGNOZZI</cognome>
+            <codFisc>BGNMRA66C61A944I</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>279767</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MARIA  BIGNOZZI,GIVENNAME=MARIA,SURNAME=BIGNOZZI,SERIALNUMBER=IT:BGNMRA66C61A944I,DN=18-1173957674620,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587380</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>fjYzfK3kZoJSy1wVNg7q1xKFUfk=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>MARIA</nome>
+            <cognome>BIGNOZZI</cognome>
+            <codFisc>BGNMRA66C61A944I</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>279767</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MARIA  BIGNOZZI,GIVENNAME=MARIA,SURNAME=BIGNOZZI,SERIALNUMBER=IT:BGNMRA66C61A944I,DN=18-1173957674620,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>ANDREA</nome>
+            <cognome>SACCANI</cognome>
+            <codFisc>SCCNDR62P27F257X</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>268429</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=ANDREA SACCANI,GIVENNAME=ANDREA,SURNAME=SACCANI,SERIALNUMBER=IT:SCCNDR62P27F257X,DN=unim-6204-171269,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587381</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>6enrzZIU6q8T4K/xWCDtApywhYI=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>MARIA</nome>
+            <cognome>BIGNOZZI</cognome>
+            <codFisc>BGNMRA66C61A944I</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>279767</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MARIA  BIGNOZZI,GIVENNAME=MARIA,SURNAME=BIGNOZZI,SERIALNUMBER=IT:BGNMRA66C61A944I,DN=18-1173957674620,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>ANDREA</nome>
+            <cognome>SACCANI</cognome>
+            <codFisc>SCCNDR62P27F257X</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>268429</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=ANDREA SACCANI,GIVENNAME=ANDREA,SURNAME=SACCANI,SERIALNUMBER=IT:SCCNDR62P27F257X,DN=unim-6204-171269,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587382</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>r2Yxrf404Os0TMZsMc5R4LqdH/E=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>MAURIZIO</nome>
+            <cognome>MUSSONI</cognome>
+            <codFisc>MSSMRZ70B01H294K</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>394152</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MAURIZIO MUSSONI,GIVENNAME=MAURIZIO,SURNAME=MUSSONI,SERIALNUMBER=IT:MSSMRZ70B01H294K,DN=18-1149764738447,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>GRAZIA</nome>
+            <cognome>MEZZETTI</cognome>
+            <codFisc>MZZGRZ46P50A944H</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>275248</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=GRAZIA MEZZETTI,GIVENNAME=GRAZIA,SURNAME=MEZZETTI,SERIALNUMBER=IT:MZZGRZ46P50A944H,DN=unim-6563-171638,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587383</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>IuEE2a9TWmDe/o/o8Glor6kr+dc=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>MAURIZIO</nome>
+            <cognome>MUSSONI</cognome>
+            <codFisc>MSSMRZ70B01H294K</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>394152</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MAURIZIO MUSSONI,GIVENNAME=MAURIZIO,SURNAME=MUSSONI,SERIALNUMBER=IT:MSSMRZ70B01H294K,DN=18-1149764738447,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>GRAZIA</nome>
+            <cognome>MEZZETTI</cognome>
+            <codFisc>MZZGRZ46P50A944H</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>275248</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=GRAZIA MEZZETTI,GIVENNAME=GRAZIA,SURNAME=MEZZETTI,SERIALNUMBER=IT:MZZGRZ46P50A944H,DN=unim-6563-171638,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587384</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>w7dzU6l8MRlyRp0txcdIZRDbyDI=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>ANDREA</nome>
+            <cognome>SACCANI</cognome>
+            <codFisc>SCCNDR62P27F257X</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>268429</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=ANDREA SACCANI,GIVENNAME=ANDREA,SURNAME=SACCANI,SERIALNUMBER=IT:SCCNDR62P27F257X,DN=unim-6204-171269,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>MARIA</nome>
+            <cognome>BIGNOZZI</cognome>
+            <codFisc>BGNMRA66C61A944I</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>279767</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MARIA  BIGNOZZI,GIVENNAME=MARIA,SURNAME=BIGNOZZI,SERIALNUMBER=IT:BGNMRA66C61A944I,DN=18-1173957674620,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587385</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>1PFYKY5cLP9bJzy62BaPUGZiA2Q=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>ANDREA</nome>
+            <cognome>SACCANI</cognome>
+            <codFisc>SCCNDR62P27F257X</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>268429</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=ANDREA SACCANI,GIVENNAME=ANDREA,SURNAME=SACCANI,SERIALNUMBER=IT:SCCNDR62P27F257X,DN=unim-6204-171269,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>MARIA</nome>
+            <cognome>BIGNOZZI</cognome>
+            <codFisc>BGNMRA66C61A944I</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>279767</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MARIA  BIGNOZZI,GIVENNAME=MARIA,SURNAME=BIGNOZZI,SERIALNUMBER=IT:BGNMRA66C61A944I,DN=18-1173957674620,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587386</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>kfuM7nfZ1aCGcl98yuLNaDSNt2Q=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>MARCO</nome>
+            <cognome>TRONCOSSI</cognome>
+            <codFisc>TRNMRC75T13H199Y</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>318271</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MARCO TRONCOSSI,GIVENNAME=MARCO,SURNAME=TRONCOSSI,SERIALNUMBER=IT:TRNMRC75T13H199Y,DN=18-1127987245863,T=RICERCATORE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>VINCENZO</nome>
+            <cognome>PARENTI CASTELLI</cognome>
+            <codFisc>PRNVCN49T15A944D</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>506175</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=VINCENZO PARENTI CASTELLI,GIVENNAME=VINCENZO,SURNAME=PARENTI CASTELLI,SERIALNUMBER=IT:PRNVCN49T15A944D,DN=unim-6202-171063,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587387</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>KuzRfxqiA6H6ARVKuu3is/MqJ7k=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>NICOLA</nome>
+            <cognome>SOLDATI</cognome>
+            <codFisc>SLDNCL67L25F257C</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>332777</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=NICOLA SOLDATI,GIVENNAME=NICOLA,SURNAME=SOLDATI,SERIALNUMBER=IT:SLDNCL67L25F257C,DN=unim-6168-156048,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>GIOVANNI BATTISTA</nome>
+            <cognome>BARILLA'</cognome>
+            <codFisc>BRLGNN76D08A944N</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>397347</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=GIOVANNI BATTISTA BARILLA',GIVENNAME=GIOVANNI BATTISTA,SURNAME=BARILLA',SERIALNUMBER=IT:BRLGNN76D08A944N,DN=18-1210864892108,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587388</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>XffTz6VqTdf137Y1eknaBEB07Eg=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>ANDREA</nome>
+            <cognome>SACCANI</cognome>
+            <codFisc>SCCNDR62P27F257X</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>268429</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=ANDREA SACCANI,GIVENNAME=ANDREA,SURNAME=SACCANI,SERIALNUMBER=IT:SCCNDR62P27F257X,DN=unim-6204-171269,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>MARIA</nome>
+            <cognome>BIGNOZZI</cognome>
+            <codFisc>BGNMRA66C61A944I</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>279767</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MARIA  BIGNOZZI,GIVENNAME=MARIA,SURNAME=BIGNOZZI,SERIALNUMBER=IT:BGNMRA66C61A944I,DN=18-1173957674620,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587389</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>P/KAuNS2lGgUzPvVQWHppmhnlYk=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>VINCENZO</nome>
+            <cognome>PARENTI CASTELLI</cognome>
+            <codFisc>PRNVCN49T15A944D</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>506175</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=VINCENZO PARENTI CASTELLI,GIVENNAME=VINCENZO,SURNAME=PARENTI CASTELLI,SERIALNUMBER=IT:PRNVCN49T15A944D,DN=unim-6202-171063,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>MARCO</nome>
+            <cognome>TRONCOSSI</cognome>
+            <codFisc>TRNMRC75T13H199Y</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>318271</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MARCO TRONCOSSI,GIVENNAME=MARCO,SURNAME=TRONCOSSI,SERIALNUMBER=IT:TRNMRC75T13H199Y,DN=18-1127987245863,T=RICERCATORE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587390</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>9ttkpvJnx+vWccRcsVUkL/NYGRE=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>MARIA</nome>
+            <cognome>BIGNOZZI</cognome>
+            <codFisc>BGNMRA66C61A944I</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>279767</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MARIA  BIGNOZZI,GIVENNAME=MARIA,SURNAME=BIGNOZZI,SERIALNUMBER=IT:BGNMRA66C61A944I,DN=18-1173957674620,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>ANDREA</nome>
+            <cognome>SACCANI</cognome>
+            <codFisc>SCCNDR62P27F257X</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>268429</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=ANDREA SACCANI,GIVENNAME=ANDREA,SURNAME=SACCANI,SERIALNUMBER=IT:SCCNDR62P27F257X,DN=unim-6204-171269,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587391</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>nXRH8oSkYF+qmaGXNzGBOU/eK0c=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>GRAZIA</nome>
+            <cognome>MEZZETTI</cognome>
+            <codFisc>MZZGRZ46P50A944H</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>275248</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=GRAZIA MEZZETTI,GIVENNAME=GRAZIA,SURNAME=MEZZETTI,SERIALNUMBER=IT:MZZGRZ46P50A944H,DN=unim-6563-171638,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>MAURIZIO</nome>
+            <cognome>MUSSONI</cognome>
+            <codFisc>MSSMRZ70B01H294K</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>394152</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MAURIZIO MUSSONI,GIVENNAME=MAURIZIO,SURNAME=MUSSONI,SERIALNUMBER=IT:MSSMRZ70B01H294K,DN=18-1149764738447,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587392</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>rrFV6FHbH3ms8I0uT5qfZJJIAi8=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>MAURIZIO</nome>
+            <cognome>MUSSONI</cognome>
+            <codFisc>MSSMRZ70B01H294K</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>394152</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MAURIZIO MUSSONI,GIVENNAME=MAURIZIO,SURNAME=MUSSONI,SERIALNUMBER=IT:MSSMRZ70B01H294K,DN=18-1149764738447,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>GRAZIA</nome>
+            <cognome>MEZZETTI</cognome>
+            <codFisc>MZZGRZ46P50A944H</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>275248</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=GRAZIA MEZZETTI,GIVENNAME=GRAZIA,SURNAME=MEZZETTI,SERIALNUMBER=IT:MZZGRZ46P50A944H,DN=unim-6563-171638,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587393</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>ZLbqzb8niZ/2vltFoJakwJ+dubE=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>MAURIZIO</nome>
+            <cognome>MUSSONI</cognome>
+            <codFisc>MSSMRZ70B01H294K</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>394152</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MAURIZIO MUSSONI,GIVENNAME=MAURIZIO,SURNAME=MUSSONI,SERIALNUMBER=IT:MSSMRZ70B01H294K,DN=18-1149764738447,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>GRAZIA</nome>
+            <cognome>MEZZETTI</cognome>
+            <codFisc>MZZGRZ46P50A944H</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>275248</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=GRAZIA MEZZETTI,GIVENNAME=GRAZIA,SURNAME=MEZZETTI,SERIALNUMBER=IT:MZZGRZ46P50A944H,DN=unim-6563-171638,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587394</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>VNBt33qC3J/mfYQG7/Zt5xpUqL4=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>GRAZIA</nome>
+            <cognome>MEZZETTI</cognome>
+            <codFisc>MZZGRZ46P50A944H</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>275248</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=GRAZIA MEZZETTI,GIVENNAME=GRAZIA,SURNAME=MEZZETTI,SERIALNUMBER=IT:MZZGRZ46P50A944H,DN=unim-6563-171638,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>MAURIZIO</nome>
+            <cognome>MUSSONI</cognome>
+            <codFisc>MSSMRZ70B01H294K</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>394152</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MAURIZIO MUSSONI,GIVENNAME=MAURIZIO,SURNAME=MUSSONI,SERIALNUMBER=IT:MSSMRZ70B01H294K,DN=18-1149764738447,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587395</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>sC0/00CTXgrkuGKv4hfl/VhNgv4=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>GRAZIA</nome>
+            <cognome>MEZZETTI</cognome>
+            <codFisc>MZZGRZ46P50A944H</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>275248</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=GRAZIA MEZZETTI,GIVENNAME=GRAZIA,SURNAME=MEZZETTI,SERIALNUMBER=IT:MZZGRZ46P50A944H,DN=unim-6563-171638,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>MAURIZIO</nome>
+            <cognome>MUSSONI</cognome>
+            <codFisc>MSSMRZ70B01H294K</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>394152</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MAURIZIO MUSSONI,GIVENNAME=MAURIZIO,SURNAME=MUSSONI,SERIALNUMBER=IT:MSSMRZ70B01H294K,DN=18-1149764738447,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587396</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>CV7avj65aaILsWPJIvb7qWPLrIM=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>MAURIZIO</nome>
+            <cognome>MUSSONI</cognome>
+            <codFisc>MSSMRZ70B01H294K</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>394152</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MAURIZIO MUSSONI,GIVENNAME=MAURIZIO,SURNAME=MUSSONI,SERIALNUMBER=IT:MSSMRZ70B01H294K,DN=18-1149764738447,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>GRAZIA</nome>
+            <cognome>MEZZETTI</cognome>
+            <codFisc>MZZGRZ46P50A944H</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>275248</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=GRAZIA MEZZETTI,GIVENNAME=GRAZIA,SURNAME=MEZZETTI,SERIALNUMBER=IT:MZZGRZ46P50A944H,DN=unim-6563-171638,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587397</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>srTlMZyp+jEJuNqLr8TIxAmG3nM=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>GRAZIA</nome>
+            <cognome>MEZZETTI</cognome>
+            <codFisc>MZZGRZ46P50A944H</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>275248</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=GRAZIA MEZZETTI,GIVENNAME=GRAZIA,SURNAME=MEZZETTI,SERIALNUMBER=IT:MZZGRZ46P50A944H,DN=unim-6563-171638,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>MAURIZIO</nome>
+            <cognome>MUSSONI</cognome>
+            <codFisc>MSSMRZ70B01H294K</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>394152</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MAURIZIO MUSSONI,GIVENNAME=MAURIZIO,SURNAME=MUSSONI,SERIALNUMBER=IT:MSSMRZ70B01H294K,DN=18-1149764738447,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587398</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>mK2uyHQUNe27YTlNEmM3z5pMsL0=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>MAURIZIO</nome>
+            <cognome>MUSSONI</cognome>
+            <codFisc>MSSMRZ70B01H294K</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>394152</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MAURIZIO MUSSONI,GIVENNAME=MAURIZIO,SURNAME=MUSSONI,SERIALNUMBER=IT:MSSMRZ70B01H294K,DN=18-1149764738447,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>GRAZIA</nome>
+            <cognome>MEZZETTI</cognome>
+            <codFisc>MZZGRZ46P50A944H</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>275248</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=GRAZIA MEZZETTI,GIVENNAME=GRAZIA,SURNAME=MEZZETTI,SERIALNUMBER=IT:MZZGRZ46P50A944H,DN=unim-6563-171638,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587399</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>3gS1Z9qChzb7Sfg+BS4NBFc4Z6A=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>GRAZIA</nome>
+            <cognome>MEZZETTI</cognome>
+            <codFisc>MZZGRZ46P50A944H</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>275248</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=GRAZIA MEZZETTI,GIVENNAME=GRAZIA,SURNAME=MEZZETTI,SERIALNUMBER=IT:MZZGRZ46P50A944H,DN=unim-6563-171638,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>MAURIZIO</nome>
+            <cognome>MUSSONI</cognome>
+            <codFisc>MSSMRZ70B01H294K</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>394152</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MAURIZIO MUSSONI,GIVENNAME=MAURIZIO,SURNAME=MUSSONI,SERIALNUMBER=IT:MSSMRZ70B01H294K,DN=18-1149764738447,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587400</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>4v1yevT6hScQVj8+qs8lCZVHPz4=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>GIOVANNI BATTISTA</nome>
+            <cognome>BARILLA'</cognome>
+            <codFisc>BRLGNN76D08A944N</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>397347</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=GIOVANNI BATTISTA BARILLA',GIVENNAME=GIOVANNI BATTISTA,SURNAME=BARILLA',SERIALNUMBER=IT:BRLGNN76D08A944N,DN=18-1210864892108,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>NICOLA</nome>
+            <cognome>SOLDATI</cognome>
+            <codFisc>SLDNCL67L25F257C</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>332777</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=NICOLA SOLDATI,GIVENNAME=NICOLA,SURNAME=SOLDATI,SERIALNUMBER=IT:SLDNCL67L25F257C,DN=unim-6168-156048,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587401</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>OPW39qMKRYxI7+0mvUK4w/lFvws=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>NICOLA</nome>
+            <cognome>SOLDATI</cognome>
+            <codFisc>SLDNCL67L25F257C</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>332777</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=NICOLA SOLDATI,GIVENNAME=NICOLA,SURNAME=SOLDATI,SERIALNUMBER=IT:SLDNCL67L25F257C,DN=unim-6168-156048,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>GIOVANNI BATTISTA</nome>
+            <cognome>BARILLA'</cognome>
+            <codFisc>BRLGNN76D08A944N</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>397347</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=GIOVANNI BATTISTA BARILLA',GIVENNAME=GIOVANNI BATTISTA,SURNAME=BARILLA',SERIALNUMBER=IT:BRLGNN76D08A944N,DN=18-1210864892108,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587402</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>WA0nEpLu9+nHHzf0AShPmYCwAKE=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>MARIA</nome>
+            <cognome>BIGNOZZI</cognome>
+            <codFisc>BGNMRA66C61A944I</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>279767</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MARIA  BIGNOZZI,GIVENNAME=MARIA,SURNAME=BIGNOZZI,SERIALNUMBER=IT:BGNMRA66C61A944I,DN=18-1173957674620,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>ANDREA</nome>
+            <cognome>SACCANI</cognome>
+            <codFisc>SCCNDR62P27F257X</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>268429</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=ANDREA SACCANI,GIVENNAME=ANDREA,SURNAME=SACCANI,SERIALNUMBER=IT:SCCNDR62P27F257X,DN=unim-6204-171269,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587403</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>SxhdGPL1sC6TxssIBMIRVkfVtoQ=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>FABIO</nome>
+            <cognome>PEZZI</cognome>
+            <codFisc>PZZFBA56C11A191M</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>282746</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=FABIO PEZZI,GIVENNAME=FABIO,SURNAME=PEZZI,SERIALNUMBER=IT:PZZFBA56C11A191M,DN=18-1174391885855,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>CLAUDIO</nome>
+            <cognome>RIPONI</cognome>
+            <codFisc>RPNCLD52T20A944O</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>344771</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=CLAUDIO RIPONI,GIVENNAME=CLAUDIO,SURNAME=RIPONI,SERIALNUMBER=IT:RPNCLD52T20A944O,DN=unim-6180-156111,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587404</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>lrSJjtACUp+dLeNtVLDsCrjvwnI=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>GRAZIA</nome>
+            <cognome>MEZZETTI</cognome>
+            <codFisc>MZZGRZ46P50A944H</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>275248</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=GRAZIA MEZZETTI,GIVENNAME=GRAZIA,SURNAME=MEZZETTI,SERIALNUMBER=IT:MZZGRZ46P50A944H,DN=unim-6563-171638,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>MAURIZIO</nome>
+            <cognome>MUSSONI</cognome>
+            <codFisc>MSSMRZ70B01H294K</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>394152</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MAURIZIO MUSSONI,GIVENNAME=MAURIZIO,SURNAME=MUSSONI,SERIALNUMBER=IT:MSSMRZ70B01H294K,DN=18-1149764738447,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587405</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>5MtxFyAcJIGgtyIdaUsb0HmjjHU=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>GRAZIA</nome>
+            <cognome>MEZZETTI</cognome>
+            <codFisc>MZZGRZ46P50A944H</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>275248</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=GRAZIA MEZZETTI,GIVENNAME=GRAZIA,SURNAME=MEZZETTI,SERIALNUMBER=IT:MZZGRZ46P50A944H,DN=unim-6563-171638,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>MAURIZIO</nome>
+            <cognome>MUSSONI</cognome>
+            <codFisc>MSSMRZ70B01H294K</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>394152</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MAURIZIO MUSSONI,GIVENNAME=MAURIZIO,SURNAME=MUSSONI,SERIALNUMBER=IT:MSSMRZ70B01H294K,DN=18-1149764738447,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587406</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>xngoD3kts7O8IS/sOlPDkrEjbDw=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>ANDREA</nome>
+            <cognome>SACCANI</cognome>
+            <codFisc>SCCNDR62P27F257X</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>268429</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=ANDREA SACCANI,GIVENNAME=ANDREA,SURNAME=SACCANI,SERIALNUMBER=IT:SCCNDR62P27F257X,DN=unim-6204-171269,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>MARIA</nome>
+            <cognome>BIGNOZZI</cognome>
+            <codFisc>BGNMRA66C61A944I</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>279767</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MARIA  BIGNOZZI,GIVENNAME=MARIA,SURNAME=BIGNOZZI,SERIALNUMBER=IT:BGNMRA66C61A944I,DN=18-1173957674620,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587407</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>zaIKnctzYcHwXDMDfNBV81IRDZc=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>ANDREA</nome>
+            <cognome>SACCANI</cognome>
+            <codFisc>SCCNDR62P27F257X</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>268429</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=ANDREA SACCANI,GIVENNAME=ANDREA,SURNAME=SACCANI,SERIALNUMBER=IT:SCCNDR62P27F257X,DN=unim-6204-171269,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>MARIA</nome>
+            <cognome>BIGNOZZI</cognome>
+            <codFisc>BGNMRA66C61A944I</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>279767</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MARIA  BIGNOZZI,GIVENNAME=MARIA,SURNAME=BIGNOZZI,SERIALNUMBER=IT:BGNMRA66C61A944I,DN=18-1173957674620,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587408</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>lL2T6ihxT9iXP5lbolCJk3bu0Eg=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>MARIA</nome>
+            <cognome>BIGNOZZI</cognome>
+            <codFisc>BGNMRA66C61A944I</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>279767</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MARIA  BIGNOZZI,GIVENNAME=MARIA,SURNAME=BIGNOZZI,SERIALNUMBER=IT:BGNMRA66C61A944I,DN=18-1173957674620,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>ANDREA</nome>
+            <cognome>SACCANI</cognome>
+            <codFisc>SCCNDR62P27F257X</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>268429</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=ANDREA SACCANI,GIVENNAME=ANDREA,SURNAME=SACCANI,SERIALNUMBER=IT:SCCNDR62P27F257X,DN=unim-6204-171269,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587409</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>nRlRA/P8cHCPMg2ZXg1ysh+IqSI=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>MONIKA</nome>
+            <cognome>JOECHLER</cognome>
+            <codFisc>JCHMNK56M71F132J</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>426692</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=MONIKA JOECHLER,GIVENNAME=MONIKA,SURNAME=JOECHLER,SERIALNUMBER=IT:JCHMNK56M71F132J,DN=unim-6622-170467,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>LORENZO</nome>
+            <cognome>MASETTI</cognome>
+            <codFisc>MSTLNZ40M17I726L</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>407403</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=LORENZO MASETTI,GIVENNAME=LORENZO,SURNAME=MASETTI,SERIALNUMBER=IT:MSTLNZ40M17I726L,DN=unim-6622-170454,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587410</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>up54wkGhJ1BPl1nPj4VGhApE3yc=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>ANDREA</nome>
+            <cognome>SACCANI</cognome>
+            <codFisc>SCCNDR62P27F257X</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>268429</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=ANDREA SACCANI,GIVENNAME=ANDREA,SURNAME=SACCANI,SERIALNUMBER=IT:SCCNDR62P27F257X,DN=unim-6204-171269,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>MARIA</nome>
+            <cognome>BIGNOZZI</cognome>
+            <codFisc>BGNMRA66C61A944I</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>279767</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MARIA  BIGNOZZI,GIVENNAME=MARIA,SURNAME=BIGNOZZI,SERIALNUMBER=IT:BGNMRA66C61A944I,DN=18-1173957674620,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587411</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>g0h+pWVtv6QbRPgNi2fGtyJKsy0=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>ANDREA</nome>
+            <cognome>LODI</cognome>
+            <codFisc>LDONDR69M02A944G</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>413851</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=ANDREA LODI,GIVENNAME=ANDREA,SURNAME=LODI,SERIALNUMBER=IT:LDONDR69M02A944G,DN=unim-6205-170587,T=RICERCATORE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>GIAMPAOLO</nome>
+            <cognome>CAMPANA</cognome>
+            <codFisc>CMPGPL68T06H294S</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>429743</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=GIAMPAOLO CAMPANA,GIVENNAME=GIAMPAOLO,SURNAME=CAMPANA,SERIALNUMBER=IT:CMPGPL68T06H294S,DN=18-1163155382641,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587412</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>TUE0d2KK0aLBP3paKfBuCfq4g/0=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>MAURIZIO</nome>
+            <cognome>MUSSONI</cognome>
+            <codFisc>MSSMRZ70B01H294K</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>394152</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MAURIZIO MUSSONI,GIVENNAME=MAURIZIO,SURNAME=MUSSONI,SERIALNUMBER=IT:MSSMRZ70B01H294K,DN=18-1149764738447,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>GRAZIA</nome>
+            <cognome>MEZZETTI</cognome>
+            <codFisc>MZZGRZ46P50A944H</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>275248</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=GRAZIA MEZZETTI,GIVENNAME=GRAZIA,SURNAME=MEZZETTI,SERIALNUMBER=IT:MZZGRZ46P50A944H,DN=unim-6563-171638,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587413</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>2U6lVONP+KkgfMS0Cxtoz4gcHo8=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>MARIA</nome>
+            <cognome>BIGNOZZI</cognome>
+            <codFisc>BGNMRA66C61A944I</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>279767</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MARIA  BIGNOZZI,GIVENNAME=MARIA,SURNAME=BIGNOZZI,SERIALNUMBER=IT:BGNMRA66C61A944I,DN=18-1173957674620,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>ANDREA</nome>
+            <cognome>SACCANI</cognome>
+            <codFisc>SCCNDR62P27F257X</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>268429</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=ANDREA SACCANI,GIVENNAME=ANDREA,SURNAME=SACCANI,SERIALNUMBER=IT:SCCNDR62P27F257X,DN=unim-6204-171269,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587414</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>hMcTF2y3HBX2yJ9DS3okma7vQ6I=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>MAURIZIO</nome>
+            <cognome>MUSSONI</cognome>
+            <codFisc>MSSMRZ70B01H294K</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>394152</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MAURIZIO MUSSONI,GIVENNAME=MAURIZIO,SURNAME=MUSSONI,SERIALNUMBER=IT:MSSMRZ70B01H294K,DN=18-1149764738447,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>GRAZIA</nome>
+            <cognome>MEZZETTI</cognome>
+            <codFisc>MZZGRZ46P50A944H</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>275248</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=GRAZIA MEZZETTI,GIVENNAME=GRAZIA,SURNAME=MEZZETTI,SERIALNUMBER=IT:MZZGRZ46P50A944H,DN=unim-6563-171638,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587415</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>cemmknptmccCvNCErkqLivRCHCE=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>ANDREA</nome>
+            <cognome>SACCANI</cognome>
+            <codFisc>SCCNDR62P27F257X</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>268429</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=ANDREA SACCANI,GIVENNAME=ANDREA,SURNAME=SACCANI,SERIALNUMBER=IT:SCCNDR62P27F257X,DN=unim-6204-171269,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>MARIA</nome>
+            <cognome>BIGNOZZI</cognome>
+            <codFisc>BGNMRA66C61A944I</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>279767</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MARIA  BIGNOZZI,GIVENNAME=MARIA,SURNAME=BIGNOZZI,SERIALNUMBER=IT:BGNMRA66C61A944I,DN=18-1173957674620,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587416</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>sqokTPSFWJqoPJ9byiMpoh3wmno=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>GRAZIA</nome>
+            <cognome>MEZZETTI</cognome>
+            <codFisc>MZZGRZ46P50A944H</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>275248</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=GRAZIA MEZZETTI,GIVENNAME=GRAZIA,SURNAME=MEZZETTI,SERIALNUMBER=IT:MZZGRZ46P50A944H,DN=unim-6563-171638,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>MAURIZIO</nome>
+            <cognome>MUSSONI</cognome>
+            <codFisc>MSSMRZ70B01H294K</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>394152</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MAURIZIO MUSSONI,GIVENNAME=MAURIZIO,SURNAME=MUSSONI,SERIALNUMBER=IT:MSSMRZ70B01H294K,DN=18-1149764738447,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587417</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>C99RjLtGkXCpyCTwfsbFnz9mndo=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>NICOLA</nome>
+            <cognome>SOLDATI</cognome>
+            <codFisc>SLDNCL67L25F257C</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>332777</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=NICOLA SOLDATI,GIVENNAME=NICOLA,SURNAME=SOLDATI,SERIALNUMBER=IT:SLDNCL67L25F257C,DN=unim-6168-156048,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>GIOVANNI BATTISTA</nome>
+            <cognome>BARILLA'</cognome>
+            <codFisc>BRLGNN76D08A944N</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>397347</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=GIOVANNI BATTISTA BARILLA',GIVENNAME=GIOVANNI BATTISTA,SURNAME=BARILLA',SERIALNUMBER=IT:BRLGNN76D08A944N,DN=18-1210864892108,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587418</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>hPNVh7JrhY4Xsst3cWqKtBqCobc=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>GRAZIA</nome>
+            <cognome>MEZZETTI</cognome>
+            <codFisc>MZZGRZ46P50A944H</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>275248</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=GRAZIA MEZZETTI,GIVENNAME=GRAZIA,SURNAME=MEZZETTI,SERIALNUMBER=IT:MZZGRZ46P50A944H,DN=unim-6563-171638,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>MAURIZIO</nome>
+            <cognome>MUSSONI</cognome>
+            <codFisc>MSSMRZ70B01H294K</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>394152</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MAURIZIO MUSSONI,GIVENNAME=MAURIZIO,SURNAME=MUSSONI,SERIALNUMBER=IT:MSSMRZ70B01H294K,DN=18-1149764738447,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587419</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>ArV0qLHxa0x1n7DAH2GiCR58JXA=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>GRAZIA</nome>
+            <cognome>MEZZETTI</cognome>
+            <codFisc>MZZGRZ46P50A944H</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>275248</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=GRAZIA MEZZETTI,GIVENNAME=GRAZIA,SURNAME=MEZZETTI,SERIALNUMBER=IT:MZZGRZ46P50A944H,DN=unim-6563-171638,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>MAURIZIO</nome>
+            <cognome>MUSSONI</cognome>
+            <codFisc>MSSMRZ70B01H294K</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>394152</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MAURIZIO MUSSONI,GIVENNAME=MAURIZIO,SURNAME=MUSSONI,SERIALNUMBER=IT:MSSMRZ70B01H294K,DN=18-1149764738447,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587420</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>Ij2EndsobWV/iE6Y1nnuPiBWhNk=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>MONIKA</nome>
+            <cognome>JOECHLER</cognome>
+            <codFisc>JCHMNK56M71F132J</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>426692</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=MONIKA JOECHLER,GIVENNAME=MONIKA,SURNAME=JOECHLER,SERIALNUMBER=IT:JCHMNK56M71F132J,DN=unim-6622-170467,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>LORENZO</nome>
+            <cognome>MASETTI</cognome>
+            <codFisc>MSTLNZ40M17I726L</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>407403</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=LORENZO MASETTI,GIVENNAME=LORENZO,SURNAME=MASETTI,SERIALNUMBER=IT:MSTLNZ40M17I726L,DN=unim-6622-170454,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587421</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>CJA3MU/49de5sSNGr/7WZfGyyDw=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>GRAZIA</nome>
+            <cognome>MEZZETTI</cognome>
+            <codFisc>MZZGRZ46P50A944H</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>275248</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=GRAZIA MEZZETTI,GIVENNAME=GRAZIA,SURNAME=MEZZETTI,SERIALNUMBER=IT:MZZGRZ46P50A944H,DN=unim-6563-171638,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>MAURIZIO</nome>
+            <cognome>MUSSONI</cognome>
+            <codFisc>MSSMRZ70B01H294K</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>394152</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MAURIZIO MUSSONI,GIVENNAME=MAURIZIO,SURNAME=MUSSONI,SERIALNUMBER=IT:MSSMRZ70B01H294K,DN=18-1149764738447,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587422</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>7Fd+TSFL5hOPVw9r89IqY0VhV4s=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>GIOVANNI BATTISTA</nome>
+            <cognome>BARILLA'</cognome>
+            <codFisc>BRLGNN76D08A944N</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>397347</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=GIOVANNI BATTISTA BARILLA',GIVENNAME=GIOVANNI BATTISTA,SURNAME=BARILLA',SERIALNUMBER=IT:BRLGNN76D08A944N,DN=18-1210864892108,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>NICOLA</nome>
+            <cognome>SOLDATI</cognome>
+            <codFisc>SLDNCL67L25F257C</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>332777</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=NICOLA SOLDATI,GIVENNAME=NICOLA,SURNAME=SOLDATI,SERIALNUMBER=IT:SLDNCL67L25F257C,DN=unim-6168-156048,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587423</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>F1/2uxiYj+JTgV0IRbzqEiJ37s4=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>NICOLA</nome>
+            <cognome>SOLDATI</cognome>
+            <codFisc>SLDNCL67L25F257C</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>332777</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=NICOLA SOLDATI,GIVENNAME=NICOLA,SURNAME=SOLDATI,SERIALNUMBER=IT:SLDNCL67L25F257C,DN=unim-6168-156048,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>GIOVANNI BATTISTA</nome>
+            <cognome>BARILLA'</cognome>
+            <codFisc>BRLGNN76D08A944N</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>397347</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=GIOVANNI BATTISTA BARILLA',GIVENNAME=GIOVANNI BATTISTA,SURNAME=BARILLA',SERIALNUMBER=IT:BRLGNN76D08A944N,DN=18-1210864892108,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587424</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>XemDApUBuOVZfIpbMkC4FBEqPmo=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>NICOLA</nome>
+            <cognome>SOLDATI</cognome>
+            <codFisc>SLDNCL67L25F257C</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>332777</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=NICOLA SOLDATI,GIVENNAME=NICOLA,SURNAME=SOLDATI,SERIALNUMBER=IT:SLDNCL67L25F257C,DN=unim-6168-156048,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>GIOVANNI BATTISTA</nome>
+            <cognome>BARILLA'</cognome>
+            <codFisc>BRLGNN76D08A944N</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>397347</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=GIOVANNI BATTISTA BARILLA',GIVENNAME=GIOVANNI BATTISTA,SURNAME=BARILLA',SERIALNUMBER=IT:BRLGNN76D08A944N,DN=18-1210864892108,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587425</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>02C3fv5WOdUw8MJCb49y2rza3eY=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>MARIA</nome>
+            <cognome>BIGNOZZI</cognome>
+            <codFisc>BGNMRA66C61A944I</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>279767</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MARIA  BIGNOZZI,GIVENNAME=MARIA,SURNAME=BIGNOZZI,SERIALNUMBER=IT:BGNMRA66C61A944I,DN=18-1173957674620,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>ANDREA</nome>
+            <cognome>SACCANI</cognome>
+            <codFisc>SCCNDR62P27F257X</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>268429</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=ANDREA SACCANI,GIVENNAME=ANDREA,SURNAME=SACCANI,SERIALNUMBER=IT:SCCNDR62P27F257X,DN=unim-6204-171269,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587426</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>KxGmrkLCfxoMDeQzrNUVyru6knA=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>MARIA</nome>
+            <cognome>BIGNOZZI</cognome>
+            <codFisc>BGNMRA66C61A944I</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>279767</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MARIA  BIGNOZZI,GIVENNAME=MARIA,SURNAME=BIGNOZZI,SERIALNUMBER=IT:BGNMRA66C61A944I,DN=18-1173957674620,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>ANDREA</nome>
+            <cognome>SACCANI</cognome>
+            <codFisc>SCCNDR62P27F257X</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>268429</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=ANDREA SACCANI,GIVENNAME=ANDREA,SURNAME=SACCANI,SERIALNUMBER=IT:SCCNDR62P27F257X,DN=unim-6204-171269,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587427</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>WVB1JCVGzpD+OLcxq5SESGibPP8=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>MARCO</nome>
+            <cognome>TRONCOSSI</cognome>
+            <codFisc>TRNMRC75T13H199Y</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>318271</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MARCO TRONCOSSI,GIVENNAME=MARCO,SURNAME=TRONCOSSI,SERIALNUMBER=IT:TRNMRC75T13H199Y,DN=18-1127987245863,T=RICERCATORE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>VINCENZO</nome>
+            <cognome>PARENTI CASTELLI</cognome>
+            <codFisc>PRNVCN49T15A944D</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>506175</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=VINCENZO PARENTI CASTELLI,GIVENNAME=VINCENZO,SURNAME=PARENTI CASTELLI,SERIALNUMBER=IT:PRNVCN49T15A944D,DN=unim-6202-171063,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587428</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>/We5NDS4viihQ6z6JMmazM2kXP0=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>ANDREA</nome>
+            <cognome>SACCANI</cognome>
+            <codFisc>SCCNDR62P27F257X</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>268429</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=ANDREA SACCANI,GIVENNAME=ANDREA,SURNAME=SACCANI,SERIALNUMBER=IT:SCCNDR62P27F257X,DN=unim-6204-171269,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>MARIA</nome>
+            <cognome>BIGNOZZI</cognome>
+            <codFisc>BGNMRA66C61A944I</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>279767</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MARIA  BIGNOZZI,GIVENNAME=MARIA,SURNAME=BIGNOZZI,SERIALNUMBER=IT:BGNMRA66C61A944I,DN=18-1173957674620,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587429</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>mwBStBQua03xS43POpNRee99stc=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>MARCO</nome>
+            <cognome>TRONCOSSI</cognome>
+            <codFisc>TRNMRC75T13H199Y</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>318271</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MARCO TRONCOSSI,GIVENNAME=MARCO,SURNAME=TRONCOSSI,SERIALNUMBER=IT:TRNMRC75T13H199Y,DN=18-1127987245863,T=RICERCATORE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>VINCENZO</nome>
+            <cognome>PARENTI CASTELLI</cognome>
+            <codFisc>PRNVCN49T15A944D</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>506175</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=VINCENZO PARENTI CASTELLI,GIVENNAME=VINCENZO,SURNAME=PARENTI CASTELLI,SERIALNUMBER=IT:PRNVCN49T15A944D,DN=unim-6202-171063,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587430</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>1jCtIzgN7b0JZwY2MYGAJtdH3aY=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>MAURIZIO</nome>
+            <cognome>MUSSONI</cognome>
+            <codFisc>MSSMRZ70B01H294K</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>394152</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MAURIZIO MUSSONI,GIVENNAME=MAURIZIO,SURNAME=MUSSONI,SERIALNUMBER=IT:MSSMRZ70B01H294K,DN=18-1149764738447,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>GRAZIA</nome>
+            <cognome>MEZZETTI</cognome>
+            <codFisc>MZZGRZ46P50A944H</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>275248</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=GRAZIA MEZZETTI,GIVENNAME=GRAZIA,SURNAME=MEZZETTI,SERIALNUMBER=IT:MZZGRZ46P50A944H,DN=unim-6563-171638,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587431</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>yTL57xztqQdhzFTJRZUR/v3anBI=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>MAURIZIO</nome>
+            <cognome>MUSSONI</cognome>
+            <codFisc>MSSMRZ70B01H294K</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>394152</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MAURIZIO MUSSONI,GIVENNAME=MAURIZIO,SURNAME=MUSSONI,SERIALNUMBER=IT:MSSMRZ70B01H294K,DN=18-1149764738447,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>GRAZIA</nome>
+            <cognome>MEZZETTI</cognome>
+            <codFisc>MZZGRZ46P50A944H</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>275248</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=GRAZIA MEZZETTI,GIVENNAME=GRAZIA,SURNAME=MEZZETTI,SERIALNUMBER=IT:MZZGRZ46P50A944H,DN=unim-6563-171638,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587432</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>svsTzSV2b6upsf7Tzid9IOnXUb0=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>GRAZIA</nome>
+            <cognome>MEZZETTI</cognome>
+            <codFisc>MZZGRZ46P50A944H</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>275248</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=GRAZIA MEZZETTI,GIVENNAME=GRAZIA,SURNAME=MEZZETTI,SERIALNUMBER=IT:MZZGRZ46P50A944H,DN=unim-6563-171638,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>MAURIZIO</nome>
+            <cognome>MUSSONI</cognome>
+            <codFisc>MSSMRZ70B01H294K</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>394152</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MAURIZIO MUSSONI,GIVENNAME=MAURIZIO,SURNAME=MUSSONI,SERIALNUMBER=IT:MSSMRZ70B01H294K,DN=18-1149764738447,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587433</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>L1gretvwQRIysOmFOnRc8bxtc+o=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>GRAZIA</nome>
+            <cognome>MEZZETTI</cognome>
+            <codFisc>MZZGRZ46P50A944H</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>275248</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=GRAZIA MEZZETTI,GIVENNAME=GRAZIA,SURNAME=MEZZETTI,SERIALNUMBER=IT:MZZGRZ46P50A944H,DN=unim-6563-171638,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>MAURIZIO</nome>
+            <cognome>MUSSONI</cognome>
+            <codFisc>MSSMRZ70B01H294K</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>394152</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MAURIZIO MUSSONI,GIVENNAME=MAURIZIO,SURNAME=MUSSONI,SERIALNUMBER=IT:MSSMRZ70B01H294K,DN=18-1149764738447,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587434</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>XofR9xM9IKgnv7iqcfSOphGbn3Y=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>SILVIA</nome>
+            <cognome>BURNELLI</cognome>
+            <codFisc>BRNSLV48T51A944U</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>317448</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=SILVIA BURNELLI,GIVENNAME=SILVIA,SURNAME=BURNELLI,SERIALNUMBER=IT:BRNSLV48T51A944U,DN=18-1126078096066,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>ALBERTO</nome>
+            <cognome>CHIARINI</cognome>
+            <codFisc>CHRLRT47M07A944N</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>318283</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=ALBERTO CHIARINI,GIVENNAME=ALBERTO,SURNAME=CHIARINI,SERIALNUMBER=IT:CHRLRT47M07A944N,DN=18-1125558441043,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587435</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>VP+Mv80ei6GftZt5+FwdIjwVos4=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>MARIA</nome>
+            <cognome>BIGNOZZI</cognome>
+            <codFisc>BGNMRA66C61A944I</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>279767</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MARIA  BIGNOZZI,GIVENNAME=MARIA,SURNAME=BIGNOZZI,SERIALNUMBER=IT:BGNMRA66C61A944I,DN=18-1173957674620,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>ANDREA</nome>
+            <cognome>SACCANI</cognome>
+            <codFisc>SCCNDR62P27F257X</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>268429</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=ANDREA SACCANI,GIVENNAME=ANDREA,SURNAME=SACCANI,SERIALNUMBER=IT:SCCNDR62P27F257X,DN=unim-6204-171269,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587436</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>NQ5ThIqyZfR+wz7CvzB3GcnLzk4=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>ANDREA</nome>
+            <cognome>SACCANI</cognome>
+            <codFisc>SCCNDR62P27F257X</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>268429</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=ANDREA SACCANI,GIVENNAME=ANDREA,SURNAME=SACCANI,SERIALNUMBER=IT:SCCNDR62P27F257X,DN=unim-6204-171269,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>MARIA</nome>
+            <cognome>BIGNOZZI</cognome>
+            <codFisc>BGNMRA66C61A944I</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>279767</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=MARIA  BIGNOZZI,GIVENNAME=MARIA,SURNAME=BIGNOZZI,SERIALNUMBER=IT:BGNMRA66C61A944I,DN=18-1173957674620,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+        <documento>
+            <urn>urn:uniwex.unibo.it:uwxunibo_verb_esa_1587437</urn>
+            <tipo>
+                <nome>verb_esa</nome>
+                <versione>1</versione>
+            </tipo>
+            <hash>
+                <valore>S5aVgwJ3RGkbYZunZX22RcVdM4g=</valore>
+                <algoritmo>SHA-1</algoritmo>
+                <codifica>BASE64</codifica>
+            </hash>
+            <esitoVerifica>
+    <esitoComplessivo>
+	    <statoControllo>000</statoControllo>
+        <descrizione>Verifica corretta.</descrizione>
+    </esitoComplessivo>
+    <formatoFirma>PKCS7</formatoFirma>
+    <firme>
+        <firma>
+            <nome>ANDREA</nome>
+            <cognome>LODI</cognome>
+            <codFisc>LDONDR69M02A944G</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>413851</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita' di Bologna/80007010376,CN=ANDREA LODI,GIVENNAME=ANDREA,SURNAME=LODI,SERIALNUMBER=IT:LDONDR69M02A944G,DN=unim-6205-170587,T=RICERCATORE</dname>
+            </certFirmatario>
+        </firma>
+        <firma>
+            <nome>GIAMPAOLO</nome>
+            <cognome>CAMPANA</cognome>
+            <codFisc>CMPGPL68T06H294S</codFisc>
+            <certFirmatario>
+                <certIssuer>C=IT,O=Actalis S.p.A.,OU=Qualified Certification Service Provider,CN=Actalis Qualified Certificates CA</certIssuer>
+                <certSerialNumber>429743</certSerialNumber>
+                <dname>C=IT,O=Alma Mater Studiorum Universita di Bologna/80007010376,CN=GIAMPAOLO CAMPANA,GIVENNAME=GIAMPAOLO,SURNAME=CAMPANA,SERIALNUMBER=IT:CMPGPL68T06H294S,DN=18-1163155382641,T=DOCENTE</dname>
+            </certFirmatario>
+        </firma>
+    </firme>
+</esitoVerifica>
+        </documento>
+    </documenti>
+</registrazione>

@@ -1,0 +1,16 @@
+
+/* Info Box */
+small[id="info"] > span {
+	display: block;
+	padding-bottom: 0.4em;
+}
+
+a:hover, a:visited, a:link, a:active
+{
+    text-decoration: none;
+}
+
+a:hover
+{
+    font-weight: bold;
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	lang="it">
+<head th:replace="fragments/template.html :: header('CRYPTO - Pagina amministratore')"></head>
+<body>
+	<div th:replace="fragments/template.html :: main"></div>
+
+	<sec:authorize access="isAuthenticated()">
+		<div class="container"
+			style="padding-top: 10px; padding-bottom: 10px;">
+			<div class="row">
+				<div class="col-sm-11">
+					<span class="glyphicon glyphicon-user" /> Utente: <strong><span
+						sec:authentication="name"></span></strong>
+				</div>
+				<div class="col-sm-1">
+					<a href="#" class="btn btn-primary btn-sm glyphicon glyphicon-off"
+						th:href="@{/logout}"> Esci</a>
+				</div>
+			</div>
+		</div>
+	</sec:authorize>
+
+	<div class="container">
+		<ul class="breadcrumb">
+			<li><a href="#" th:href="@{/}" class="glyphicon glyphicon-home">
+					Home</a></li>
+		</ul>
+	</div>
+
+	<div class="container">
+		<div class="panel-group" id="accordion">
+			<div th:replace="fragments/spring.html :: utilities"></div>
+
+			<div th:replace="fragments/spring.html :: env"></div>
+		</div>
+
+		<div th:replace="fragments/template.html :: info"></div>
+		<div th:replace="fragments/template.html :: footer"></div>
+	</div>
+</body>
+</html>
