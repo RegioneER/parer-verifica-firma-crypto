@@ -1,0 +1,28 @@
+# H2
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver  
+    # passare come argomenti (e.g. mvn spring-boot:run -Dspring-boot.run.arguments="--dbusername=USER,--dbpassword=PWD" oppure 
+    # come argomenti alla VM sullo starter java -Ddburl=DBURI -Ddbusername=USER -Ddbpassword=PWD)
+    url: ${dburl}
+    username:  ${dbusername}
+    password:  ${dbpassword}
+    hikari:
+      maximum-pool-size: 15
+      pool-name: ParerCryptoHikariPool
+      maxLifeTime : 600000
+  jpa:
+    open-in-view: false
+    database-platform: org.hibernate.dialect.Oracle12cDialect
+    hibernate:
+      max_fetch_depth: 3
+      ddl-auto: update
+      show_sql: false
+  main:
+    allow-bean-definition-overriding: true
+  security: 
+    user:
+      name: admin
+      password: admin
+      roles: ADMIN
+   

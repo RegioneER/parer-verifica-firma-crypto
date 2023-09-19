@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	lang="it">
+<head th:replace="~{fragments/template.html :: header('CRYPTO - Home Page')}"></head>
+<body>
+	<div th:replace="~{fragments/template.html :: main}"></div>
+
+	<div sec:authorize="hasRole('ROLE_ADMIN')" th:if="${@environment.getProperty('parer.crypto.admin-ui.enabled') ?: true}" class="container"
+		style="padding-top: 10px; padding-bottom: 10px;">
+		<div class="row">
+			<div class="col-sm-11">
+				<span class="glyphicon glyphicon-user" /> Utente: <strong><span
+						sec:authentication="name"></span></strong>
+			</div>
+			<div class="col-sm-1">
+				<a href="#" class="btn btn-primary btn-sm glyphicon glyphicon-off"
+						th:href="@{/logout}"> Esci</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="container" th:if="${@environment.getProperty('parer.crypto.admin-ui.enabled') ?: true}">
+		<ul class="breadcrumb">
+			<li><a href="#" th:href="@{/admin}" class="glyphicon glyphicon-asterisk"> Admin</a></li>
+		</ul>
+	</div>
+
+	<div class="container">
+		<div class="panel-group" id="accordion">
+			<div th:replace="~{fragments/spring.html :: apidocs}"></div>
+		</div>
+
+		<div th:replace="~{fragments/template.html :: info}"></div>
+		<div th:replace="~{fragments/template.html :: footer}"></div>
+	</div>
+
+</body>
+</html>

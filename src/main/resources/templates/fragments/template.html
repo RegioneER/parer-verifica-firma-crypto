@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <body>
+
+    <head th:fragment="header(title)">
+        <meta charset="UTF-8">
+        <link rel="SHORTCUT ICON" type="image/x-icon" href="img/favicon.ico" />
+        <link th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap.min.css}" rel="stylesheet" />
+        <link th:href="@{/css/css_carousel.css}" rel='stylesheet' />
+        <link th:href="@{/css/app.css}" rel='stylesheet' />
+        <link th:href="@{/webjars/google-code-prettify/1.0.5/src/prettify.css}" rel="stylesheet" />
+
+        <script type="text/javascript" th:src="@{/webjars/google-code-prettify/1.0.5/src/run_prettify.js}"></script>    
+        <script type="text/javascript" th:src="@{/webjars/jquery/3.6.4/jquery.min.js}"></script>
+        <script type="text/javascript" th:src="@{/webjars/bootstrap/3.4.1/js/bootstrap.min.js}"></script>
+        <script th:src="@{/js/app.js}"></script>
+        <title th:text="${title}"></title>
+    </head>
+
+    <div th:fragment="main">
+
+        <button onclick="topFunction()" id="btnup" class="btn btn-primary"
+                title="Go to top">
+            <span class="glyphicon glyphicon-arrow-up"></span>
+        </button>
+
+        <div id="content" class="bs-docs-header" tabindex="-1">
+            <div class="container">
+                <img class="logoImg" th:src="@{/img/crypto.jpg}"
+                     alt="CRYPTO : SPRING BOOT APP" style="height: 10em; width: 80em;" />
+
+            </div>
+        </div>
+
+        <div class="container">
+            <h2 th:inline="text">
+                Verifica Firma CRYPTO <span class="badge badge-info">[[${version}]]
+                    - Crypto Library [[${engcryptolibrary}]]</span>
+            </h2>
+        </div>
+
+        <script>
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function () {
+            scrollFunction()
+            };
+        </script>
+    </div>
+
+    <div th:fragment="footer" class="footer-copyright text-center py-3">
+        <div class="container">
+            <img class="logoImg" src="img/parer.png"
+                 alt="PARER : SPRING BOOT APP">
+        </div>
+    </div>
+
+
+    <div th:fragment="info" class="container">
+
+        <samp>
+            <small id="info"> <span sec:authorize="hasRole('ROLE_ADMIN')" th:if="${@environment.getProperty('parer.crypto.admin-ui.enabled') ?: true}"> Profilo: <b
+                        th:if="${@environment.getProperty('spring.profiles.active')} == null">
+                        default</b> <b>[[${@environment.getProperty('spring.profiles.active')}]]</b>
+                </span> <span> Versione: <b>[[${version}]]</b>
+                </span> <span sec:authorize="hasRole('ROLE_ADMIN')" th:if="${@environment.getProperty('parer.crypto.admin-ui.enabled') ?: true}">
+                    Git Branch: <b>[[${@environment.getProperty('git.branch')}]]</b>
+                </span> <span> Ultima modifica: <b>[[${builddate}]]</b>
+                </span> <span> Versione Crypto Library: <b>[[${engcryptolibrary}]]</b>
+                </span> 
+            </small>
+        </samp>
+    </div>
+
+</body>
+</html>

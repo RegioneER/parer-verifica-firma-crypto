@@ -1,0 +1,34 @@
+<configuration>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+	<!--    for having JSON long enable encode AND disable std layout
+	 	<encoder class="net.logstash.logback.encoder.LogstashEncoder" /> -->
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d %-5p [%c] [%t] [%X{uuid}] %m %n
+            </Pattern>
+        </layout>
+    </appender>
+     
+    <logger name="it.eng.parer.crypto" level="debug" additivity="false">
+         <appender-ref ref="CONSOLE"/> 
+     </logger> 
+     <logger name="org.springframework" level="info" additivity="false">
+         <appender-ref ref="CONSOLE"/> 
+     </logger> 
+     <logger name="org.apache" level="info" additivity="false">
+         <appender-ref ref="CONSOLE"/> 
+     </logger> 
+     <logger name="org.hibernate" level="info" additivity="false">
+         <appender-ref ref="CONSOLE"/> 
+     </logger>      
+     <logger name="com.zaxxer.hikari.HikariConfig" level="off" additivity="false">
+         <appender-ref ref="CONSOLE"/> 
+     </logger>  
+     <logger name="springfox.documentation" level="off" additivity="false">
+         <appender-ref ref="CONSOLE"/> 
+     </logger> 
+               
+    <root level="debug">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>
