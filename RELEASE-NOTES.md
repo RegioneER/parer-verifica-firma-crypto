@@ -1,4 +1,4 @@
-## 1.2.8 (20-04-2022)
+## 1.7.0 (16-08-2023)
 
 ### Novità: 1
-- [#27099](https://parermine.regione.emilia-romagna.it/issues/27099) Aggiornamento Springboot per vulnerabilità Spring4Shell
+- [#29864](https://parermine.regione.emilia-romagna.it/issues/29864) Aggiornamento librerie obsolete 2023

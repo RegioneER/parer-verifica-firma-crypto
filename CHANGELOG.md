@@ -1,4 +1,43 @@
 
+## 1.7.0 (16-08-2023)
+
+### Novità: 1
+- [#29864](https://parermine.regione.emilia-romagna.it/issues/29864) Aggiornamento librerie obsolete 2023
+
+## 1.6.0 (26-06-2023)
+
+### Bugfix: 2
+- [#29789](https://parermine.regione.emilia-romagna.it/issues/29789) Correzione gestione cancellazione dei file temporanei
+- [#29612](https://parermine.regione.emilia-romagna.it/issues/29612) Correzione errata valorizzazione del TipoRiferimentoTemporaleUsato in caso di verifica Crypto effettuata alla data di versamento
+
+### Novità: 1
+- [#29694](https://parermine.regione.emilia-romagna.it/issues/29694) Introduzione degli attribute su reponse dei servizi (ETag + last-modified) e aggiornamento spring boot
+
+## 1.5.0 (19-05-2023)
+
+### Novità: 1
+- [#28516](https://parermine.regione.emilia-romagna.it/issues/28516) Estensione API di verifica firma con introduzione parametro booleano "includeCertificateAndRevocationValues"
+
+## 1.4.1 (23-03-2023)
+
+### Bugfix: 1
+- [#29099](https://parermine.regione.emilia-romagna.it/issues/29099)  Correzione nome parametro utilizzato per attivazione pagina amministrativa
+
+## 1.4.0 (28-02-2023)
+
+### Novità: 1
+- [#28007](https://parermine.regione.emilia-romagna.it/issues/28007) Modifica parametri di input per object storage
+
+## 1.3.1 (26-10-2022)
+
+### Bugfix: 1
+- [#27903](https://parermine.regione.emilia-romagna.it/issues/27903) Correzione meccanismo di gestione di schedulazione Job di aggiornamento CA/CRL
+
+## 1.3.0 (19-10-2022)
+
+### Novità: 1
+- [#27362](https://parermine.regione.emilia-romagna.it/issues/27362) Analisi librerie obsolete 2022
+
 ## 1.2.8 (20-04-2022)
 
 ### Novità: 1
