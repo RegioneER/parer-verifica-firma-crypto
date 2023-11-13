@@ -146,7 +146,7 @@ public class OldCryptoInvoker {
             }
 
         } catch (CryptoSignerException ex) {
-            log.error("Errore nella verifica delle firme embedded", ex);
+            log.atError().log("Errore nella verifica delle firme embedded", ex);
         }
         return outputSignerBean;
     }
@@ -164,7 +164,7 @@ public class OldCryptoInvoker {
             }
 
         } catch (CryptoSignerException ex) {
-            log.error("Errore nella verifica delle firme detached", ex);
+            log.atError().log("Errore nella verifica delle firme detached", ex);
         }
         return outputSignerBean;
     }
@@ -300,7 +300,7 @@ public class OldCryptoInvoker {
         reqGen.setCertReq(true);
 
         TimeStampRequest request = reqGen.generate(TSPAlgorithms.SHA256, fingerprints);
-        log.debug(String.valueOf(request.getMessageImprintDigest().length));
+        log.atDebug().log(String.valueOf(request.getMessageImprintDigest().length));
 
         byte[] encRequest = request.getEncoded();
 
@@ -326,14 +326,14 @@ public class OldCryptoInvoker {
         try {
             postTSTRequest.validate(request);
         } catch (TSPValidationException ex) {
-            log.error("Errore durante la validazione della marca temporale", ex);
+            log.atError().log("Errore durante la validazione della marca temporale", ex);
             throw ex;
         } catch (TSPException ex) {
-            log.error("Marca non conforme", ex);
+            log.atError().log("Marca non conforme", ex);
             throw ex;
         }
 
-        log.debug("TimestampResponse validated");
+        log.atDebug().log("TimestampResponse validated");
 
         return postTSTRequest.getTimeStampToken();
 
@@ -346,10 +346,10 @@ public class OldCryptoInvoker {
             md = MessageDigest.getInstance(digest, BouncyCastleProvider.PROVIDER_NAME);
 
         } catch (NoSuchAlgorithmException ex) {
-            log.error("Errore nel reperimento del MessageDigest SHA-256 nel provider BC", ex);
+            log.atError().log("Errore nel reperimento del MessageDigest SHA-256 nel provider BC", ex);
             throw ex;
         } catch (NoSuchProviderException ex) {
-            log.error("Errore nel reperimento del provider BC", ex);
+            log.atError().log("Errore nel reperimento del provider BC", ex);
             throw ex;
         }
         return md;

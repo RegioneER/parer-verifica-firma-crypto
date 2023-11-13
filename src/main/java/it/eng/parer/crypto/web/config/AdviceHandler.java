@@ -58,13 +58,13 @@ public class AdviceHandler {
      * verifica firma (o prima quando si valuta la risposta del client), ma che comunque in generale non sono gestite
      * (CryptoParerException) all'interno dell'implementazione dell'endpoint.
      */
-    private static final Logger LOG = LoggerFactory.getLogger(AdviceHandler.class);
+    private static final Logger log = LoggerFactory.getLogger(AdviceHandler.class);
 
     @ExceptionHandler(CryptoParerException.class)
     public final ResponseEntity<RestExceptionResponse> handleCryptoParerException(CryptoParerException ex,
             WebRequest request) {
         // log error
-        LOG.error(STD_MSG_APP_ERROR, ex);
+        log.atError().log(STD_MSG_APP_ERROR, ex);
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
         if (ex.getCode().exceptionType().equals(ParerError.ExceptionType.NOT_FOUND)) {
             status = HttpStatus.NOT_FOUND;
@@ -79,7 +79,7 @@ public class AdviceHandler {
     public final ResponseEntity<RestExceptionResponse> handleValidationException(MethodArgumentNotValidException ex,
             WebRequest request) {
         // log generic exception
-        LOG.error(STD_MSG_VALIDATION_ERROR, ex);
+        log.atError().log(STD_MSG_VALIDATION_ERROR, ex);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         return new ResponseEntity<>(
@@ -91,7 +91,7 @@ public class AdviceHandler {
     public final ResponseEntity<RestExceptionResponse> handleMediaType(HttpMediaTypeNotSupportedException ex,
             WebRequest request) {
         // log generic exception
-        LOG.error(STD_MSG_VALIDATION_ERROR, ex);
+        log.atError().log(STD_MSG_VALIDATION_ERROR, ex);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         return new ResponseEntity<>(
@@ -103,7 +103,7 @@ public class AdviceHandler {
     public ResponseEntity<RestExceptionResponse> handleHttpMessageConversionException(HttpMessageConversionException ex,
             WebRequest request) {
         // log generic exception
-        LOG.error(STD_MSG_VALIDATION_ERROR, ex);
+        log.atError().log(STD_MSG_VALIDATION_ERROR, ex);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         return new ResponseEntity<>(RestUtil.buildValidationException(STD_MSG_VALIDATION_ERROR,
@@ -114,7 +114,7 @@ public class AdviceHandler {
     public ResponseEntity<RestExceptionResponse> handleMaxSizeException(MaxUploadSizeExceededException ex,
             WebRequest request) {
         // log generic exception
-        LOG.error(STD_MSG_VALIDATION_ERROR, ex);
+        log.atError().log(STD_MSG_VALIDATION_ERROR, ex);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -128,7 +128,7 @@ public class AdviceHandler {
     public ResponseEntity<RestExceptionResponse> handleMissingServletRequestPartException(
             MissingServletRequestPartException ex, WebRequest request) {
         // log generic exception
-        LOG.error(STD_MSG_VALIDATION_ERROR, ex);
+        log.atError().log(STD_MSG_VALIDATION_ERROR, ex);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         return new ResponseEntity<>(
@@ -140,7 +140,7 @@ public class AdviceHandler {
     @ExceptionHandler(Throwable.class)
     public final ResponseEntity<RestExceptionResponse> handleGenericException(Exception ex, WebRequest request) {
         // log generic exception
-        LOG.error(STD_MSG_GENERIC_ERROR, ex);
+        log.atError().log(STD_MSG_GENERIC_ERROR, ex);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         return new ResponseEntity<>(RestUtil.buildGenericResponseEntity(request), headers,

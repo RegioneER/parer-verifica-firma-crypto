@@ -90,7 +90,7 @@ public class CrlController {
     @GetMapping(value = RESOURCE_CRL, produces = MediaType.APPLICATION_JSON_VALUE)
     public ParerCRL getCrl(@RequestParam("certifFirmatarioBase64UrlEncoded") String certifFirmatarioBase64UrlEncoded,
             HttpServletRequest request, UriComponentsBuilder builder) {
-        log.debug("Lunghezza della stringa codificata passata come queryString: {}",
+        log.atDebug().log("Lunghezza della stringa codificata passata come queryString: {}",
                 certifFirmatarioBase64UrlEncoded.length());
         byte[] extvalue = Base64.getUrlDecoder().decode(certifFirmatarioBase64UrlEncoded);
         String subjectDN = certificateService.getCertificateSubjectDN(extvalue);

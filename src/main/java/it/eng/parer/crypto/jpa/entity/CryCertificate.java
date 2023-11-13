@@ -47,6 +47,7 @@ public class CryCertificate implements Serializable {
     private Date expirationDate;
 
     public CryCertificate() {
+        // document why this constructor is empty
     }
 
     @Id

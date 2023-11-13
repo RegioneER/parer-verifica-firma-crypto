@@ -20,8 +20,6 @@ package it.eng.parer.crypto.service.helper;
 import java.security.cert.X509CRL;
 import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -42,8 +40,6 @@ import jakarta.persistence.EntityManager;
 @Service(CryptoConstants.ICRLSTORAGE)
 @Transactional
 public class CRLHelper implements CRLHelperLocal {
-
-    Logger log = LoggerFactory.getLogger(CRLHelper.class);
 
     @Autowired
     CryCrlRepository repository;
@@ -73,7 +69,6 @@ public class CRLHelper implements CRLHelperLocal {
             repository.save(entityCrl);
 
         } catch (Exception e) {
-            // log.error("ERROR inserting CRL", e);
             throw new CryptoStorageException(e);
         }
     }
@@ -101,7 +96,6 @@ public class CRLHelper implements CRLHelperLocal {
             try {
                 ret = CRLUtil.parse(res.get().getCrl());
             } catch (Exception e) {
-                // log.error("retriveCRL ERROR", e);
                 throw new CryptoStorageException(e);
             }
         }

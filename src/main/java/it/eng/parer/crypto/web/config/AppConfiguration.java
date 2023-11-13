@@ -18,17 +18,23 @@
 package it.eng.parer.crypto.web.config;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -38,12 +44,6 @@ import org.springframework.web.util.UrlPathHelper;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import it.eng.crypto.data.SignerUtil;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
-import org.springframework.context.ApplicationContext;
-import org.springframework.http.MediaType;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
 //https://docs.spring.io/spring-boot/docs/1.5.2.RELEASE/reference/htmlsingle/#boot-features-external-config-application-property-files
 //SEE 24.6.4 YAML shortcomings
@@ -62,10 +62,7 @@ public class AppConfiguration implements WebMvcConfigurer {
     @Value("${cron.thread.pool.size}")
     int threadPoolSize;
 
-    private final Logger LOG = LoggerFactory.getLogger(this.getClass());
-
-    @Autowired
-    private ApplicationContext applicationContext;
+    private final Logger log = LoggerFactory.getLogger(AppConfiguration.class);
 
     /**
      *
@@ -101,7 +98,7 @@ public class AppConfiguration implements WebMvcConfigurer {
         threadPoolTaskScheduler.setPoolSize(threadPoolSize);
         threadPoolTaskScheduler.setThreadNamePrefix("job-scarico-CA-CRL-");
         threadPoolTaskScheduler.setThreadPriority(Thread.MIN_PRIORITY);
-        LOG.debug("Creazione pool di thread per i job di scarico CA/CRL con dimensione " + threadPoolSize);
+        log.atDebug().log("Creazione pool di thread per i job di scarico CA/CRL con dimensione " + threadPoolSize);
         return threadPoolTaskScheduler;
     }
 
@@ -109,7 +106,7 @@ public class AppConfiguration implements WebMvcConfigurer {
      * Utilizzato dai JOB / per ottenere un singleton
      */
     @Bean
-    public SignerUtil signerUtil() {
+    public SignerUtil signerUtil(ApplicationContext applicationContext) {
         return SignerUtil.newInstance(applicationContext);
     }
 

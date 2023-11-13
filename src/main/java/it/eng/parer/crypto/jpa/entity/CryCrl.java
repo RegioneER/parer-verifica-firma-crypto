@@ -56,6 +56,7 @@ public class CryCrl implements Serializable {
     private String uniqueId;
 
     public CryCrl() {
+        // document why this constructor is empty
     }
 
     @Id

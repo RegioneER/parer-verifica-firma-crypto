@@ -85,7 +85,7 @@ import reactor.util.retry.Retry;
 @RequestMapping(URL_API_BASE)
 public class VerificaFirmaControllerV3 {
 
-    private final Logger LOG = LoggerFactory.getLogger(VerificaFirmaControllerV3.class);
+    private final Logger log = LoggerFactory.getLogger(VerificaFirmaControllerV3.class);
 
     private static final FileAttribute<Set<PosixFilePermission>> attr = PosixFilePermissions
             .asFileAttribute(PosixFilePermissions.fromString("rw-------"));
@@ -171,7 +171,7 @@ public class VerificaFirmaControllerV3 {
         validazioneCoerenzaInput(metadati, firme, marche);
 
         // Controllo che i metadati siano coerenti con i dati
-        // LOG UUID
+        // log UUID
         MDC.put(Constants.UUID_LOG_MDC, metadati.getUuid());
         CryptoDataToValidateFile signedFile = new CryptoDataToValidateFile();
         List<CryptoDataToValidateFile> detachedSignature = new ArrayList<>(firme.size());
@@ -229,20 +229,20 @@ public class VerificaFirmaControllerV3 {
                     Files.deleteIfExists(signedFile.getContenuto().toPath());
                 }
             } catch (IOException e) {
-                LOG.warn(CANT_DELETE, signedFile.getContenuto().getName());
+                log.atWarn().log(CANT_DELETE, signedFile.getContenuto().getName());
             }
             detachedSignature.forEach(s -> {
                 try {
                     Files.deleteIfExists(s.getContenuto().toPath());
                 } catch (IOException e) {
-                    LOG.warn(CANT_DELETE, s.getContenuto().getName());
+                    log.atWarn().log(CANT_DELETE, s.getContenuto().getName());
                 }
             });
             detachedTimeStamp.forEach(s -> {
                 try {
                     Files.deleteIfExists(s.getContenuto().toPath());
                 } catch (IOException e) {
-                    LOG.warn(CANT_DELETE, s.getContenuto().getName());
+                    log.atWarn().log(CANT_DELETE, s.getContenuto().getName());
                 }
             });
 
@@ -254,8 +254,8 @@ public class VerificaFirmaControllerV3 {
         // essere problemi di conversione dei
         // caratteri
         Flux<DataBuffer> dataBuffer = webClient.get().uri(signedResource).retrieve().bodyToFlux(DataBuffer.class);
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("Sto per scaricare il pre-signed content da {}", signedResource.toASCIIString());
+        if (log.isDebugEnabled()) {
+            log.atDebug().log("Sto per scaricare il pre-signed content da {}", signedResource.toASCIIString());
         }
         // scarica sul local path provando 5 volte aspettando almeno 3 secondi tra un
         // prova e l'altra

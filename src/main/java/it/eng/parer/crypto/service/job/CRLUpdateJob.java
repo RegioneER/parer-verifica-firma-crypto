@@ -44,7 +44,7 @@ import java.time.LocalDateTime;
 @Service
 public class CRLUpdateJob {
 
-    Logger logger = LoggerFactory.getLogger(CRLUpdateJob.class);
+    Logger log = LoggerFactory.getLogger(CRLUpdateJob.class);
 
     @Autowired
     IConfigStorage configHelper;
@@ -61,15 +61,15 @@ public class CRLUpdateJob {
     @Scheduled(cron = "${cron.crl.sched}")
     public void doJob() {
         if (enable) {
-            logger.info("CRL Update Job - Started");
+            log.atInfo().log("CRL Update Job - Started");
             LocalDateTime inizio = LocalDateTime.now();
 
             this.loadingCrl();
 
             long minutes = Duration.between(inizio, LocalDateTime.now()).toMinutes();
-            logger.info("CRL Update Job - Finished in {} minutes", minutes);
+            log.atInfo().log("CRL Update Job - Finished in {} minutes", minutes);
         } else {
-            logger.info("CRL Update Job - Disabled");
+            log.atInfo().log("CRL Update Job - Disabled");
         }
     }
 
@@ -82,7 +82,7 @@ public class CRLUpdateJob {
             // del distribution point
             List<ConfigBean> crlConfig = configHelper.retriveAllConfig();
             if (crlConfig != null) {
-                logger.debug("CRL Update Job - Trovate {} configurazioni", crlConfig.size());
+                log.atDebug().log("CRL Update Job - Trovate {} configurazioni", crlConfig.size());
                 // Per ogni configurazione invio un messaggio
                 Map<String, List<String>> map = new HashMap<String, List<String>>();
                 for (ConfigBean config : crlConfig) {
@@ -98,11 +98,11 @@ public class CRLUpdateJob {
                 int crlProcessate = 0;
                 for (Map.Entry<String, List<String>> urls : map.entrySet()) {
                     updateCRL(urls.getValue(), urls.getKey());
-                    logger.info("Processata CRL {} di {} ", ++crlProcessate, map.entrySet().size());
+                    log.atInfo().log("Processata CRL {} di {} ", ++crlProcessate, map.entrySet().size());
                 }
             }
         } catch (CryptoStorageException e) {
-            logger.error("Errore nel reperimento delle configurazioni CRL", e);
+            log.atError().log("Errore nel reperimento delle configurazioni CRL", e);
         }
     }
 
@@ -114,12 +114,12 @@ public class CRLUpdateJob {
                 // la salvo sul db
                 crlHelper.upsertCRL(crl);
             }
-            logger.debug("Inviato update delle CRL per il subject {}", key);
+            log.atDebug().log("Inviato update delle CRL per il subject {}", key);
 
         } catch (CryptoStorageException e) {
-            logger.error("Non è stato possibile salvare la CRL nel db", e);
+            log.atError().log("Non è stato possibile salvare la CRL nel db", e);
         } catch (Exception e) {
-            logger.error("Errore nell'update :" + key, e);
+            log.atError().log("Errore nell'update :" + key, e);
         }
     }
 
