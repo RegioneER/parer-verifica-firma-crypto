@@ -43,6 +43,7 @@ public class CryConfig implements Serializable {
     private String keyId;
 
     public CryConfig() {
+        // document why this constructor is empty
     }
 
     @Id

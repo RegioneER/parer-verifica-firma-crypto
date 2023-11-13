@@ -82,7 +82,7 @@ public class TimestampController {
     @PostMapping(value = RESOURCE_TST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ParerTST requestTst(@RequestParam(name = "description", required = true) String description,
             @RequestParam(name = "file", required = true) MultipartFile file) {
-        log.info("Applico timestamp al file con descrizione {}", description);
+        log.atInfo().log("Applico timestamp al file con descrizione {}", description);
         byte[] content = null;
         try {
             Path temp = Files.createTempFile("tst-", ".crypto", attr);
@@ -105,7 +105,7 @@ public class TimestampController {
     @PostMapping(value = RESOURCE_TSD, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ParerTSD generateTsd(@RequestParam(name = "description", required = true) String description,
             @RequestParam(name = "file", required = true) MultipartFile file) {
-        log.info("Crea il TSD al file con descrizione {}", description);
+        log.atInfo().log("Crea il TSD al file con descrizione {}", description);
         byte[] content = null;
         try {
             Path temp = Files.createTempFile("tsd-", ".crypto", attr);

@@ -25,8 +25,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -49,8 +47,6 @@ import jakarta.persistence.EntityManager;
 @Service(CryptoConstants.ICONFIGSTORAGE)
 @Transactional
 public class ConfigHelper implements IConfigStorage {
-
-    Logger log = LoggerFactory.getLogger(ConfigHelper.class);
 
     @Autowired
     CryConfigRepository repository;

@@ -135,17 +135,54 @@ La compilazione dell'immagine può essere eseguita con il comando:
 docker build -t <registry> -f ./Dockerfile --build-arg EXTRA_CA_CERTS_DIR=docker_build/certs .
 ```
 
+# Requisiti e librerie utilizzate
+
+Requisiti minimi per installazione: 
+
+- Sistema operativo : consigliato Linux server (in alternativa compatibilità con Windows server)
+- Java versione 17 (OpenJDK / Oracle)
+- Kubernetes / Docker : se rilasciato attraverso container oppure si esegue una build del progetto attraverso il profilo maven **uber-jar** per ottenere il JAR eseguibile (vedi paragrafi precendeti)
+
+## Librerie utilizzate
+
+|  GroupId | ArtifactId  | Version  | Type   |  Licenses |
+|---|---|---|---|---|
+|com.google.guava|guava|32.1.1-jre|jar|Apache License, Version 2.0
+|com.h2database|h2|2.1.214|jar|MPL 2.0EPL 1.0
+|com.oracle.database.jdbc|ojdbc11|21.7.0.0|jar|Oracle Free Use Terms and Conditions (FUTC)
+|it.eng.parer|cryptolibrary|1.12.7|jar|-
+|it.eng.parer|verificafirma-crypto-beans|1.3.0|jar|-
+|net.logstash.logback|logstash-logback-encoder|7.2|jar|Apache License, Version 2.0MIT License
+|org.apache.taglibs|taglibs-standard-jstlel|1.2.5|jar|The Apache Software License, Version 2.0
+|org.apache.tika|tika-core|1.7|jar|The Apache Software License, Version 2.0
+|org.apache.tika|tika-parsers|1.7|jar|The Apache Software License, Version 2.0
+|org.springdoc|springdoc-openapi-starter-webmvc-ui|2.1.0|jar|The Apache License, Version 2.0
+|org.springframework.boot|spring-boot-starter-actuator|3.0.9|jar|Apache License, Version 2.0
+|org.springframework.boot|spring-boot-starter-data-jpa|3.0.9|jar|Apache License, Version 2.0
+|org.springframework.boot|spring-boot-starter-security|3.0.9|jar|Apache License, Version 2.0
+|org.springframework.boot|spring-boot-starter-thymeleaf|3.0.9|jar|Apache License, Version 2.0
+|org.springframework.boot|spring-boot-starter-validation|3.0.9|jar|Apache License, Version 2.0
+|org.springframework.boot|spring-boot-starter-web|3.0.9|jar|Apache License, Version 2.0
+|org.springframework.boot|spring-boot-starter-webflux|3.0.9|jar|Apache License, Version 2.0
+|org.springframework.ws|spring-ws-core|4.0.5|jar|Apache License, Version 2.0
+|org.thymeleaf.extras|thymeleaf-extras-springsecurity6|3.1.1.RELEASE|jar|The Apache Software License, Version 2.0
+|org.webjars|bootstrap|3.4.1|jar|Apache License, Version 2.0
+|org.webjars|jquery|3.6.4|jar|MIT License
+|org.webjars.bower|google-code-prettify|1.0.5|jar|MIT
+|org.yaml|snakeyaml|1.33|jar|Apache License, Version 2.0
+|xalan|xalan|2.7.2|jar|The Apache Software License, Version 2.0
+
 # Supporto
 
-Progetto a cura di [Engineering Ingegneria Informatica S.p.A.](https://www.eng.it/).
+Mantainer del progetto è [Engineering Ingegneria Informatica S.p.A.](https://www.eng.it/).
 
 # Contributi
 
 Se interessati a crontribuire alla crescita del progetto potete scrivere all'indirizzo email <a href="mailto:areasviluppoparer@regione.emilia-romagna.it">areasviluppoparer@regione.emilia-romagna.it</a>.
 
-# Autori
+# Credits
 
-Proprietà intellettuale del progetto di [Regione Emilia-Romagna](https://www.regione.emilia-romagna.it/) e [Polo Archivisitico](https://poloarchivistico.regione.emilia-romagna.it/).
+Progetto di proprietà di [Regione Emilia-Romagna](https://www.regione.emilia-romagna.it/) sviluppato a cura di [Engineering Ingegneria Informatica S.p.A.](https://www.eng.it/).
 
 # Licenza
 

@@ -83,7 +83,7 @@ import jakarta.validation.Valid;
 @ConditionalOnProperty(name = "parer.crypto.verifica-ui.enabled", havingValue = "true", matchIfMissing = true)
 public class VerificaController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(VerificaController.class);
+    private static final Logger log = LoggerFactory.getLogger(VerificaController.class);
 
     private static final String RISULTATO_VERIFICA = "risultatoVerifica";
 
@@ -152,7 +152,7 @@ public class VerificaController {
 
         } catch (Exception ex) {
             // imposta errore
-            LOG.error("Errore durante la conversione dell'oggetto", ex);
+            log.atError().log("Errore durante la conversione dell'oggetto", ex);
             risultato.setWithErrors(true);
         } finally {
             // pulisci dati
@@ -282,21 +282,21 @@ public class VerificaController {
                 Files.deleteIfExists(signedFile.getContenuto().toPath());
             }
         } catch (IOException e) {
-            LOG.warn("{}", noDelete + signedFile.getContenuto().getName());
+            log.atWarn().log("{}", noDelete + signedFile.getContenuto().getName());
 
         }
         detachedSignature.forEach(s -> {
             try {
                 Files.deleteIfExists(s.getContenuto().toPath());
             } catch (IOException e) {
-                LOG.warn("{}", noDelete + s.getContenuto().getName());
+                log.atWarn().log("{}", noDelete + s.getContenuto().getName());
             }
         });
         detachedTimeStamp.forEach(s -> {
             try {
                 Files.deleteIfExists(s.getContenuto().toPath());
             } catch (IOException e) {
-                LOG.warn("{}", noDelete + s.getContenuto().getName());
+                log.atWarn().log("{}", noDelete + s.getContenuto().getName());
             }
         });
     }

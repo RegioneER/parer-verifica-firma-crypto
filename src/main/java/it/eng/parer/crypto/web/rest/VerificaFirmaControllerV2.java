@@ -77,7 +77,7 @@ import jakarta.validation.Valid;
 @RequestMapping(URL_API_BASE)
 public class VerificaFirmaControllerV2 {
 
-    private final Logger LOG = LoggerFactory.getLogger(VerificaFirmaControllerV2.class);
+    private final Logger log = LoggerFactory.getLogger(VerificaFirmaControllerV2.class);
 
     private static final FileAttribute<Set<PosixFilePermission>> attr = PosixFilePermissions
             .asFileAttribute(PosixFilePermissions.fromString("rw-------"));
@@ -155,7 +155,7 @@ public class VerificaFirmaControllerV2 {
         validazioneCoerenzaInput(metadati, firme, marche);
 
         // Controllo che i metadati siano coerenti con i dati
-        // LOG UUID
+        // log UUID
         MDC.put(Constants.UUID_LOG_MDC, metadati.getUuid());
         CryptoDataToValidateFile signedFile = new CryptoDataToValidateFile();
         List<CryptoDataToValidateFile> detachedSignature = new ArrayList<>(firme.size());
@@ -209,20 +209,20 @@ public class VerificaFirmaControllerV2 {
                     Files.deleteIfExists(signedFile.getContenuto().toPath());
                 }
             } catch (IOException e) {
-                LOG.warn(CANT_DELETE, signedFile.getContenuto().getName());
+                log.atWarn().log(CANT_DELETE, signedFile.getContenuto().getName());
             }
             detachedSignature.forEach(s -> {
                 try {
                     Files.deleteIfExists(s.getContenuto().toPath());
                 } catch (IOException e) {
-                    LOG.warn(CANT_DELETE, s.getContenuto().getName());
+                    log.atWarn().log(CANT_DELETE, s.getContenuto().getName());
                 }
             });
             detachedTimeStamp.forEach(s -> {
                 try {
                     Files.deleteIfExists(s.getContenuto().toPath());
                 } catch (IOException e) {
-                    LOG.warn(CANT_DELETE, s.getContenuto().getName());
+                    log.atWarn().log(CANT_DELETE, s.getContenuto().getName());
                 }
             });
 

@@ -31,8 +31,6 @@ import java.util.Optional;
 import javax.security.auth.x500.X500Principal;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -53,8 +51,6 @@ import jakarta.persistence.EntityManager;
 @Service(CryptoConstants.ICASTORAGE)
 @Transactional
 public class CAHelper implements ICAStorage {
-
-    Logger log = LoggerFactory.getLogger(CAHelper.class);
 
     @Autowired
     CryCertificateRepository repository;
@@ -102,7 +98,6 @@ public class CAHelper implements ICAStorage {
                 repository.save(cert);
             }
         } catch (IOException | CertificateEncodingException e) {
-            // log.error("insertCA ERROR", e);
             throw new CryptoStorageException("Errore durante l'inserimento della CA", e);
         }
 
@@ -138,7 +133,6 @@ public class CAHelper implements ICAStorage {
                 }
             }
         } catch (Exception e) {
-            // log.error("retriveActiveCA ERROR", e);
             throw new CryptoStorageException(e);
         }
         return ret;
@@ -157,7 +151,6 @@ public class CAHelper implements ICAStorage {
                         .generateCertificate(new ByteArrayInputStream(res.get().getCertificate()));
             }
         } catch (Exception e) {
-            // log.error("retriveCA ERROR", e);
             throw new CryptoStorageException(e);
         }
         return ret;

@@ -126,7 +126,7 @@ public class AppInfosController {
         try {
             return env.getProperty(key);
         } catch (IllegalArgumentException e) {
-            log.warn(
+            log.atWarn().log(
                     "Errore durante il recupero della variabile d'ambiente {}. All'interno del valore c'è forse un placeholder tipo ${var}?",
                     key, e);
             return "non disponibile";

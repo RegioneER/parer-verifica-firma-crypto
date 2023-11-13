@@ -191,20 +191,20 @@ public class VerificaFirmaService {
                     Files.deleteIfExists(signedFile.getContenuto().toPath());
                 }
             } catch (IOException e1) {
-                log.warn("{}", noDelete + signedFile.getContenuto().getName());
+                log.atWarn().log("{}", noDelete + signedFile.getContenuto().getName());
             }
             detachedSignature.forEach(s -> {
                 try {
                     Files.deleteIfExists(s.getContenuto().toPath());
                 } catch (IOException e) {
-                    log.warn("{}", noDelete + s.getContenuto().getName());
+                    log.atWarn().log("{}", noDelete + s.getContenuto().getName());
                 }
             });
             detachedTimeStamp.forEach(s -> {
                 try {
                     Files.deleteIfExists(s.getContenuto().toPath());
                 } catch (IOException e) {
-                    log.warn("{}", noDelete + s.getContenuto().getName());
+                    log.atWarn().log("{}", noDelete + s.getContenuto().getName());
                 }
             });
         }
@@ -267,7 +267,7 @@ public class VerificaFirmaService {
         try {
             // Step 1 - Prepara input
             result.setInizioValidazione(Date.from(inizioValidazione.atZone(ZoneId.systemDefault()).toInstant()));
-            log.debug("Inizio validazione documento con identificativo [{}] - data/ora inizio {}",
+            log.atDebug().log("Inizio validazione documento con identificativo [{}] - data/ora inizio {}",
                     metadata.getComponentePrincipale().getId(), inizioValidazione);
             CryptoProfiloVerifica profiloVerifica = metadata.getProfiloVerifica();
             // Salva nell'esito il profilo di verifica utilizzato
@@ -301,7 +301,7 @@ public class VerificaFirmaService {
             LocalDateTime fineValidazione = LocalDateTime.now(ZoneId.systemDefault());
             result.setFineValidazione(Date.from(fineValidazione.atZone(ZoneId.systemDefault()).toInstant()));
             final long msTrascorsi = Duration.between(inizioValidazione, fineValidazione).toMillis();
-            log.info("Fine validazione documento con identificativo [{}] - data/ora fine {} (totale : {} ms)",
+            log.atInfo().log("Fine validazione documento con identificativo [{}] - data/ora fine {} (totale : {} ms)",
                     metadata.getComponentePrincipale().getId(), fineValidazione, msTrascorsi);
 
         }
@@ -464,7 +464,7 @@ public class VerificaFirmaService {
             }
         }
 
-        log.debug("Formato rilevato : {}", tikaMime);
+        log.atDebug().log("Formato rilevato : {}", tikaMime);
 
         return tikaMime;
     }
@@ -492,11 +492,11 @@ public class VerificaFirmaService {
             file = cycleOut.getContent().getContentFile();
             try {
                 if (file != null) {
-                    log.debug("Sto per eliminare il file {}", file.getName());
+                    log.atDebug().log("Sto per eliminare il file {}", file.getName());
                     Files.deleteIfExists(file.toPath());
                 }
             } catch (IOException e) {
-                log.error("Si è verificato un errore durante la pulizia dei dati", e);
+                log.atError().log("Si è verificato un errore durante la pulizia dei dati", e);
             }
             cycleOut = cycleOut.getChild();
         }
@@ -517,7 +517,7 @@ public class VerificaFirmaService {
         }
         if (output == null) {
             if (ex != null) {
-                log.warn("Passata eccezione a extractVerifyInfo", ex);
+                log.atWarn().log("Passata eccezione a extractVerifyInfo", ex);
             } else if (sottoComponente != null) {
                 // Caso firma
                 if (isDetachedSignature) {
@@ -680,11 +680,11 @@ public class VerificaFirmaService {
             }
 
         } catch (CRLException ex) {
-            log.error("Eccezione nella lettura della CRL", ex);
+            log.atError().log("Eccezione nella lettura della CRL", ex);
         } catch (IOException ex) {
-            log.error("Eccezione nella lettura del numero della CRL", ex);
+            log.atError().log("Eccezione nella lettura del numero della CRL", ex);
         } catch (CertificateEncodingException ex) {
-            log.error("Eccezione nella lettura del certificato X.509", ex);
+            log.atError().log("Eccezione nella lettura del certificato X.509", ex);
         }
     }
 
@@ -1215,7 +1215,7 @@ public class VerificaFirmaService {
                 }
 
             } catch (CryptoSignerException ex) {
-                log.error("Errore nel reperimento del distribution point CRL dal certificato della CA", ex);
+                log.atError().log("Errore nel reperimento del distribution point CRL dal certificato della CA", ex);
             }
 
             if (profiloVerifica.isIncludeCertificateAndRevocationValues()) {

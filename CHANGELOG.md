@@ -1,4 +1,14 @@
 
+## 1.9.0 (13-11-2023)
+
+### Novità: 1
+- [#30840](https://parermine.regione.emilia-romagna.it/issues/30840) Aggiornamento documentazione di progetto
+
+## 1.8.0 (02-10-2023)
+
+### Novità: 1
+- [#30471](https://parermine.regione.emilia-romagna.it/issues/30471) Utilizzo della modalità fluent di slf4j
+
 ## 1.7.0 (16-08-2023)
 
 ### Novità: 1

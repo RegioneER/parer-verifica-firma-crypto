@@ -39,7 +39,7 @@ import jakarta.annotation.PostConstruct;
 @Component
 public class SpringTikaSingleton {
 
-    private static final Logger LOG = LoggerFactory.getLogger(SpringTikaSingleton.class);
+    private static final Logger log = LoggerFactory.getLogger(SpringTikaSingleton.class);
 
     private Tika tika;
 
@@ -69,7 +69,7 @@ public class SpringTikaSingleton {
                 mimeType = tika.detect(is, metadata);
 
             } catch (IOException ex) {
-                LOG.warn("Impossibile leggere il file durante il calcolo del MimeType", ex);
+                log.atWarn().log("Impossibile leggere il file durante il calcolo del MimeType", ex);
             }
         }
         return mimeType;

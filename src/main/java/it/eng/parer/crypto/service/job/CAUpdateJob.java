@@ -48,7 +48,7 @@ import java.util.Iterator;
 @Service
 public class CAUpdateJob {
 
-    Logger logger = LoggerFactory.getLogger(CAUpdateJob.class);
+    Logger log = LoggerFactory.getLogger(CAUpdateJob.class);
 
     @Autowired
     ICAStorage caHelperLocal;
@@ -68,15 +68,15 @@ public class CAUpdateJob {
     @Scheduled(cron = "${cron.ca.sched}")
     public void doJob() {
         if (enable) {
-            logger.info("CA Update Job - Started");
+            log.atInfo().log("CA Update Job - Started");
             LocalDateTime inizio = LocalDateTime.now();
 
             this.loadingCa();
 
             long minutes = Duration.between(inizio, LocalDateTime.now()).toMinutes();
-            logger.info("CA Update Job - Finished in {} minutes", minutes);
+            log.atInfo().log("CA Update Job - Finished in {} minutes", minutes);
         } else {
-            logger.info("CA Update Job - Disabled");
+            log.atInfo().log("CA Update Job - Disabled");
         }
     }
 
@@ -88,18 +88,18 @@ public class CAUpdateJob {
             Collection<X509Certificate> qualifiedCertificate = signerUtil.getQualifiedPrincipalsAndX509Certificates()
                     .values();
             final int size = qualifiedCertificate.size();
-            logger.info("Trovati {} certificati dal CNIPA", size);
+            log.atInfo().log("Trovati {} certificati dal CNIPA", size);
             // Utilizzo l'iteratore e rimovo l'elemento per rendere eleggibile al GC il record già processato
             Iterator<X509Certificate> iterator = qualifiedCertificate.iterator();
             int caProcessate = 0;
             while (iterator.hasNext()) {
                 this.updateCA(iterator.next());
-                logger.info("Processata CA {} di {} ", ++caProcessate, size);
+                log.atInfo().log("Processata CA {} di {} ", ++caProcessate, size);
                 iterator.remove();
             }
 
         } catch (CryptoSignerException e) {
-            logger.error("Errore nello scarico dei certificati CA dal CNIPA", e);
+            log.atError().log("Errore nello scarico dei certificati CA dal CNIPA", e);
         }
     }
 
@@ -108,7 +108,7 @@ public class CAUpdateJob {
         try {
             caHelperLocal.insertCA(cert);
 
-            logger.debug("SubjectDN della CA: {}", cert.getSubjectX500Principal().getName());
+            log.atDebug().log("SubjectDN della CA: {}", cert.getSubjectX500Principal().getName());
             final String subjectKeyId = SignerUtil.getSubjectKeyId(cert);
 
             // Salvo l'url di recupero CRL
@@ -128,7 +128,8 @@ public class CAUpdateJob {
                         i++;
                     }
                 } else {
-                    logger.warn("La lista dei punti di distribuzione delle CRL è vuota per la CA - Subject Key ID: {}",
+                    log.atWarn().log(
+                            "La lista dei punti di distribuzione delle CRL è vuota per la CA - Subject Key ID: {}",
                             subjectKeyId);
                 }
             }
@@ -136,9 +137,9 @@ public class CAUpdateJob {
             saveCRL(urls);
 
         } catch (CryptoStorageException e) {
-            logger.error("Impossibile aggiornare la CA:", e);
+            log.atError().log("Impossibile aggiornare la CA:", e);
         } catch (Exception e) {
-            logger.error("Errore nell'aggionamento delle CA", e);
+            log.atError().log("Errore nell'aggionamento delle CA", e);
         }
     }
 
@@ -158,7 +159,7 @@ public class CAUpdateJob {
         try {
             urls = signerUtil.getURLCrlDistributionPoint(cert);
         } catch (CryptoSignerException e) {
-            logger.warn("Non è stato possibile recuperare la CRL dal distribution point - Subject Key ID: {}",
+            log.atWarn().log("Non è stato possibile recuperare la CRL dal distribution point - Subject Key ID: {}",
                     subjectKeyId);
         }
         return urls;
