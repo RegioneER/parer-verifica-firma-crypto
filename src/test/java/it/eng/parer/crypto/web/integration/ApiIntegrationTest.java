@@ -19,6 +19,11 @@ package it.eng.parer.crypto.web.integration;
 
 import static it.eng.parer.crypto.web.util.EndPointCostants.URL_DEPRECATE_REPORT_VERIFICA;
 import static it.eng.parer.crypto.web.util.EndPointCostants.URL_REPORT_VERIFICA;
+import static it.eng.parer.crypto.web.util.EndPointCostants.URL_FILEXML;
+import static it.eng.parer.crypto.web.util.EndPointCostants.URL_TST;
+import static it.eng.parer.crypto.web.util.EndPointCostants.URL_CRL;
+import static it.eng.parer.crypto.web.util.EndPointCostants.URL_TSD;
+import static it.eng.parer.crypto.web.util.EndPointCostants.URL_ERRORS;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -27,6 +32,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
@@ -167,7 +173,7 @@ class ApiIntegrationTest {
     @Test
     void testGetErrorDocument() {
 
-        ResponseEntity<ParerErrorDoc> entity = restTemplate.getForEntity("/api/errors/unhandled-exception",
+        ResponseEntity<ParerErrorDoc> entity = restTemplate.getForEntity(URL_ERRORS + "/unhandled-exception",
                 ParerErrorDoc.class);
         ParerErrorDoc errorDocument = entity.getBody();
         assertNotNull(errorDocument.getDescription());
@@ -730,7 +736,7 @@ class ApiIntegrationTest {
         body.add("file", resource);
         HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 
-        ParerTST postForObject = restTemplate.postForObject("/api/tst", requestEntity, ParerTST.class);
+        ParerTST postForObject = restTemplate.postForObject(URL_TST, requestEntity, ParerTST.class);
 
         assertNotNull(postForObject.getTimeStampInfo().getGenTime());
 
@@ -755,9 +761,30 @@ class ApiIntegrationTest {
         body.add("description", "TEST-TSD");
         body.add("file", resource);
         HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
-        ParerTSD postForObject = restTemplate.postForObject("/api/tsd", requestEntity, ParerTSD.class);
+        ParerTSD postForObject = restTemplate.postForObject(URL_TSD, requestEntity, ParerTSD.class);
 
         assertNotNull(postForObject.getTimeStampTokens()[0].getTimeStampInfo().getGenTime());
+
+    }
+
+    @Test
+    void testXmlExtraction() throws IOException {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+        restTemplate.getRestTemplate().setErrorHandler(new CryptoErrorHandler());
+        Resource resource = resourceLoader.getResource("classpath:firme/p7m_b64.xml.p7m");
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+
+        body.add("xml-p7m", resource);
+        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+        String actualValue = restTemplate.postForObject(URL_FILEXML, requestEntity, String.class);
+
+        Resource resourceSbustato = resourceLoader.getResource("classpath:firme/p7m_b64_sbustato.xml");
+        byte[] readAllBytes = Files.readAllBytes(resourceSbustato.getFile().toPath());
+        String expectedValue = new String(readAllBytes);
+
+        assertEquals(expectedValue, actualValue);
 
     }
 
@@ -780,7 +807,7 @@ class ApiIntegrationTest {
         HttpEntity<String> requestEntity = new HttpEntity<String>(createArrayNode.toString(), headers);
 
         restTemplate.getRestTemplate().setErrorHandler(new CryptoErrorHandler());
-        final ParerCRL expectedCrl = restTemplate.postForObject("/api/crl", requestEntity, ParerCRL.class);
+        final ParerCRL expectedCrl = restTemplate.postForObject(URL_CRL, requestEntity, ParerCRL.class);
 
         // Fase 2: effettuo la ricerca utilizzando il certificato del firmatario.
         Resource resource = resourceLoader.getResource("classpath:firmatario-test.cer");
@@ -789,7 +816,7 @@ class ApiIntegrationTest {
 
         String certificatoFirmatarioBase64 = Base64.getUrlEncoder().encodeToString(blobFilePerFirma);
 
-        String url = "/api/crl?certifFirmatarioBase64UrlEncoded=" + certificatoFirmatarioBase64;
+        String url = URL_CRL + "?certifFirmatarioBase64UrlEncoded=" + certificatoFirmatarioBase64;
 
         ResponseEntity<ParerCRL> crlEntity = restTemplate.getForEntity(url, ParerCRL.class);
         ParerCRL parerCrl = crlEntity.getBody();
