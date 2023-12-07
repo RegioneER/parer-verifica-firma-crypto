@@ -42,7 +42,7 @@
         <logstash-logback-encoder.version>7.2</logstash-logback-encoder.version>
         <!-- custom libs -->
         <eng-cryptolibrary.version>1.12.7</eng-cryptolibrary.version>
-        <verificafirma-crypto-beans.version>1.3.0</verificafirma-crypto-beans.version>
+        <verificafirma-crypto-beans.version>1.4.0</verificafirma-crypto-beans.version>
         <!-- -->
         <start-class>it.eng.parer.crypto.web.CryptoApplication</start-class>
     </properties>
