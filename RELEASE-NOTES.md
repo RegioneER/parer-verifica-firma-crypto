@@ -1,4 +1,4 @@
-## 1.9.0 (13-11-2023)
+## 1.10.0 (05-12-2023)
 
 ### Novità: 1
-- [#30840](https://parermine.regione.emilia-romagna.it/issues/30840) Aggiornamento documentazione di progetto
+- [#30313](https://parermine.regione.emilia-romagna.it/issues/30313) Aggiunta di un servizio per sbustare i documenti XML.P7M

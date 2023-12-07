@@ -133,6 +133,9 @@ public class DocService {
         case SIGNATURE_WRONG_PARAMETER:
             decodifica = "Parametro errato durante la fase di verifica firma.";
             break;
+        case SIGNATURE_FORMAT:
+            decodifica = "Errore validazione formato del file elaborato.";
+            break;
         default:
             decodifica = "Errore non gestito";
         }
@@ -174,6 +177,9 @@ public class DocService {
             break;
         case SIGNATURE_VERIFICATION:
             decodifica = "processo di verifica firma/formati";
+            break;
+        case SIGNATURE_EXTRACTION:
+            decodifica = "processo di estrazione file originale da file firmato";
             break;
         default:
             decodifica = "non gestito";
