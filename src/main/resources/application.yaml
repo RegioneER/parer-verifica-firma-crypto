@@ -68,7 +68,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: "info, health, jolokia, threaddump, scheduledtasks, shutdown"
+        include: "info, health, jolokia, threaddump, scheduledtasks, shutdown, prometheus"
         
 
 # CRYPTO
@@ -83,7 +83,8 @@ parer:
     trovaCAOnline: false  
     admin-ui:
       enabled: true
-      propstoskip: .*H2_USER.*|.*H2_PWD.*|.*ADMIN_USER.*|.*ADMIN_PWD.*|.*user.*|.*password.*|.*email.*      
+      env:
+        propstoskip: .*H2_USER.*|.*H2_PWD.*|.*ADMIN_USER.*|.*ADMIN_PWD.*|.*user.*|.*password.*|.*email.*      
     verifica-ui:
       enabled: true
 

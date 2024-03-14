@@ -2,7 +2,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>old-cryptolibrary</artifactId>
-    <version>1.11.0</version>
+    <version>1.10.1-SNAPSHOT</version>
     <packaging>${packaging.type}</packaging>
     <name>Sacer Cryptolibrary</name>
     <description>Cryptolibrary contenuta in Sacer</description>
@@ -48,16 +48,23 @@
     </properties>
 
     <scm>
-        <developerConnection>scm:git:git@gitlab.ente.regione.emr.it:parer/okd/crypto.git</developerConnection>
-        <tag>old-cryptolibrary-1.11.0</tag>
+        <developerConnection>scm:git:https://github.com/RegioneER/parer-verifica-firma-crypto.git</developerConnection>
+        <tag>HEAD</tag>
     </scm>
 
     <distributionManagement>
-        <site>
-            <id>site</id>
-            <url>dav:https://nexus.ente.regione.emr.it/repository/parer-site/crypto/${project.version}</url>
-        </site>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/RegioneER/parer-verifica-firma-crypto</url>
+        </repository> 
     </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/RegioneER/parer-framework-parerpom</url>            
+        </repository>             
+     </repositories>
 
     <dependencyManagement>
         <dependencies>
@@ -204,11 +211,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
-        <dependency>
-			<groupId>io.micrometer</groupId>
-			<artifactId>micrometer-registry-prometheus</artifactId>
-			<scope>runtime</scope>
-		</dependency>
         <!-- Swagger -->
         <dependency>
 		    <groupId>org.springdoc</groupId>
@@ -369,27 +371,6 @@
                             <goal>report</goal>
                         </goals>
                     </execution>
-					<!-- check della coverage minima -->
-					<execution>
-						<id>jacoco-check</id>
-						<goals>
-							<goal>check</goal>
-						</goals>
-						<configuration>
-							<rules>
-								<rule>
-									<element>BUNDLE</element>
-									<limits>
-										<limit>
-											<counter>LINE</counter>
-											<value>COVEREDRATIO</value>
-											<minimum>0.55</minimum>
-										</limit>
-									</limits>
-								</rule>
-							</rules>
-						</configuration>
-					</execution>	                    
                 </executions>
             </plugin>
 

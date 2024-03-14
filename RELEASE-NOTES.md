@@ -1,4 +1,4 @@
-## 1.10.0 (05-12-2023)
+## 1.11.0 (14-03-2024)
 
 ### Novità: 1
-- [#30313](https://parermine.regione.emilia-romagna.it/issues/30313) Aggiunta di un servizio per sbustare i documenti XML.P7M
+- [#31418](https://parermine.regione.emilia-romagna.it/issues/31418) Attivazione statistiche per monitoraggio con prometheus

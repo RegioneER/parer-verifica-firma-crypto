@@ -1,4 +1,14 @@
 
+## 1.11.0 (14-03-2024)
+
+### Novità: 1
+- [#31418](https://parermine.regione.emilia-romagna.it/issues/31418) Attivazione statistiche per monitoraggio con prometheus
+
+## 1.10.1 (12-02-2024)
+
+### Bugfix: 1
+- [#31069](https://parermine.regione.emilia-romagna.it/issues/31069) Risoluzione errore ORACLE nella verifica firma "SQL Error: 17268, SQLState: 99999 (Year out of range)"
+
 ## 1.10.0 (05-12-2023)
 
 ### Novità: 1
