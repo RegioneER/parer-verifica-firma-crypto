@@ -68,7 +68,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: "info, health, jolokia, threaddump, scheduledtasks, shutdown"
+        include: "info, health, jolokia, threaddump, scheduledtasks, shutdown, prometheus"
         
 
 # CRYPTO

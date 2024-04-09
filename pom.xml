@@ -2,7 +2,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>old-cryptolibrary</artifactId>
-    <version>1.10.2-SNAPSHOT</version>
+    <version>1.11.1-SNAPSHOT</version>
     <packaging>${packaging.type}</packaging>
     <name>Sacer Cryptolibrary</name>
     <description>Cryptolibrary contenuta in Sacer</description>
@@ -211,6 +211,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
+        <dependency>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-registry-prometheus</artifactId>
+			<scope>runtime</scope>
+		</dependency>
         <!-- Swagger -->
         <dependency>
 		    <groupId>org.springdoc</groupId>

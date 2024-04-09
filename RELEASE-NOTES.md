@@ -1,1 +1,5 @@
-## 1.10.1 (12-02-2024)
+## 1.11.0 (14-03-2024)
+
+### Novità: 1
+- [#31418](https://parermine.regione.emilia-romagna.it/issues/31418) Attivazione statistiche per monitoraggio con prometheus
+
