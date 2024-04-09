@@ -19,13 +19,17 @@ package it.eng.parer.crypto.jpa.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.TimeZone;
 
+import it.eng.parer.crypto.jpa.entity.converter.NeverendingDateConverter;
 import jakarta.persistence.Cacheable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.Lob;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -94,6 +98,24 @@ public class CryCertificate implements Serializable {
 
     public void setKeyId(String keyId) {
         this.keyId = keyId;
+    }
+
+    /**
+     * Secondo specifica RFC5280 https://tools.ietf.org/html/rfc5280#section-5.1.2.5 le date sarebbero normalmente
+     * espresse in UTC/GMT Il sistema però persistente con il TZ locale (ossia GMT+01), esiste un caso "particolare" di
+     * timestamp : 9999/31/12 23:59:59 UTC che per un hard limit di ORACLE DB non può essere persisto (la sua
+     * conversione in GMT+01 lo trasforma in 10000/01/01 00:59:59 GMT+01) che non può essere persistito e/o letto
+     */
+    @PrePersist
+    void preInsert() {
+        this.expirationDate = NeverendingDateConverter.verifyOverZoneId(this.expirationDate,
+                TimeZone.getTimeZone("UTC").toZoneId());
+    }
+
+    @PreUpdate
+    void preUpdate() {
+        this.expirationDate = NeverendingDateConverter.verifyOverZoneId(this.expirationDate,
+                TimeZone.getTimeZone("UTC").toZoneId());
     }
 
 }
