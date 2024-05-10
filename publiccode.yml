@@ -73,7 +73,7 @@ maintenance:
     - name: ' Engineering Ingegneria Informatica S.p.A.'
       until: '2024-06-30'
   type: contract
-name: Verifica Firma Crypto
+name: Parer - Verifica Firma Crypto
 platforms:
   - linux
 releaseDate: '2023-11-13'
