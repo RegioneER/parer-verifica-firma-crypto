@@ -21,7 +21,7 @@ description:
     genericName: Verificatore di firma digitale
     longDescription: |
       Microservizio realizzato per effettuare verifica e validazione di
-      documenti con firma digitale. 
+      documenti con firma digitale utilizzato nell'ambito del processo di acquisizione gestito dal sistema SACER. 
 
       Realizzato attraverso framework [Spring
       Boot](https://spring.io/projects/spring-boot) (versione 3.x) e [OpenJDK
@@ -35,8 +35,7 @@ description:
       consigliato l'utilizzo di Docker e/o sistema operativo Linux per
       l'esecuzione del launcher.
     shortDescription: |-
-      Microservizio che implementa la verifica di documenti firmati attraverso
-      libreria cryptolibrary
+      Microservizio che implementa la verifica di documenti firmati attraverso libreria cryptolibrary utilizzato dal sistema SACER nella fase di ingest
 developmentStatus: stable
 intendedAudience:
   countries:
