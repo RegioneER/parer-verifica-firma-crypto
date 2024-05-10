@@ -4,11 +4,11 @@
 
 publiccodeYmlVersion: '0.3'
 categories:
-  - application-development
-  - e-signature
+  - data-analytics
+  - data-collection  
 dependsOn:
   open:
-    - name: Cryptolibrary
+    - name: Xformer Kettle Server
       optional: false
       version: ''
       versionMax: ''
@@ -16,26 +16,21 @@ dependsOn:
 description:
   it:
     features:
-      - verifica firma digitale
-      - cryptolibrary
-    genericName: Verificatore di firma digitale
-    longDescription: |
-      Microservizio realizzato per effettuare verifica e validazione di
-      documenti con firma digitale utilizzato nell'ambito del processo di acquisizione gestito dal sistema SACER. 
-
-      Realizzato attraverso framework [Spring
-      Boot](https://spring.io/projects/spring-boot) (versione 3.x) e [OpenJDK
-      17](https://openjdk.org/projects/jdk/17/), utilizza la libreria
-      proprietaria **Cryptolibray**
-      (https://github.com/RegioneER/parer-cryptolibrary) con la quale sono
-      realizzate le logiche di validazione e verifica della firma digitale.
-
-
-      Compatibile con le ultimissime versioni di Kubernets ed Openshift, 
-      consigliato l'utilizzo di Docker e/o sistema operativo Linux per
-      l'esecuzione del launcher.
+      - data integration penthao
+      - data transformation
+    genericName: Xformer Kettle Server
+    longDescription: |+
+      Xformer Kettle Server è un'applicazione web per servlet container che funge da wrapper 
+      
+      alle librerie di [Data Integration di Penthao Kettle](https://github.com/pentaho/pentaho-kettle). 
+      
+      L'applicazione espone dei webservice SOAP e REST per l'inserimento, l'amministrazione e l'esecuzione di 
+      
+      trasformazioni modellate tramite l'applicativo 
+      
+      [Kettle Spoon](https://www.hitachivantara.com/es-latam/products/pentaho-platform/data-integration-analytics/pentaho-community-edition.html) e utilizzate nell'ambito del processo di preacquisizione dal sistema SACER.
     shortDescription: |-
-      Microservizio che implementa la verifica di documenti firmati attraverso libreria cryptolibrary utilizzato dal sistema SACER nella fase di ingest
+      Xformer Kettle Server è un'applicazione web per servlet container che funge da wrapper alle librerie di Data Integration di Penthao Kettle 
 developmentStatus: stable
 intendedAudience:
   countries:
@@ -54,7 +49,7 @@ it:
     spid: false
   riuso:
     codiceIPA: r_emiro
-landingURL: 'https://github.com/RegioneER/parer-verifica-firma-crypto'
+landingURL: 'https://github.com/RegioneER/parer-xformer-kettle-server'
 legal:
   license: AGPL-3.0-or-later
   mainCopyrightOwner: Regione Emilia-Romagna
@@ -64,7 +59,7 @@ localisation:
     - it
   localisationReady: true
 logo: |-
-  https://raw.githubusercontent.com/RegioneER/parer-verifica-firma-crypto/master/src/docs/rer-logo.png
+  https://raw.githubusercontent.com/RegioneER/parer-xformer-kettle-server/master/src/docs/rer-logo.png
 maintenance:
   contacts:
     - email: areasviluppoparer@regione.emilia-romagna.it
@@ -73,10 +68,10 @@ maintenance:
     - name: ' Engineering Ingegneria Informatica S.p.A.'
       until: '2024-06-30'
   type: contract
-name: Verifica Firma Crypto
+name: Parer - Xformer Kettle Server
 platforms:
   - linux
 releaseDate: '2023-11-13'
 softwareType: standalone/backend
-url: 'https://github.com/RegioneER/parer-verifica-firma-crypto.git'
+url: 'https://github.com/RegioneER/parer-xformer-kettle-server.git'
 applicationSuite: SACER
