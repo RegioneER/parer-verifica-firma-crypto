@@ -1,5 +1,4 @@
-## 1.11.0 (14-03-2024)
+## 1.12.0 (22-05-2024)
 
 ### Novità: 1
-- [#31418](https://parermine.regione.emilia-romagna.it/issues/31418) Attivazione statistiche per monitoraggio con prometheus
-
+- [#32596](https://parermine.regione.emilia-romagna.it/issues/32596) Introduzione Apache basic client "no-retry" per recupero oggetto da object storage
