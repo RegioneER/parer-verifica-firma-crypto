@@ -1,5 +1,4 @@
-## 1.11.0 (14-03-2024)
+## 1.13.0 (31-05-2024)
 
 ### Novità: 1
-- [#31418](https://parermine.regione.emilia-romagna.it/issues/31418) Attivazione statistiche per monitoraggio con prometheus
-
+- [#32645](https://parermine.regione.emilia-romagna.it/issues/32645) Introduzione logging JSON body request
