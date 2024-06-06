@@ -1,5 +1,4 @@
-## 1.11.0 (14-03-2024)
+## 1.14.0 (06-06-2024)
 
 ### Novità: 1
-- [#31418](https://parermine.regione.emilia-romagna.it/issues/31418) Attivazione statistiche per monitoraggio con prometheus
-
+- [#32662](https://parermine.regione.emilia-romagna.it/issues/32662) Ottimizzazione/Re-factor apache client utilizzato per recupero documento da verificare e parametro per disattivazione verifica SSL
