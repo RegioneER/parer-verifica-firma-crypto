@@ -2,7 +2,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>old-cryptolibrary</artifactId>
-    <version>1.14.1</version>
+    <version>1.11.1-SNAPSHOT</version>
     <packaging>${packaging.type}</packaging>
     <name>Sacer Cryptolibrary</name>
     <description>Cryptolibrary contenuta in Sacer</description>
@@ -11,7 +11,7 @@
     <parent>
         <groupId>it.eng.parer</groupId>
         <artifactId>parer-pom</artifactId>
-        <version>5.2.1</version>
+        <version>4.2.0</version>
     </parent>
 
     <properties>
@@ -40,7 +40,6 @@
         <bootstrap.version>3.4.1</bootstrap.version>
         <jquery.version>3.6.4</jquery.version>
         <logstash-logback-encoder.version>7.2</logstash-logback-encoder.version>
-        <org-json.version>20240303</org-json.version>
         <!-- custom libs -->
         <eng-cryptolibrary.version>1.12.7</eng-cryptolibrary.version>
         <verificafirma-crypto-beans.version>1.4.0</verificafirma-crypto-beans.version>
@@ -49,16 +48,23 @@
     </properties>
 
     <scm>
-        <developerConnection>scm:git:git@gitlab.ente.regione.emr.it:parer/okd/crypto.git</developerConnection>
-        <tag>old-cryptolibrary-1.14.1</tag>
+        <developerConnection>scm:git:https://github.com/RegioneER/parer-verifica-firma-crypto.git</developerConnection>
+        <tag>HEAD</tag>
     </scm>
 
     <distributionManagement>
-        <site>
-            <id>site</id>
-            <url>dav:https://nexus.ente.regione.emr.it/repository/parer-site/crypto/${project.version}</url>
-        </site>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/RegioneER/parer-verifica-firma-crypto</url>
+        </repository> 
     </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/RegioneER/parer-framework-parerpom</url>            
+        </repository>             
+     </repositories>
 
     <dependencyManagement>
         <dependencies>
@@ -319,12 +325,6 @@
             <artifactId>jquery</artifactId>
             <version>${jquery.version}</version>
         </dependency>
-		<dependency>
-		    <groupId>org.json</groupId>
-		    <artifactId>json</artifactId>
-		    <version>${org-json.version}</version>
-		</dependency>
-
     </dependencies>
 
     <build>

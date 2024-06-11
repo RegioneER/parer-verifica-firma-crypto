@@ -1,3 +1,24 @@
+
+## 1.14.1 (11-06-2024)
+
+### Bugfix: 1
+- [#32696](https://parermine.regione.emilia-romagna.it/issues/32696) Correzione gestione configurazioni http client (diverse dal default)
+
+## 1.14.0 (06-06-2024)
+
+### Novità: 1
+- [#32662](https://parermine.regione.emilia-romagna.it/issues/32662) Ottimizzazione/Re-factor apache client utilizzato per recupero documento da verificare e parametro per disattivazione verifica SSL
+
+## 1.13.0 (31-05-2024)
+
+### Novità: 1
+- [#32645](https://parermine.regione.emilia-romagna.it/issues/32645) Introduzione logging JSON body request
+
+## 1.12.0 (22-05-2024)
+
+### Novità: 1
+- [#32596](https://parermine.regione.emilia-romagna.it/issues/32596) Introduzione Apache basic client "no-retry" per recupero oggetto da object storage
+
 ## 1.11.0 (14-03-2024)
 
 ### Novità: 1

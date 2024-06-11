@@ -44,6 +44,7 @@ import org.springframework.web.util.UrlPathHelper;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import it.eng.crypto.data.SignerUtil;
+import it.eng.parer.crypto.service.util.CommonsHttpClient;
 
 //https://docs.spring.io/spring-boot/docs/1.5.2.RELEASE/reference/htmlsingle/#boot-features-external-config-application-property-files
 //SEE 24.6.4 YAML shortcomings
@@ -56,13 +57,40 @@ import it.eng.crypto.data.SignerUtil;
 // @ImportResource("classpath*:CryptoLibrarySpringConfig.xml")
 public class AppConfiguration implements WebMvcConfigurer {
 
+    private final Logger log = LoggerFactory.getLogger(AppConfiguration.class);
+
     @Autowired
     Environment env;
 
     @Value("${cron.thread.pool.size}")
     int threadPoolSize;
 
-    private final Logger log = LoggerFactory.getLogger(AppConfiguration.class);
+    /*
+     * Standard httpclient
+     */
+    // default 60 s
+    @Value("${parer.crypto.uriloader.httpclient.timeout:60}")
+    int httpClientTimeout;
+
+    // default 60 s
+    @Value("${parer.crypto.uriloader.httpclient.timeoutsocket:60}")
+    int httpClientSocketTimeout;
+
+    // default 4
+    @Value("${parer.crypto.uriloader.httpclient.connectionsmaxperroute:4}")
+    int httpClientConnectionsmaxperroute;
+
+    // default 40
+    @Value("${parer.crypto.uriloader.httpclient.connectionsmax:40}")
+    int httpClientConnectionsmax;
+
+    // defult 60s
+    @Value("${parer.crypto.uriloader.httpclient.timetolive:60}")
+    long httpClientTimeToLive;
+
+    // default false
+    @Value("${parer.crypto.uriloader.httpclient.no-ssl-verify:false}")
+    boolean noSslVerify;
 
     /**
      *
@@ -130,5 +158,21 @@ public class AppConfiguration implements WebMvcConfigurer {
                 .description("Microserivice per verifica firma basato su cryptolibrary")
                 .version((StringUtils.isNotBlank(getClass().getPackage().getImplementationVersion())
                         ? getClass().getPackage().getImplementationVersion() : "")));
+    }
+
+    /** CUSTOM HTTP CLIENT ! **/
+    @Bean(initMethod = "init", destroyMethod = "destroy")
+    public CommonsHttpClient commonsHttpClient() {
+        CommonsHttpClient commonsHttpClient = new CommonsHttpClient();
+        // NOTA timeout impostabile (da configurazione!)
+        commonsHttpClient.setHttpClientTimeout(httpClientTimeout);
+        commonsHttpClient.setHttpClientConnectionsmax(httpClientConnectionsmax);
+        commonsHttpClient.setHttpClientSocketTimeout(httpClientSocketTimeout);
+        //
+        commonsHttpClient.setHttpClientConnectionsmaxperroute(httpClientConnectionsmaxperroute);
+        commonsHttpClient.setHttpClientTimeToLive(httpClientTimeToLive);
+        //
+        commonsHttpClient.setNoSslVerify(noSslVerify);
+        return commonsHttpClient;
     }
 }
