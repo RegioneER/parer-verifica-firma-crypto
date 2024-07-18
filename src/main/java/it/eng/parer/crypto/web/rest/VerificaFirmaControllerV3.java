@@ -17,10 +17,11 @@
 
 package it.eng.parer.crypto.web.rest;
 
+import static it.eng.parer.crypto.web.util.EndPointCostants.ETAG_RV10;
 import static it.eng.parer.crypto.web.util.EndPointCostants.RESOURCE_REPORT_VERIFICA;
 import static it.eng.parer.crypto.web.util.EndPointCostants.URL_API_BASE;
-import static it.eng.parer.crypto.web.util.EndPointCostants.ETAG_RV10;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.nio.file.Files;
@@ -34,7 +35,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
@@ -67,7 +72,9 @@ import it.eng.parer.crypto.model.verifica.input.CryptoDataToValidateMetadataFile
 import it.eng.parer.crypto.service.VerificaFirmaService;
 import it.eng.parer.crypto.service.model.CryptoDataToValidateData;
 import it.eng.parer.crypto.service.model.CryptoDataToValidateFile;
+import it.eng.parer.crypto.service.util.CommonsHttpClient;
 import it.eng.parer.crypto.service.util.Constants;
+import it.eng.parer.crypto.service.util.Constants.URIClientType;
 import it.eng.parer.crypto.web.bean.RestExceptionResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -95,17 +102,50 @@ public class VerificaFirmaControllerV3 {
     @Autowired
     VerificaFirmaService verificaFirmaService;
 
+    @Autowired
+    CommonsHttpClient commonsHttpClient;
+
+    @Value("${parer.crypto.uriloader.client-type:httpclient}")
+    URIClientType uRIClientType;
+
     // default 60 s
-    @Value("${parer.crypto.webclient.timeout:360}")
+    @Value("${parer.crypto.uriloader.webclient.timeout:60}")
     long webClientTimeout;
 
     // default 5 times
-    @Value("${parer.crypto.webclient.backoff:10}")
+    @Value("${parer.crypto.uriloader.webclient.backoff:5}")
     long webClientBackoff;
 
     // default 3 s
-    @Value("${parer.crypto.webclient.backofftime:3}")
+    @Value("${parer.crypto.uriloader.webclient.backofftime:3}")
     long webClientBackoffTime;
+
+    /*
+     * Standard httpclient
+     */
+    // default 60 s
+    @Value("${parer.crypto.uriloader.httpclient.timeout:60}")
+    int httpClientTimeout;
+
+    // default 60 s
+    @Value("${parer.crypto.uriloader.httpclient.timeoutsocket:60}")
+    int httpClientSocketTimeout;
+
+    // default 4
+    @Value("${parer.crypto.uriloader.httpclient.connectionsmaxperroute:4}")
+    int httpClientConnectionsmaxperroute;
+
+    // default 40
+    @Value("${parer.crypto.uriloader.httpclient.connectionsmax:40}")
+    int httpClientConnectionsmax;
+
+    // defult 60s
+    @Value("${parer.crypto.uriloader.httpclient.timetolive:60}")
+    long httpClientTimeToLive;
+
+    // default false
+    @Value("${parer.v.uriloader.httpclient.no-ssl-verify:false}")
+    boolean noSslVerify;
 
     /**
      * Metodo per effettuare la verifica delle firme. In questo caso i file da verificare sono passati sotto-forma di
@@ -173,6 +213,10 @@ public class VerificaFirmaControllerV3 {
         // Controllo che i metadati siano coerenti con i dati
         // log UUID
         MDC.put(Constants.UUID_LOG_MDC, metadati.getUuid());
+        // LOG BODY
+        if (log.isDebugEnabled()) {
+            log.atDebug().log("RequestBody {}", new JSONObject(body).toString());
+        }
         CryptoDataToValidateFile signedFile = new CryptoDataToValidateFile();
         List<CryptoDataToValidateFile> detachedSignature = new ArrayList<>(firme.size());
         List<CryptoDataToValidateFile> detachedTimeStamp = new ArrayList<>(marche.size());
@@ -249,7 +293,15 @@ public class VerificaFirmaControllerV3 {
         }
     }
 
-    private void downloadSignedResource(URI signedResource, Path localPath) {
+    private void downloadSignedResource(URI signedResource, Path localPath) throws IOException {
+        if (uRIClientType.equals(URIClientType.HTTPCLIENT)) {
+            getWithCommonHttpclient(signedResource, localPath);
+        } else {
+            getWithWebClient(signedResource, localPath);
+        }
+    }
+
+    private void getWithWebClient(URI signedResource, Path localPath) {
         // Attenzione, se al posto dell'uri viene utilizzata una stringa ci possono
         // essere problemi di conversione dei
         // caratteri
@@ -261,6 +313,14 @@ public class VerificaFirmaControllerV3 {
         // prova e l'altra
         DataBufferUtils.write(dataBuffer, localPath).timeout(Duration.ofSeconds(webClientTimeout))
                 .retryWhen(Retry.backoff(webClientBackoff, Duration.ofSeconds(webClientBackoffTime))).share().block();
+    }
+
+    private void getWithCommonHttpclient(URI signedResource, Path localPath) throws IOException {
+        try (CloseableHttpResponse response = commonsHttpClient.getHttpClient().execute(new HttpGet(signedResource));
+                FileOutputStream out = new FileOutputStream(localPath.toFile());) {
+            //
+            IOUtils.copy(response.getEntity().getContent(), out);
+        }
     }
 
     /**
