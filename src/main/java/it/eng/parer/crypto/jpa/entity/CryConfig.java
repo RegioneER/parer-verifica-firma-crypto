@@ -29,7 +29,7 @@ import jakarta.persistence.Table;
 
 /**
  * The persistent class for the CRY_CONFIG database table.
- * 
+ *
  */
 @Entity
 @Cacheable(true)

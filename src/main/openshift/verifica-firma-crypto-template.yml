@@ -188,7 +188,6 @@ objects:
     labels:
       app: verificafirma-crypto
       group: it.eng.parer
-      registry: ${REGISTRY}
       gl_log_application: crypto
       gl_tags: ${AMBIENTE}
     name: verificafirma-crypto
@@ -215,7 +214,6 @@ objects:
       metadata:
         labels:
           app: verificafirma-crypto
-          registry: ${REGISTRY}
           gl_log_application: crypto
           gl_tags: ${AMBIENTE}
           group: it.eng.parer

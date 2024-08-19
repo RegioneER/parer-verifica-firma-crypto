@@ -47,7 +47,7 @@ import jakarta.validation.Valid;
  * Endopint relativo alle verifica delle firme.
  *
  * @deprecated (Deprecato a partire dall'introduzione di {@link VerificaFirmaControllerV3})
- * 
+ *
  * @author Snidero_L
  */
 @Tag(name = "Verifica", description = "Report verifica firma")

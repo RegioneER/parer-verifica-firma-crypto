@@ -53,7 +53,7 @@ public class SpringTikaSingleton {
      *
      * @param document
      *            file di input
-     * 
+     *
      * @return il mime type identificato o null
      */
     public String detectMimeType(File document) {

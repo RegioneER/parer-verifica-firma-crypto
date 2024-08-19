@@ -49,7 +49,7 @@ public class Util {
      * Ritorna true se tutti i controlli di firma hanno ritornato valore POSITIVO
      *
      * @param firma
-     * 
+     *
      * @return
      */
     public static void assertControlliFirmeOK(CryptoAroCompDoc componente) {

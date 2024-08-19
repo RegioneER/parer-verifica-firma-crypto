@@ -52,9 +52,9 @@ public class ExtractorService {
      *
      * @param xmlP7mFile
      *            file di tipo xml.p7m
-     * 
+     *
      * @return serializzazione in stringa del file xml
-     * 
+     *
      * @throws java.io.IOException
      *             in caso di file in input non xml.p7m oppure mime type dello sbustato diverso da application/xml
      */

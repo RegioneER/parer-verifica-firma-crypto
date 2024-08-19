@@ -35,7 +35,7 @@ import it.eng.parer.crypto.service.verifica.OldCryptoInvoker;
 
 /**
  * Test di unita sul cryptoInvoker (attualmente utilizzato solo per TST e TSD)
- * 
+ *
  * @author Snidero_L
  */
 @SpringBootTest(properties = { "cron.ca.enable=false", "cron.crl.enable=false",

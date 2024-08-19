@@ -1,5 +1,4 @@
-## 1.11.0 (14-03-2024)
+## 1.15.0 (19-08-2024)
 
 ### Novità: 1
-- [#31418](https://parermine.regione.emilia-romagna.it/issues/31418) Attivazione statistiche per monitoraggio con prometheus
-
+- [#32998](https://parermine.regione.emilia-romagna.it/issues/32998) Aggiornamento librerie obsolete 2024

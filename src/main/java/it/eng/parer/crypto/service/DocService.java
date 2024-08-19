@@ -38,7 +38,7 @@ public class DocService {
      *            codice da decodificare
      * @param selfLink
      *            link della richiesta
-     * 
+     *
      * @return modello degli errori.
      */
     public ParerErrorDoc compilaErrore(String codiceErrore, String selfLink) {
@@ -75,7 +75,7 @@ public class DocService {
      *
      * @param codice
      *            di errore codificato
-     * 
+     *
      * @return descrizione del codice di errore.Non viene mai restituito null.
      */
     private String decodificaErrore(ParerError.ErrorCode codice) {
@@ -147,24 +147,15 @@ public class DocService {
      *
      * @param tipologia
      *            tipologia di errore
-     * 
+     *
      * @return decodifica della tipologia. Non viene mai restituito null.
      */
     private String decodificaTipologia(ParerError.ExceptionType tipologia) {
 
         final String decodifica;
         switch (tipologia) {
-        case PARAMETER_VALIDATION:
-            decodifica = "parametro errato";
-            break;
         case GENERIC:
             decodifica = "generico";
-            break;
-        case NOT_FOUND:
-            decodifica = "risorsa non trovata";
-            break;
-        case CA:
-            decodifica = "certification authority";
             break;
         case CERTIFICATE:
             decodifica = "certificato digitale";
@@ -174,12 +165,6 @@ public class DocService {
             break;
         case TIME:
             decodifica = "emissione marca temporale";
-            break;
-        case SIGNATURE_VERIFICATION:
-            decodifica = "processo di verifica firma/formati";
-            break;
-        case SIGNATURE_EXTRACTION:
-            decodifica = "processo di estrazione file originale da file firmato";
             break;
         default:
             decodifica = "non gestito";
