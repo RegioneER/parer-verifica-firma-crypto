@@ -70,7 +70,6 @@ import it.eng.parer.crypto.model.verifica.input.CryptoDataToValidateDataUri;
 import it.eng.parer.crypto.model.verifica.input.CryptoDataToValidateMetadata;
 import it.eng.parer.crypto.model.verifica.input.CryptoDataToValidateMetadataFile;
 import it.eng.parer.crypto.service.VerificaFirmaService;
-import it.eng.parer.crypto.service.helper.ApacheClientHelper;
 import it.eng.parer.crypto.service.model.CryptoDataToValidateData;
 import it.eng.parer.crypto.service.model.CryptoDataToValidateFile;
 import it.eng.parer.crypto.service.util.CommonsHttpClient;

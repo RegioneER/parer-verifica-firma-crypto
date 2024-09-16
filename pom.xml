@@ -47,17 +47,24 @@
         <start-class>it.eng.parer.crypto.web.CryptoApplication</start-class>
     </properties>
 
-    <scm>
-        <developerConnection>scm:git:git@gitlab.ente.regione.emr.it:parer/okd/crypto.git</developerConnection>
-        <tag>old-cryptolibrary-1.14.1</tag>
+<scm>
+        <developerConnection>scm:git:https://github.com/RegioneER/parer-verifica-firma-crypto.git</developerConnection>
+        <tag>HEAD</tag>
     </scm>
 
-    <distributionManagement>
-        <site>
-            <id>site</id>
-            <url>dav:https://nexus.ente.regione.emr.it/repository/parer-site/crypto/${project.version}</url>
-        </site>
+<distributionManagement>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/RegioneER/parer-verifica-firma-crypto</url>
+        </repository> 
     </distributionManagement>
+
+<repositories>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/RegioneER/parer-framework-parerpom</url>            
+        </repository>             
+     </repositories>
 
     <dependencyManagement>
         <dependencies>
