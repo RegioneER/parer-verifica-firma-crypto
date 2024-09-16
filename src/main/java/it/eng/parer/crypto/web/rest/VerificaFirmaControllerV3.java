@@ -34,16 +34,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -75,6 +70,7 @@ import it.eng.parer.crypto.model.verifica.input.CryptoDataToValidateDataUri;
 import it.eng.parer.crypto.model.verifica.input.CryptoDataToValidateMetadata;
 import it.eng.parer.crypto.model.verifica.input.CryptoDataToValidateMetadataFile;
 import it.eng.parer.crypto.service.VerificaFirmaService;
+import it.eng.parer.crypto.service.helper.ApacheClientHelper;
 import it.eng.parer.crypto.service.model.CryptoDataToValidateData;
 import it.eng.parer.crypto.service.model.CryptoDataToValidateFile;
 import it.eng.parer.crypto.service.util.Constants;
@@ -105,6 +101,9 @@ public class VerificaFirmaControllerV3 {
 
     @Autowired
     VerificaFirmaService verificaFirmaService;
+
+    @Autowired
+    ApacheClientHelper apacheClientHelper;
 
     @Value("${parer.crypto.uriloader.client-type:httpclient}")
     URIClientType uRIClientType;
@@ -143,6 +142,10 @@ public class VerificaFirmaControllerV3 {
     // defult 60s
     @Value("${parer.crypto.uriloader.httpclient.timetolive:60}")
     long httpClientTimeToLive;
+
+    // default false
+    @Value("${parer.v.uriloader.httpclient.no-ssl-verify:false}")
+    boolean noSslVerify;
 
     /**
      * Metodo per effettuare la verifica delle firme. In questo caso i file da verificare sono passati sotto-forma di
@@ -313,20 +316,9 @@ public class VerificaFirmaControllerV3 {
     }
 
     private void getWithCommonHttpclient(URI signedResource, Path localPath) throws IOException {
-        // config
-        RequestConfig config = RequestConfig.custom().setConnectTimeout(httpClientTimeout * 1000)
-                .setConnectionRequestTimeout(httpClientTimeout * 1000).setSocketTimeout(httpClientSocketTimeout * 1000)
-                .build();
-        // pool manager
-        PoolingHttpClientConnectionManager connManager = new PoolingHttpClientConnectionManager();
-        connManager.setDefaultMaxPerRoute(httpClientConnectionsmaxperroute);
-        connManager.setMaxTotal(httpClientConnectionsmax);
-
-        try (CloseableHttpClient httpClient = HttpClientBuilder.create().setDefaultRequestConfig(config)
-                .setConnectionTimeToLive(httpClientTimeToLive, TimeUnit.MILLISECONDS).setConnectionManager(connManager)
-                .build(); FileOutputStream out = new FileOutputStream(localPath.toFile());) {
+        try (CloseableHttpResponse response = apacheClientHelper.client().execute(new HttpGet(signedResource));
+                FileOutputStream out = new FileOutputStream(localPath.toFile());) {
             //
-            CloseableHttpResponse response = httpClient.execute(new HttpGet(signedResource));
             IOUtils.copy(response.getEntity().getContent(), out);
         }
     }
