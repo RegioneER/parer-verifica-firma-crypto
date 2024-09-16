@@ -310,7 +310,8 @@ public class VerificaFirmaControllerV3 {
     private void getWithCommonHttpclient(URI signedResource, Path localPath) throws IOException {
         // config
         RequestConfig config = RequestConfig.custom().setConnectTimeout(httpClientTimeout * 1000)
-                .setConnectionRequestTimeout(httpClientTimeout * 1000).setSocketTimeout(httpClientSocketTimeout * 1000).build();
+                .setConnectionRequestTimeout(httpClientTimeout * 1000).setSocketTimeout(httpClientSocketTimeout * 1000)
+                .build();
         // pool manager
         PoolingHttpClientConnectionManager connManager = new PoolingHttpClientConnectionManager();
         connManager.setDefaultMaxPerRoute(httpClientConnectionsmaxperroute);
