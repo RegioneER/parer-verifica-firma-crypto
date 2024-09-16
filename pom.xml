@@ -6,7 +6,6 @@
     <packaging>${packaging.type}</packaging>
     <name>Sacer Cryptolibrary</name>
     <description>Cryptolibrary contenuta in Sacer</description>
-    <url>https://nexus.ente.regione.emr.it/repository/parer-site/crypto/${project.version}/</url>
 
     <parent>
         <groupId>it.eng.parer</groupId>
