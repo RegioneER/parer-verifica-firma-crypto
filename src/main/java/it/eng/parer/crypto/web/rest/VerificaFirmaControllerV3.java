@@ -44,6 +44,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
@@ -209,6 +210,10 @@ public class VerificaFirmaControllerV3 {
         // Controllo che i metadati siano coerenti con i dati
         // log UUID
         MDC.put(Constants.UUID_LOG_MDC, metadati.getUuid());
+        // LOG BODY
+        if (log.isDebugEnabled()) {
+            log.atDebug().log("RequestBody {}", new JSONObject(body).toString());
+        }
         CryptoDataToValidateFile signedFile = new CryptoDataToValidateFile();
         List<CryptoDataToValidateFile> detachedSignature = new ArrayList<>(firme.size());
         List<CryptoDataToValidateFile> detachedTimeStamp = new ArrayList<>(marche.size());

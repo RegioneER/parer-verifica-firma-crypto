@@ -1,4 +1,4 @@
-## 1.12.0 (22-05-2024)
+## 1.13.0 (31-05-2024)
 
 ### Novità: 1
-- [#32596](https://parermine.regione.emilia-romagna.it/issues/32596) Introduzione Apache basic client "no-retry" per recupero oggetto da object storage
+- [#32645](https://parermine.regione.emilia-romagna.it/issues/32645) Introduzione logging JSON body request
