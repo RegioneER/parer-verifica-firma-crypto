@@ -70,9 +70,9 @@ import it.eng.parer.crypto.model.verifica.input.CryptoDataToValidateDataUri;
 import it.eng.parer.crypto.model.verifica.input.CryptoDataToValidateMetadata;
 import it.eng.parer.crypto.model.verifica.input.CryptoDataToValidateMetadataFile;
 import it.eng.parer.crypto.service.VerificaFirmaService;
-import it.eng.parer.crypto.service.helper.ApacheClientHelper;
 import it.eng.parer.crypto.service.model.CryptoDataToValidateData;
 import it.eng.parer.crypto.service.model.CryptoDataToValidateFile;
+import it.eng.parer.crypto.service.util.CommonsHttpClient;
 import it.eng.parer.crypto.service.util.Constants;
 import it.eng.parer.crypto.service.util.Constants.URIClientType;
 import it.eng.parer.crypto.web.bean.RestExceptionResponse;
@@ -103,7 +103,7 @@ public class VerificaFirmaControllerV3 {
     VerificaFirmaService verificaFirmaService;
 
     @Autowired
-    ApacheClientHelper apacheClientHelper;
+    CommonsHttpClient commonsHttpClient;
 
     @Value("${parer.crypto.uriloader.client-type:httpclient}")
     URIClientType uRIClientType;
@@ -316,7 +316,7 @@ public class VerificaFirmaControllerV3 {
     }
 
     private void getWithCommonHttpclient(URI signedResource, Path localPath) throws IOException {
-        try (CloseableHttpResponse response = apacheClientHelper.client().execute(new HttpGet(signedResource));
+        try (CloseableHttpResponse response = commonsHttpClient.getHttpClient().execute(new HttpGet(signedResource));
                 FileOutputStream out = new FileOutputStream(localPath.toFile());) {
             //
             IOUtils.copy(response.getEntity().getContent(), out);
