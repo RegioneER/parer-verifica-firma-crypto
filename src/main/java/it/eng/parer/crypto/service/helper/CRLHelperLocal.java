@@ -34,9 +34,9 @@ public interface CRLHelperLocal extends ICRLStorage {
      *
      * @param uniqueId
      *            MD5 di subjectdn + keyId;
-     * 
+     *
      * @return CRL (se esiste)
-     * 
+     *
      * @throws CryptoStorageException
      *             in caso di errore.
      */

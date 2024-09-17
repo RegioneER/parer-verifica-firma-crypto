@@ -59,7 +59,7 @@ public class CrlService {
      *
      * @param urls
      *            lista di url da cui scaricare la nuova crl.
-     * 
+     *
      * @return Modello del Parer per le crl.
      */
     public ParerCRL addCrlByURL(List<String> urls) {
@@ -92,7 +92,7 @@ public class CrlService {
      *            Distinguished Name della CA che emette la CRL.
      * @param keyId
      *            Authority Key Identifier (in hex) del certificato.
-     * 
+     *
      * @return Modello del Parer per le crl.
      */
     public ParerCRL getCrl(String subjectDN, String keyId) {
@@ -126,7 +126,7 @@ public class CrlService {
      *
      * @param uniqueId
      *            MD5 di subjectdn + keyId
-     * 
+     *
      * @return ParerCRL
      */
     public ParerCRL getCRL(String uniqueId) {

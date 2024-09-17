@@ -99,7 +99,7 @@ public class CertificateService {
      *
      * @param derCertificate
      *            Certificato della CA
-     * 
+     *
      * @return l'oggetto che rappresenta il certificato
      */
     public ParerCertificate addCaCertificate(byte[] derCertificate) {

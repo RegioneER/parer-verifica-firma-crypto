@@ -30,7 +30,7 @@ public interface CryCrlRepository extends JpaRepository<CryCrl, CryCrlPK> {
      *
      * @param uniqueId
      *            md5 di subjectdn + keyId;
-     * 
+     *
      * @return Entity della CRL
      */
     public Optional<CryCrl> findByUniqueId(String uniqueId);

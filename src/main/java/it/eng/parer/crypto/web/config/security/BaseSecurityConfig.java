@@ -21,6 +21,8 @@ import static it.eng.parer.crypto.web.util.EndPointCostants.RESOURCE_INFOS;
 import static it.eng.parer.crypto.web.util.EndPointCostants.ROLE_ADMIN;
 import static it.eng.parer.crypto.web.util.EndPointCostants.URL_ADMIN_BASE;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,11 +31,11 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /*
- * since spring boot 2.7.0 
+ * since spring boot 3.x
  * https://spring.io/blog/2022/02/21/spring-security-without-the-websecurityconfigureradapter
- * 
+ *
  * Note: questa configurazione (default) gestisce la sicurezza legata alla API/UI esposte
- * Le regole su URI pattern match definiscono la "catena" dei permessi, quindi l'ordine è importante.  
+ * Le regole su URI pattern match definiscono la "catena" dei permessi, quindi l'ordine è importante.
  */
 @Configuration
 @ConditionalOnProperty(name = "parer.crypto.admin-ui.enabled", havingValue = "true", matchIfMissing = true)
@@ -42,23 +44,25 @@ public class BaseSecurityConfig {
     @Bean
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
 
-        http.csrf().disable() // disable csrf
-                .authorizeHttpRequests() // rule on single path
-                .requestMatchers(new AntPathRequestMatcher(URL_ADMIN_BASE + RESOURCE_INFOS)).authenticated().and()
-                .httpBasic() // basic auth
-                .and() // solo admin
-                .authorizeHttpRequests().requestMatchers(new AntPathRequestMatcher(URL_ADMIN_BASE + "/**"))
-                .hasRole(ROLE_ADMIN).requestMatchers(new AntPathRequestMatcher("/actuator/shutdown"))
-                .hasRole(ROLE_ADMIN).and() // permit all
-                .authorizeHttpRequests().anyRequest().permitAll().and() // form login
-                .formLogin().defaultSuccessUrl(URL_ADMIN_BASE) // url predefinita
-                .permitAll().and() // logout form
-                .logout().deleteCookies("JSESSIONID").logoutSuccessUrl("/").permitAll(); // enable
+        http.csrf(csrf -> csrf.disable()) // disable csrf
+                .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
+                        .requestMatchers(new AntPathRequestMatcher(URL_ADMIN_BASE + RESOURCE_INFOS)).authenticated())
+                .httpBasic(withDefaults()) // basic auth
+                .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
+                        .requestMatchers(new AntPathRequestMatcher(URL_ADMIN_BASE + "/**")).hasRole(ROLE_ADMIN)) // only
+                                                                                                                 // admin
+                .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
+                        .requestMatchers(new AntPathRequestMatcher("/actuator/shutdown")).hasRole(ROLE_ADMIN)) // only
+                                                                                                               // admin
+                .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests.anyRequest().permitAll()) // permit
+                                                                                                                // all
+                .formLogin(formlogin -> formlogin.defaultSuccessUrl(URL_ADMIN_BASE).permitAll()) // login form
+                .logout(logout -> logout.deleteCookies("JSESSIONID").logoutSuccessUrl("/").permitAll()); // logout
 
         /*
          * h2 console https://springframework.guru/using-the-h2-database-console-in-spring-boot- with-spring-security/
          */
-        http.headers().frameOptions().disable();
+        http.headers(headers -> headers.frameOptions(frame -> frame.disable()));
 
         return http.build();
     }

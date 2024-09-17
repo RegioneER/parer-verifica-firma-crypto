@@ -38,7 +38,7 @@ public class DocService {
      *            codice da decodificare
      * @param selfLink
      *            link della richiesta
-     * 
+     *
      * @return modello degli errori.
      */
     public ParerErrorDoc compilaErrore(String codiceErrore, String selfLink) {
@@ -75,7 +75,7 @@ public class DocService {
      *
      * @param codice
      *            di errore codificato
-     * 
+     *
      * @return descrizione del codice di errore.Non viene mai restituito null.
      */
     private String decodificaErrore(ParerError.ErrorCode codice) {
@@ -147,7 +147,7 @@ public class DocService {
      *
      * @param tipologia
      *            tipologia di errore
-     * 
+     *
      * @return decodifica della tipologia. Non viene mai restituito null.
      */
     private String decodificaTipologia(ParerError.ExceptionType tipologia) {

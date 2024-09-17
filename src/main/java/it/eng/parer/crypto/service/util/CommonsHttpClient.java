@@ -122,7 +122,7 @@ public class CommonsHttpClient implements Serializable {
 
     /**
      * destroy method
-     * 
+     *
      * @throws IOException
      *             generic exception
      */

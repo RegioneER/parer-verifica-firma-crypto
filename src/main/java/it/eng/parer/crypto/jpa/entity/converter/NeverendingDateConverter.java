@@ -33,7 +33,7 @@ public class NeverendingDateConverter {
 
     /*
      * MAX DATE supported by Oracle DB
-     * 
+     *
      * https://www.techonthenet.com/oracle/datatypes.php
      */
     public static final LocalDateTime NEVERENDING = LocalDateTime.of(9999, Month.DECEMBER, 31, 23, 59, 59);
@@ -46,7 +46,7 @@ public class NeverendingDateConverter {
      *            data da verificare
      * @param zoneIdToCheck
      *            id Locale
-     * 
+     *
      * @return date
      */
     public static Date verifyOverZoneId(Date dateToCheck, ZoneId zoneIdToCheck) {
@@ -64,7 +64,7 @@ public class NeverendingDateConverter {
      *
      * @param dateToCheck
      *            da verificare
-     * 
+     *
      * @return date da verificare
      */
     public static Date verifyOverZoneId(Date dateToCheck) {

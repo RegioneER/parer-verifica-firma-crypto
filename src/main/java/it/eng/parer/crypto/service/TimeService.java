@@ -53,9 +53,9 @@ public class TimeService {
      *
      * @param content
      *            documento
-     * 
+     *
      * @return Oggetto contenente il timestamp token.
-     * 
+     *
      * @throws CryptoParerException
      *             per i vari casi di errore.
      */
@@ -90,9 +90,9 @@ public class TimeService {
      *
      * @param content
      *            documento originale
-     * 
+     *
      * @return documento originale + marca
-     * 
+     *
      * @throws CryptoParerException
      *             per i vari casi di errore.
      */

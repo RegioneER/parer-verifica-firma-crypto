@@ -21,7 +21,7 @@ import java.io.Serializable;
 
 /**
  * The persistent class for the CRY_CERTIFICATE database table.
- * 
+ *
  */
 
 public class CryCrlPK implements Serializable {

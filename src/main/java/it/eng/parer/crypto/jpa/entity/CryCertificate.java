@@ -36,7 +36,7 @@ import jakarta.persistence.TemporalType;
 
 /**
  * The persistent class for the CRY_CERTIFICATE database table.
- * 
+ *
  */
 @Entity
 @Cacheable(true)

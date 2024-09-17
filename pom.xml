@@ -2,15 +2,15 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>old-cryptolibrary</artifactId>
-    <version>1.14.3-SNAPSHOT</version>
+    <version>1.15.1-SNAPSHOT</version>
     <packaging>${packaging.type}</packaging>
-    <name>Sacer Cryptolibrary</name>
-    <description>Cryptolibrary contenuta in Sacer</description>
+    <name>Verifica Firma CRYPTO</name>
+    <description>Progetto per effettuare firme e validazioni con librerie cryptolibrary (CRYPTO)</description>
 
     <parent>
         <groupId>it.eng.parer</groupId>
         <artifactId>parer-pom</artifactId>
-        <version>5.2.1</version>
+        <version>6.4.0</version>
     </parent>
 
     <properties>
@@ -25,24 +25,24 @@
         <!-- cannot access class sun.security.action.GetPropertyAction (in module java.base) because module java.base does not export sun.security.action to unnamed module @0x3b2c72c2 -->
         <argLine>--add-exports java.base/sun.security.action=ALL-UNNAMED</argLine>
         <!-- third party libs -->
-		<springboot.version>3.0.9</springboot.version>
-		<springdoc-openapi-starter-webmvc-ui.version>2.1.0</springdoc-openapi-starter-webmvc-ui.version>		
+		<springboot.version>3.3.1</springboot.version>
+		<springdoc-openapi-starter-webmvc-ui.version>2.6.0</springdoc-openapi-starter-webmvc-ui.version>		
         <!-- versione massima supportata per problemi legati a bouncy -->
         <tika.version>1.7</tika.version>
         <bcprov-jdk16.version>1.46</bcprov-jdk16.version>
         <xercesImpl.version>2.10.0</xercesImpl.version>
         <xml-resolver.version>1.2</xml-resolver.version>
-        <xalan.version>2.7.2</xalan.version>
+        <xalan.version>2.7.3</xalan.version>
         <jaxb-runtime.version>2.3.8</jaxb-runtime.version>
-        <guava.version>32.1.1-jre</guava.version>
+        <guava.version>33.2.1-jre</guava.version>
         <google-code-prettify.version>1.0.5</google-code-prettify.version>
         <bootstrap.version>3.4.1</bootstrap.version>
         <jquery.version>3.6.4</jquery.version>
-        <logstash-logback-encoder.version>7.2</logstash-logback-encoder.version>
+        <logstash-logback-encoder.version>7.4</logstash-logback-encoder.version>
         <org-json.version>20240303</org-json.version>
         <!-- custom libs -->
-        <eng-cryptolibrary.version>1.12.7</eng-cryptolibrary.version>
-        <verificafirma-crypto-beans.version>1.4.1</verificafirma-crypto-beans.version>
+        <eng-cryptolibrary.version>1.13.0</eng-cryptolibrary.version>
+        <verificafirma-crypto-beans.version>1.5.0</verificafirma-crypto-beans.version>
         <!-- -->
         <start-class>it.eng.parer.crypto.web.CryptoApplication</start-class>
     </properties>
@@ -353,10 +353,12 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-					<!-- JDK 17 -->
-                    <target>17</target>
-                    <source>17</source>
-                    <!-- export legay module -->
+                	<!-- JDK 21 -->
+					<source>21</source>
+					<target>21</target>
+					<!-- disable release option --> 
+                	<release combine.self="override" />
+                	<!-- export legay module -->
                     <!-- @see java.lang.IllegalAccessError: class es.mityc.firmaJava.libreria.utilidades.URIEncoder (in unnamed module @0x3b2c72c2) -->
                     <!-- cannot access class sun.security.action.GetPropertyAction (in module java.base) because module java.base does not export sun.security.action to unnamed module @0x3b2c72c2 -->
                  	<compilerArgs>
