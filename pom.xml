@@ -2,7 +2,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>old-cryptolibrary</artifactId>
-    <version>1.14.2-SNAPSHOT</version>
+    <version>1.14.3-SNAPSHOT</version>
     <packaging>${packaging.type}</packaging>
     <name>Sacer Cryptolibrary</name>
     <description>Cryptolibrary contenuta in Sacer</description>
@@ -42,7 +42,7 @@
         <org-json.version>20240303</org-json.version>
         <!-- custom libs -->
         <eng-cryptolibrary.version>1.12.7</eng-cryptolibrary.version>
-        <verificafirma-crypto-beans.version>1.4.0</verificafirma-crypto-beans.version>
+        <verificafirma-crypto-beans.version>1.4.1</verificafirma-crypto-beans.version>
         <!-- -->
         <start-class>it.eng.parer.crypto.web.CryptoApplication</start-class>
     </properties>

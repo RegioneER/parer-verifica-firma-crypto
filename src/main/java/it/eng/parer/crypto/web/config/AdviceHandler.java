@@ -17,7 +17,9 @@
 
 package it.eng.parer.crypto.web.config;
 
+import static it.eng.parer.crypto.model.exceptions.ParerError.ExceptionType.GENERIC;
 import static it.eng.parer.crypto.service.util.Constants.STD_MSG_APP_ERROR;
+import static it.eng.parer.crypto.service.util.Constants.STD_MSG_APP_WARN;
 import static it.eng.parer.crypto.service.util.Constants.STD_MSG_GENERIC_ERROR;
 import static it.eng.parer.crypto.service.util.Constants.STD_MSG_VALIDATION_ERROR;
 
@@ -40,7 +42,6 @@ import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.support.MissingServletRequestPartException;
 
 import it.eng.parer.crypto.model.exceptions.CryptoParerException;
-import it.eng.parer.crypto.model.exceptions.ParerError;
 import it.eng.parer.crypto.web.bean.RestExceptionResponse;
 import it.eng.parer.crypto.web.util.RestUtil;
 
@@ -63,16 +64,19 @@ public class AdviceHandler {
     @ExceptionHandler(CryptoParerException.class)
     public final ResponseEntity<RestExceptionResponse> handleCryptoParerException(CryptoParerException ex,
             WebRequest request) {
-        // log error
-        log.atError().log(STD_MSG_APP_ERROR, ex);
-        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-        if (ex.getCode().exceptionType().equals(ParerError.ExceptionType.NOT_FOUND)) {
-            status = HttpStatus.NOT_FOUND;
+        //
+        if (ex.getCode().exceptionType().equals(GENERIC)) {
+            // log error
+            log.atError().log(STD_MSG_APP_ERROR, ex);
+        } else {
+            // log warn
+            log.atWarn().log(STD_MSG_APP_WARN, ex);
         }
-
+        //
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        return new ResponseEntity<>(RestUtil.buildParerResponseEntity(ex, request), headers, status);
+        return new ResponseEntity<>(RestUtil.buildParerResponseEntity(ex, request), headers,
+                HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

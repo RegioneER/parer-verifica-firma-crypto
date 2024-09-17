@@ -1,7 +1,7 @@
 ## Container scan evidence CVE
-<strong>Image name:</strong> registry.ente.regione.emr.it/parer/okd/crypto:sast
-<br/><strong>Run date:</strong> Tue Jun 11 16:00:27 CEST 2024
-<br/><strong>Produced by:</strong> <a href="https://gitlab.ente.regione.emr.it/parer/okd/crypto/-/jobs/262645">Job</a>
+<strong>Image name:</strong> 
+<br/><strong>Run date:</strong> Thu Jul 18 10:04:24 CEST 2024
+<br/><strong>Produced by:</strong> <a href="https://gitlab.ente.regione.emr.it/parer/okd/crypto/-/jobs/298859">Job</a>
 <br/><strong>CVE founded:</strong> 8
 | CVE | Description | Severity | Solution | 
 |:---:|:---|:---:|:---|

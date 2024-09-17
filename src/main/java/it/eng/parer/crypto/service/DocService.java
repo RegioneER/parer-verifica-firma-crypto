@@ -154,17 +154,8 @@ public class DocService {
 
         final String decodifica;
         switch (tipologia) {
-        case PARAMETER_VALIDATION:
-            decodifica = "parametro errato";
-            break;
         case GENERIC:
             decodifica = "generico";
-            break;
-        case NOT_FOUND:
-            decodifica = "risorsa non trovata";
-            break;
-        case CA:
-            decodifica = "certification authority";
             break;
         case CERTIFICATE:
             decodifica = "certificato digitale";
@@ -174,12 +165,6 @@ public class DocService {
             break;
         case TIME:
             decodifica = "emissione marca temporale";
-            break;
-        case SIGNATURE_VERIFICATION:
-            decodifica = "processo di verifica firma/formati";
-            break;
-        case SIGNATURE_EXTRACTION:
-            decodifica = "processo di estrazione file originale da file firmato";
             break;
         default:
             decodifica = "non gestito";
