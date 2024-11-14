@@ -17,27 +17,61 @@
 
 package it.eng.parer.crypto.web.rest;
 
+import static it.eng.parer.crypto.web.util.EndPointCostants.ETAG_RV10;
 import static it.eng.parer.crypto.web.util.EndPointCostants.RESOURCE_REPORT_VERIFICA;
-import static it.eng.parer.crypto.web.util.EndPointCostants.URL_DEPRECATE_BASE;
+import static it.eng.parer.crypto.web.util.EndPointCostants.URL_API_BASE;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.attribute.FileAttribute;
+import java.nio.file.attribute.PosixFilePermission;
+import java.nio.file.attribute.PosixFilePermissions;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import it.eng.parer.crypto.model.exceptions.CryptoParerException;
+import it.eng.parer.crypto.model.exceptions.ParerError;
 import it.eng.parer.crypto.model.verifica.CryptoAroCompDoc;
-import it.eng.parer.crypto.model.verifica.input.CryptoDataToValidate;
+import it.eng.parer.crypto.model.verifica.input.CryptoDataToValidateBody;
+import it.eng.parer.crypto.model.verifica.input.CryptoDataToValidateDataUri;
+import it.eng.parer.crypto.model.verifica.input.CryptoDataToValidateMetadata;
+import it.eng.parer.crypto.model.verifica.input.CryptoDataToValidateMetadataFile;
 import it.eng.parer.crypto.service.VerificaFirmaService;
+import it.eng.parer.crypto.service.model.CryptoDataToValidateData;
+import it.eng.parer.crypto.service.model.CryptoDataToValidateFile;
+import it.eng.parer.crypto.service.util.CommonsHttpClient;
 import it.eng.parer.crypto.service.util.Constants;
 import it.eng.parer.crypto.web.bean.RestExceptionResponse;
 import jakarta.servlet.http.HttpServletRequest;
@@ -46,20 +80,224 @@ import jakarta.validation.Valid;
 /**
  * Endopint relativo alle verifica delle firme.
  *
- * @deprecated (Deprecato a partire dall'introduzione di {@link VerificaFirmaControllerV3})
- *
  * @author Snidero_L
  */
 @Tag(name = "Verifica", description = "Report verifica firma")
 @RestController
 @Validated
-@RequestMapping(URL_DEPRECATE_BASE)
-@Deprecated(forRemoval = true)
+@RequestMapping(URL_API_BASE)
 public class VerificaFirmaController {
+
+    private final Logger log = LoggerFactory.getLogger(VerificaFirmaController.class);
+
+    private static final FileAttribute<Set<PosixFilePermission>> attr = PosixFilePermissions
+            .asFileAttribute(PosixFilePermissions.fromString("rw-------"));
 
     @Autowired
     VerificaFirmaService verificaFirmaService;
 
+    @Autowired
+    CommonsHttpClient commonsHttpClient;
+
+    // default 60 s
+    @Value("${parer.crypto.uriloader.webclient.timeout:60}")
+    long webClientTimeout;
+
+    // default 5 times
+    @Value("${parer.crypto.uriloader.webclient.backoff:5}")
+    long webClientBackoff;
+
+    // default 3 s
+    @Value("${parer.crypto.uriloader.webclient.backofftime:3}")
+    long webClientBackoffTime;
+
+    /*
+     * Standard httpclient
+     */
+    // default 60 s
+    @Value("${parer.crypto.uriloader.httpclient.timeout:60}")
+    int httpClientTimeout;
+
+    // default 60 s
+    @Value("${parer.crypto.uriloader.httpclient.timeoutsocket:60}")
+    int httpClientSocketTimeout;
+
+    // default 4
+    @Value("${parer.crypto.uriloader.httpclient.connectionsmaxperroute:4}")
+    int httpClientConnectionsmaxperroute;
+
+    // default 40
+    @Value("${parer.crypto.uriloader.httpclient.connectionsmax:40}")
+    int httpClientConnectionsmax;
+
+    // defult 60s
+    @Value("${parer.crypto.uriloader.httpclient.timetolive:60}")
+    long httpClientTimeToLive;
+
+    // default false
+    @Value("${parer.v.uriloader.httpclient.no-ssl-verify:false}")
+    boolean noSslVerify;
+
+    /**
+     * Metodo per effettuare la verifica delle firme.
+     *
+     * <em>Nota sui metadati</em> Per collegare il file caricato con i relativi metadati (opzionali), viene fatta
+     * l'assunzione che il caricamento dei file avvenga in ordine. La specifica HTTP consente ciò:
+     *
+     * A "multipart/form-data" message contains a series of parts, each representing a successful control. The parts are
+     * sent to the processing agent in the same order the corresponding controls appear in the document stream. Part
+     * boundaries should not occur in any of the data; how this is done lies outside the scope of this specification.
+     *
+     * Fonte: https://www.w3.org/TR/html4/interact/forms.html#h-17.13.4
+     *
+     *
+     * @param metadati
+     *            informazioni opzionali sui file
+     * @param contenuto
+     *            file da verificare, unico elemento obbligatorio
+     * @param firme
+     *            lista di file contenenti le firme detached
+     * @param marche
+     *            lista di file contenenti le marche detached
+     * @param request
+     *            uso interno (per impostare il selfLink)
+     *
+     * @return report della verifica crypto
+     */
+    @Operation(summary = "Report Verifica", method = "Effettua la verifica dei file passati in input. La risorsa ottenuta da questa chiamata è il report di verifica")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Esito verifica documento firmato", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = CryptoAroCompDoc.class)) }),
+            @ApiResponse(responseCode = "400", description = "Richiesta non valida", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }),
+            @ApiResponse(responseCode = "417", description = "File eccede dimensioni consentite", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }),
+            @ApiResponse(responseCode = "500", description = "Documento firmato non riconosciuto", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }) })
+    @PostMapping(value = RESOURCE_REPORT_VERIFICA, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CryptoAroCompDoc> verificaFirmaMultipart(
+            @Valid @RequestPart(name = "metadati", required = false) @Parameter(schema = @Schema(type = "string", format = "binary")) CryptoDataToValidateMetadata metadati,
+            @RequestPart(name = "contenuto", required = true) MultipartFile contenuto,
+            @RequestPart(name = "firme", required = false) List<MultipartFile> firme,
+            @RequestPart(name = "marche", required = false) List<MultipartFile> marche, HttpServletRequest request) {
+
+        // init list
+        if (firme == null) {
+            firme = Collections.emptyList();
+        }
+        if (marche == null) {
+            marche = Collections.emptyList();
+        }
+
+        if (metadati == null) {
+            metadati = new CryptoDataToValidateMetadata();
+            metadati.setComponentePrincipale(new CryptoDataToValidateMetadataFile("contenuto"));
+            List<CryptoDataToValidateMetadataFile> sottoComponentiFirma = new ArrayList<>(firme.size());
+            for (int i = 0; i < firme.size(); i++) {
+                sottoComponentiFirma.add(new CryptoDataToValidateMetadataFile("firma_" + i));
+            }
+            List<CryptoDataToValidateMetadataFile> sottoComponentiMarca = new ArrayList<>(marche.size());
+            for (int i = 0; i < marche.size(); i++) {
+                sottoComponentiMarca.add(new CryptoDataToValidateMetadataFile("marca_" + i));
+            }
+            metadati.setSottoComponentiFirma(sottoComponentiFirma);
+            metadati.setSottoComponentiMarca(sottoComponentiMarca);
+        }
+
+        // Prima di invocare il service mi assicuro che tutto sia coerente
+        validazioneCoerenzaInput(metadati, firme.size(), marche.size());
+
+        // Controllo che i metadati siano coerenti con i dati
+        // log UUID
+        MDC.put(Constants.UUID_LOG_MDC, metadati.getUuid());
+        CryptoDataToValidateFile signedFile = new CryptoDataToValidateFile();
+        List<CryptoDataToValidateFile> detachedSignature = new ArrayList<>(firme.size());
+        List<CryptoDataToValidateFile> detachedTimeStamp = new ArrayList<>(marche.size());
+
+        try {
+            final String suffix = ".crypto";
+            Path principale = Files.createTempFile("contenuto-", suffix, attr);
+            contenuto.transferTo(principale);
+            signedFile.setNome(metadati.getComponentePrincipale().getId());
+            signedFile.setContenuto(principale.toFile());
+
+            for (int i = 0; i < firme.size(); i++) {
+                MultipartFile firma = firme.get(i);
+                Path sig = Files.createTempFile("firma-", suffix, attr);
+                firma.transferTo(sig);
+                CryptoDataToValidateMetadataFile metadatiSottoComponenteFirma = metadati.getSottoComponentiFirma()
+                        .get(i);
+
+                detachedSignature.add(new CryptoDataToValidateFile(metadatiSottoComponenteFirma.getId(), sig.toFile()));
+            }
+
+            for (int i = 0; i < marche.size(); i++) {
+                MultipartFile marca = marche.get(i);
+                Path ts = Files.createTempFile("timestamp-", suffix, attr);
+                marca.transferTo(ts);
+                CryptoDataToValidateMetadataFile metadatiSottoComponenteMarca = metadati.getSottoComponentiMarca()
+                        .get(i);
+
+                detachedTimeStamp.add(new CryptoDataToValidateFile(metadatiSottoComponenteMarca.getId(), ts.toFile()));
+            }
+
+            CryptoDataToValidateData dati = new CryptoDataToValidateData();
+            dati.setContenuto(signedFile);
+            dati.setSottoComponentiFirma(detachedSignature);
+            dati.setSottoComponentiMarca(detachedTimeStamp);
+
+            CryptoAroCompDoc verificaFirma = verificaFirmaService.verificaFirma(dati, metadati);
+            String selfLink = request.getRequestURL().toString();
+            // HATEOAS de no attri
+            verificaFirma.setLink(selfLink);
+            return ResponseEntity.ok().lastModified(verificaFirma.getFineValidazione().toInstant()).eTag(ETAG_RV10)
+                    .body(verificaFirma);
+        } catch (IllegalStateException | IOException ex) {
+            throw new CryptoParerException(metadati, ex).withCode(ParerError.ErrorCode.SIGNATURE_VERIFICATION_IO)
+                    .withMessage("Eccezione di IO durante la creazione di un file da verificare");
+        } finally {
+            final String CANT_DELETE = "Impossibile eliminare {}";
+            try {
+                if (signedFile.getContenuto() != null) {
+                    Files.deleteIfExists(signedFile.getContenuto().toPath());
+                }
+            } catch (IOException e) {
+                log.atWarn().log(CANT_DELETE, signedFile.getContenuto().getName());
+            }
+            detachedSignature.forEach(s -> {
+                try {
+                    Files.deleteIfExists(s.getContenuto().toPath());
+                } catch (IOException e) {
+                    log.atWarn().log(CANT_DELETE, s.getContenuto().getName());
+                }
+            });
+            detachedTimeStamp.forEach(s -> {
+                try {
+                    Files.deleteIfExists(s.getContenuto().toPath());
+                } catch (IOException e) {
+                    log.atWarn().log(CANT_DELETE, s.getContenuto().getName());
+                }
+            });
+
+        }
+    }
+
+    /**
+     * Metodo per effettuare la verifica delle firme. In questo caso i file da verificare sono passati sotto-forma di
+     * URI.
+     *
+     * <em>Nota sui metadati</em> Per collegare il file caricato con i relativi metadati (opzionali), viene fatta
+     * l'assunzione che il caricamento dei file avvenga in ordine. La specifica HTTP consente ciò:
+     *
+     *
+     * @param body
+     *            corpo della richiesta di verifica della firma. Contiene dati e metadati.
+     *
+     * @param request
+     *            uso interno (per impostare il selfLink)
+     *
+     * @return report della verifica crypto
+     */
     @Operation(summary = "Report Verifica", method = "Effettua la verifica dei file passati in input. La risorsa ottenuta da questa chiamata è il report di verifica")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Esito verifica documento firmato", content = {
@@ -71,14 +309,172 @@ public class VerificaFirmaController {
             @ApiResponse(responseCode = "500", description = "Documento firmato non riconosciuto", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }) })
     @PostMapping(value = RESOURCE_REPORT_VERIFICA, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public CryptoAroCompDoc verificaFirma(@Valid @RequestBody(required = true) CryptoDataToValidate parerVerificaInput,
-            HttpServletRequest request) {
-        // LOG UUID
-        MDC.put(Constants.UUID_LOG_MDC, parerVerificaInput.getUuid());
-        CryptoAroCompDoc verificaFirma = verificaFirmaService.verificaFirma(parerVerificaInput);
-        String selfLink = request.getRequestURL().toString();
-        // HATEOAS de no attri
-        verificaFirma.setLink(selfLink);
-        return verificaFirma;
+    public ResponseEntity<CryptoAroCompDoc> verificaFirmaJson(
+            @Valid @RequestBody(required = true) CryptoDataToValidateBody body, HttpServletRequest request) {
+
+        CryptoDataToValidateDataUri dati = body.getData();
+        CryptoDataToValidateMetadata metadati = body.getMetadata();
+
+        URI contenuto = dati.getContenuto();
+        List<URI> firme = dati.getFirme();
+        List<URI> marche = dati.getMarche();
+
+        // init list
+        if (firme == null) {
+            firme = Collections.emptyList();
+        }
+        if (marche == null) {
+            marche = Collections.emptyList();
+        }
+
+        if (metadati == null) {
+            metadati = new CryptoDataToValidateMetadata();
+            metadati.setComponentePrincipale(new CryptoDataToValidateMetadataFile("contenuto"));
+            List<CryptoDataToValidateMetadataFile> sottoComponentiFirma = new ArrayList<>(firme.size());
+            for (int i = 0; i < firme.size(); i++) {
+                sottoComponentiFirma.add(new CryptoDataToValidateMetadataFile("firma_" + i));
+            }
+            List<CryptoDataToValidateMetadataFile> sottoComponentiMarca = new ArrayList<>(marche.size());
+            for (int i = 0; i < marche.size(); i++) {
+                sottoComponentiMarca.add(new CryptoDataToValidateMetadataFile("marca_" + i));
+            }
+            metadati.setSottoComponentiFirma(sottoComponentiFirma);
+            metadati.setSottoComponentiMarca(sottoComponentiMarca);
+        }
+
+        // Prima di invocare il service mi assicuro che tutto sia coerente
+        validazioneCoerenzaInput(metadati, firme.size(), marche.size());
+
+        // Controllo che i metadati siano coerenti con i dati
+        // log UUID
+        MDC.put(Constants.UUID_LOG_MDC, metadati.getUuid());
+        // LOG BODY
+        if (log.isDebugEnabled()) {
+            log.atDebug().log("RequestBody {}", new JSONObject(body).toString());
+        }
+        CryptoDataToValidateFile signedFile = new CryptoDataToValidateFile();
+        List<CryptoDataToValidateFile> detachedSignature = new ArrayList<>(firme.size());
+        List<CryptoDataToValidateFile> detachedTimeStamp = new ArrayList<>(marche.size());
+
+        try {
+            final String suffix = ".crypto";
+
+            Path principale = Files.createTempFile("contenuto-", suffix, attr);
+            downloadSignedResource(contenuto, principale);
+
+            signedFile.setNome(metadati.getComponentePrincipale().getId());
+            signedFile.setContenuto(principale.toFile());
+
+            for (int i = 0; i < firme.size(); i++) {
+                URI firma = firme.get(i);
+                Path sig = Files.createTempFile("firma-", suffix, attr);
+                downloadSignedResource(firma, sig);
+
+                CryptoDataToValidateMetadataFile metadatiSottoComponenteFirma = metadati.getSottoComponentiFirma()
+                        .get(i);
+
+                detachedSignature.add(new CryptoDataToValidateFile(metadatiSottoComponenteFirma.getId(), sig.toFile()));
+            }
+
+            for (int i = 0; i < marche.size(); i++) {
+                URI marca = marche.get(i);
+                Path ts = Files.createTempFile("timestamp-", suffix, attr);
+                downloadSignedResource(marca, ts);
+
+                CryptoDataToValidateMetadataFile metadatiSottoComponenteMarca = metadati.getSottoComponentiMarca()
+                        .get(i);
+
+                detachedTimeStamp.add(new CryptoDataToValidateFile(metadatiSottoComponenteMarca.getId(), ts.toFile()));
+            }
+
+            CryptoDataToValidateData datiVerifica = new CryptoDataToValidateData();
+            datiVerifica.setContenuto(signedFile);
+            datiVerifica.setSottoComponentiFirma(detachedSignature);
+            datiVerifica.setSottoComponentiMarca(detachedTimeStamp);
+
+            CryptoAroCompDoc verificaFirma = verificaFirmaService.verificaFirma(datiVerifica, metadati);
+            String selfLink = request.getRequestURL().toString();
+            // HATEOAS de no attri
+            verificaFirma.setLink(selfLink);
+            return ResponseEntity.ok().lastModified(verificaFirma.getFineValidazione().toInstant()).eTag(ETAG_RV10)
+                    .body(verificaFirma);
+        } catch (IllegalStateException | IOException ex) {
+            throw new CryptoParerException(metadati, ex).withCode(ParerError.ErrorCode.SIGNATURE_VERIFICATION_IO)
+                    .withMessage("Eccezione di IO durante la creazione di un file da verificare");
+        } finally {
+            final String CANT_DELETE = "Impossibile eliminare {}";
+            try {
+                if (signedFile.getContenuto() != null) {
+                    Files.deleteIfExists(signedFile.getContenuto().toPath());
+                }
+            } catch (IOException e) {
+                log.atWarn().log(CANT_DELETE, signedFile.getContenuto().getName());
+            }
+            detachedSignature.forEach(s -> {
+                try {
+                    Files.deleteIfExists(s.getContenuto().toPath());
+                } catch (IOException e) {
+                    log.atWarn().log(CANT_DELETE, s.getContenuto().getName());
+                }
+            });
+            detachedTimeStamp.forEach(s -> {
+                try {
+                    Files.deleteIfExists(s.getContenuto().toPath());
+                } catch (IOException e) {
+                    log.atWarn().log(CANT_DELETE, s.getContenuto().getName());
+                }
+            });
+
+        }
     }
+
+    private void downloadSignedResource(URI signedResource, Path localPath) throws IOException {
+        try (CloseableHttpResponse response = commonsHttpClient.getHttpClient().execute(new HttpGet(signedResource));
+                FileOutputStream out = new FileOutputStream(localPath.toFile());) {
+            //
+            IOUtils.copy(response.getEntity().getContent(), out);
+        }
+    }
+
+    /**
+     * Effettua la validazione di coerenza tra i metadati ed i dati passati in input.
+     *
+     * @param metadati
+     *            metadati di configurazione passati in input
+     * @param numeroFirmeCaricate
+     *            numero firme da file delle firme detached
+     * @param numeroMarcheCaricate
+     *            numero marche da file delle marche detached
+     */
+    private void validazioneCoerenzaInput(CryptoDataToValidateMetadata metadati, int numeroFirmeCaricate,
+            int numeroMarcheCaricate) {
+
+        assert metadati != null;
+
+        if (StringUtils.isBlank(metadati.getComponentePrincipale().getId())) {
+            throw new CryptoParerException(metadati).withCode(ParerError.ErrorCode.SIGNATURE_WRONG_PARAMETER)
+                    .withMessage("Identificativo componente principale mancante")
+                    .withDetail("Necessario impostare l'identificativo del componentene principale");
+
+        }
+        int numeroFirmeMetadata = metadati.getSottoComponentiFirma() != null ? metadati.getSottoComponentiFirma().size()
+                : 0;
+
+        if (numeroFirmeMetadata != numeroFirmeCaricate) {
+            throw new CryptoParerException(metadati).withCode(ParerError.ErrorCode.SIGNATURE_WRONG_PARAMETER)
+                    .withMessage("Numero sotto componenti firma errato").withDetail(
+                            "Numero di sotto componenti di tipo firma indicato nei metadati non corrisponde al numero di sotto componenti di tipo firma effettivamente caricati");
+        }
+
+        int numeroMarcheMetadata = metadati.getSottoComponentiMarca() != null
+                ? metadati.getSottoComponentiMarca().size() : 0;
+
+        if (numeroMarcheMetadata != numeroMarcheCaricate) {
+            throw new CryptoParerException(metadati).withCode(ParerError.ErrorCode.SIGNATURE_WRONG_PARAMETER)
+                    .withMessage("Numero sotto componenti marca errato").withDetail(
+                            "Numero di sotto componenti di tipo marca indicato nei metadati non corrisponde al numero di sotto componenti di tipo marca effettivamente caricati");
+        }
+
+    }
+
 }

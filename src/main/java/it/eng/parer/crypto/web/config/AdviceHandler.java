@@ -23,7 +23,10 @@ import static it.eng.parer.crypto.service.util.Constants.STD_MSG_APP_WARN;
 import static it.eng.parer.crypto.service.util.Constants.STD_MSG_GENERIC_ERROR;
 import static it.eng.parer.crypto.service.util.Constants.STD_MSG_VALIDATION_ERROR;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +35,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConversionException;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -86,9 +90,13 @@ public class AdviceHandler {
         log.atError().log(STD_MSG_VALIDATION_ERROR, ex);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        return new ResponseEntity<>(
-                RestUtil.buildValidationException(STD_MSG_VALIDATION_ERROR, Arrays.asList(ex.getBody().getDetail())),
-                headers, HttpStatus.BAD_REQUEST);
+        // details
+        List<String> details = new ArrayList<>();
+        Stream.of(Arrays.asList(ex.getBody().getDetail()),
+                ex.getAllErrors().stream().map(ObjectError::getDefaultMessage).toList()).forEach(details::addAll);
+        //
+        return new ResponseEntity<>(RestUtil.buildValidationException(STD_MSG_VALIDATION_ERROR, details), headers,
+                HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)

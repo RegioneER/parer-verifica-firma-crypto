@@ -2,7 +2,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>old-cryptolibrary</artifactId>
-    <version>1.15.1-SNAPSHOT</version>
+    <version>1.16.0</version>
     <packaging>${packaging.type}</packaging>
     <name>Verifica Firma CRYPTO</name>
     <description>Progetto per effettuare firme e validazioni con librerie cryptolibrary (CRYPTO)</description>
@@ -10,7 +10,7 @@
     <parent>
         <groupId>it.eng.parer</groupId>
         <artifactId>parer-pom</artifactId>
-        <version>6.4.0</version>
+        <version>6.4.1</version>
     </parent>
 
     <properties>
@@ -25,7 +25,7 @@
         <!-- cannot access class sun.security.action.GetPropertyAction (in module java.base) because module java.base does not export sun.security.action to unnamed module @0x3b2c72c2 -->
         <argLine>--add-exports java.base/sun.security.action=ALL-UNNAMED</argLine>
         <!-- third party libs -->
-		<springboot.version>3.3.1</springboot.version>
+		<springboot.version>3.3.5</springboot.version>
 		<springdoc-openapi-starter-webmvc-ui.version>2.6.0</springdoc-openapi-starter-webmvc-ui.version>		
         <!-- versione massima supportata per problemi legati a bouncy -->
         <tika.version>1.7</tika.version>
@@ -42,7 +42,7 @@
         <org-json.version>20240303</org-json.version>
         <!-- custom libs -->
         <eng-cryptolibrary.version>1.13.0</eng-cryptolibrary.version>
-        <verificafirma-crypto-beans.version>1.5.0</verificafirma-crypto-beans.version>
+        <verificafirma-crypto-beans.version>1.6.0</verificafirma-crypto-beans.version>
         <!-- -->
         <start-class>it.eng.parer.crypto.web.CryptoApplication</start-class>
     </properties>
@@ -190,6 +190,16 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.vaadin.external.google</groupId>
+					<artifactId>android-json</artifactId>
+				</exclusion>
+			</exclusions>            
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -208,25 +218,21 @@
 			<artifactId>thymeleaf-extras-springsecurity6</artifactId>
 		</dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
-        </dependency>
-        <dependency>
 			<groupId>io.micrometer</groupId>
 			<artifactId>micrometer-registry-prometheus</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-        <!-- Swagger -->
+		<!-- Swagger -->
         <dependency>
 		    <groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
 		</dependency>
-        <!-- YAML -->
+		<!-- YAML -->
         <dependency>
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
         </dependency>
-        <!-- Model -->
+		<!-- Model -->
         <dependency>
             <groupId>it.eng.parer</groupId>
             <artifactId>verificafirma-crypto-beans</artifactId>
@@ -241,8 +247,8 @@
 				</exclusion>
             </exclusions>
         </dependency>
-        <!-- Third party -->
-        <!-- Encoder logstash -->
+		<!-- Third party -->
+		<!-- Encoder logstash -->
         <dependency>
             <groupId>net.logstash.logback</groupId>
             <artifactId>logstash-logback-encoder</artifactId>
@@ -297,7 +303,7 @@
             <groupId>com.oracle.database.jdbc</groupId>
             <artifactId>ojdbc11</artifactId>
         </dependency>
-        <!-- https://www.apache.org/dist/tomcat/taglibs/taglibs-standard-1.2.5/README_bin.txt -->
+		<!-- https://www.apache.org/dist/tomcat/taglibs/taglibs-standard-1.2.5/README_bin.txt -->
         <dependency>
             <groupId>org.apache.taglibs</groupId>
             <artifactId>taglibs-standard-jstlel</artifactId>
