@@ -2,7 +2,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>old-cryptolibrary</artifactId>
-    <version>1.16.0</version>
+    <version>1.16.1-SNAPSHOT</version>
     <packaging>${packaging.type}</packaging>
     <name>Verifica Firma CRYPTO</name>
     <description>Progetto per effettuare firme e validazioni con librerie cryptolibrary (CRYPTO)</description>
@@ -49,7 +49,7 @@
 
 <scm>
         <developerConnection>scm:git:https://github.com/RegioneER/parer-verifica-firma-crypto.git</developerConnection>
-        <tag>old-cryptolibrary-1.16.0</tag>
+        <tag>HEAD</tag>
     </scm>
 
 <distributionManagement>
