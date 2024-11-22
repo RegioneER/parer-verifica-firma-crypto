@@ -26,7 +26,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
@@ -87,7 +87,7 @@ class VerficaFirmaTest {
      * @throws IOException
      *             nel caso non trovi il file
      */
-    @BeforeAll
+    @BeforeEach
     void fillTrustedCADatabase() throws IOException {
         Resource resource = resourceLoader.getResource("classpath:ca-blob.cer");
         Resource tsaInfoCertResource = resourceLoader.getResource("classpath:tsa/inforcert-tsa-ca.cer");

@@ -24,6 +24,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import javax.xml.bind.DatatypeConverter;
+
+import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -34,6 +37,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
 import it.eng.parer.crypto.service.ExtractorService;
+import it.eng.parer.crypto.service.model.CryptoP7mUnsigned;
 
 /**
  * Test di unità per l'estrattore di P7M
@@ -54,16 +58,17 @@ class ExtractorTest {
 
     private Resource xmlP7mBase64File;
     private Resource xmlP7mFile;
-    private Resource notXmlP7mFile;
+    private Resource pdfXmlP7mFile;
 
     private String xmlSbustatoExpectedb64;
     private String xmlSbustatoExpected;
+    private byte[] xmlPdfBytesExpected;
 
     @BeforeAll
     public void loadTestFiles() throws IOException {
         xmlP7mBase64File = resourceLoader.getResource("classpath:firme/p7m_b64.xml.p7m");
         xmlP7mFile = resourceLoader.getResource("classpath:firme/cades_bes.xml.p7m");
-        notXmlP7mFile = resourceLoader.getResource("classpath:firme/p7m_pem_sha256.pdf.p7m");
+        pdfXmlP7mFile = resourceLoader.getResource("classpath:firme/p7m_pem_sha256.pdf.p7m");
 
         Resource sbustatob64 = resourceLoader.getResource("classpath:firme/p7m_b64_sbustato.xml");
         byte[] xmlBytesb64 = Files.readAllBytes(sbustatob64.getFile().toPath());
@@ -72,6 +77,9 @@ class ExtractorTest {
         Resource sbustato = resourceLoader.getResource("classpath:firme/cades_bes_sbustato.xml");
         byte[] xmlBytes = Files.readAllBytes(sbustato.getFile().toPath());
         xmlSbustatoExpected = new String(xmlBytes);
+
+        Resource sbustatopdf = resourceLoader.getResource("classpath:firme/p7m_pem_sha256_sbustato.pdf");
+        xmlPdfBytesExpected = Files.readAllBytes(sbustatopdf.getFile().toPath());
     }
 
     @Test
@@ -88,12 +96,18 @@ class ExtractorTest {
 
     @Test
     void testWrongFile() throws IOException {
-        // String actualXml = service.extractXmlFromP7m(notXmlP7mFile.getFile().toPath());
-        // assertEquals(xmlSbustatoExpected, actualXml);
-        Path notXmlP7mFileAsPath = notXmlP7mFile.getFile().toPath();
+        Path notXmlP7mFileAsPath = pdfXmlP7mFile.getFile().toPath();
         assertThrows(IOException.class, () -> {
             service.extractXmlFromP7m(notXmlP7mFileAsPath);
         });
+    }
+
+    @Test
+    void testPdfExtraction() throws IOException {
+        CryptoP7mUnsigned unsigned = service.extractUnsignedFromP7m(pdfXmlP7mFile.getFile().toPath(),
+                pdfXmlP7mFile.getFilename());
+        assertEquals(DatatypeConverter.printBase64Binary(xmlPdfBytesExpected),
+                DatatypeConverter.printBase64Binary(IOUtils.toByteArray(unsigned.getData())));
     }
 
 }

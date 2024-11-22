@@ -29,11 +29,11 @@ public class EndPointCostants {
 
     public static final String URL_ADMIN_BASE = "/admin";
     public static final String URL_API_BASE = "/api";
-    public static final String URL_DEPRECATE_BASE = "/deprecate";
 
     public static final String RESOURCE_ERRORS = "/errors";
     public static final String RESOURCE_REPORT_VERIFICA = "/report-verifica";
     public static final String RESOURCE_FILEXML = "/file-xml";
+    public static final String RESOURCE_UNSIGNED_P7M = "/unsigned-p7m";
     public static final String RESOURCE_INFOS = "/infos";
     public static final String RESOURCE_CERTIFICATE = "/certificate";
     public static final String RESOURCE_CRL = "/crl";
@@ -43,11 +43,11 @@ public class EndPointCostants {
     public static final String URL_APP_INFOS = URL_API_BASE + RESOURCE_INFOS;
     public static final String URL_REPORT_VERIFICA = URL_API_BASE + RESOURCE_REPORT_VERIFICA;
     public static final String URL_FILEXML = URL_API_BASE + RESOURCE_FILEXML;
+    public static final String URL_UNSIGNEDP7M = URL_API_BASE + RESOURCE_UNSIGNED_P7M;
     public static final String URL_CRL = URL_API_BASE + RESOURCE_CRL;
     public static final String URL_TSD = URL_API_BASE + RESOURCE_TSD;
     public static final String URL_TST = URL_API_BASE + RESOURCE_TST;
     public static final String URL_ERRORS = URL_API_BASE + RESOURCE_ERRORS;
-    public static final String URL_DEPRECATE_REPORT_VERIFICA = URL_DEPRECATE_BASE + RESOURCE_REPORT_VERIFICA;
 
     // ROLES
     public static final String ROLE_ADMIN = "ADMIN";

@@ -143,34 +143,258 @@ Requisiti minimi per installazione:
 - Java versione 17 (OpenJDK / Oracle)
 - Kubernetes / Docker : se rilasciato attraverso container oppure si esegue una build del progetto attraverso il profilo maven **uber-jar** per ottenere il JAR eseguibile (vedi paragrafi precendeti)
 
-## Librerie utilizzate
+# Librerie utilizzate
 
-|  GroupId | ArtifactId  | Version  | Type   |  Licenses |
-|---|---|---|---|---|
-|com.google.guava|guava|32.1.1-jre|jar|Apache License, Version 2.0
-|com.h2database|h2|2.1.214|jar|MPL 2.0EPL 1.0
-|com.oracle.database.jdbc|ojdbc11|21.7.0.0|jar|Oracle Free Use Terms and Conditions (FUTC)
-|it.eng.parer|cryptolibrary|1.12.7|jar|-
-|it.eng.parer|verificafirma-crypto-beans|1.3.0|jar|-
-|net.logstash.logback|logstash-logback-encoder|7.2|jar|Apache License, Version 2.0MIT License
-|org.apache.taglibs|taglibs-standard-jstlel|1.2.5|jar|The Apache Software License, Version 2.0
-|org.apache.tika|tika-core|1.7|jar|The Apache Software License, Version 2.0
-|org.apache.tika|tika-parsers|1.7|jar|The Apache Software License, Version 2.0
-|org.springdoc|springdoc-openapi-starter-webmvc-ui|2.1.0|jar|The Apache License, Version 2.0
-|org.springframework.boot|spring-boot-starter-actuator|3.0.9|jar|Apache License, Version 2.0
-|org.springframework.boot|spring-boot-starter-data-jpa|3.0.9|jar|Apache License, Version 2.0
-|org.springframework.boot|spring-boot-starter-security|3.0.9|jar|Apache License, Version 2.0
-|org.springframework.boot|spring-boot-starter-thymeleaf|3.0.9|jar|Apache License, Version 2.0
-|org.springframework.boot|spring-boot-starter-validation|3.0.9|jar|Apache License, Version 2.0
-|org.springframework.boot|spring-boot-starter-web|3.0.9|jar|Apache License, Version 2.0
-|org.springframework.boot|spring-boot-starter-webflux|3.0.9|jar|Apache License, Version 2.0
-|org.springframework.ws|spring-ws-core|4.0.5|jar|Apache License, Version 2.0
-|org.thymeleaf.extras|thymeleaf-extras-springsecurity6|3.1.1.RELEASE|jar|The Apache Software License, Version 2.0
-|org.webjars|bootstrap|3.4.1|jar|Apache License, Version 2.0
-|org.webjars|jquery|3.6.4|jar|MIT License
-|org.webjars.bower|google-code-prettify|1.0.5|jar|MIT
-|org.yaml|snakeyaml|1.33|jar|Apache License, Version 2.0
-|xalan|xalan|2.7.2|jar|The Apache Software License, Version 2.0
+
+|  GroupId | ArtifactId  | Version |
+|:---:|:---:|:---:|
+|be.fedict.eid-tsl|eid-tsl-core|1.0.0-20100816|
+|ch.qos.logback|logback-classic|1.4.8|
+|ch.qos.logback|logback-core|1.4.8|
+|com.adobe.xmp|xmpcore|5.1.2|
+|com.drewnoakes|metadata-extractor|2.6.2|
+|com.fasterxml.jackson.core|jackson-annotations|2.14.3|
+|com.fasterxml.jackson.core|jackson-core|2.14.3|
+|com.fasterxml.jackson.core|jackson-databind|2.14.3|
+|com.fasterxml.jackson.dataformat|jackson-dataformat-yaml|2.14.3|
+|com.fasterxml.jackson.datatype|jackson-datatype-jdk8|2.14.3|
+|com.fasterxml.jackson.datatype|jackson-datatype-jsr310|2.14.3|
+|com.fasterxml.jackson.module|jackson-module-parameter-names|2.14.3|
+|com.fasterxml|classmate|1.5.1|
+|com.google.code.findbugs|jsr305|3.0.2|
+|com.google.errorprone|error_prone_annotations|2.18.0|
+|com.google.guava|failureaccess|1.0.1|
+|com.google.guava|guava|32.1.1-jre|
+|com.google.guava|listenablefuture|9999.0-empty-to-avoid-conflict-with-guava|
+|com.google.j2objc|j2objc-annotations|2.8|
+|com.googlecode.juniversalchardet|juniversalchardet|1.0.3|
+|com.googlecode.mp4parser|isoparser|1.0.2|
+|com.h2database|h2|2.1.214|
+|com.itextpdf|itextpdf|5.2.1|
+|com.jayway.jsonpath|json-path|2.7.0|
+|com.oracle.database.jdbc|ojdbc11|21.7.0.0|
+|com.pff|java-libpst|0.8.1|
+|com.sun.activation|jakarta.activation|1.2.2|
+|com.sun.istack|istack-commons-runtime|4.1.2|
+|com.sun.xml.messaging.saaj|saaj-impl|3.0.2|
+|com.uwyn|jhighlight|1.0|
+|com.vaadin.external.google|android-json|0.0.20131108.vaadin1|
+|com.zaxxer|HikariCP|5.0.1|
+|commons-codec|commons-codec|1.15|
+|commons-httpclient|commons-httpclient|3.1|
+|commons-io|commons-io|2.4|
+|commons-lang|commons-lang|2.4|
+|de.l3s.boilerpipe|boilerpipe|1.1.0|
+|edu.ucar|netcdf|4.2.20|
+|edu.ucar|unidataCommon|4.2.20|
+|io.micrometer|micrometer-commons|1.10.9|
+|io.micrometer|micrometer-core|1.10.9|
+|io.micrometer|micrometer-observation|1.10.9|
+|io.micrometer|micrometer-registry-prometheus|1.10.9|
+|io.netty|netty-buffer|4.1.94.Final|
+|io.netty|netty-codec-dns|4.1.94.Final|
+|io.netty|netty-codec-http2|4.1.94.Final|
+|io.netty|netty-codec-http|4.1.94.Final|
+|io.netty|netty-codec-socks|4.1.94.Final|
+|io.netty|netty-codec|4.1.94.Final|
+|io.netty|netty-common|4.1.94.Final|
+|io.netty|netty-handler-proxy|4.1.94.Final|
+|io.netty|netty-handler|4.1.94.Final|
+|io.netty|netty-resolver-dns-classes-macos|4.1.94.Final|
+|io.netty|netty-resolver-dns-native-macos|osx-x86_64|
+|io.netty|netty-resolver-dns|4.1.94.Final|
+|io.netty|netty-resolver|4.1.94.Final|
+|io.netty|netty-transport-classes-epoll|4.1.94.Final|
+|io.netty|netty-transport-native-epoll|linux-x86_64|
+|io.netty|netty-transport-native-unix-common|4.1.94.Final|
+|io.netty|netty-transport|4.1.94.Final|
+|io.projectreactor.netty|reactor-netty-core|1.1.9|
+|io.projectreactor.netty|reactor-netty-http|1.1.9|
+|io.projectreactor|reactor-core|3.5.8|
+|io.prometheus|simpleclient|0.16.0|
+|io.prometheus|simpleclient_common|0.16.0|
+|io.prometheus|simpleclient_tracer_common|0.16.0|
+|io.prometheus|simpleclient_tracer_otel|0.16.0|
+|io.prometheus|simpleclient_tracer_otel_agent|0.16.0|
+|io.swagger.core.v3|swagger-annotations-jakarta|2.2.9|
+|io.swagger.core.v3|swagger-core-jakarta|2.2.9|
+|io.swagger.core.v3|swagger-models-jakarta|2.2.9|
+|it.eng.parer|cryptolibrary|1.12.7|
+|it.eng.parer|eng-mityclib-api|1.0.2|
+|it.eng.parer|eng-mityclib-tsa|1.0.2|
+|it.eng.parer|eng-mityclib-xades|1.0.2|
+|it.eng.parer|eng-sec-provider|1.0.0|
+|it.eng.parer|verificafirma-crypto-beans|1.4.1|
+|jakarta.activation|jakarta.activation-api|2.1.2|
+|jakarta.annotation|jakarta.annotation-api|2.1.1|
+|jakarta.inject|jakarta.inject-api|2.0.0|
+|jakarta.persistence|jakarta.persistence-api|3.1.0|
+|jakarta.transaction|jakarta.transaction-api|2.0.1|
+|jakarta.validation|jakarta.validation-api|3.0.2|
+|jakarta.xml.bind|jakarta.xml.bind-api|4.0.0|
+|jakarta.xml.soap|jakarta.xml.soap-api|3.0.0|
+|javax.activation|activation|1.1|
+|javax.mail|mail|1.4.7|
+|javax.xml.bind|jaxb-api|2.3.0|
+|jdom|jdom|1.0|
+|net.bytebuddy|byte-buddy-agent|1.12.23|
+|net.bytebuddy|byte-buddy|1.12.23|
+|net.jcip|jcip-annotations|1.0|
+|net.logstash.logback|logstash-logback-encoder|7.2|
+|net.minidev|accessors-smart|2.4.11|
+|net.minidev|json-smart|2.4.11|
+|net.sourceforge.jmatio|jmatio|1.0|
+|org.antlr|antlr4-runtime|4.10.1|
+|org.apache.commons|commons-compress|1.8.1|
+|org.apache.commons|commons-lang3|3.12.0|
+|org.apache.httpcomponents|httpclient|4.5.14|
+|org.apache.httpcomponents|httpcore|4.4.16|
+|org.apache.james|apache-mime4j-core|0.7.2|
+|org.apache.james|apache-mime4j-dom|0.7.2|
+|org.apache.logging.log4j|log4j-api|2.19.0|
+|org.apache.logging.log4j|log4j-to-slf4j|2.19.0|
+|org.apache.pdfbox|fontbox|1.8.8|
+|org.apache.pdfbox|jempbox|1.8.8|
+|org.apache.pdfbox|pdfbox|1.8.8|
+|org.apache.poi|poi-ooxml-schemas|3.11|
+|org.apache.poi|poi-ooxml|3.11|
+|org.apache.poi|poi-scratchpad|3.11|
+|org.apache.poi|poi|3.11|
+|org.apache.santuario|xmlsec|1.4.5|
+|org.apache.taglibs|taglibs-standard-impl|1.2.5|
+|org.apache.taglibs|taglibs-standard-jstlel|1.2.5|
+|org.apache.taglibs|taglibs-standard-spec|1.2.5|
+|org.apache.tika|tika-core|1.7|
+|org.apache.tika|tika-parsers|1.7|
+|org.apache.tomcat.embed|tomcat-embed-core|10.1.11|
+|org.apache.tomcat.embed|tomcat-embed-el|10.1.11|
+|org.apache.tomcat.embed|tomcat-embed-websocket|10.1.11|
+|org.apache.xmlbeans|xmlbeans|2.6.0|
+|org.apiguardian|apiguardian-api|1.1.2|
+|org.aspectj|aspectjrt|1.9.19|
+|org.aspectj|aspectjweaver|1.9.19|
+|org.assertj|assertj-core|3.23.1|
+|org.attoparser|attoparser|2.0.6.RELEASE|
+|org.bouncycastle|bcmail-jdk16|1.46|
+|org.bouncycastle|bcprov-jdk16|1.46|
+|org.bouncycastle|bctsp-jdk16|1.46|
+|org.ccil.cowan.tagsoup|tagsoup|1.2.1|
+|org.checkerframework|checker-qual|3.33.0|
+|org.eclipse.angus|angus-activation|2.0.1|
+|org.gagravarr|vorbis-java-core|0.6|
+|org.gagravarr|vorbis-java-tika|0.6|
+|org.glassfish.jaxb|jaxb-runtime|2.3.8|
+|org.glassfish.jaxb|txw2|4.0.3|
+|org.hamcrest|hamcrest|2.2|
+|org.hdrhistogram|HdrHistogram|2.1.12|
+|org.hibernate.common|hibernate-commons-annotations|6.0.6.Final|
+|org.hibernate.orm|hibernate-core|6.1.7.Final|
+|org.hibernate.validator|hibernate-validator|8.0.1.Final|
+|org.jboss.logging|jboss-logging|3.5.3.Final|
+|org.jboss|jandex|2.4.2.Final|
+|org.json|json|20240303|
+|org.junit.jupiter|junit-jupiter-api|5.9.3|
+|org.junit.jupiter|junit-jupiter-engine|5.9.3|
+|org.junit.jupiter|junit-jupiter-params|5.9.3|
+|org.junit.jupiter|junit-jupiter|5.9.3|
+|org.junit.platform|junit-platform-commons|1.9.3|
+|org.junit.platform|junit-platform-engine|1.9.3|
+|org.jvnet.staxex|stax-ex|2.1.0|
+|org.latencyutils|LatencyUtils|2.0.3|
+|org.mockito|mockito-core|4.8.1|
+|org.mockito|mockito-junit-jupiter|4.8.1|
+|org.objenesis|objenesis|3.2|
+|org.opentest4j|opentest4j|1.2.0|
+|org.ow2.asm|asm-debug-all|4.1|
+|org.ow2.asm|asm|9.3|
+|org.reactivestreams|reactive-streams|1.0.4|
+|org.skyscreamer|jsonassert|1.5.1|
+|org.slf4j|jul-to-slf4j|2.0.7|
+|org.slf4j|slf4j-api|2.0.7|
+|org.springdoc|springdoc-openapi-starter-common|2.1.0|
+|org.springdoc|springdoc-openapi-starter-webmvc-api|2.1.0|
+|org.springdoc|springdoc-openapi-starter-webmvc-ui|2.1.0|
+|org.springframework.boot|spring-boot-actuator-autoconfigure|3.0.9|
+|org.springframework.boot|spring-boot-actuator|3.0.9|
+|org.springframework.boot|spring-boot-autoconfigure|3.0.9|
+|org.springframework.boot|spring-boot-starter-actuator|3.0.9|
+|org.springframework.boot|spring-boot-starter-aop|3.0.9|
+|org.springframework.boot|spring-boot-starter-data-jpa|3.0.9|
+|org.springframework.boot|spring-boot-starter-jdbc|3.0.9|
+|org.springframework.boot|spring-boot-starter-json|3.0.9|
+|org.springframework.boot|spring-boot-starter-logging|3.0.9|
+|org.springframework.boot|spring-boot-starter-reactor-netty|3.0.9|
+|org.springframework.boot|spring-boot-starter-security|3.0.9|
+|org.springframework.boot|spring-boot-starter-test|3.0.9|
+|org.springframework.boot|spring-boot-starter-thymeleaf|3.0.9|
+|org.springframework.boot|spring-boot-starter-tomcat|3.0.9|
+|org.springframework.boot|spring-boot-starter-validation|3.0.9|
+|org.springframework.boot|spring-boot-starter-web|3.0.9|
+|org.springframework.boot|spring-boot-starter-webflux|3.0.9|
+|org.springframework.boot|spring-boot-starter|3.0.9|
+|org.springframework.boot|spring-boot-test-autoconfigure|3.0.9|
+|org.springframework.boot|spring-boot-test|3.0.9|
+|org.springframework.boot|spring-boot|3.0.9|
+|org.springframework.data|spring-data-commons|3.0.8|
+|org.springframework.data|spring-data-jpa|3.0.8|
+|org.springframework.security|spring-security-config|6.0.5|
+|org.springframework.security|spring-security-core|6.0.5|
+|org.springframework.security|spring-security-crypto|6.0.5|
+|org.springframework.security|spring-security-web|6.0.5|
+|org.springframework.ws|spring-ws-core|4.0.5|
+|org.springframework.ws|spring-xml|4.0.5|
+|org.springframework|spring-aop|6.0.11|
+|org.springframework|spring-aspects|6.0.11|
+|org.springframework|spring-beans|6.0.11|
+|org.springframework|spring-context|6.0.11|
+|org.springframework|spring-core|6.0.11|
+|org.springframework|spring-expression|6.0.11|
+|org.springframework|spring-jcl|6.0.11|
+|org.springframework|spring-jdbc|6.0.11|
+|org.springframework|spring-orm|6.0.11|
+|org.springframework|spring-oxm|6.0.11|
+|org.springframework|spring-test|6.0.11|
+|org.springframework|spring-tx|6.0.11|
+|org.springframework|spring-web|6.0.11|
+|org.springframework|spring-webflux|6.0.11|
+|org.springframework|spring-webmvc|6.0.11|
+|org.thymeleaf.extras|thymeleaf-extras-springsecurity6|3.1.1.RELEASE|
+|org.thymeleaf|thymeleaf-spring6|3.1.1.RELEASE|
+|org.thymeleaf|thymeleaf|3.1.1.RELEASE|
+|org.tukaani|xz|1.5|
+|org.unbescape|unbescape|1.1.6.RELEASE|
+|org.webjars.bower|google-code-prettify|1.0.5|
+|org.webjars|bootstrap|3.4.1|
+|org.webjars|jquery|3.6.4|
+|org.webjars|swagger-ui|4.18.2|
+|org.xmlunit|xmlunit-core|2.9.1|
+|org.yaml|snakeyaml|1.33|
+|rome|rome|1.0|
+|xalan|serializer|2.7.2|
+|xalan|xalan|2.7.2|
+|xerces|xercesImpl|2.10.0|
+
+
+## Lista licenze in uso
+
+
+ * agpl_v3     : GNU Affero General Public License (AGPL) version 3.0
+ * apache_v2   : Apache License version 2.0
+ * bsd_2       : BSD 2-Clause License
+ * bsd_3       : BSD 3-Clause License
+ * cddl_v1     : COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0
+ * epl_only_v1 : Eclipse Public License - v 1.0
+ * epl_only_v2 : Eclipse Public License - v 2.0
+ * epl_v1      : Eclipse Public + Distribution License - v 1.0
+ * epl_v2      : Eclipse Public License - v 2.0 with Secondary License
+ * eupl_v1_1   : European Union Public License v1.1
+ * fdl_v1_3    : GNU Free Documentation License (FDL) version 1.3
+ * gpl_v1      : GNU General Public License (GPL) version 1.0
+ * gpl_v2      : GNU General Public License (GPL) version 2.0
+ * gpl_v3      : GNU General Public License (GPL) version 3.0
+ * lgpl_v2_1   : GNU General Lesser Public License (LGPL) version 2.1
+ * lgpl_v3     : GNU General Lesser Public License (LGPL) version 3.0
+ * mit         : MIT-License
 
 # Supporto
 
