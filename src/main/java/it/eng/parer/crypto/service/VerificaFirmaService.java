@@ -46,6 +46,7 @@ import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.mutable.MutableInt;
+import org.apache.commons.lang3.StringUtils;
 import org.bouncycastle.asn1.DERInteger;
 import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.asn1.x500.style.BCStyle;
@@ -979,9 +980,9 @@ public class VerificaFirmaService {
             } else {
                 esitoVerifiche = false;
                 controlliCatenaTrusted.setTiEsitoContrFirma(VerificheEnums.EsitoControllo.NEGATIVO.name());
-                controlliCatenaTrusted.setDsMsgEsitoContrFirma(VerificheEnums.EsitoControllo.NEGATIVO.message() + ": "
+                controlliCatenaTrusted.setDsMsgEsitoContrFirma(StringUtils.trim(VerificheEnums.EsitoControllo.NEGATIVO.message() + ": "
                         + unqualifiedSignature.getErrorsString() + " " + certificateAssociationInfo.getErrorsString()
-                        + " " + unqualifiedSignature.getWarningsString() + " ");
+                        + " " + unqualifiedSignature.getWarningsString() + " "));
             }
         }
 

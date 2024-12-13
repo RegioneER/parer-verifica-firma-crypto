@@ -83,12 +83,12 @@ public class CAUpdateJob {
     private void loadingCa() {
         try {
             // TASK UPDATE CERTIFICATI CA e CRL - Scarico tutti i
-            // certificati dal CNIPA, le CRL e creo le configurazioni nel DB.
+            // certificati dal eIDAS, le CRL e creo le configurazioni nel DB.
             // Siccome non utilizzo mai la chiave ottengo solamente i valori.
             Collection<X509Certificate> qualifiedCertificate = signerUtil.getQualifiedPrincipalsAndX509Certificates()
                     .values();
             final int size = qualifiedCertificate.size();
-            log.atInfo().log("Trovati {} certificati dal CNIPA", size);
+            log.atInfo().log("Trovati {} certificati da eIDAS", size);
             // Utilizzo l'iteratore e rimovo l'elemento per rendere eleggibile al GC il record già processato
             Iterator<X509Certificate> iterator = qualifiedCertificate.iterator();
             int caProcessate = 0;
@@ -99,7 +99,7 @@ public class CAUpdateJob {
             }
 
         } catch (CryptoSignerException e) {
-            log.atError().log("Errore nello scarico dei certificati CA dal CNIPA", e);
+            log.atError().log("Errore nello scarico dei certificati CA da eIDAS", e);
         }
     }
 

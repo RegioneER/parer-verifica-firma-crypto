@@ -182,8 +182,8 @@ objects:
       name: verificafirma-crypto
       weight: 100
     wildcardPolicy: None
-- apiVersion: v1
-  kind: DeploymentConfig
+- apiVersion: apps/v1
+  kind: Deployment
   metadata:
     labels:
       app: verificafirma-crypto
@@ -195,7 +195,8 @@ objects:
     replicas: 1
     revisionHistoryLimit: 2
     selector:
-      app: verificafirma-crypto
+      matchLabels:
+        app: verificafirma-crypto
     strategy:
       activeDeadlineSeconds: 21600
       resources: {}
@@ -209,7 +210,7 @@ objects:
         maxUnavailable: 25%
         timeoutSeconds: 3600
         updatePeriodSeconds: 1
-      type: Rolling    
+      type: RollingUpdate    
     template:
       metadata:
         labels:
@@ -322,6 +323,9 @@ objects:
         schedulerName: default-scheduler
         securityContext: {}
         terminationGracePeriodSeconds: 50
+        securityContext:
+          runAsUser: 1000660000
+          fsGroup: 1000660000        
         volumes:
         - configMap:
             defaultMode: 420
