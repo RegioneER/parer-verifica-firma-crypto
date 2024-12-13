@@ -2,7 +2,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>old-cryptolibrary</artifactId>
-    <version>1.16.1-SNAPSHOT</version>
+    <version>1.17.1-SNAPSHOT</version>
     <packaging>${packaging.type}</packaging>
     <name>Verifica Firma CRYPTO</name>
     <description>Progetto per effettuare firme e validazioni con librerie cryptolibrary (CRYPTO)</description>
@@ -41,7 +41,7 @@
         <logstash-logback-encoder.version>7.4</logstash-logback-encoder.version>
         <org-json.version>20240303</org-json.version>
         <!-- custom libs -->
-        <eng-cryptolibrary.version>1.13.0</eng-cryptolibrary.version>
+        <eng-cryptolibrary.version>1.14.0</eng-cryptolibrary.version>
         <verificafirma-crypto-beans.version>1.6.0</verificafirma-crypto-beans.version>
         <!-- -->
         <start-class>it.eng.parer.crypto.web.CryptoApplication</start-class>
@@ -125,6 +125,11 @@
                 <artifactId>xalan</artifactId>
                 <version>${xalan.version}</version>
             </dependency>
+			<dependency>
+				<groupId>xalan</groupId>
+				<artifactId>serializer</artifactId>
+				<version>${xalan.version}</version>
+			</dependency>            
             <dependency>
                 <groupId>it.eng.parer</groupId>
                 <artifactId>cryptolibrary</artifactId>
@@ -147,7 +152,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!-- Swagger UI -->
+			<!-- Swagger UI -->
            <dependency>
 				<groupId>org.springdoc</groupId>
 				<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
@@ -274,6 +279,7 @@
         <dependency>
             <groupId>xalan</groupId>
             <artifactId>xalan</artifactId>
+            <scope>runtime</scope>
             <exclusions>
                 <exclusion>
                     <groupId>xml-apis</groupId>
@@ -281,6 +287,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
+		<dependency>
+			<groupId>xalan</groupId>
+			<artifactId>serializer</artifactId>
+			<scope>runtime</scope>
+		</dependency>  
         <dependency>
             <groupId>it.eng.parer</groupId>
             <artifactId>cryptolibrary</artifactId>
@@ -336,7 +347,6 @@
 		    <artifactId>json</artifactId>
 		    <version>${org-json.version}</version>
 		</dependency>
-
     </dependencies>
 
     <build>
@@ -359,14 +369,14 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                	<!-- JDK 21 -->
+					<!-- JDK 21 -->
 					<source>21</source>
 					<target>21</target>
 					<!-- disable release option --> 
                 	<release combine.self="override" />
-                	<!-- export legay module -->
-                    <!-- @see java.lang.IllegalAccessError: class es.mityc.firmaJava.libreria.utilidades.URIEncoder (in unnamed module @0x3b2c72c2) -->
-                    <!-- cannot access class sun.security.action.GetPropertyAction (in module java.base) because module java.base does not export sun.security.action to unnamed module @0x3b2c72c2 -->
+					<!-- export legay module -->
+					<!-- @see java.lang.IllegalAccessError: class es.mityc.firmaJava.libreria.utilidades.URIEncoder (in unnamed module @0x3b2c72c2) -->
+					<!-- cannot access class sun.security.action.GetPropertyAction (in module java.base) because module java.base does not export sun.security.action to unnamed module @0x3b2c72c2 -->
                  	<compilerArgs>
 						 <compilerArg>--add-exports</compilerArg>
 						 <compilerArg>java.base/sun.security.action=ALL-UNNAMED</compilerArg>
@@ -471,9 +481,9 @@
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                             <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
                         </manifest>
-                        <!-- export legacy module -->
-        				<!-- @see java.lang.IllegalAccessError: class es.mityc.firmaJava.libreria.utilidades.URIEncoder (in unnamed module @0x3b2c72c2) -->
-        				<!-- cannot access class sun.security.action.GetPropertyAction (in module java.base) because module java.base does not export sun.security.action to unnamed module @0x3b2c72c2 -->
+						<!-- export legacy module -->
+						<!-- @see java.lang.IllegalAccessError: class es.mityc.firmaJava.libreria.utilidades.URIEncoder (in unnamed module @0x3b2c72c2) -->
+						<!-- cannot access class sun.security.action.GetPropertyAction (in module java.base) because module java.base does not export sun.security.action to unnamed module @0x3b2c72c2 -->
                         <manifestEntries>
 							<Add-Exports>java.base/sun.security.action</Add-Exports>
 						</manifestEntries>
