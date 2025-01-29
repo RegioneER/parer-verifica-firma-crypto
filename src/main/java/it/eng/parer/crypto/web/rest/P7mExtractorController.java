@@ -34,6 +34,7 @@ import java.util.Set;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -159,6 +160,10 @@ public class P7mExtractorController {
 
         Path p7mToExtract = null;
         try {
+           // LOG BODY
+            if (log.isDebugEnabled()) {
+                log.atDebug().log("RequestBody {}", new JSONObject(p7mBody).toString());
+            }
             p7mToExtract = Files.createTempFile("extracted", ".p7m", attr);
             downloadSignedResource(p7mBody.getUri(), p7mToExtract);
             CryptoP7mUnsigned p7m = service.extractUnsignedFromP7m(p7mToExtract, p7mBody.getOriginalFileName());
