@@ -6,11 +6,11 @@ labels:
 metadata:
   annotations:
     description: |-
-      Template microservizio verifica firma CRYPTO JDK17 OracleDB (vedere https://gitlab.ente.regione.emr.it/parer/okd/crypto.git)
+      Template microservizio verifica firma CRYPTO (https://gitlab.ente.regione.emr.it/parer/okd/crypto.git)
     iconClass: icon-spring
     openshift.io/display-name: Microservice CRYPTO
     openshift.io/documentation-url: https://gitlab.ente.regione.emr.it/parer/okd/crypto
-    openshift.io/long-description: Il template fornisce la creazione del microservizio CRYPTO con selettore sul tipo di ambiente (svil/test/pre/etc.)
+    openshift.io/long-description: Il template fornisce la creazione del microservizio CRYPTO
     openshift.io/provider-display-name: Parer (Regione Emilia Romagna)
     openshift.io/support-url: https://gitlab.ente.regione.emr.it/parer
     tags: springboot,crypto
@@ -308,8 +308,6 @@ objects:
             limits:
               cpu: 800m
               memory: 3Gi
-          securityContext:
-            privileged: false
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           volumeMounts:
@@ -323,9 +321,6 @@ objects:
         schedulerName: default-scheduler
         securityContext: {}
         terminationGracePeriodSeconds: 50
-        securityContext:
-          runAsUser: 1000660000
-          fsGroup: 1000660000        
         volumes:
         - configMap:
             defaultMode: 420

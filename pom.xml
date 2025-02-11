@@ -2,7 +2,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>old-cryptolibrary</artifactId>
-    <version>1.17.1-SNAPSHOT</version>
+    <version>1.18.1-SNAPSHOT</version>
     <packaging>${packaging.type}</packaging>
     <name>Verifica Firma CRYPTO</name>
     <description>Progetto per effettuare firme e validazioni con librerie cryptolibrary (CRYPTO)</description>
