@@ -49,7 +49,7 @@
 
 <scm>
         <developerConnection>scm:git:https://github.com/RegioneER/parer-verifica-firma-crypto.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>old-cryptolibrary-1.18.0</tag>
     </scm>
 
 <distributionManagement>
