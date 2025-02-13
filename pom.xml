@@ -2,7 +2,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>old-cryptolibrary</artifactId>
-    <version>1.18.1-SNAPSHOT</version>
+    <version>1.19.0</version>
     <packaging>${packaging.type}</packaging>
     <name>Verifica Firma CRYPTO</name>
     <description>Progetto per effettuare firme e validazioni con librerie cryptolibrary (CRYPTO)</description>
@@ -10,7 +10,7 @@
     <parent>
         <groupId>it.eng.parer</groupId>
         <artifactId>parer-pom</artifactId>
-        <version>6.4.1</version>
+        <version>6.5.0</version>
     </parent>
 
     <properties>
@@ -30,7 +30,7 @@
         <!-- versione massima supportata per problemi legati a bouncy -->
         <tika.version>1.7</tika.version>
         <bcprov-jdk16.version>1.46</bcprov-jdk16.version>
-        <xercesImpl.version>2.10.0</xercesImpl.version>
+        <xercesImpl.version>2.12.2</xercesImpl.version>
         <xml-resolver.version>1.2</xml-resolver.version>
         <xalan.version>2.7.3</xalan.version>
         <jaxb-runtime.version>2.3.8</jaxb-runtime.version>
@@ -40,6 +40,11 @@
         <jquery.version>3.6.4</jquery.version>
         <logstash-logback-encoder.version>7.4</logstash-logback-encoder.version>
         <org-json.version>20240303</org-json.version>
+        <poi.version>3.17</poi.version>
+        <pdfbox.version>2.0.33</pdfbox.version>
+        <commons-compress.version>1.26.2</commons-compress.version>
+        <jdom.version>1.1</jdom.version>
+        <xmlbeans.version>3.0.0</xmlbeans.version>
         <!-- custom libs -->
         <eng-cryptolibrary.version>1.14.0</eng-cryptolibrary.version>
         <verificafirma-crypto-beans.version>1.6.0</verificafirma-crypto-beans.version>
@@ -145,6 +150,36 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi</artifactId>
+				<version>${poi.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi-ooxml-schemas</artifactId>
+				<version>${poi.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.pdfbox</groupId>
+				<artifactId>pdfbox</artifactId>
+				<version>${pdfbox.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-compress</artifactId>
+				<version>${commons-compress.version}</version>
+			</dependency>
+			<dependency>
+			    <groupId>jdom</groupId>
+			    <artifactId>jdom</artifactId>
+			    <version>${jdom.version}</version>
+			</dependency>
+			<dependency>
+			    <groupId>org.apache.xmlbeans</groupId>
+			    <artifactId>xmlbeans</artifactId>
+			    <version>${xmlbeans.version}</version>
+			</dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
