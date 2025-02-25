@@ -20,6 +20,7 @@ package it.eng.parer.crypto.web.unit;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -36,19 +37,24 @@ import it.eng.parer.crypto.service.TimeService;
 @SpringBootTest(properties = { "cron.ca.enable=false", "cron.crl.enable=false",
         "spring.datasource.url=jdbc:h2:mem:cryptodb-test;DB_CLOSE_DELAY=-1", "logging.level.root=INFO",
         "logging.level.it.eng.parer.crypto=INFO" })
+@Deprecated(forRemoval = true, since = "Da rimuovere API-Unit test obsoleto")
 class TimestampTest {
 
     @Autowired
     private TimeService timeService;
 
+    @Disabled(value = "API da dismettere")
     @Test
+    @Deprecated
     void testTst() {
         byte[] content = { 67, 105, 97, 111, 33 };
         ParerTST tst = timeService.getTst(content);
         assertNotNull(tst.getTimeStampInfo().getGenTime());
     }
 
+    @Disabled(value = "API da dismettere")
     @Test
+    @Deprecated
     void testTsd() {
         byte[] content = { 67, 105, 97, 111, 33 };
         ParerTSD tsd = timeService.getTsd(content);

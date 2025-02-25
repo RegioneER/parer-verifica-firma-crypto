@@ -980,9 +980,10 @@ public class VerificaFirmaService {
             } else {
                 esitoVerifiche = false;
                 controlliCatenaTrusted.setTiEsitoContrFirma(VerificheEnums.EsitoControllo.NEGATIVO.name());
-                controlliCatenaTrusted.setDsMsgEsitoContrFirma(StringUtils.trim(VerificheEnums.EsitoControllo.NEGATIVO.message() + ": "
-                        + unqualifiedSignature.getErrorsString() + " " + certificateAssociationInfo.getErrorsString()
-                        + " " + unqualifiedSignature.getWarningsString() + " "));
+                controlliCatenaTrusted.setDsMsgEsitoContrFirma(StringUtils.trim(
+                        VerificheEnums.EsitoControllo.NEGATIVO.message() + ": " + unqualifiedSignature.getErrorsString()
+                                + " " + certificateAssociationInfo.getErrorsString() + " "
+                                + unqualifiedSignature.getWarningsString() + " "));
             }
         }
 

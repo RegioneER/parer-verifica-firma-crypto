@@ -160,7 +160,7 @@ public class P7mExtractorController {
 
         Path p7mToExtract = null;
         try {
-           // LOG BODY
+            // LOG BODY
             if (log.isDebugEnabled()) {
                 log.atDebug().log("RequestBody {}", new JSONObject(p7mBody).toString());
             }

@@ -45,6 +45,7 @@ import javax.xml.bind.DatatypeConverter;
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -646,6 +647,8 @@ class ApiIntegrationTest {
     }
 
     @Test
+    @Deprecated
+    @Disabled(value = "API da dismettere")
     void testTimestamp() {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
@@ -672,6 +675,8 @@ class ApiIntegrationTest {
     }
 
     @Test
+    @Deprecated
+    @Disabled(value = "API da dismettere")
     void testTSD() {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
@@ -783,7 +788,9 @@ class ApiIntegrationTest {
      * Effettuo un test sul recupero della CRL del firmatario. Partendo da un db vuoto ho la necessità di inserire prima
      * la CRL che sto cercando. Essendo un test di integrazione lo effettuo tramite le API fornite.
      */
+    @Disabled(value = "API da dismettere")
     @Test
+    @Deprecated
     void testSearchCrl() throws IOException {
         // Fase 1: inserisco la CRL refernziata dal firmatario
         HttpHeaders headers = new HttpHeaders();

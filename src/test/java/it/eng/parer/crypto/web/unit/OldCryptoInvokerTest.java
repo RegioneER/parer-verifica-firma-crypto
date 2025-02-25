@@ -27,6 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.bouncycastle.tsp.TimeStampToken;
 import org.bouncycastle.tsp.cms.CMSTimeStampedData;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -41,12 +42,15 @@ import it.eng.parer.crypto.service.verifica.OldCryptoInvoker;
 @SpringBootTest(properties = { "cron.ca.enable=false", "cron.crl.enable=false",
         "spring.datasource.url=jdbc:h2:mem:cryptodb-test;DB_CLOSE_DELAY=-1", "logging.level.root=INFO",
         "logging.level.it.eng.parer.crypto=INFO" })
+@Deprecated(forRemoval = true, since = "Da rimuovere API-Unit test obsoleto")
 class OldCryptoInvokerTest {
 
     @Autowired
     private OldCryptoInvoker oldCryptoInvoker;
 
+    @Disabled(value = "API da dismettere")
     @Test
+    @Deprecated
     void testInvokerTST() throws Exception {
         byte[] content = { 67, 105, 97, 111, 33 };
 
@@ -56,7 +60,9 @@ class OldCryptoInvokerTest {
         assertNotNull(tst.getTimeStampInfo().getSerialNumber());
     }
 
+    @Disabled(value = "API da dismettere")
     @Test
+    @Deprecated
     void testInvokerTSD() throws Exception {
         byte[] content = { 67, 105, 97, 111, 33 };
 
