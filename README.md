@@ -5,6 +5,15 @@
 
 Fonte template redazione documento:  https://www.makeareadme.com/.
 
+## Esposizione locale dell'applicazione 
+
+Data la seguente configurazione: 
+
+```bash
+server.servlet.context-path = /verificafirma-crypto
+```
+
+l'applicazione viene esposta al seguente indirizzo (in locale): ``http://localhost:8091/verificafirma-crypto``.
 
 # Descrizione
 

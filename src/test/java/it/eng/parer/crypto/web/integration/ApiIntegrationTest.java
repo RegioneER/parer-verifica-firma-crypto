@@ -43,6 +43,7 @@ import java.util.List;
 import javax.xml.bind.DatatypeConverter;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -57,6 +58,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.ClientHttpResponse;
@@ -116,6 +118,8 @@ class ApiIntegrationTest {
 
     @Autowired
     private CrlService crlService;
+    
+    private String uriWithCtxPath;
 
     /**
      * Aggiungo manualmente alcuni dei certificati CA/CRL che mi servono per verificare le firme. Il database delle CA e
@@ -188,6 +192,10 @@ class ApiIntegrationTest {
         certificateService.addCaCertificate(p7mmd5ResourceBlob);
         crlService.addCRL(multicertifyActalisCRLResourceBlob);
         crlService.addCRL(pdfFirmeMultipleErroreCrittoCRLBlob);
+        
+        // define base URL
+        final String rootUri = restTemplate.getRootUri();
+        uriWithCtxPath = rootUri.concat(rootUri.endsWith("/") ? StringUtils.EMPTY : "/") ; // complete URL
     }
 
     @Test
@@ -464,11 +472,9 @@ class ApiIntegrationTest {
     @Test
     void testVerificaFirmaJson() {
 
-        String rootUri = restTemplate.getRootUri();
-
         CryptoDataToValidateDataUri data = new CryptoDataToValidateDataUri();
-        data.setContenuto(URI.create(rootUri + "cades_T_1.pdf.p7m"));
-        data.setMarche(Arrays.asList(URI.create(rootUri + "cades_T_1.pdf.p7m.tsr")));
+        data.setContenuto(URI.create(uriWithCtxPath + "cades_T_1.pdf.p7m"));
+        data.setMarche(Arrays.asList(URI.create(uriWithCtxPath + "cades_T_1.pdf.p7m.tsr")));
 
         CryptoDataToValidateMetadata metadata = new CryptoDataToValidateMetadata();
         metadata.setTipologiaDataRiferimento(TipologiaDataRiferimento.verificaAllaDataDiFirma());
@@ -556,10 +562,9 @@ class ApiIntegrationTest {
 
     @Test
     void testProfiloDefault() {
-        String rootUri = restTemplate.getRootUri();
-
+	
         CryptoDataToValidateDataUri data = new CryptoDataToValidateDataUri();
-        data.setContenuto(URI.create(rootUri + "p7m_pem_sha256.pdf.p7m"));
+        data.setContenuto(URI.create(uriWithCtxPath + "p7m_pem_sha256.pdf.p7m"));
 
         CryptoDataToValidateMetadata metadata = new CryptoDataToValidateMetadata();
 
@@ -583,10 +588,9 @@ class ApiIntegrationTest {
 
     @Test
     void testProfiloCustom() {
-        String rootUri = restTemplate.getRootUri();
 
         CryptoDataToValidateDataUri data = new CryptoDataToValidateDataUri();
-        data.setContenuto(URI.create(rootUri + "p7m_pem_sha256.pdf.p7m"));
+        data.setContenuto(URI.create(uriWithCtxPath + "p7m_pem_sha256.pdf.p7m"));
 
         CryptoDataToValidateMetadata metadata = new CryptoDataToValidateMetadata();
 
@@ -747,10 +751,8 @@ class ApiIntegrationTest {
     @Test
     void testP7mExtractionJson() throws IOException {
 
-        String rootUri = restTemplate.getRootUri();
-
         CryptoSignedP7mUri data = new CryptoSignedP7mUri();
-        data.setUri(URI.create(rootUri + "cades_T_1.pdf.p7m"));
+        data.setUri(URI.create(uriWithCtxPath + "cades_T_1.pdf.p7m"));
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -828,13 +830,13 @@ class ApiIntegrationTest {
 
         private final ObjectMapper objectMapper = new ObjectMapper();
 
-        @SuppressWarnings("resource")
-        @Override
-        public void handleError(ClientHttpResponse response) throws IOException {
-            // avoid unmapped field (see datetime on RestExceptionResponse)
+	@SuppressWarnings("resource")
+	@Override
+	public void handleError(URI url, HttpMethod method, ClientHttpResponse response) throws IOException {
+	    // avoid unmapped field (see datetime on RestExceptionResponse)
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             throw objectMapper.readValue(response.getBody(), CryptoParerException.class);
-        }
+	}
     }
 
 }

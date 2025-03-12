@@ -9,7 +9,7 @@ server:
     whitelabel:
       enabled: false
   servlet: 
-    context-path: /
+    context-path: /verificafirma-crypto
   shutdown: graceful
 
 # CRON  

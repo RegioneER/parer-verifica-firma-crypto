@@ -2,7 +2,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>old-cryptolibrary</artifactId>
-    <version>1.19.1-SNAPSHOT</version>
+    <version>1.20.1-SNAPSHOT</version>
     <packaging>${packaging.type}</packaging>
     <name>Verifica Firma CRYPTO</name>
     <description>Progetto per effettuare firme e validazioni con librerie cryptolibrary (CRYPTO)</description>
@@ -25,8 +25,8 @@
         <!-- cannot access class sun.security.action.GetPropertyAction (in module java.base) because module java.base does not export sun.security.action to unnamed module @0x3b2c72c2 -->
         <argLine>--add-exports java.base/sun.security.action=ALL-UNNAMED</argLine>
         <!-- third party libs -->
-		<springboot.version>3.3.5</springboot.version>
-		<springdoc-openapi-starter-webmvc-ui.version>2.6.0</springdoc-openapi-starter-webmvc-ui.version>		
+		<springboot.version>3.4.3</springboot.version>
+		<springdoc-openapi-starter-webmvc-ui.version>2.7.0</springdoc-openapi-starter-webmvc-ui.version>		
         <!-- versione massima supportata per problemi legati a bouncy -->
         <tika.version>1.7</tika.version>
         <bcprov-jdk16.version>1.46</bcprov-jdk16.version>
@@ -40,7 +40,6 @@
         <jquery.version>3.6.4</jquery.version>
         <logstash-logback-encoder.version>7.4</logstash-logback-encoder.version>
         <org-json.version>20240303</org-json.version>
-        <poi.version>3.17</poi.version>
         <pdfbox.version>2.0.33</pdfbox.version>
         <commons-compress.version>1.26.2</commons-compress.version>
         <jdom.version>1.1</jdom.version>
@@ -73,6 +72,20 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- Spring Boot -->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${springboot.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<!-- Swagger UI -->
+			<dependency>
+				<groupId>org.springdoc</groupId>
+				<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+				<version>${springdoc-openapi-starter-webmvc-ui.version}</version>
+			</dependency>
             <dependency>
                 <groupId>it.eng.parer</groupId>
                 <artifactId>verificafirma-crypto-beans</artifactId>
@@ -93,6 +106,7 @@
                 <artifactId>bctsp-jdk16</artifactId>
                 <version>${bcprov-jdk16.version}</version>
             </dependency>
+            <!-- Tika -->
             <dependency>
                 <groupId>org.apache.tika</groupId>
                 <artifactId>tika-core</artifactId>
@@ -114,7 +128,7 @@
                 </exclusions>
             </dependency>
 
-            <!-- Imposto le versioni per Xerces & Xalan -->
+			<!-- Imposto le versioni per Xerces & Xalan -->
             <dependency>
                 <groupId>xerces</groupId>
                 <artifactId>xercesImpl</artifactId>
@@ -151,16 +165,6 @@
                 </exclusions>
             </dependency>
 			<dependency>
-				<groupId>org.apache.poi</groupId>
-				<artifactId>poi</artifactId>
-				<version>${poi.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.poi</groupId>
-				<artifactId>poi-ooxml-schemas</artifactId>
-				<version>${poi.version}</version>
-			</dependency>
-			<dependency>
 				<groupId>org.apache.pdfbox</groupId>
 				<artifactId>pdfbox</artifactId>
 				<version>${pdfbox.version}</version>
@@ -179,19 +183,6 @@
 			    <groupId>org.apache.xmlbeans</groupId>
 			    <artifactId>xmlbeans</artifactId>
 			    <version>${xmlbeans.version}</version>
-			</dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${springboot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-			<!-- Swagger UI -->
-           <dependency>
-				<groupId>org.springdoc</groupId>
-				<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-				<version>${springdoc-openapi-starter-webmvc-ui.version}</version>
 			</dependency>
             <dependency>
                 <groupId>net.logstash.logback</groupId>

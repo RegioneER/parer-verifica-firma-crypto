@@ -1,4 +1,5 @@
-## 1.19.0 (13-02-2025)
+## 1.20.0 (07-03-2025)
 
-### Novità: 1
-- [#36659](https://parermine.regione.emilia-romagna.it/issues/36659) Aggiornamento librerie CVE OWASP 
+### Novità: 2
+- [#37262](https://parermine.regione.emilia-romagna.it/issues/37262) Aggiornamento spring boot 3.4.x e patch su Apache Poi
+- [#37250](https://parermine.regione.emilia-romagna.it/issues/37250) Introduzione di root path esplicito
