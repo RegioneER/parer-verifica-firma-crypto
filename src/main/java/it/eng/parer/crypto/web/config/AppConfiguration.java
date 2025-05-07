@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package it.eng.parer.crypto.web.config;
@@ -46,11 +42,11 @@ import io.swagger.v3.oas.models.info.Info;
 import it.eng.crypto.data.SignerUtil;
 import it.eng.parer.crypto.service.util.CommonsHttpClient;
 
-//https://docs.spring.io/spring-boot/docs/1.5.2.RELEASE/reference/htmlsingle/#boot-features-external-config-application-property-files
-//SEE 24.6.4 YAML shortcomings
-//@PropertySource("classpath:application.properties")
-//https://stackoverflow.com/questions/51008382/why-spring-boot-application-doesnt-require-enablewebmvc
-//@EnableWebMvc
+// https://docs.spring.io/spring-boot/docs/1.5.2.RELEASE/reference/htmlsingle/#boot-features-external-config-application-property-files
+// SEE 24.6.4 YAML shortcomings
+// @PropertySource("classpath:application.properties")
+// https://stackoverflow.com/questions/51008382/why-spring-boot-application-doesnt-require-enablewebmvc
+// @EnableWebMvc
 @Configuration
 @ComponentScan("it.eng.parer.crypto.service")
 @PropertySource("classpath:git.properties")
@@ -99,19 +95,21 @@ public class AppConfiguration implements WebMvcConfigurer {
      */
     @Override
     public void configurePathMatch(PathMatchConfigurer configurer) {
-        UrlPathHelper urlPathHelper = new UrlPathHelper();
-        urlPathHelper.setDefaultEncoding(Charset.defaultCharset().name());
-        urlPathHelper.setUrlDecode(false);
-        configurer.setUrlPathHelper(urlPathHelper);
+	UrlPathHelper urlPathHelper = new UrlPathHelper();
+	urlPathHelper.setDefaultEncoding(Charset.defaultCharset().name());
+	urlPathHelper.setUrlDecode(false);
+	configurer.setUrlPathHelper(urlPathHelper);
     }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        // static resources
-        registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
-        // swagger
-        registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
-        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+	// static resources
+	registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
+	// swagger
+	registry.addResourceHandler("swagger-ui.html")
+		.addResourceLocations("classpath:/META-INF/resources/");
+	registry.addResourceHandler("/webjars/**")
+		.addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 
     /**
@@ -121,13 +119,14 @@ public class AppConfiguration implements WebMvcConfigurer {
      */
     @Bean
     public ThreadPoolTaskScheduler threadPoolTaskScheduler() {
-        ThreadPoolTaskScheduler threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
-        threadPoolTaskScheduler.setWaitForTasksToCompleteOnShutdown(true);
-        threadPoolTaskScheduler.setPoolSize(threadPoolSize);
-        threadPoolTaskScheduler.setThreadNamePrefix("job-scarico-CA-CRL-");
-        threadPoolTaskScheduler.setThreadPriority(Thread.MIN_PRIORITY);
-        log.atDebug().log("Creazione pool di thread per i job di scarico CA/CRL con dimensione " + threadPoolSize);
-        return threadPoolTaskScheduler;
+	ThreadPoolTaskScheduler threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
+	threadPoolTaskScheduler.setWaitForTasksToCompleteOnShutdown(true);
+	threadPoolTaskScheduler.setPoolSize(threadPoolSize);
+	threadPoolTaskScheduler.setThreadNamePrefix("job-scarico-CA-CRL-");
+	threadPoolTaskScheduler.setThreadPriority(Thread.MIN_PRIORITY);
+	log.atDebug().log("Creazione pool di thread per i job di scarico CA/CRL con dimensione "
+		+ threadPoolSize);
+	return threadPoolTaskScheduler;
     }
 
     /*
@@ -135,44 +134,45 @@ public class AppConfiguration implements WebMvcConfigurer {
      */
     @Bean
     public SignerUtil signerUtil(ApplicationContext applicationContext) {
-        return SignerUtil.newInstance(applicationContext);
+	return SignerUtil.newInstance(applicationContext);
     }
 
     @Bean
     public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
-        MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
-        List<MediaType> supportedMediaTypes = new ArrayList<>(
-                mappingJackson2HttpMessageConverter.getSupportedMediaTypes());
+	MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
+	List<MediaType> supportedMediaTypes = new ArrayList<>(
+		mappingJackson2HttpMessageConverter.getSupportedMediaTypes());
 
-        supportedMediaTypes.add(new MediaType(MediaType.TEXT_PLAIN, StandardCharsets.UTF_8));
-        supportedMediaTypes.add(new MediaType(MediaType.TEXT_PLAIN, StandardCharsets.ISO_8859_1));
+	supportedMediaTypes.add(new MediaType(MediaType.TEXT_PLAIN, StandardCharsets.UTF_8));
+	supportedMediaTypes.add(new MediaType(MediaType.TEXT_PLAIN, StandardCharsets.ISO_8859_1));
 
-        mappingJackson2HttpMessageConverter.setSupportedMediaTypes(supportedMediaTypes);
+	mappingJackson2HttpMessageConverter.setSupportedMediaTypes(supportedMediaTypes);
 
-        return mappingJackson2HttpMessageConverter;
+	return mappingJackson2HttpMessageConverter;
     }
 
     @Bean
     public OpenAPI cryptoOpenAPI() {
-        return new OpenAPI().info(new Info().title("Verifica firma CRYPTO")
-                .description("Microserivice per verifica firma basato su cryptolibrary")
-                .version((StringUtils.isNotBlank(getClass().getPackage().getImplementationVersion())
-                        ? getClass().getPackage().getImplementationVersion() : "")));
+	return new OpenAPI().info(new Info().title("Verifica firma CRYPTO")
+		.description("Microserivice per verifica firma basato su cryptolibrary")
+		.version((StringUtils.isNotBlank(getClass().getPackage().getImplementationVersion())
+			? getClass().getPackage().getImplementationVersion()
+			: "")));
     }
 
     /** CUSTOM HTTP CLIENT ! **/
     @Bean(initMethod = "init", destroyMethod = "destroy")
     public CommonsHttpClient commonsHttpClient() {
-        CommonsHttpClient commonsHttpClient = new CommonsHttpClient();
-        // NOTA timeout impostabile (da configurazione!)
-        commonsHttpClient.setHttpClientTimeout(httpClientTimeout);
-        commonsHttpClient.setHttpClientConnectionsmax(httpClientConnectionsmax);
-        commonsHttpClient.setHttpClientSocketTimeout(httpClientSocketTimeout);
-        //
-        commonsHttpClient.setHttpClientConnectionsmaxperroute(httpClientConnectionsmaxperroute);
-        commonsHttpClient.setHttpClientTimeToLive(httpClientTimeToLive);
-        //
-        commonsHttpClient.setNoSslVerify(noSslVerify);
-        return commonsHttpClient;
+	CommonsHttpClient commonsHttpClient = new CommonsHttpClient();
+	// NOTA timeout impostabile (da configurazione!)
+	commonsHttpClient.setHttpClientTimeout(httpClientTimeout);
+	commonsHttpClient.setHttpClientConnectionsmax(httpClientConnectionsmax);
+	commonsHttpClient.setHttpClientSocketTimeout(httpClientSocketTimeout);
+	//
+	commonsHttpClient.setHttpClientConnectionsmaxperroute(httpClientConnectionsmaxperroute);
+	commonsHttpClient.setHttpClientTimeToLive(httpClientTimeToLive);
+	//
+	commonsHttpClient.setNoSslVerify(noSslVerify);
+	return commonsHttpClient;
     }
 }

@@ -1,24 +1,19 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * To change this license header, choose License Headers in Project Properties. To change this
+ * template file, choose Tools | Templates and open the template in the editor.
  */
 package it.eng.parer.crypto.web.view;
 
@@ -79,7 +74,8 @@ import jakarta.validation.Valid;
  * @author lorenzo
  */
 @Controller
-@SessionAttributes({ "risultatoVerifica" })
+@SessionAttributes({
+	"risultatoVerifica" })
 @ConditionalOnProperty(name = "parer.crypto.verifica-ui.enabled", havingValue = "true", matchIfMissing = true)
 public class VerificaController {
 
@@ -88,7 +84,7 @@ public class VerificaController {
     private static final String RISULTATO_VERIFICA = "risultatoVerifica";
 
     private static final FileAttribute<Set<PosixFilePermission>> attr = PosixFilePermissions
-            .asFileAttribute(PosixFilePermissions.fromString("rw-------"));
+	    .asFileAttribute(PosixFilePermissions.fromString("rw-------"));
 
     private static final String CONTENUTO = "contenuto";
     private static final String MARCA = "marca_";
@@ -111,199 +107,201 @@ public class VerificaController {
 
     @ModelAttribute("version")
     public String getVersion() {
-        return env.getProperty(BUILD_VERSION);
+	return env.getProperty(BUILD_VERSION);
     }
 
     @ModelAttribute("builddate")
     public String getBuilddate() {
-        return env.getProperty(BUILD_TIME);
+	return env.getProperty(BUILD_TIME);
     }
 
     @ModelAttribute("engcryptolibrary")
     public String getEngcryptolibrary() {
-        return buildProperties.get(CRYPTO_VERSION);
+	return buildProperties.get(CRYPTO_VERSION);
     }
 
     @GetMapping("/verifica")
     public ModelAndView verifica(Model model) {
-        model.addAttribute("verificafirmaBean", new VerificaFirmaBean());
-        return new ModelAndView("verifica");
+	model.addAttribute("verificafirmaBean", new VerificaFirmaBean());
+	return new ModelAndView("verifica");
     }
 
     @PostMapping(value = "/verifica", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ModelAndView verifica(@ModelAttribute @Valid VerificaFirmaBean verificafirmaBean, BindingResult errors,
-            Model model) {
-        // Output
-        VerificaFirmaResultBean risultato = new VerificaFirmaResultBean();
+    public ModelAndView verifica(@ModelAttribute @Valid VerificaFirmaBean verificafirmaBean,
+	    BindingResult errors, Model model) {
+	// Output
+	VerificaFirmaResultBean risultato = new VerificaFirmaResultBean();
 
-        // Input
-        CryptoDataToValidateMetadata metadati = new CryptoDataToValidateMetadata();
-        CryptoDataToValidateData dati = new CryptoDataToValidateData();
-        try {
-            // compila metadati
-            compilaMetadati(verificafirmaBean, metadati);
-            MDC.put("uuid", metadati.getUuid());
-            // compila dati
-            compilaDati(verificafirmaBean, dati);
+	// Input
+	CryptoDataToValidateMetadata metadati = new CryptoDataToValidateMetadata();
+	CryptoDataToValidateData dati = new CryptoDataToValidateData();
+	try {
+	    // compila metadati
+	    compilaMetadati(verificafirmaBean, metadati);
+	    MDC.put("uuid", metadati.getUuid());
+	    // compila dati
+	    compilaDati(verificafirmaBean, dati);
 
-            CryptoAroCompDoc verificaFirma = verificaService.verificaFirma(dati, metadati);
-            String reportTree = creaStringaXml(verificaFirma);
-            risultato.setReportTree(reportTree);
+	    CryptoAroCompDoc verificaFirma = verificaService.verificaFirma(dati, metadati);
+	    String reportTree = creaStringaXml(verificaFirma);
+	    risultato.setReportTree(reportTree);
 
-        } catch (Exception ex) {
-            // imposta errore
-            log.atError().log("Errore durante la conversione dell'oggetto", ex);
-            risultato.setWithErrors(true);
-        } finally {
-            // pulisci dati
-            pulisciDati(dati);
+	} catch (Exception ex) {
+	    // imposta errore
+	    log.atError().log("Errore durante la conversione dell'oggetto", ex);
+	    risultato.setWithErrors(true);
+	} finally {
+	    // pulisci dati
+	    pulisciDati(dati);
 
-        }
+	}
 
-        model.addAttribute(RISULTATO_VERIFICA, risultato);
-        return new ModelAndView("risultati_verifica");
+	model.addAttribute(RISULTATO_VERIFICA, risultato);
+	return new ModelAndView("risultati_verifica");
 
     }
 
     private String creaStringaXml(CryptoAroCompDoc output) throws JAXBException {
-        JAXBContext context = JAXBContext.newInstance(CryptoAroCompDoc.class);
-        Marshaller marshaller = context.createMarshaller();
-        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        StringWriter sw = new StringWriter();
-        marshaller.marshal(output, sw);
-        return sw.toString();
+	JAXBContext context = JAXBContext.newInstance(CryptoAroCompDoc.class);
+	Marshaller marshaller = context.createMarshaller();
+	marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+	StringWriter sw = new StringWriter();
+	marshaller.marshal(output, sw);
+	return sw.toString();
     }
 
     private void compilaMetadati(VerificaFirmaBean input, CryptoDataToValidateMetadata metadati) {
 
-        List<MultipartFile> firme = input.getFirmeDetached();
-        List<MultipartFile> marche = input.getMarcheDetached();
+	List<MultipartFile> firme = input.getFirmeDetached();
+	List<MultipartFile> marche = input.getMarcheDetached();
 
-        metadati.setComponentePrincipale(new CryptoDataToValidateMetadataFile(CONTENUTO));
-        List<CryptoDataToValidateMetadataFile> sottoComponentiFirma = new ArrayList<>();
-        for (int i = 0; i < firme.size(); i++) {
-            if (!firme.get(i).isEmpty()) {
-                sottoComponentiFirma.add(new CryptoDataToValidateMetadataFile(FIRMA + i));
-            }
-        }
-        List<CryptoDataToValidateMetadataFile> sottoComponentiMarca = new ArrayList<>();
-        for (int i = 0; i < marche.size(); i++) {
-            if (!marche.get(i).isEmpty()) {
-                sottoComponentiMarca.add(new CryptoDataToValidateMetadataFile(MARCA + i));
-            }
-        }
-        metadati.setSottoComponentiFirma(sottoComponentiFirma);
-        metadati.setSottoComponentiMarca(sottoComponentiMarca);
+	metadati.setComponentePrincipale(new CryptoDataToValidateMetadataFile(CONTENUTO));
+	List<CryptoDataToValidateMetadataFile> sottoComponentiFirma = new ArrayList<>();
+	for (int i = 0; i < firme.size(); i++) {
+	    if (!firme.get(i).isEmpty()) {
+		sottoComponentiFirma.add(new CryptoDataToValidateMetadataFile(FIRMA + i));
+	    }
+	}
+	List<CryptoDataToValidateMetadataFile> sottoComponentiMarca = new ArrayList<>();
+	for (int i = 0; i < marche.size(); i++) {
+	    if (!marche.get(i).isEmpty()) {
+		sottoComponentiMarca.add(new CryptoDataToValidateMetadataFile(MARCA + i));
+	    }
+	}
+	metadati.setSottoComponentiFirma(sottoComponentiFirma);
+	metadati.setSottoComponentiMarca(sottoComponentiMarca);
 
-        metadati.setUuid("verifica-manuale");
+	metadati.setUuid("verifica-manuale");
 
-        CryptoProfiloVerifica profiloVerifica = new CryptoProfiloVerifica();
-        profiloVerifica.setControlloCatenaTrustAbilitato(input.isAbilitaControlloCatenaTrusted());
-        profiloVerifica.setControlloCertificatoAbilitato(input.isAbilitaControlloCa());
-        profiloVerifica.setControlloCrittograficoAbilitato(input.isAbilitaControlloCrittografico());
-        profiloVerifica.setControlloCrlAbilitato(input.isAbilitaControlloCrl());
-        profiloVerifica.setIncludeCertificateAndRevocationValues(input.isIncludiRaw());
+	CryptoProfiloVerifica profiloVerifica = new CryptoProfiloVerifica();
+	profiloVerifica.setControlloCatenaTrustAbilitato(input.isAbilitaControlloCatenaTrusted());
+	profiloVerifica.setControlloCertificatoAbilitato(input.isAbilitaControlloCa());
+	profiloVerifica.setControlloCrittograficoAbilitato(input.isAbilitaControlloCrittografico());
+	profiloVerifica.setControlloCrlAbilitato(input.isAbilitaControlloCrl());
+	profiloVerifica.setIncludeCertificateAndRevocationValues(input.isIncludiRaw());
 
-        metadati.setProfiloVerifica(profiloVerifica);
+	metadati.setProfiloVerifica(profiloVerifica);
 
-        Date dataRiferimento = null;
-        LocalDate dataRiferimentoForm = input.getDataRiferimento();
-        LocalTime oraRiferimentoForm = input.getOraRiferimento();
+	Date dataRiferimento = null;
+	LocalDate dataRiferimentoForm = input.getDataRiferimento();
+	LocalTime oraRiferimentoForm = input.getOraRiferimento();
 
-        if (dataRiferimentoForm != null) {
-            if (oraRiferimentoForm == null) {
-                oraRiferimentoForm = LocalTime.MIN;
-            }
-            LocalDateTime atDate = oraRiferimentoForm.atDate(dataRiferimentoForm);
-            ZonedDateTime zatDate = atDate.atZone(ZoneId.systemDefault());
-            dataRiferimento = Date.from(zatDate.toInstant());
-        }
+	if (dataRiferimentoForm != null) {
+	    if (oraRiferimentoForm == null) {
+		oraRiferimentoForm = LocalTime.MIN;
+	    }
+	    LocalDateTime atDate = oraRiferimentoForm.atDate(dataRiferimentoForm);
+	    ZonedDateTime zatDate = atDate.atZone(ZoneId.systemDefault());
+	    dataRiferimento = Date.from(zatDate.toInstant());
+	}
 
-        if (input.isVerificaAllaDataFirma()) {
-            metadati.setTipologiaDataRiferimento(TipologiaDataRiferimento.verificaAllaDataDiFirma());
-        } else {
-            if (dataRiferimento != null) {
-                metadati.setTipologiaDataRiferimento(
-                        TipologiaDataRiferimento.verificaAllaDataSpecifica(dataRiferimento.getTime()));
-            }
-        }
+	if (input.isVerificaAllaDataFirma()) {
+	    metadati.setTipologiaDataRiferimento(
+		    TipologiaDataRiferimento.verificaAllaDataDiFirma());
+	} else {
+	    if (dataRiferimento != null) {
+		metadati.setTipologiaDataRiferimento(TipologiaDataRiferimento
+			.verificaAllaDataSpecifica(dataRiferimento.getTime()));
+	    }
+	}
     }
 
-    private void compilaDati(VerificaFirmaBean input, CryptoDataToValidateData dati) throws IOException {
-        MultipartFile contenuto = input.getFileDaVerificare();
-        List<MultipartFile> firme = input.getFirmeDetached();
-        List<MultipartFile> marche = input.getMarcheDetached();
+    private void compilaDati(VerificaFirmaBean input, CryptoDataToValidateData dati)
+	    throws IOException {
+	MultipartFile contenuto = input.getFileDaVerificare();
+	List<MultipartFile> firme = input.getFirmeDetached();
+	List<MultipartFile> marche = input.getMarcheDetached();
 
-        CryptoDataToValidateFile signedFile = new CryptoDataToValidateFile();
-        List<CryptoDataToValidateFile> detachedSignature = new ArrayList<>();
-        List<CryptoDataToValidateFile> detachedTimeStamp = new ArrayList<>();
+	CryptoDataToValidateFile signedFile = new CryptoDataToValidateFile();
+	List<CryptoDataToValidateFile> detachedSignature = new ArrayList<>();
+	List<CryptoDataToValidateFile> detachedTimeStamp = new ArrayList<>();
 
-        final String suffix = ".crypto";
+	final String suffix = ".crypto";
 
-        Path principale = Files.createTempFile(CONTENUTO, suffix, attr);
-        contenuto.transferTo(principale);
-        signedFile.setNome(CONTENUTO);
-        signedFile.setContenuto(principale.toFile());
+	Path principale = Files.createTempFile(CONTENUTO, suffix, attr);
+	contenuto.transferTo(principale);
+	signedFile.setNome(CONTENUTO);
+	signedFile.setContenuto(principale.toFile());
 
-        for (int i = 0; i < firme.size(); i++) {
-            if (!firme.get(i).isEmpty()) {
-                MultipartFile firma = firme.get(i);
-                Path sig = Files.createTempFile(FIRMA, suffix, attr);
-                firma.transferTo(sig);
-                detachedSignature.add(new CryptoDataToValidateFile(FIRMA + i, sig.toFile()));
-            }
-        }
+	for (int i = 0; i < firme.size(); i++) {
+	    if (!firme.get(i).isEmpty()) {
+		MultipartFile firma = firme.get(i);
+		Path sig = Files.createTempFile(FIRMA, suffix, attr);
+		firma.transferTo(sig);
+		detachedSignature.add(new CryptoDataToValidateFile(FIRMA + i, sig.toFile()));
+	    }
+	}
 
-        for (int i = 0; i < marche.size(); i++) {
-            if (!marche.get(i).isEmpty()) {
-                MultipartFile marca = marche.get(i);
-                Path ts = Files.createTempFile(MARCA, suffix, attr);
-                marca.transferTo(ts);
+	for (int i = 0; i < marche.size(); i++) {
+	    if (!marche.get(i).isEmpty()) {
+		MultipartFile marca = marche.get(i);
+		Path ts = Files.createTempFile(MARCA, suffix, attr);
+		marca.transferTo(ts);
 
-                detachedTimeStamp.add(new CryptoDataToValidateFile(MARCA + i, ts.toFile()));
-            }
-        }
+		detachedTimeStamp.add(new CryptoDataToValidateFile(MARCA + i, ts.toFile()));
+	    }
+	}
 
-        dati.setContenuto(signedFile);
-        dati.setSottoComponentiFirma(detachedSignature);
-        dati.setSottoComponentiMarca(detachedTimeStamp);
+	dati.setContenuto(signedFile);
+	dati.setSottoComponentiFirma(detachedSignature);
+	dati.setSottoComponentiMarca(detachedTimeStamp);
 
     }
 
     private void pulisciDati(CryptoDataToValidateData dati) {
-        final String noDelete = "Impossibile eliminare ";
+	final String noDelete = "Impossibile eliminare ";
 
-        CryptoDataToValidateFile signedFile = dati.getContenuto();
-        List<CryptoDataToValidateFile> detachedSignature = dati.getSottoComponentiFirma();
-        List<CryptoDataToValidateFile> detachedTimeStamp = dati.getSottoComponentiMarca();
+	CryptoDataToValidateFile signedFile = dati.getContenuto();
+	List<CryptoDataToValidateFile> detachedSignature = dati.getSottoComponentiFirma();
+	List<CryptoDataToValidateFile> detachedTimeStamp = dati.getSottoComponentiMarca();
 
-        try {
-            if (signedFile.getContenuto() != null) {
-                Files.deleteIfExists(signedFile.getContenuto().toPath());
-            }
-        } catch (IOException e) {
-            log.atWarn().log("{}", noDelete + signedFile.getContenuto().getName());
+	try {
+	    if (signedFile.getContenuto() != null) {
+		Files.deleteIfExists(signedFile.getContenuto().toPath());
+	    }
+	} catch (IOException e) {
+	    log.atWarn().log("{}", noDelete + signedFile.getContenuto().getName());
 
-        }
-        detachedSignature.forEach(s -> {
-            try {
-                Files.deleteIfExists(s.getContenuto().toPath());
-            } catch (IOException e) {
-                log.atWarn().log("{}", noDelete + s.getContenuto().getName());
-            }
-        });
-        detachedTimeStamp.forEach(s -> {
-            try {
-                Files.deleteIfExists(s.getContenuto().toPath());
-            } catch (IOException e) {
-                log.atWarn().log("{}", noDelete + s.getContenuto().getName());
-            }
-        });
+	}
+	detachedSignature.forEach(s -> {
+	    try {
+		Files.deleteIfExists(s.getContenuto().toPath());
+	    } catch (IOException e) {
+		log.atWarn().log("{}", noDelete + s.getContenuto().getName());
+	    }
+	});
+	detachedTimeStamp.forEach(s -> {
+	    try {
+		Files.deleteIfExists(s.getContenuto().toPath());
+	    } catch (IOException e) {
+		log.atWarn().log("{}", noDelete + s.getContenuto().getName());
+	    }
+	});
     }
 
     @PostMapping("/verifica/clean")
     public ModelAndView reset(SessionStatus status) {
-        status.setComplete();
-        return new ModelAndView("redirect:/verifica");
+	status.setComplete();
+	return new ModelAndView("redirect:/verifica");
     }
 }

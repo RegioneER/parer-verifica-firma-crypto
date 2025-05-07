@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package it.eng.parer.crypto.service.job;
@@ -60,67 +56,69 @@ public class CRLUpdateJob {
 
     @Scheduled(cron = "${cron.crl.sched}")
     public void doJob() {
-        if (enable) {
-            log.atInfo().log("CRL Update Job - Started");
-            LocalDateTime inizio = LocalDateTime.now();
+	if (enable) {
+	    log.atInfo().log("CRL Update Job - Started");
+	    LocalDateTime inizio = LocalDateTime.now();
 
-            this.loadingCrl();
+	    this.loadingCrl();
 
-            long minutes = Duration.between(inizio, LocalDateTime.now()).toMinutes();
-            log.atInfo().log("CRL Update Job - Finished in {} minutes", minutes);
-        } else {
-            log.atInfo().log("CRL Update Job - Disabled");
-        }
+	    long minutes = Duration.between(inizio, LocalDateTime.now()).toMinutes();
+	    log.atInfo().log("CRL Update Job - Finished in {} minutes", minutes);
+	} else {
+	    log.atInfo().log("CRL Update Job - Disabled");
+	}
     }
 
     private void loadingCrl() {
-        try {
-            // TASK SCARICO CRL PROSSIME ALLA SCADENZA - Recupero tutti i
-            // distribution point del sistema per le CA attive e con data di
-            // scadenza successiva alla data odierna
-            // Le configurazioni sono ordinate per subjectDN e numero d'ordine
-            // del distribution point
-            List<ConfigBean> crlConfig = configHelper.retriveAllConfig();
-            if (crlConfig != null) {
-                log.atDebug().log("CRL Update Job - Trovate {} configurazioni", crlConfig.size());
-                // Per ogni configurazione invio un messaggio
-                Map<String, List<String>> map = new HashMap<String, List<String>>();
-                for (ConfigBean config : crlConfig) {
-                    List<String> distrPoints = null;
-                    if ((distrPoints = map.get(config.getSubjectDN() + "|" + config.getKeyId())) != null) {
-                        distrPoints.add(config.getCrlURL());
-                    } else {
-                        distrPoints = new ArrayList<>();
-                        distrPoints.add(config.getCrlURL());
-                        map.put(config.getSubjectDN() + "|" + config.getKeyId(), distrPoints);
-                    }
-                }
-                int crlProcessate = 0;
-                for (Map.Entry<String, List<String>> urls : map.entrySet()) {
-                    updateCRL(urls.getValue(), urls.getKey());
-                    log.atInfo().log("Processata CRL {} di {} ", ++crlProcessate, map.entrySet().size());
-                }
-            }
-        } catch (CryptoStorageException e) {
-            log.atError().log("Errore nel reperimento delle configurazioni CRL", e);
-        }
+	try {
+	    // TASK SCARICO CRL PROSSIME ALLA SCADENZA - Recupero tutti i
+	    // distribution point del sistema per le CA attive e con data di
+	    // scadenza successiva alla data odierna
+	    // Le configurazioni sono ordinate per subjectDN e numero d'ordine
+	    // del distribution point
+	    List<ConfigBean> crlConfig = configHelper.retriveAllConfig();
+	    if (crlConfig != null) {
+		log.atDebug().log("CRL Update Job - Trovate {} configurazioni", crlConfig.size());
+		// Per ogni configurazione invio un messaggio
+		Map<String, List<String>> map = new HashMap<String, List<String>>();
+		for (ConfigBean config : crlConfig) {
+		    List<String> distrPoints = null;
+		    if ((distrPoints = map
+			    .get(config.getSubjectDN() + "|" + config.getKeyId())) != null) {
+			distrPoints.add(config.getCrlURL());
+		    } else {
+			distrPoints = new ArrayList<>();
+			distrPoints.add(config.getCrlURL());
+			map.put(config.getSubjectDN() + "|" + config.getKeyId(), distrPoints);
+		    }
+		}
+		int crlProcessate = 0;
+		for (Map.Entry<String, List<String>> urls : map.entrySet()) {
+		    updateCRL(urls.getValue(), urls.getKey());
+		    log.atInfo().log("Processata CRL {} di {} ", ++crlProcessate,
+			    map.entrySet().size());
+		}
+	    }
+	} catch (CryptoStorageException e) {
+	    log.atError().log("Errore nel reperimento delle configurazioni CRL", e);
+	}
     }
 
     private void updateCRL(List<String> distributionPoints, String key) {
-        // In base all'url passato in ingresso recupero la CRL.
-        X509CRL crl = signerUtil.getCrlByURL(distributionPoints);
-        try {
-            if (crl != null) {
-                // la salvo sul db
-                crlHelper.upsertCRL(crl);
-            }
-            log.atDebug().log("Inviato update delle CRL per il subject {}", key);
+	// In base all'url passato in ingresso recupero la CRL.
+	X509CRL crl = signerUtil.getCrlByURL(distributionPoints);
+	try {
+	    if (crl != null) {
+		// la salvo sul db
+		crlHelper.upsertCRL(crl);
+	    }
+	    log.atDebug().log("Inviato update delle CRL per il subject {}", key);
 
-        } catch (CryptoStorageException e) {
-            log.atError().log("Non è stato possibile salvare la CRL nel db", e);
-        } catch (Exception e) {
-            log.atError().log("Errore nell'update :" + key, e);
-        }
+	} catch (CryptoStorageException e) {
+	    log.atError().log("Non è stato possibile salvare la CRL nel db", e);
+	} catch (Exception e) {
+	    log.atError().log("Errore nell'update :" + key, e);
+	}
     }
 
 }

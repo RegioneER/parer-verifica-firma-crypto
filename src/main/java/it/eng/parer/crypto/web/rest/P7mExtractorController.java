@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package it.eng.parer.crypto.web.rest;
@@ -79,7 +75,7 @@ public class P7mExtractorController {
     private final Logger log = LoggerFactory.getLogger(P7mExtractorController.class);
 
     private static final FileAttribute<Set<PosixFilePermission>> attr = PosixFilePermissions
-            .asFileAttribute(PosixFilePermissions.fromString("rw-------"));
+	    .asFileAttribute(PosixFilePermissions.fromString("rw-------"));
 
     @Autowired
     ExtractorService service;
@@ -89,114 +85,122 @@ public class P7mExtractorController {
 
     @Operation(summary = "P7m XML Extractor", method = "Ottieni xml originale (non firmato) a partire dal documento xml.p7m")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "File xml estratto correttamente", content = {
-                    @Content(mediaType = "application/xml", schema = @Schema(implementation = ResponseEntity.class)) }),
-            @ApiResponse(responseCode = "400", description = "Richiesta non valida", content = {
-                    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }),
-            @ApiResponse(responseCode = "500", description = "Errore generico", content = {
-                    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }) })
+	    @ApiResponse(responseCode = "200", description = "File xml estratto correttamente", content = {
+		    @Content(mediaType = "application/xml", schema = @Schema(implementation = ResponseEntity.class)) }),
+	    @ApiResponse(responseCode = "400", description = "Richiesta non valida", content = {
+		    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }),
+	    @ApiResponse(responseCode = "500", description = "Errore generico", content = {
+		    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }) })
     @PostMapping(value = RESOURCE_FILEXML, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<String> extractXmlP7mMultipart(
-            @RequestPart(name = "xml-p7m", required = true) MultipartFile xmlP7mFile) {
+	    @RequestPart(name = "xml-p7m", required = true) MultipartFile xmlP7mFile) {
 
-        Path xmlDaSbustare = null;
-        try {
-            xmlDaSbustare = Files.createTempFile("da-sbustare", "xml.p7m", attr);
-            xmlP7mFile.transferTo(xmlDaSbustare);
-            String xmlSbustato = service.extractXmlFromP7m(xmlDaSbustare);
+	Path xmlDaSbustare = null;
+	try {
+	    xmlDaSbustare = Files.createTempFile("da-sbustare", "xml.p7m", attr);
+	    xmlP7mFile.transferTo(xmlDaSbustare);
+	    String xmlSbustato = service.extractXmlFromP7m(xmlDaSbustare);
 
-            return new ResponseEntity<>(xmlSbustato, HttpStatus.OK);
+	    return new ResponseEntity<>(xmlSbustato, HttpStatus.OK);
 
-        } catch (IOException e) {
-            throw new CryptoParerException().withCode(ParerError.ErrorCode.SIGNATURE_FORMAT).withMessage(e.getMessage())
-                    .withDetail("Impossibile estrarre documento originale xml.p7m");
-        } finally {
-            deleteUnsignedTmp(xmlDaSbustare);
-        }
+	} catch (IOException e) {
+	    throw new CryptoParerException().withCode(ParerError.ErrorCode.SIGNATURE_FORMAT)
+		    .withMessage(e.getMessage())
+		    .withDetail("Impossibile estrarre documento originale xml.p7m");
+	} finally {
+	    deleteUnsignedTmp(xmlDaSbustare);
+	}
     }
 
     @Operation(summary = "P7m Extractor", method = "Ottieni documento originale (non firmato) a partire da quello firmato p7m")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "File estratto correttamente", content = {
-                    @Content(mediaType = "application/xml", schema = @Schema(implementation = ResponseEntity.class)) }),
-            @ApiResponse(responseCode = "400", description = "Richiesta non valida", content = {
-                    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }),
-            @ApiResponse(responseCode = "500", description = "Errore generico", content = {
-                    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }) })
+	    @ApiResponse(responseCode = "200", description = "File estratto correttamente", content = {
+		    @Content(mediaType = "application/xml", schema = @Schema(implementation = ResponseEntity.class)) }),
+	    @ApiResponse(responseCode = "400", description = "Richiesta non valida", content = {
+		    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }),
+	    @ApiResponse(responseCode = "500", description = "Errore generico", content = {
+		    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }) })
     @PostMapping(value = RESOURCE_UNSIGNED_P7M, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Resource> extractUnsignedP7mMultipart(
-            @RequestPart(name = "signed-p7m", required = true) MultipartFile p7mFile) {
+	    @RequestPart(name = "signed-p7m", required = true) MultipartFile p7mFile) {
 
-        Path p7mToExtract = null;
-        try {
-            p7mToExtract = Files.createTempFile("extracted", ".p7m", attr);
-            p7mFile.transferTo(p7mToExtract);
-            CryptoP7mUnsigned p7m = service.extractUnsignedFromP7m(p7mToExtract, p7mFile.getOriginalFilename());
+	Path p7mToExtract = null;
+	try {
+	    p7mToExtract = Files.createTempFile("extracted", ".p7m", attr);
+	    p7mFile.transferTo(p7mToExtract);
+	    CryptoP7mUnsigned p7m = service.extractUnsignedFromP7m(p7mToExtract,
+		    p7mFile.getOriginalFilename());
 
-            // return attachment file
-            return ResponseEntity.ok().contentType(MediaType.parseMediaType(p7m.getFileType()))
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + p7m.getFileName() + "\"")
-                    .body(new InputStreamResource(p7m.getData()));
-        } catch (IOException e) {
-            throw new CryptoParerException().withCode(ParerError.ErrorCode.SIGNATURE_FORMAT).withMessage(e.getMessage())
-                    .withDetail("Impossibile estrarre documento originale p7m da multipart");
-        } finally {
-            deleteUnsignedTmp(p7mToExtract);
+	    // return attachment file
+	    return ResponseEntity.ok().contentType(MediaType.parseMediaType(p7m.getFileType()))
+		    .header(HttpHeaders.CONTENT_DISPOSITION,
+			    "attachment; filename=\"" + p7m.getFileName() + "\"")
+		    .body(new InputStreamResource(p7m.getData()));
+	} catch (IOException e) {
+	    throw new CryptoParerException().withCode(ParerError.ErrorCode.SIGNATURE_FORMAT)
+		    .withMessage(e.getMessage())
+		    .withDetail("Impossibile estrarre documento originale p7m da multipart");
+	} finally {
+	    deleteUnsignedTmp(p7mToExtract);
 
-        }
+	}
     }
 
     @Operation(summary = "P7m Extractor", method = "Ottieni documento originale (non firmato) a partire da quello firmato p7m")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "File estratto correttamente", content = {
-                    @Content(mediaType = "application/xml", schema = @Schema(implementation = ResponseEntity.class)) }),
-            @ApiResponse(responseCode = "400", description = "Richiesta non valida", content = {
-                    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }),
-            @ApiResponse(responseCode = "500", description = "Errore generico", content = {
-                    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }) })
+	    @ApiResponse(responseCode = "200", description = "File estratto correttamente", content = {
+		    @Content(mediaType = "application/xml", schema = @Schema(implementation = ResponseEntity.class)) }),
+	    @ApiResponse(responseCode = "400", description = "Richiesta non valida", content = {
+		    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }),
+	    @ApiResponse(responseCode = "500", description = "Errore generico", content = {
+		    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }) })
     @PostMapping(value = RESOURCE_UNSIGNED_P7M, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Resource> extractUnsignedP7mJson(
-            @Valid @RequestBody(required = true) CryptoSignedP7mUri p7mBody) {
+	    @Valid @RequestBody(required = true) CryptoSignedP7mUri p7mBody) {
 
-        Path p7mToExtract = null;
-        try {
-            // LOG BODY
-            if (log.isDebugEnabled()) {
-                log.atDebug().log("RequestBody {}", new JSONObject(p7mBody).toString());
-            }
-            p7mToExtract = Files.createTempFile("extracted", ".p7m", attr);
-            downloadSignedResource(p7mBody.getUri(), p7mToExtract);
-            CryptoP7mUnsigned p7m = service.extractUnsignedFromP7m(p7mToExtract, p7mBody.getOriginalFileName());
+	Path p7mToExtract = null;
+	try {
+	    // LOG BODY
+	    if (log.isDebugEnabled()) {
+		log.atDebug().log("RequestBody {}", new JSONObject(p7mBody).toString());
+	    }
+	    p7mToExtract = Files.createTempFile("extracted", ".p7m", attr);
+	    downloadSignedResource(p7mBody.getUri(), p7mToExtract);
+	    CryptoP7mUnsigned p7m = service.extractUnsignedFromP7m(p7mToExtract,
+		    p7mBody.getOriginalFileName());
 
-            // return attachment file
-            return ResponseEntity.ok().contentType(MediaType.parseMediaType(p7m.getFileType()))
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + p7m.getFileName() + "\"")
-                    .body(new InputStreamResource(p7m.getData()));
-        } catch (IOException e) {
-            throw new CryptoParerException().withCode(ParerError.ErrorCode.SIGNATURE_FORMAT).withMessage(e.getMessage())
-                    .withDetail("Impossibile estrarre documento originale p7m da URI");
-        } finally {
-            deleteUnsignedTmp(p7mToExtract);
+	    // return attachment file
+	    return ResponseEntity.ok().contentType(MediaType.parseMediaType(p7m.getFileType()))
+		    .header(HttpHeaders.CONTENT_DISPOSITION,
+			    "attachment; filename=\"" + p7m.getFileName() + "\"")
+		    .body(new InputStreamResource(p7m.getData()));
+	} catch (IOException e) {
+	    throw new CryptoParerException().withCode(ParerError.ErrorCode.SIGNATURE_FORMAT)
+		    .withMessage(e.getMessage())
+		    .withDetail("Impossibile estrarre documento originale p7m da URI");
+	} finally {
+	    deleteUnsignedTmp(p7mToExtract);
 
-        }
+	}
     }
 
     private void downloadSignedResource(URI signedResource, Path localPath) throws IOException {
-        try (CloseableHttpResponse response = commonsHttpClient.getHttpClient().execute(new HttpGet(signedResource));
-                FileOutputStream out = new FileOutputStream(localPath.toFile());) {
-            //
-            IOUtils.copyLarge(response.getEntity().getContent(), out);
-        }
+	try (CloseableHttpResponse response = commonsHttpClient.getHttpClient()
+		.execute(new HttpGet(signedResource));
+		FileOutputStream out = new FileOutputStream(localPath.toFile());) {
+	    //
+	    IOUtils.copyLarge(response.getEntity().getContent(), out);
+	}
     }
 
     private void deleteUnsignedTmp(Path xmlDaSbustare) {
-        try {
-            if (xmlDaSbustare != null && !Files.deleteIfExists(xmlDaSbustare)) {
-                log.warn("Impossibile eliminare il file {}", xmlDaSbustare.getFileName());
-            }
-        } catch (IOException e) {
-            log.error("Errore generale durante l'eliminazione del file", e);
-        }
+	try {
+	    if (xmlDaSbustare != null && !Files.deleteIfExists(xmlDaSbustare)) {
+		log.warn("Impossibile eliminare il file {}", xmlDaSbustare.getFileName());
+	    }
+	} catch (IOException e) {
+	    log.error("Errore generale durante l'eliminazione del file", e);
+	}
     }
 
 }
