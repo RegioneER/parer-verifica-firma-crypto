@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package it.eng.parer.crypto.web.unit;
@@ -44,9 +40,10 @@ import it.eng.parer.crypto.service.model.CryptoP7mUnsigned;
  *
  * @author Snidero_L
  */
-@SpringBootTest(properties = { "cron.ca.enable=false", "cron.crl.enable=false",
-        "spring.datasource.url=jdbc:h2:mem:cryptodb-test;DB_CLOSE_DELAY=-1", "logging.level.root=INFO",
-        "logging.level.it.eng.parer.crypto=INFO" })
+@SpringBootTest(properties = {
+	"cron.ca.enable=false", "cron.crl.enable=false",
+	"spring.datasource.url=jdbc:h2:mem:cryptodb-test;DB_CLOSE_DELAY=-1",
+	"logging.level.root=INFO", "logging.level.it.eng.parer.crypto=INFO" })
 @TestInstance(Lifecycle.PER_CLASS)
 class ExtractorTest {
 
@@ -66,48 +63,49 @@ class ExtractorTest {
 
     @BeforeAll
     public void loadTestFiles() throws IOException {
-        xmlP7mBase64File = resourceLoader.getResource("classpath:firme/p7m_b64.xml.p7m");
-        xmlP7mFile = resourceLoader.getResource("classpath:firme/cades_bes.xml.p7m");
-        pdfXmlP7mFile = resourceLoader.getResource("classpath:firme/p7m_pem_sha256.pdf.p7m");
+	xmlP7mBase64File = resourceLoader.getResource("classpath:firme/p7m_b64.xml.p7m");
+	xmlP7mFile = resourceLoader.getResource("classpath:firme/cades_bes.xml.p7m");
+	pdfXmlP7mFile = resourceLoader.getResource("classpath:firme/p7m_pem_sha256.pdf.p7m");
 
-        Resource sbustatob64 = resourceLoader.getResource("classpath:firme/p7m_b64_sbustato.xml");
-        byte[] xmlBytesb64 = Files.readAllBytes(sbustatob64.getFile().toPath());
-        xmlSbustatoExpectedb64 = new String(xmlBytesb64);
+	Resource sbustatob64 = resourceLoader.getResource("classpath:firme/p7m_b64_sbustato.xml");
+	byte[] xmlBytesb64 = Files.readAllBytes(sbustatob64.getFile().toPath());
+	xmlSbustatoExpectedb64 = new String(xmlBytesb64);
 
-        Resource sbustato = resourceLoader.getResource("classpath:firme/cades_bes_sbustato.xml");
-        byte[] xmlBytes = Files.readAllBytes(sbustato.getFile().toPath());
-        xmlSbustatoExpected = new String(xmlBytes);
+	Resource sbustato = resourceLoader.getResource("classpath:firme/cades_bes_sbustato.xml");
+	byte[] xmlBytes = Files.readAllBytes(sbustato.getFile().toPath());
+	xmlSbustatoExpected = new String(xmlBytes);
 
-        Resource sbustatopdf = resourceLoader.getResource("classpath:firme/p7m_pem_sha256_sbustato.pdf");
-        xmlPdfBytesExpected = Files.readAllBytes(sbustatopdf.getFile().toPath());
+	Resource sbustatopdf = resourceLoader
+		.getResource("classpath:firme/p7m_pem_sha256_sbustato.pdf");
+	xmlPdfBytesExpected = Files.readAllBytes(sbustatopdf.getFile().toPath());
     }
 
     @Test
     void testXmlExtractionBase64() throws IOException {
-        String actualXml = service.extractXmlFromP7m(xmlP7mBase64File.getFile().toPath());
-        assertEquals(xmlSbustatoExpectedb64, actualXml);
+	String actualXml = service.extractXmlFromP7m(xmlP7mBase64File.getFile().toPath());
+	assertEquals(xmlSbustatoExpectedb64, actualXml);
     }
 
     @Test
     void testXmlExtraction() throws IOException {
-        String actualXml = service.extractXmlFromP7m(xmlP7mFile.getFile().toPath());
-        assertEquals(xmlSbustatoExpected, actualXml);
+	String actualXml = service.extractXmlFromP7m(xmlP7mFile.getFile().toPath());
+	assertEquals(xmlSbustatoExpected, actualXml);
     }
 
     @Test
     void testWrongFile() throws IOException {
-        Path notXmlP7mFileAsPath = pdfXmlP7mFile.getFile().toPath();
-        assertThrows(IOException.class, () -> {
-            service.extractXmlFromP7m(notXmlP7mFileAsPath);
-        });
+	Path notXmlP7mFileAsPath = pdfXmlP7mFile.getFile().toPath();
+	assertThrows(IOException.class, () -> {
+	    service.extractXmlFromP7m(notXmlP7mFileAsPath);
+	});
     }
 
     @Test
     void testPdfExtraction() throws IOException {
-        CryptoP7mUnsigned unsigned = service.extractUnsignedFromP7m(pdfXmlP7mFile.getFile().toPath(),
-                pdfXmlP7mFile.getFilename());
-        assertEquals(DatatypeConverter.printBase64Binary(xmlPdfBytesExpected),
-                DatatypeConverter.printBase64Binary(IOUtils.toByteArray(unsigned.getData())));
+	CryptoP7mUnsigned unsigned = service.extractUnsignedFromP7m(
+		pdfXmlP7mFile.getFile().toPath(), pdfXmlP7mFile.getFilename());
+	assertEquals(DatatypeConverter.printBase64Binary(xmlPdfBytesExpected),
+		DatatypeConverter.printBase64Binary(IOUtils.toByteArray(unsigned.getData())));
     }
 
 }
