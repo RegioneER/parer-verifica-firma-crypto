@@ -62,7 +62,7 @@ class ExtractorTest {
     private byte[] xmlPdfBytesExpected;
 
     @BeforeAll
-    public void loadTestFiles() throws IOException {
+    void loadTestFiles() throws IOException {
 	xmlP7mBase64File = resourceLoader.getResource("classpath:firme/p7m_b64.xml.p7m");
 	xmlP7mFile = resourceLoader.getResource("classpath:firme/cades_bes.xml.p7m");
 	pdfXmlP7mFile = resourceLoader.getResource("classpath:firme/p7m_pem_sha256.pdf.p7m");
