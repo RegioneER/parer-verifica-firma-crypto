@@ -42,6 +42,8 @@ public class ExtractorService {
 
     private final Logger log = LoggerFactory.getLogger(ExtractorService.class);
 
+    private static final String LOG_ERR_FILE_DELETE = "Impossibile eliminare il file {}";
+
     @Autowired
     private SignerUtil signerUtil;
 
@@ -59,9 +61,10 @@ public class ExtractorService {
      *                             sbustato diverso da application/xml
      */
     public String extractXmlFromP7m(Path xmlP7mFile) throws IOException {
+	// recursive extract
 	File contentAsFile = null;
 	try {
-	    contentAsFile = extractUnsignP7m(xmlP7mFile);
+	    contentAsFile = extractUnsignP7m(xmlP7mFile, true);
 	    String detectMimeType = detectMimeType(contentAsFile);
 
 	    if (!MediaType.APPLICATION_XML.getBaseType().toString().equals(detectMimeType)) {
@@ -76,7 +79,7 @@ public class ExtractorService {
 	    throw new IOException("Il file passato in input non è un XML.P7M valido", ex);
 	} finally {
 	    if (contentAsFile != null && !Files.deleteIfExists(contentAsFile.toPath())) {
-		log.warn("Impossibile eliminare il file {}", contentAsFile.getName());
+		log.warn(LOG_ERR_FILE_DELETE, contentAsFile.getName());
 	    }
 	}
 
@@ -95,9 +98,10 @@ public class ExtractorService {
      */
     public CryptoP7mUnsigned extractUnsignedFromP7m(Path p7mFile, String originalFileName)
 	    throws IOException {
+	// recursive extract
 	File contentAsFile = null;
 	try {
-	    contentAsFile = extractUnsignP7m(p7mFile);
+	    contentAsFile = extractUnsignP7m(p7mFile, true);
 	    String detectMimeType = detectMimeType(contentAsFile);
 
 	    return new CryptoP7mUnsigned(
@@ -106,18 +110,59 @@ public class ExtractorService {
 		    detectMimeType, Files.newInputStream(contentAsFile.toPath(),
 			    StandardOpenOption.DELETE_ON_CLOSE));
 	} catch (CryptoSignerException | IOException ex) {
-	    // in caso di eccezione il file temporaneo creato dal processo di estrazione viene
+	    // in caso di eccezione il file temporaneo creato dal processo di estrazione
+	    // viene
 	    // eliminato
 	    if (contentAsFile != null && !Files.deleteIfExists(contentAsFile.toPath())) {
-		log.warn("Impossibile eliminare il file {}", contentAsFile.getName());
+		log.warn(LOG_ERR_FILE_DELETE, contentAsFile.getName());
 	    }
 	    throw new IOException("Il file passato in input non è un P7M valido", ex);
 	}
     }
 
-    private File extractUnsignP7m(Path p7m) throws CryptoSignerException, IOException {
-	AbstractSigner signerManager = signerUtil.getSignerManager(p7m.toFile());
-	return signerManager.getContentAsFile();
+    /**
+     * Metodo ricorsivo per l'estrazione del file originale (non firmato) da un p7m
+     *
+     * @param p7m                   file di tipo p7m
+     * @param notValidOrUnsignedDoc flag per indicare se il file in input è già il file originale
+     *                              (non firmato)
+     *
+     * @return file originale (non firmato)
+     *
+     * @throws CryptoSignerException in caso di errore generico o file non firmato
+     * @throws IOException           in caso di errore generico o file non firmato
+     */
+    private File extractUnsignP7m(Path p7m, boolean notValidOrUnsignedDoc)
+	    throws CryptoSignerException, IOException {
+	//
+	Path currentDocument = p7m;
+	AbstractSigner signerManager;
+	try {
+	    signerManager = signerUtil.getSignerManager(currentDocument.toFile());
+	    // get content as file
+	    File extractedDocument = signerManager.getContentAsFile();
+	    if (extractedDocument == null) {
+		throw new CryptoSignerException("Errore generico, file estratto non presente");
+	    }
+	    // recursive call
+	    return extractUnsignP7m(extractedDocument.toPath(), false);
+	} catch (CryptoSignerException ex) {
+	    // if trying extract original document (not recursive - first call !)
+	    if (notValidOrUnsignedDoc) {
+		throw ex;
+	    }
+	    // modify notValidOrUnsignedDoc to avoid delete
+	    notValidOrUnsignedDoc = true;
+	    // current document (unsigned)
+	    return currentDocument.toFile();
+	} finally {
+	    // delete previous original document
+	    if (!notValidOrUnsignedDoc && !Files.deleteIfExists(currentDocument)) {
+		//
+		log.warn(LOG_ERR_FILE_DELETE, currentDocument.toFile().getName());
+	    }
+	}
+
     }
 
     private String detectMimeType(File p7m) {

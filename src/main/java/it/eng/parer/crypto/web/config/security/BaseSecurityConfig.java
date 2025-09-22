@@ -16,7 +16,6 @@ package it.eng.parer.crypto.web.config.security;
 import static it.eng.parer.crypto.web.util.EndPointCostants.RESOURCE_INFOS;
 import static it.eng.parer.crypto.web.util.EndPointCostants.ROLE_ADMIN;
 import static it.eng.parer.crypto.web.util.EndPointCostants.URL_ADMIN_BASE;
-
 import static org.springframework.security.config.Customizer.withDefaults;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -24,7 +23,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /*
  * since spring boot 3.x
@@ -42,15 +40,15 @@ public class BaseSecurityConfig {
 
 	http.csrf(csrf -> csrf.disable()) // disable csrf
 		.authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-			.requestMatchers(new AntPathRequestMatcher(URL_ADMIN_BASE + RESOURCE_INFOS))
+			.requestMatchers(URL_ADMIN_BASE + RESOURCE_INFOS)
 			.authenticated())
 		.httpBasic(withDefaults()) // basic auth
 		.authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-			.requestMatchers(new AntPathRequestMatcher(URL_ADMIN_BASE + "/**"))
+			.requestMatchers(URL_ADMIN_BASE + "/**")
 			.hasRole(ROLE_ADMIN)) // only
 					      // admin
 		.authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-			.requestMatchers(new AntPathRequestMatcher("/actuator/shutdown"))
+			.requestMatchers("/actuator/shutdown")
 			.hasRole(ROLE_ADMIN)) // only
 					      // admin
 		.authorizeHttpRequests(
