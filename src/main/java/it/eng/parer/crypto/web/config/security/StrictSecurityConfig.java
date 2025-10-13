@@ -40,12 +40,10 @@ public class StrictSecurityConfig {
 
 	http.csrf(csrf -> csrf.disable()) // disable csrf
 		.authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-			.requestMatchers(URL_ADMIN_BASE + RESOURCE_INFOS)
-			.authenticated())
+			.requestMatchers(URL_ADMIN_BASE + RESOURCE_INFOS).authenticated())
 		.httpBasic(withDefaults()) // basic auth
 		.authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-			.requestMatchers(URL_ADMIN_BASE + "/**")
-			.denyAll()) // deny admin
+			.requestMatchers(URL_ADMIN_BASE + "/**").denyAll()) // deny admin
 		.authorizeHttpRequests(auth -> auth.anyRequest().permitAll()); // permit all
 
 	/*

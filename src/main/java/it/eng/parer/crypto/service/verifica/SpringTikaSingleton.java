@@ -13,7 +13,8 @@
 
 package it.eng.parer.crypto.service.verifica;
 
-import static org.apache.tika.metadata.Metadata.RESOURCE_NAME_KEY;
+import static org.apache.tika.metadata.TikaCoreProperties.RESOURCE_NAME_KEY;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;

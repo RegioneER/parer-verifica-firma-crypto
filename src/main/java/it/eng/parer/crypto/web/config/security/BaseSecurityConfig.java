@@ -40,17 +40,14 @@ public class BaseSecurityConfig {
 
 	http.csrf(csrf -> csrf.disable()) // disable csrf
 		.authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-			.requestMatchers(URL_ADMIN_BASE + RESOURCE_INFOS)
-			.authenticated())
+			.requestMatchers(URL_ADMIN_BASE + RESOURCE_INFOS).authenticated())
 		.httpBasic(withDefaults()) // basic auth
 		.authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-			.requestMatchers(URL_ADMIN_BASE + "/**")
-			.hasRole(ROLE_ADMIN)) // only
-					      // admin
+			.requestMatchers(URL_ADMIN_BASE + "/**").hasRole(ROLE_ADMIN)) // only
+										      // admin
 		.authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-			.requestMatchers("/actuator/shutdown")
-			.hasRole(ROLE_ADMIN)) // only
-					      // admin
+			.requestMatchers("/actuator/shutdown").hasRole(ROLE_ADMIN)) // only
+										    // admin
 		.authorizeHttpRequests(
 			authorizeHttpRequests -> authorizeHttpRequests.anyRequest().permitAll()) // permit
 												 // all

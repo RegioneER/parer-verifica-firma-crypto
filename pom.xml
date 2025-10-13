@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>old-cryptolibrary</artifactId>
-    <version>1.22.1-SNAPSHOT</version>
+    <version>2.0.0</version>
     <packaging>${packaging.type}</packaging>
     <name>Verifica Firma CRYPTO</name>
     <description>Progetto per effettuare firme e validazioni con librerie cryptolibrary (CRYPTO)</description>
@@ -18,34 +18,29 @@
         <!--<skipTests>true</skipTests>-->
         <!-- Applied for jdk11 bug -->
         <detectJavaApiLink>false</detectJavaApiLink>
-        <!-- Jacoco/Surefire argLine https://www.eclemma.org/jacoco/trunk/doc/prepare-agent-mojo.html#propertyName -->
-        <!-- export legacy module -->
-        <!-- @see java.lang.IllegalAccessError: class es.mityc.firmaJava.libreria.utilidades.URIEncoder (in unnamed module @0x3b2c72c2) -->
-        <!-- cannot access class sun.security.action.GetPropertyAction (in module java.base) because module java.base does not export sun.security.action to unnamed module @0x3b2c72c2 -->
-        <argLine>--add-exports java.base/sun.security.action=ALL-UNNAMED</argLine>
         <!-- third party libs -->
-		<springboot.version>3.5.5</springboot.version>
+		<springboot.version>3.5.6</springboot.version>
 		<springdoc-openapi-starter-webmvc-ui.version>2.8.13</springdoc-openapi-starter-webmvc-ui.version>		
         <!-- versione massima supportata per problemi legati a bouncy -->
-        <tika.version>1.7</tika.version>
-        <bcprov-jdk16.version>1.46</bcprov-jdk16.version>
+        <tika.version>3.2.3</tika.version>
         <xercesImpl.version>2.12.2</xercesImpl.version>
         <xml-resolver.version>1.2</xml-resolver.version>
         <xalan.version>2.7.3</xalan.version>
         <jaxb-runtime.version>2.3.8</jaxb-runtime.version>
         <guava.version>33.2.1-jre</guava.version>
         <google-code-prettify.version>1.0.5</google-code-prettify.version>
-        <bootstrap.version>3.4.1</bootstrap.version>
-        <jquery.version>3.6.4</jquery.version>
+        <bootstrap.version>4.6.2</bootstrap.version>
+        <popper.js.version>1.16.1</popper.js.version>
+		<highlightjs.version>11.5.0</highlightjs.version>
+		<highlightjs-badgejs.version>0.0.5</highlightjs-badgejs.version>
+		<font-awesome.version>6.5.2</font-awesome.version>		        
+        <jquery.version>3.7.1</jquery.version>
         <logstash-logback-encoder.version>7.4</logstash-logback-encoder.version>
-        <org-json.version>20240303</org-json.version>
-        <pdfbox.version>2.0.33</pdfbox.version>
-        <commons-compress.version>1.26.2</commons-compress.version>
+        <org-json.version>20250517</org-json.version>
         <jdom.version>1.1</jdom.version>
-        <xmlbeans.version>3.0.0</xmlbeans.version>
         <!-- custom libs -->
-        <eng-cryptolibrary.version>1.14.0</eng-cryptolibrary.version>
-        <verificafirma-crypto-beans.version>1.7.0</verificafirma-crypto-beans.version>
+        <eng-cryptolibrary.version>2.0.0</eng-cryptolibrary.version>
+        <verificafirma-crypto-beans.version>2.0.0</verificafirma-crypto-beans.version>
         <!-- -->
         <start-class>it.eng.parer.crypto.web.CryptoApplication</start-class>
     </properties>
@@ -90,21 +85,6 @@
                 <artifactId>verificafirma-crypto-beans</artifactId>
                 <version>${verificafirma-crypto-beans.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.bouncycastle</groupId>
-                <artifactId>bcprov-jdk16</artifactId>
-                <version>${bcprov-jdk16.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.bouncycastle</groupId>
-                <artifactId>bcmail-jdk16</artifactId>
-                <version>${bcprov-jdk16.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.bouncycastle</groupId>
-                <artifactId>bctsp-jdk16</artifactId>
-                <version>${bcprov-jdk16.version}</version>
-            </dependency>
             <!-- Tika -->
             <dependency>
                 <groupId>org.apache.tika</groupId>
@@ -113,7 +93,7 @@
             </dependency>
             <dependency>
                 <groupId>org.apache.tika</groupId>
-                <artifactId>tika-parsers</artifactId>
+				<artifactId>tika-parsers-standard-package</artifactId>
                 <version>${tika.version}</version>
                 <exclusions>
                     <exclusion>
@@ -164,11 +144,6 @@
                 </exclusions>
             </dependency>
 			<dependency>
-				<groupId>org.apache.pdfbox</groupId>
-				<artifactId>pdfbox</artifactId>
-				<version>${pdfbox.version}</version>
-			</dependency>
-			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-compress</artifactId>
 				<version>${commons-compress.version}</version>
@@ -177,12 +152,7 @@
 			    <groupId>jdom</groupId>
 			    <artifactId>jdom</artifactId>
 			    <version>${jdom.version}</version>
-			</dependency>
-			<dependency>
-			    <groupId>org.apache.xmlbeans</groupId>
-			    <artifactId>xmlbeans</artifactId>
-			    <version>${xmlbeans.version}</version>
-			</dependency>
+			</dependency>			
             <dependency>
                 <groupId>net.logstash.logback</groupId>
                 <artifactId>logstash-logback-encoder</artifactId>
@@ -289,7 +259,7 @@
         </dependency>
         <dependency>
             <groupId>org.apache.tika</groupId>
-            <artifactId>tika-parsers</artifactId>
+			<artifactId>tika-parsers-standard-package</artifactId>
             <exclusions>
                 <exclusion>
                     <groupId>xml-apis</groupId>
@@ -299,6 +269,14 @@
                 	<groupId>commons-logging</groupId>
                 	<artifactId>commons-logging</artifactId>
                 </exclusion>
+				<exclusion>
+					<groupId>org.bouncycastle</groupId>
+					<artifactId>bcprov-jdk18on</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.bouncycastle</groupId>
+					<artifactId>bcjmail-jdk18on</artifactId>
+				</exclusion>
             </exclusions>
         </dependency>
         <dependency>
@@ -361,12 +339,39 @@
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap</artifactId>
             <version>${bootstrap.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.webjars</groupId>
+					<artifactId>popper.js</artifactId>
+				</exclusion>
+			</exclusions>            
         </dependency>
+		<!-- https://mvnrepository.com/artifact/org.webjars.npm/popper.js -->
+		<dependency>
+		    <groupId>org.webjars.npm</groupId>
+		    <artifactId>popper.js</artifactId>
+		    <version>${popper.js.version}</version>
+		</dependency>        
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>jquery</artifactId>
             <version>${jquery.version}</version>
         </dependency>
+        <dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>highlightjs</artifactId>
+			<version>${highlightjs.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>highlightjs-badgejs</artifactId>
+			<version>${highlightjs-badgejs.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>font-awesome</artifactId>
+			<version>${font-awesome.version}</version>
+		</dependency>
 		<dependency>
 		    <groupId>org.json</groupId>
 		    <artifactId>json</artifactId>
@@ -399,13 +404,6 @@
 					<target>21</target>
 					<!-- disable release option --> 
                 	<release combine.self="override" />
-					<!-- export legay module -->
-					<!-- @see java.lang.IllegalAccessError: class es.mityc.firmaJava.libreria.utilidades.URIEncoder (in unnamed module @0x3b2c72c2) -->
-					<!-- cannot access class sun.security.action.GetPropertyAction (in module java.base) because module java.base does not export sun.security.action to unnamed module @0x3b2c72c2 -->
-                 	<compilerArgs>
-						 <compilerArg>--add-exports</compilerArg>
-						 <compilerArg>java.base/sun.security.action=ALL-UNNAMED</compilerArg>
-					 </compilerArgs>
                 </configuration>
             </plugin>
             <plugin>

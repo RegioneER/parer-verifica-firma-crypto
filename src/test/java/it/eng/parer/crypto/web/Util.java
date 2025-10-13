@@ -112,6 +112,18 @@ public class Util {
 	}
     }
 
+    public static void assertControlloFirmaOK(CryptoAroFirmaComp firma,
+	    VerificheEnums.TipoControlli tipoControllo) {
+	assertEquals(VerificheEnums.EsitoControllo.POSITIVO.name(), firma.getTiEsitoVerifFirma());
+	for (CryptoAroContrFirmaComp controllo : firma.getAroContrFirmaComps()) {
+	    if (controllo.getTiContr().equals(tipoControllo.name())) {
+		assertEquals(VerificheEnums.EsitoControllo.POSITIVO.name(),
+			controllo.getTiEsitoContrFirma());
+		break;
+	    }
+	}
+    }
+
     /**
      * Permette di valutare un esisito specifico su una firma considerata valida
      *

@@ -7,42 +7,62 @@
 
         <div th:replace="~{fragments/template.html :: main}"></div>
 
-        <div sec:authorize="hasRole('ROLE_ADMIN')" class="container"
-             style="padding-top: 10px; padding-bottom: 10px;">
-            <div class="row">
-                <div class="col-sm-11">
-                    <span class="glyphicon glyphicon-user"/> Utente: <strong><span sec:authentication="name"></span></strong>
-                </div>
-                <div class="col-sm-1">
-                    <a href="#" class="btn btn-primary btn-sm glyphicon glyphicon-off" th:href="@{/logout}"> Esci</a>
-                </div>
-            </div>
-        </div>
+	    <div sec:authorize="hasRole('ROLE_ADMIN')" class="container"
+					style="padding-top: 10px; padding-bottom: 10px;">
+					<div class="row">
+						<div class="col">
+							<a href="#" class="btn btn-primary btn-sm fa fa-sign-out" th:href="@{/logout}"> Esci</a>
+						</div>					
+						<div class="col-sm-2">
+							<span class="fa fa-user fa-sm"/> Utente: <strong><span sec:authentication="name"></span></strong>
+						</div>
+					</div>
+		 </div>
 
-        <div class="container">
-            <ul class="breadcrumb">
-                <li><a href="#" th:href="@{/}" class="glyphicon glyphicon-home">
-                        Home</a></li>
-                <li><a href="#" th:if="${@environment.getProperty('parer.crypto.verifica-ui.enabled') ?: true}" th:href="@{/verifica}">Verifica</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Risultati verifica</li>
-            </ul>
-        </div>
-
+		<div class="container">
+		 <nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="#" th:href="@{/}" class="fa fa-home fa-sm">
+						Home</a></li>
+				<li class="breadcrumb-item"><a href="#" th:if="${@environment.getProperty('parer.crypto.verifica-ui.enabled') ?: true}" th:href="@{/verifica}">Verifica</a></li>
+				<li class="breadcrumb-item active" aria-current="page">
+					Risultati verifica</li>
+			</ol>
+		  </nav>
+		</div>
+		
+		
         <div class="container">
             <!-- REPORT PRINCIPALE -->
             <th:block th:if="${risultatoVerifica ne null}">   
                 <th:block th:switch="${risultatoVerifica.withErrors}">
                     <th:block th:case="false">
                         <h2> Risultato verifica </h2>
-                        <pre class="prettyprint lang-xml" th:text="*{risultatoVerifica.reportTree}"></pre>
-                    </th:block>
-                    <!-- ERRORI -->
-                    <th:block th:case="*">
-                        <div class="alert alert-warning">
-                            <h4><span class="glyphicon glyphicon-warning-sign"></span> Attenzione!</h4>
-                            <p> Si è verificato un problema durante la validazione del file.</p>
-                        </div>
-                    </th:block>
+						<div class="position-relative">
+							<pre class="code-badge-pre">													
+		                        	<div class="code-badge">
+							        <div class="code-badge-language">Copia xml</div>
+							        <div title="Copia">
+							            <i class="fa fa-copy code-badge-copy-icon"></i>
+							        </div>
+							     </div>
+		                        <code
+									class="prettyprint lang-xml hljs language-xml"
+									th:text="*{risultatoVerifica.reportTree}"></code>
+		                        </pre>
+						</div>
+				</th:block>
+					<!-- ERRORI -->
+					<th:block th:case="*">
+						<div class="alert alert-warning">
+							<h4>
+								<span class="fa fa-warning-sign fa-sm"></span>
+								Attenzione!
+							</h4>
+							<p>Si è verificato un problema durante la validazione del
+								file.</p>
+						</div>
+					</th:block>
                 </th:block>
             </th:block>
         </div>
