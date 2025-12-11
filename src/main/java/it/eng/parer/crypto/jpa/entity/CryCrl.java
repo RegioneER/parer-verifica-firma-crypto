@@ -43,8 +43,8 @@ import jakarta.persistence.UniqueConstraint;
 @Entity
 @Cacheable(true)
 @Table(name = "CRY_CRL", uniqueConstraints = {
-	@UniqueConstraint(columnNames = {
-		"UNIQUE_ID", }) })
+        @UniqueConstraint(columnNames = {
+                "UNIQUE_ID", }) })
 @IdClass(CryCrlPK.class)
 public class CryCrl implements Serializable {
 
@@ -57,64 +57,64 @@ public class CryCrl implements Serializable {
     private String uniqueId;
 
     public CryCrl() {
-	// document why this constructor is empty
+        // document why this constructor is empty
     }
 
     @Id
     public String getSubjectdn() {
-	return this.subjectdn;
+        return this.subjectdn;
     }
 
     public void setSubjectdn(String subjectdn) {
-	this.subjectdn = subjectdn;
+        this.subjectdn = subjectdn;
     }
 
     @Lob()
     public byte[] getCrl() {
-	return this.crl;
+        return this.crl;
     }
 
     public void setCrl(byte[] crl) {
-	this.crl = crl;
+        this.crl = crl;
     }
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "UPDATE_DATA")
     public Date getUpdateData() {
-	return this.updateData;
+        return this.updateData;
     }
 
     public void setUpdateData(Date updateData) {
-	this.updateData = updateData;
+        this.updateData = updateData;
     }
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "NEXT_EXPIRATION")
     public Date getNextExpiration() {
-	return nextExpiration;
+        return nextExpiration;
     }
 
     public void setNextExpiration(Date nextExpiration) {
-	this.nextExpiration = nextExpiration;
+        this.nextExpiration = nextExpiration;
     }
 
     @Id
     @Column(name = "SUBJECT_KEY_ID")
     public String getKeyId() {
-	return keyId;
+        return keyId;
     }
 
     public void setKeyId(String keyId) {
-	this.keyId = keyId;
+        this.keyId = keyId;
     }
 
     @Column(name = "UNIQUE_ID")
     public String getUniqueId() {
-	return uniqueId;
+        return uniqueId;
     }
 
     public void setUniqueId(String uniqueId) {
-	this.uniqueId = uniqueId;
+        this.uniqueId = uniqueId;
     }
 
     /**
@@ -126,26 +126,26 @@ public class CryCrl implements Serializable {
      */
     @PrePersist
     public void prePersist() {
-	try {
-	    MessageDigest md = MessageDigest.getInstance("MD5");
-	    String toHash = subjectdn + keyId;
-	    md.update(toHash.getBytes());
-	    uniqueId = DatatypeConverter.printHexBinary(md.digest()).toLowerCase();
-	} catch (NoSuchAlgorithmException ex) {
-	    throw new PersistenceException(ex);
-	}
-	//
-	this.updateData = NeverendingDateConverter.verifyOverZoneId(this.updateData,
-		TimeZone.getTimeZone("UTC").toZoneId());
-	this.nextExpiration = NeverendingDateConverter.verifyOverZoneId(this.nextExpiration,
-		TimeZone.getTimeZone("UTC").toZoneId());
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            String toHash = subjectdn + keyId;
+            md.update(toHash.getBytes());
+            uniqueId = DatatypeConverter.printHexBinary(md.digest()).toLowerCase();
+        } catch (NoSuchAlgorithmException ex) {
+            throw new PersistenceException(ex);
+        }
+        //
+        this.updateData = NeverendingDateConverter.verifyOverZoneId(this.updateData,
+                TimeZone.getTimeZone("UTC").toZoneId());
+        this.nextExpiration = NeverendingDateConverter.verifyOverZoneId(this.nextExpiration,
+                TimeZone.getTimeZone("UTC").toZoneId());
     }
 
     @PreUpdate
     void preUpdate() {
-	this.updateData = NeverendingDateConverter.verifyOverZoneId(this.updateData,
-		TimeZone.getTimeZone("UTC").toZoneId());
-	this.nextExpiration = NeverendingDateConverter.verifyOverZoneId(this.nextExpiration,
-		TimeZone.getTimeZone("UTC").toZoneId());
+        this.updateData = NeverendingDateConverter.verifyOverZoneId(this.updateData,
+                TimeZone.getTimeZone("UTC").toZoneId());
+        this.nextExpiration = NeverendingDateConverter.verifyOverZoneId(this.nextExpiration,
+                TimeZone.getTimeZone("UTC").toZoneId());
     }
 }

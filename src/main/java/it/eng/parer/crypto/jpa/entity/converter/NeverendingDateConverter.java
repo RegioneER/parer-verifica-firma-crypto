@@ -33,7 +33,7 @@ public class NeverendingDateConverter {
      * https://www.techonthenet.com/oracle/datatypes.php
      */
     public static final LocalDateTime NEVERENDING = LocalDateTime.of(9999, Month.DECEMBER, 31, 23,
-	    59, 59);
+            59, 59);
 
     /**
      * Verifica se una certa data (ZoneId di sistema) convertita con lo zoneIdToCheck se oltre la
@@ -45,14 +45,14 @@ public class NeverendingDateConverter {
      * @return date
      */
     public static Date verifyOverZoneId(Date dateToCheck, ZoneId zoneIdToCheck) {
-	// equals OR after
-	Date dateToCheckOverZid = convert(dateToCheck, zoneIdToCheck);
-	if (dateToCheckOverZid.equals(asDate(NEVERENDING))
-		|| dateToCheckOverZid.after(asDate(NEVERENDING))) {
-	    LOG.warn("Data: {} oltre il limite massimo consentito {}", dateToCheck, NEVERENDING);
-	    return asDate(NEVERENDING);
-	}
-	return dateToCheck;
+        // equals OR after
+        Date dateToCheckOverZid = convert(dateToCheck, zoneIdToCheck);
+        if (dateToCheckOverZid.equals(asDate(NEVERENDING))
+                || dateToCheckOverZid.after(asDate(NEVERENDING))) {
+            LOG.warn("Data: {} oltre il limite massimo consentito {}", dateToCheck, NEVERENDING);
+            return asDate(NEVERENDING);
+        }
+        return dateToCheck;
     }
 
     /**
@@ -63,30 +63,30 @@ public class NeverendingDateConverter {
      * @return date da verificare
      */
     public static Date verifyOverZoneId(Date dateToCheck) {
-	return verifyOverZoneId(dateToCheck, ZoneId.systemDefault());
+        return verifyOverZoneId(dateToCheck, ZoneId.systemDefault());
     }
 
     private static Date convert(Date dateToCheck, ZoneId zid) {
-	return asDate(asLocalDateTime(dateToCheck, zid));
+        return asDate(asLocalDateTime(dateToCheck, zid));
     }
 
     private static Date asDate(LocalDateTime localDateTime) {
-	return asDate(localDateTime, ZoneId.systemDefault());
+        return asDate(localDateTime, ZoneId.systemDefault());
     }
 
     private static Date asDate(LocalDateTime localDateTime, ZoneId zid) {
-	return Date.from(localDateTime.atZone(zid).toInstant());
+        return Date.from(localDateTime.atZone(zid).toInstant());
     }
 
     private static LocalDate asLocalDate(Date date) {
-	return Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+        return Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
     }
 
     private static LocalDateTime asLocalDateTime(Date date) {
-	return asLocalDateTime(date, ZoneId.systemDefault());
+        return asLocalDateTime(date, ZoneId.systemDefault());
     }
 
     private static LocalDateTime asLocalDateTime(Date date, ZoneId zid) {
-	return Instant.ofEpochMilli(date.getTime()).atZone(zid).toLocalDateTime();
+        return Instant.ofEpochMilli(date.getTime()).atZone(zid).toLocalDateTime();
     }
 }

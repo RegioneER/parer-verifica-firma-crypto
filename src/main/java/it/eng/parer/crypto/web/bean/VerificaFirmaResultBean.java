@@ -29,19 +29,19 @@ public class VerificaFirmaResultBean implements Serializable {
     private boolean withErrors = false;
 
     public String getReportTree() {
-	return reportTree;
+        return reportTree;
     }
 
     public void setReportTree(String reportTree) {
-	this.reportTree = reportTree;
+        this.reportTree = reportTree;
     }
 
     public boolean isWithErrors() {
-	return withErrors;
+        return withErrors;
     }
 
     public void setWithErrors(boolean withErrors) {
-	this.withErrors = withErrors;
+        this.withErrors = withErrors;
     }
 
 }

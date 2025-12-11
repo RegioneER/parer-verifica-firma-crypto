@@ -33,7 +33,7 @@ import it.eng.parer.crypto.model.verifica.input.CryptoDataToValidateMetadata;
  * @author sinatti_s
  */
 @JsonIgnoreProperties(value = {
-	"cryptoParerException", "localizedMessage", "suppressed", "cause", "stackTrace" })
+        "cryptoParerException", "localizedMessage", "suppressed", "cause", "stackTrace" })
 public class RestExceptionResponse extends CryptoParerException {
 
     /**
@@ -48,79 +48,79 @@ public class RestExceptionResponse extends CryptoParerException {
     private final LocalDateTime datetime = LocalDateTime.now();
 
     public RestExceptionResponse() {
-	super();
-	this.cryptoParerException = new CryptoParerException();
+        super();
+        this.cryptoParerException = new CryptoParerException();
     }
 
     public RestExceptionResponse(CryptoParerException cryptoParerException) {
-	super();
-	this.cryptoParerException = cryptoParerException;
+        super();
+        this.cryptoParerException = cryptoParerException;
     }
 
     @Override
     public String getMessage() {
-	return getCryptoParerException().getMessage();
+        return getCryptoParerException().getMessage();
     }
 
     @Override
     public String getMoreInfo() {
-	return getCryptoParerException().getMoreInfo();
+        return getCryptoParerException().getMoreInfo();
     }
 
     @Override
     public ErrorCode getCode() {
-	return getCryptoParerException().getCode();
+        return getCryptoParerException().getCode();
     }
 
     @Override
     public List<String> getDetails() {
-	return getCryptoParerException().getDetails();
+        return getCryptoParerException().getDetails();
     }
 
     public LocalDateTime getDatetime() {
-	return datetime;
+        return datetime;
     }
 
     @Schema(hidden = true, accessMode = AccessMode.READ_ONLY)
     public CryptoParerException getCryptoParerException() {
-	return cryptoParerException;
+        return cryptoParerException;
     }
 
     @Override
     public CryptoParerException withMoreInfo(String moreInfo) {
-	return getCryptoParerException().withMoreInfo(moreInfo);
+        return getCryptoParerException().withMoreInfo(moreInfo);
     }
 
     @Override
     public CryptoParerException withCode(ErrorCode code) {
-	return getCryptoParerException().withCode(code);
+        return getCryptoParerException().withCode(code);
     }
 
     @Override
     public CryptoParerException withMessage(String message) {
-	return getCryptoParerException().withMessage(message);
+        return getCryptoParerException().withMessage(message);
     }
 
     @Override
     public CryptoParerException withDetail(String message) {
-	return getCryptoParerException().withDetail(message);
+        return getCryptoParerException().withDetail(message);
     }
 
     @Schema(hidden = true, accessMode = AccessMode.READ_ONLY)
     @Override
     public String getLocalizedMessage() {
-	return super.getLocalizedMessage();
+        return super.getLocalizedMessage();
     }
 
     @JsonInclude(Include.NON_NULL)
     @Override
     public CryptoDataToValidateMetadata getMetadata() {
-	return getCryptoParerException().getMetadata();
+        return getCryptoParerException().getMetadata();
     }
 
     @Override
     public String toString() {
-	return super.toString() + " - datetime=" + datetime;
+        return super.toString() + " - datetime=" + datetime;
     }
 
 }

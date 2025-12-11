@@ -35,9 +35,9 @@ import it.eng.parer.crypto.service.verifica.OldCryptoInvoker;
  * @author Snidero_L
  */
 @SpringBootTest(properties = {
-	"cron.ca.enable=false", "cron.crl.enable=false",
-	"spring.datasource.url=jdbc:h2:mem:cryptodb-test;DB_CLOSE_DELAY=-1",
-	"logging.level.root=INFO", "logging.level.it.eng.parer.crypto=INFO" })
+        "cron.ca.enable=false", "cron.crl.enable=false",
+        "spring.datasource.url=jdbc:h2:mem:cryptodb-test;DB_CLOSE_DELAY=-1",
+        "logging.level.root=INFO", "logging.level.it.eng.parer.crypto=INFO" })
 @Deprecated(forRemoval = true, since = "Da rimuovere API-Unit test obsoleto")
 class OldCryptoInvokerTest {
 
@@ -48,26 +48,26 @@ class OldCryptoInvokerTest {
     @Test
     @Deprecated
     void testInvokerTST() throws Exception {
-	byte[] content = {
-		67, 105, 97, 111, 33 };
+        byte[] content = {
+                67, 105, 97, 111, 33 };
 
-	TimeStampToken tst = oldCryptoInvoker.requestTST(content);
+        TimeStampToken tst = oldCryptoInvoker.requestTST(content);
 
-	assertNotNull(tst.getTimeStampInfo().getGenTime());
-	assertNotNull(tst.getTimeStampInfo().getSerialNumber());
+        assertNotNull(tst.getTimeStampInfo().getGenTime());
+        assertNotNull(tst.getTimeStampInfo().getSerialNumber());
     }
 
     @Disabled(value = "API da dismettere")
     @Test
     @Deprecated
     void testInvokerTSD() throws Exception {
-	byte[] content = {
-		67, 105, 97, 111, 33 };
+        byte[] content = {
+                67, 105, 97, 111, 33 };
 
-	CMSTimeStampedData generateTSD = oldCryptoInvoker.generateTSD(content);
-	int expectedTs = 1;
-	int actualTs = generateTSD.getTimeStampTokens().length;
-	assertEquals(expectedTs, actualTs);
+        CMSTimeStampedData generateTSD = oldCryptoInvoker.generateTSD(content);
+        int expectedTs = 1;
+        int actualTs = generateTSD.getTimeStampTokens().length;
+        assertEquals(expectedTs, actualTs);
     }
 
 }

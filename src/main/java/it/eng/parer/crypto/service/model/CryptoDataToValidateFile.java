@@ -32,24 +32,24 @@ public class CryptoDataToValidateFile implements Serializable {
     }
 
     public CryptoDataToValidateFile(String nome, File contenuto) {
-	this.nome = nome;
-	this.contenuto = contenuto;
+        this.nome = nome;
+        this.contenuto = contenuto;
     }
 
     public String getNome() {
-	return nome;
+        return nome;
     }
 
     public void setNome(String nome) {
-	this.nome = nome;
+        this.nome = nome;
     }
 
     public File getContenuto() {
-	return contenuto;
+        return contenuto;
     }
 
     public void setContenuto(File contenuto) {
-	this.contenuto = contenuto;
+        this.contenuto = contenuto;
     }
 
 }

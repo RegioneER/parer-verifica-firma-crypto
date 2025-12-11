@@ -2,11 +2,11 @@
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
 	<!--    for having JSON long enable encode AND disable std layout
 	 	<encoder class="net.logstash.logback.encoder.LogstashEncoder" /> -->
-        <layout class="ch.qos.logback.classic.PatternLayout">
+	    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <Pattern>
                 %d %-5p [%c] [%t] [%X{uuid}] %m %n
             </Pattern>
-        </layout>
+	   </encoder>        
     </appender>
      
     <logger name="it.eng.parer.crypto" level="debug" additivity="false">

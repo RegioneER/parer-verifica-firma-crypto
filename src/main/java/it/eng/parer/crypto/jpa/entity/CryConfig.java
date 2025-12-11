@@ -39,44 +39,44 @@ public class CryConfig implements Serializable {
     private String keyId;
 
     public CryConfig() {
-	// document why this constructor is empty
+        // document why this constructor is empty
     }
 
     @Id
     public String getSubjectdn() {
-	return this.subjectdn;
+        return this.subjectdn;
     }
 
     public void setSubjectdn(String subjectdn) {
-	this.subjectdn = subjectdn;
+        this.subjectdn = subjectdn;
     }
 
     public String getCrlurl() {
-	return this.crlurl;
+        return this.crlurl;
     }
 
     public void setCrlurl(String crlurl) {
-	this.crlurl = crlurl;
+        this.crlurl = crlurl;
     }
 
     @Id
     @Column(name = "NI_ORD_URL_DISTRIB_CRL")
     public BigDecimal getNiOrdUrlDistribCrl() {
-	return niOrdUrlDistribCrl;
+        return niOrdUrlDistribCrl;
     }
 
     public void setNiOrdUrlDistribCrl(BigDecimal niOrdUrlDistribCrl) {
-	this.niOrdUrlDistribCrl = niOrdUrlDistribCrl;
+        this.niOrdUrlDistribCrl = niOrdUrlDistribCrl;
     }
 
     @Id
     @Column(name = "SUBJECT_KEY_ID")
     public String getKeyId() {
-	return keyId;
+        return keyId;
     }
 
     public void setKeyId(String keyId) {
-	this.keyId = keyId;
+        this.keyId = keyId;
     }
 
 }

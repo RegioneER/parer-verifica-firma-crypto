@@ -4,25 +4,32 @@
 
     <head th:fragment="header(title)">
         <meta charset="UTF-8">
-        <link rel="SHORTCUT ICON" type="image/x-icon" href="img/favicon.ico" />
-        <link th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap.min.css}" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">        
+		<link rel="SHORTCUT ICON" type="image/x-icon" th:href="@{/img/favicon.ico}" />
+        <link th:href="@{/webjars/bootstrap/4.6.2/css/bootstrap.min.css}" rel="stylesheet" />
+        <link th:href="@{/webjars/highlightjs/11.5.0/styles/magula.min.css}" rel="stylesheet" />
+        <link th:href="@{/webjars/font-awesome/6.5.2/css/all.min.css}" rel="stylesheet" />
+        
         <link th:href="@{/css/css_carousel.css}" rel='stylesheet' />
         <link th:href="@{/css/app.css}" rel='stylesheet' />
-        <link th:href="@{/webjars/google-code-prettify/1.0.5/src/prettify.css}" rel="stylesheet" />
-
-        <script type="text/javascript" th:src="@{/webjars/google-code-prettify/1.0.5/src/run_prettify.js}"></script>    
-        <script type="text/javascript" th:src="@{/webjars/jquery/3.6.4/jquery.min.js}"></script>
-        <script type="text/javascript" th:src="@{/webjars/bootstrap/3.4.1/js/bootstrap.min.js}"></script>
+        <link th:href="@{/css/crypto.css}" rel='stylesheet' />
+        
+        <script type="text/javascript" th:src="@{/webjars/jquery/3.7.1/jquery.min.js}"></script>
+        <script type="text/javascript" th:src="@{/webjars/popper.js/1.16.1/dist/popper.min.js}"></script>        
+        <script type="text/javascript" th:src="@{/webjars/bootstrap/4.6.2/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" th:src="@{/webjars/highlightjs/11.5.0/highlight.min.js}"></script>
+        <script type="text/javascript" th:src="@{/webjars/highlightjs-badgejs/0.0.5/highlightjs-badgejs.min.js}"></script>
+        <!-- Custom -->        
         <script th:src="@{/js/app.js}"></script>
+        
         <title th:text="${title}"></title>
     </head>
 
     <div th:fragment="main">
-
-        <button onclick="topFunction()" id="btnup" class="btn btn-primary"
-                title="Go to top">
-            <span class="glyphicon glyphicon-arrow-up"></span>
-        </button>
+		<button onclick="topFunction()" id="btnup" class="btn" style="background-color: transparent;"
+			title="Page top">
+			<em class="fa fa-chevron-circle-up fa-4x" ></em>
+		</button>
 
         <div id="content" class="bs-docs-header" tabindex="-1">
             <div class="container">
@@ -32,13 +39,22 @@
             </div>
         </div>
 
-        <div class="container">
-            <h2 th:inline="text">
-                Verifica Firma CRYPTO <span class="badge badge-info">[[${version}]]
-                    - Crypto Library [[${engcryptolibrary}]]</span>
-            </h2>
-        </div>
-
+		<div class="container">
+			<div class="row">
+				 <div class="col-md-auto">
+					<h2 th:inline="text">
+						 Verifica Firma CRYPTO
+					</h2>
+				 </div>
+				 <div class="col-0">
+					<h6 th:inline="text">
+						<span class="badge badge-secondary">[[${version}]]
+							- Crypto Library [[${engcryptolibrary}]]</span>
+					</h6>
+				</div>
+			</div>
+		</div>
+		
         <script>
             // When the user scrolls down 20px from the top of the document, show the button
             window.onscroll = function () {
@@ -47,29 +63,29 @@
         </script>
     </div>
 
-    <div th:fragment="footer" class="footer-copyright text-center py-3">
-        <div class="container">
-            <img class="logoImg" src="img/parer.png"
-                 alt="PARER : SPRING BOOT APP">
-        </div>
-    </div>
+	<div th:fragment="footer" class="footer-copyright text-center py-3">
+		<div class="container">
+			<img class="logoImg" th:src="@{/img/parer.png}"
+				alt="PARER : SPRING BOOT APP">
+		</div>
+	</div>
 
+	<div th:fragment="info" class="container" style="margin-top: 1.5em;">
 
-    <div th:fragment="info" class="container">
-
-        <samp>
-            <small id="info"> <span sec:authorize="hasRole('ROLE_ADMIN')" th:if="${@environment.getProperty('parer.crypto.admin-ui.enabled') ?: true}"> Profilo: <b
-                        th:if="${@environment.getProperty('spring.profiles.active')} == null">
-                        default</b> <b>[[${@environment.getProperty('spring.profiles.active')}]]</b>
+		   <samp>
+				<small id="info"> <span sec:authorize="hasRole('ROLE_ADMIN')" th:if="${@environment.getProperty('parer.eidas.admin-ui.enabled') ?: true}"> Profilo: <b
+						th:if="${@environment.getProperty('spring.profiles.active')} == null">
+							default</b> <b>[[${@environment.getProperty('spring.profiles.active')}]]</b>
                 </span> <span> Versione: <b>[[${version}]]</b>
                 </span> <span sec:authorize="hasRole('ROLE_ADMIN')" th:if="${@environment.getProperty('parer.crypto.admin-ui.enabled') ?: true}">
                     Git Branch: <b>[[${@environment.getProperty('git.branch')}]]</b>
                 </span> <span> Ultima modifica: <b>[[${builddate}]]</b>
-                </span> <span> Versione Crypto Library: <b>[[${engcryptolibrary}]]</b>
+                </span> <span>Cryptolibrary: <b>[[${engcryptolibrary}]]</b>
                 </span> 
-            </small>
-        </samp>
-    </div>
-
+				</small>
+			</samp>
+		
+	</div>
+	
 </body>
 </html>

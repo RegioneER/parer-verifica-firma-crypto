@@ -1,4 +1,4 @@
-## 1.22.0 (18-09-2025)
+## 2.1.0 (11-12-2025)
 
 ### Novità: 1
-- [#39102](https://parermine.regione.emilia-romagna.it/issues/39102)  Modifica servizio estrazione documento originale da P7m
+- [#39419](https://parermine.regione.emilia-romagna.it/issues/39419) Migliorata gestione CRL per configurazione timeout recupero online via LDAP e centralizzata configurazione connection/socket timeout HTTP

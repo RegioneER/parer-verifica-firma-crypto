@@ -34,19 +34,19 @@ import it.eng.parer.crypto.web.config.CustomBanner;
 public class CryptoApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
-	/**
-	 * https://stackoverflow.com/questions/13482020/encoded-slash-2f-with-spring-requestmapping-path-param-gives-http-400
-	 */
-	// System.setProperty("org.apache.tomcat.util.buf.UDecoder.ALLOW_ENCODED_SLASH", "true");
+        /**
+         * https://stackoverflow.com/questions/13482020/encoded-slash-2f-with-spring-requestmapping-path-param-gives-http-400
+         */
+        // System.setProperty("org.apache.tomcat.util.buf.UDecoder.ALLOW_ENCODED_SLASH", "true");
 
-	SpringApplication application = new SpringApplication(CryptoApplication.class);
-	application.setBanner(new CustomBanner());
-	application.run(args);
+        SpringApplication application = new SpringApplication(CryptoApplication.class);
+        application.setBanner(new CustomBanner());
+        application.run(args);
     }
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-	return application.sources(CryptoApplication.class);
+        return application.sources(CryptoApplication.class);
     }
 
 }

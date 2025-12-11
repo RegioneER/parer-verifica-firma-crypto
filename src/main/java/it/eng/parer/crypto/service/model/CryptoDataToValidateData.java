@@ -38,35 +38,35 @@ public class CryptoDataToValidateData implements Serializable {
     private List<CryptoDataToValidateFile> sottoComponentiMarca = new ArrayList<>();
 
     public CryptoDataToValidateFile getContenuto() {
-	return contenuto;
+        return contenuto;
     }
 
     public void setContenuto(CryptoDataToValidateFile contenuto) {
-	this.contenuto = contenuto;
+        this.contenuto = contenuto;
     }
 
     public List<CryptoDataToValidateFile> getSottoComponentiFirma() {
-	return sottoComponentiFirma;
+        return sottoComponentiFirma;
     }
 
     public void setSottoComponentiFirma(List<CryptoDataToValidateFile> sottoComponentiFirma) {
-	this.sottoComponentiFirma = sottoComponentiFirma;
+        this.sottoComponentiFirma = sottoComponentiFirma;
     }
 
     public List<CryptoDataToValidateFile> getSottoComponentiMarca() {
-	return sottoComponentiMarca;
+        return sottoComponentiMarca;
     }
 
     public void setSottoComponentiMarca(List<CryptoDataToValidateFile> sottoComponentiMarca) {
-	this.sottoComponentiMarca = sottoComponentiMarca;
+        this.sottoComponentiMarca = sottoComponentiMarca;
     }
 
     public boolean addSottoComponenteFirma(CryptoDataToValidateFile sottoComponenteFirma) {
-	return this.sottoComponentiFirma.add(sottoComponenteFirma);
+        return this.sottoComponentiFirma.add(sottoComponenteFirma);
     }
 
     public boolean addSottoComponenteMarca(CryptoDataToValidateFile sottoComponenteMarca) {
-	return this.sottoComponentiMarca.add(sottoComponenteMarca);
+        return this.sottoComponentiMarca.add(sottoComponenteMarca);
     }
 
 }

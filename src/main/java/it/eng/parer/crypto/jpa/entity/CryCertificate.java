@@ -47,53 +47,53 @@ public class CryCertificate implements Serializable {
     private Date expirationDate;
 
     public CryCertificate() {
-	// document why this constructor is empty
+        // document why this constructor is empty
     }
 
     @Id
     public String getSubjectdn() {
-	return this.subjectdn;
+        return this.subjectdn;
     }
 
     public void setSubjectdn(String subjectdn) {
-	this.subjectdn = subjectdn;
+        this.subjectdn = subjectdn;
     }
 
     public String getActive() {
-	return this.active;
+        return this.active;
     }
 
     public void setActive(String active) {
-	this.active = active;
+        this.active = active;
     }
 
     @Lob()
     public byte[] getCertificate() {
-	return this.certificate;
+        return this.certificate;
     }
 
     public void setCertificate(byte[] certificate) {
-	this.certificate = certificate;
+        this.certificate = certificate;
     }
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "EXPIRATION_DATE")
     public Date getExpirationDate() {
-	return this.expirationDate;
+        return this.expirationDate;
     }
 
     public void setExpirationDate(Date expirationDate) {
-	this.expirationDate = expirationDate;
+        this.expirationDate = expirationDate;
     }
 
     @Id
     @Column(name = "SUBJECT_KEY_ID")
     public String getKeyId() {
-	return keyId;
+        return keyId;
     }
 
     public void setKeyId(String keyId) {
-	this.keyId = keyId;
+        this.keyId = keyId;
     }
 
     /**
@@ -105,14 +105,14 @@ public class CryCertificate implements Serializable {
      */
     @PrePersist
     void preInsert() {
-	this.expirationDate = NeverendingDateConverter.verifyOverZoneId(this.expirationDate,
-		TimeZone.getTimeZone("UTC").toZoneId());
+        this.expirationDate = NeverendingDateConverter.verifyOverZoneId(this.expirationDate,
+                TimeZone.getTimeZone("UTC").toZoneId());
     }
 
     @PreUpdate
     void preUpdate() {
-	this.expirationDate = NeverendingDateConverter.verifyOverZoneId(this.expirationDate,
-		TimeZone.getTimeZone("UTC").toZoneId());
+        this.expirationDate = NeverendingDateConverter.verifyOverZoneId(this.expirationDate,
+                TimeZone.getTimeZone("UTC").toZoneId());
     }
 
 }

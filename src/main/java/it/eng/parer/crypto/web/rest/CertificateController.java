@@ -53,24 +53,24 @@ public class CertificateController {
 
     @Operation(summary = "Certificate", method = "Inserimento Certificato")
     @ApiResponses(value = {
-	    @ApiResponse(responseCode = "200", description = "Certificato inserito", content = {
-		    @Content(mediaType = "application/json", schema = @Schema(implementation = ParerCertificate.class)) }),
-	    @ApiResponse(responseCode = "400", description = "Richiesta non valida", content = {
-		    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }),
-	    @ApiResponse(responseCode = "417", description = "File eccede dimensioni consentite", content = {
-		    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }),
-	    @ApiResponse(responseCode = "500", description = "Certificato in formato errato", content = {
-		    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }) })
+            @ApiResponse(responseCode = "200", description = "Certificato inserito", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = ParerCertificate.class)) }),
+            @ApiResponse(responseCode = "400", description = "Richiesta non valida", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }),
+            @ApiResponse(responseCode = "417", description = "File eccede dimensioni consentite", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }),
+            @ApiResponse(responseCode = "500", description = "Certificato in formato errato", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }) })
     @PostMapping(value = RESOURCE_CERTIFICATE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ParerCertificate addCertificate(
-	    @RequestPart(name = "certificato", required = true) MultipartFile certificato) {
-	try {
-	    return certificateService.addCaCertificate(certificato.getBytes());
-	} catch (IllegalStateException | IOException ex) {
-	    throw new CryptoParerException(ex)
-		    .withCode(ParerError.ErrorCode.SIGNATURE_VERIFICATION_IO)
-		    .withMessage("Eccezione di IO durante la creazione di certificato da caricare");
-	}
+            @RequestPart(name = "certificato", required = true) MultipartFile certificato) {
+        try {
+            return certificateService.addCaCertificate(certificato.getBytes());
+        } catch (IllegalStateException | IOException ex) {
+            throw new CryptoParerException(ex)
+                    .withCode(ParerError.ErrorCode.SIGNATURE_VERIFICATION_IO)
+                    .withMessage("Eccezione di IO durante la creazione di certificato da caricare");
+        }
 
     }
 }
