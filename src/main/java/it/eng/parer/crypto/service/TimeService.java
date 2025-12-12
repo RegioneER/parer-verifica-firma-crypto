@@ -54,29 +54,29 @@ public class TimeService {
      * @throws CryptoParerException per i vari casi di errore.
      */
     public ParerTST getTst(byte[] content) throws CryptoParerException {
-	try {
-	    log.debug("Richiedo TST per un byteArray di {} elementi", content.length);
-	    TimeStampToken requestTST = cryptoInvoker.requestTST(content);
-	    if (requestTST == null) {
-		throw new CryptoParerException().withCode(ParerError.ErrorCode.TSP_EXCEPTION)
-			.withMessage("RequestTST è vuoto").withDetail(
-				"Per qualche motivo la richiesta di un nuovo timestamp ha prodotto un timestamp vuoto.");
-	    }
+        try {
+            log.debug("Richiedo TST per un byteArray di {} elementi", content.length);
+            TimeStampToken requestTST = cryptoInvoker.requestTST(content);
+            if (requestTST == null) {
+                throw new CryptoParerException().withCode(ParerError.ErrorCode.TSP_EXCEPTION)
+                        .withMessage("RequestTST è vuoto").withDetail(
+                                "Per qualche motivo la richiesta di un nuovo timestamp ha prodotto un timestamp vuoto.");
+            }
 
-	    return toParerTST(requestTST);
+            return toParerTST(requestTST);
 
-	} catch (TSPException ex) {
-	    throw new CryptoParerException(ex).withCode(ParerError.ErrorCode.TSP_EXCEPTION)
-		    .withMessage(
-			    "Errore di tipo TSPException durante la richiesta di un timestamp");
-	} catch (IOException ex) {
-	    throw new CryptoParerException(ex).withCode(ParerError.ErrorCode.TSP_IO)
-		    .withMessage("Errore di INPUT/OUTPUT durante la richiesta di un timestamp");
-	} catch (NoSuchAlgorithmException | NoSuchProviderException ex) {
-	    throw new CryptoParerException(ex).withCode(ParerError.ErrorCode.TSP_PROVIDER_ERROR)
-		    .withMessage(
-			    "Errore di tipo NoSuchAlgorithm o NoSuchProvider durante la richiesta di un timestamp");
-	}
+        } catch (TSPException ex) {
+            throw new CryptoParerException(ex).withCode(ParerError.ErrorCode.TSP_EXCEPTION)
+                    .withMessage(
+                            "Errore di tipo TSPException durante la richiesta di un timestamp");
+        } catch (IOException ex) {
+            throw new CryptoParerException(ex).withCode(ParerError.ErrorCode.TSP_IO)
+                    .withMessage("Errore di INPUT/OUTPUT durante la richiesta di un timestamp");
+        } catch (NoSuchAlgorithmException | NoSuchProviderException ex) {
+            throw new CryptoParerException(ex).withCode(ParerError.ErrorCode.TSP_PROVIDER_ERROR)
+                    .withMessage(
+                            "Errore di tipo NoSuchAlgorithm o NoSuchProvider durante la richiesta di un timestamp");
+        }
 
     }
 
@@ -91,48 +91,48 @@ public class TimeService {
      * @throws CryptoParerException per i vari casi di errore.
      */
     public ParerTSD getTsd(byte[] content) throws CryptoParerException {
-	try {
-	    log.debug("Richiedo TSD per un byteArray di {} elementi", content.length);
-	    CMSTimeStampedData generateTSD = cryptoInvoker.generateTSD(content);
-	    if (generateTSD == null) {
-		throw new CryptoParerException().withCode(ParerError.ErrorCode.TSP_EXCEPTION)
-			.withMessage("CMSTimeStampedData è vuoto")
-			.withDetail("Per qualche motivo il contenuto marcato risulta vuoto.");
-	    }
+        try {
+            log.debug("Richiedo TSD per un byteArray di {} elementi", content.length);
+            CMSTimeStampedData generateTSD = cryptoInvoker.generateTSD(content);
+            if (generateTSD == null) {
+                throw new CryptoParerException().withCode(ParerError.ErrorCode.TSP_EXCEPTION)
+                        .withMessage("CMSTimeStampedData è vuoto")
+                        .withDetail("Per qualche motivo il contenuto marcato risulta vuoto.");
+            }
 
-	    ParerTSD parerTsd = new ParerTSD();
-	    parerTsd.setEncoded(generateTSD.getEncoded());
-	    for (TimeStampToken tst : generateTSD.getTimeStampTokens()) {
-		ParerTST parerTst = toParerTST(tst);
-		parerTsd.addTimeStampToken(parerTst);
-	    }
-	    return parerTsd;
+            ParerTSD parerTsd = new ParerTSD();
+            parerTsd.setEncoded(generateTSD.getEncoded());
+            for (TimeStampToken tst : generateTSD.getTimeStampTokens()) {
+                ParerTST parerTst = toParerTST(tst);
+                parerTsd.addTimeStampToken(parerTst);
+            }
+            return parerTsd;
 
-	} catch (TSPException ex) {
-	    throw new CryptoParerException(ex).withCode(ParerError.ErrorCode.TSP_EXCEPTION)
-		    .withMessage(
-			    "Errore di tipo TSPException durante la richiesta di un timestamp");
+        } catch (TSPException ex) {
+            throw new CryptoParerException(ex).withCode(ParerError.ErrorCode.TSP_EXCEPTION)
+                    .withMessage(
+                            "Errore di tipo TSPException durante la richiesta di un timestamp");
 
-	} catch (IOException ex) {
-	    throw new CryptoParerException(ex).withCode(ParerError.ErrorCode.TSP_IO)
-		    .withMessage("Errore di INPUT/OUTPUT durante la richiesta di un timestamp");
+        } catch (IOException ex) {
+            throw new CryptoParerException(ex).withCode(ParerError.ErrorCode.TSP_IO)
+                    .withMessage("Errore di INPUT/OUTPUT durante la richiesta di un timestamp");
 
-	} catch (CMSException | NoSuchAlgorithmException | NoSuchProviderException ex) {
-	    throw new CryptoParerException(ex).withCode(ParerError.ErrorCode.TSD_PROVIDER_ERROR)
-		    .withMessage(
-			    "Errore di tipo NoSuchAlgorithm o NoSuchProvider durante la richiesta di un timestamp");
-	}
+        } catch (CMSException | NoSuchAlgorithmException | NoSuchProviderException ex) {
+            throw new CryptoParerException(ex).withCode(ParerError.ErrorCode.TSD_PROVIDER_ERROR)
+                    .withMessage(
+                            "Errore di tipo NoSuchAlgorithm o NoSuchProvider durante la richiesta di un timestamp");
+        }
     }
 
     private ParerTST toParerTST(TimeStampToken requestTST) throws IOException {
-	ParerTST parerTst = new ParerTST();
-	parerTst.setEncoded(requestTST.getEncoded());
-	ParerTST.TimeStampInfo timeStampInfo = parerTst.create();
-	if (requestTST.getTimeStampInfo() != null) {
-	    timeStampInfo.setGenTime(requestTST.getTimeStampInfo().getGenTime());
-	}
-	parerTst.setTimeStampInfo(timeStampInfo);
-	return parerTst;
+        ParerTST parerTst = new ParerTST();
+        parerTst.setEncoded(requestTST.getEncoded());
+        ParerTST.TimeStampInfo timeStampInfo = parerTst.create();
+        if (requestTST.getTimeStampInfo() != null) {
+            timeStampInfo.setGenTime(requestTST.getTimeStampInfo().getGenTime());
+        }
+        parerTst.setTimeStampInfo(timeStampInfo);
+        return parerTst;
     }
 
 }

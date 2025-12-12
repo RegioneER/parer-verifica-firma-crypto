@@ -38,31 +38,31 @@ public class BaseSecurityConfig {
     @Bean
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
 
-	http.csrf(csrf -> csrf.disable()) // disable csrf
-		.authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-			.requestMatchers(URL_ADMIN_BASE + RESOURCE_INFOS).authenticated())
-		.httpBasic(withDefaults()) // basic auth
-		.authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-			.requestMatchers(URL_ADMIN_BASE + "/**").hasRole(ROLE_ADMIN)) // only
-										      // admin
-		.authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-			.requestMatchers("/actuator/shutdown").hasRole(ROLE_ADMIN)) // only
-										    // admin
-		.authorizeHttpRequests(
-			authorizeHttpRequests -> authorizeHttpRequests.anyRequest().permitAll()) // permit
-												 // all
-		.formLogin(formlogin -> formlogin.defaultSuccessUrl(URL_ADMIN_BASE).permitAll()) // login
-												 // form
-		.logout(logout -> logout.deleteCookies("JSESSIONID").logoutSuccessUrl("/")
-			.permitAll()); // logout
+        http.csrf(csrf -> csrf.disable()) // disable csrf
+                .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
+                        .requestMatchers(URL_ADMIN_BASE + RESOURCE_INFOS).authenticated())
+                .httpBasic(withDefaults()) // basic auth
+                .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
+                        .requestMatchers(URL_ADMIN_BASE + "/**").hasRole(ROLE_ADMIN)) // only
+                // admin
+                .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
+                        .requestMatchers("/actuator/shutdown").hasRole(ROLE_ADMIN)) // only
+                // admin
+                .authorizeHttpRequests(
+                        authorizeHttpRequests -> authorizeHttpRequests.anyRequest().permitAll()) // permit
+                // all
+                .formLogin(formlogin -> formlogin.defaultSuccessUrl(URL_ADMIN_BASE).permitAll()) // login
+                // form
+                .logout(logout -> logout.deleteCookies("JSESSIONID").logoutSuccessUrl("/")
+                        .permitAll()); // logout
 
-	/*
-	 * h2 console https://springframework.guru/using-the-h2-database-console-in-spring-boot-
-	 * with-spring-security/
-	 */
-	http.headers(headers -> headers.frameOptions(frame -> frame.disable()));
+        /*
+         * h2 console https://springframework.guru/using-the-h2-database-console-in-spring-boot-
+         * with-spring-security/
+         */
+        http.headers(headers -> headers.frameOptions(frame -> frame.disable()));
 
-	return http.build();
+        return http.build();
     }
 
 }

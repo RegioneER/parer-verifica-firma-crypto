@@ -25,20 +25,20 @@ public class CryptoP7mUnsigned implements Serializable {
     private transient InputStream data;
 
     public CryptoP7mUnsigned(String fileName, String fileType, InputStream data) {
-	this.fileName = fileName;
-	this.fileType = fileType;
-	this.data = data;
+        this.fileName = fileName;
+        this.fileType = fileType;
+        this.data = data;
     }
 
     public String getFileName() {
-	return fileName;
+        return fileName;
     }
 
     public String getFileType() {
-	return fileType;
+        return fileType;
     }
 
     public InputStream getData() {
-	return data;
+        return data;
     }
 }

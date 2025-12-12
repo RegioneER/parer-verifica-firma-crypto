@@ -64,55 +64,55 @@ public class TimestampController {
     private final Logger log = LoggerFactory.getLogger(TimestampController.class);
 
     private static final FileAttribute<Set<PosixFilePermission>> attr = PosixFilePermissions
-	    .asFileAttribute(PosixFilePermissions.fromString("rw-------"));
+            .asFileAttribute(PosixFilePermissions.fromString("rw-------"));
 
     @Autowired
     TimeService timeService;
 
     @Operation(summary = "Timestamp", method = "Ottieni un timestamp per lo stream di dati passato in input")
     @ApiResponses(value = {
-	    @ApiResponse(responseCode = "200", description = "Timestamp inserito correttamente", content = {
-		    @Content(mediaType = "application/json", schema = @Schema(implementation = ParerTST.class)) }),
-	    @ApiResponse(responseCode = "400", description = "Richiesta non valida", content = {
-		    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }) })
+            @ApiResponse(responseCode = "200", description = "Timestamp inserito correttamente", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = ParerTST.class)) }),
+            @ApiResponse(responseCode = "400", description = "Richiesta non valida", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }) })
     @PostMapping(value = RESOURCE_TST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ParerTST requestTst(
-	    @RequestParam(name = "description", required = true) String description,
-	    @RequestParam(name = "file", required = true) MultipartFile file) {
-	log.atInfo().log("Applico timestamp al file con descrizione {}", description);
-	byte[] content = null;
-	try {
-	    Path temp = Files.createTempFile("tst-", ".crypto", attr);
-	    file.transferTo(temp);
-	    content = Files.readAllBytes(temp);
-	    Files.delete(temp);
+            @RequestParam(name = "description", required = true) String description,
+            @RequestParam(name = "file", required = true) MultipartFile file) {
+        log.atInfo().log("Applico timestamp al file con descrizione {}", description);
+        byte[] content = null;
+        try {
+            Path temp = Files.createTempFile("tst-", ".crypto", attr);
+            file.transferTo(temp);
+            content = Files.readAllBytes(temp);
+            Files.delete(temp);
 
-	} catch (IOException ex) {
-	    throw new CryptoParerException(ex).withCode(ParerError.ErrorCode.TSP_IO);
-	}
-	return timeService.getTst(content);
+        } catch (IOException ex) {
+            throw new CryptoParerException(ex).withCode(ParerError.ErrorCode.TSP_IO);
+        }
+        return timeService.getTst(content);
     }
 
     @Operation(summary = "Timestamp", method = "Ottieni l'oggetto passato in input stream marcato")
     @ApiResponses(value = {
-	    @ApiResponse(responseCode = "200", description = "TSD inserito correttamente", content = {
-		    @Content(mediaType = "application/json", schema = @Schema(implementation = ParerTSD.class)) }),
-	    @ApiResponse(responseCode = "400", description = "Richiesta non valida", content = {
-		    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }) })
+            @ApiResponse(responseCode = "200", description = "TSD inserito correttamente", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = ParerTSD.class)) }),
+            @ApiResponse(responseCode = "400", description = "Richiesta non valida", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }) })
     @PostMapping(value = RESOURCE_TSD, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ParerTSD generateTsd(
-	    @RequestParam(name = "description", required = true) String description,
-	    @RequestParam(name = "file", required = true) MultipartFile file) {
-	log.atInfo().log("Crea il TSD al file con descrizione {}", description);
-	byte[] content = null;
-	try {
-	    Path temp = Files.createTempFile("tsd-", ".crypto", attr);
-	    file.transferTo(temp);
-	    content = Files.readAllBytes(temp);
-	    Files.delete(temp);
-	} catch (IOException ex) {
-	    throw new CryptoParerException(ex).withCode(ParerError.ErrorCode.TSP_IO);
-	}
-	return timeService.getTsd(content);
+            @RequestParam(name = "description", required = true) String description,
+            @RequestParam(name = "file", required = true) MultipartFile file) {
+        log.atInfo().log("Crea il TSD al file con descrizione {}", description);
+        byte[] content = null;
+        try {
+            Path temp = Files.createTempFile("tsd-", ".crypto", attr);
+            file.transferTo(temp);
+            content = Files.readAllBytes(temp);
+            Files.delete(temp);
+        } catch (IOException ex) {
+            throw new CryptoParerException(ex).withCode(ParerError.ErrorCode.TSP_IO);
+        }
+        return timeService.getTsd(content);
     }
 }

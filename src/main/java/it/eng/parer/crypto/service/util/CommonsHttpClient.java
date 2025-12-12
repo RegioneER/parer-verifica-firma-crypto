@@ -76,44 +76,44 @@ public class CommonsHttpClient implements Serializable {
     private transient CloseableHttpClient client;
 
     public CommonsHttpClient() {
-	// empty
+        // empty
     }
 
     /**
      * init method
      */
     public void init() {
-	if (client == null) {
-	    createHttpClient();
-	}
+        if (client == null) {
+            createHttpClient();
+        }
     }
 
     private void createHttpClient() {
-	// client
-	HttpClientBuilder httpClientBuilder = HttpClients.custom();
+        // client
+        HttpClientBuilder httpClientBuilder = HttpClients.custom();
 
-	// config
-	RequestConfig config = RequestConfig.custom().setConnectTimeout(httpClientTimeout * 1000)
-		.setConnectionRequestTimeout(httpClientTimeout * 1000)
-		.setSocketTimeout(httpClientSocketTimeout * 1000).build();
+        // config
+        RequestConfig config = RequestConfig.custom().setConnectTimeout(httpClientTimeout * 1000)
+                .setConnectionRequestTimeout(httpClientTimeout * 1000)
+                .setSocketTimeout(httpClientSocketTimeout * 1000).build();
 
-	httpClientBuilder.setDefaultRequestConfig(config)
-		.setConnectionTimeToLive(httpClientTimeToLive, TimeUnit.MILLISECONDS)
-		.setConnectionManager(getConnectionManager());
-	// ssl
-	if (noSslVerify) {
-	    try {
-		httpClientBuilder
-			.setSSLContext(new SSLContextBuilder()
-				.loadTrustMaterial(null, TrustAllStrategy.INSTANCE).build())
-			.setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE);
-	    } catch (KeyManagementException | NoSuchAlgorithmException | KeyStoreException e) {
-		throw new CryptoParerException(e).withCode(ParerError.ErrorCode.GENERIC_ERROR)
-			.withMessage("Eccezione generica in fase di creazione client");
-	    }
-	}
+        httpClientBuilder.setDefaultRequestConfig(config)
+                .setConnectionTimeToLive(httpClientTimeToLive, TimeUnit.MILLISECONDS)
+                .setConnectionManager(getConnectionManager());
+        // ssl
+        if (noSslVerify) {
+            try {
+                httpClientBuilder
+                        .setSSLContext(new SSLContextBuilder()
+                                .loadTrustMaterial(null, TrustAllStrategy.INSTANCE).build())
+                        .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE);
+            } catch (KeyManagementException | NoSuchAlgorithmException | KeyStoreException e) {
+                throw new CryptoParerException(e).withCode(ParerError.ErrorCode.GENERIC_ERROR)
+                        .withMessage("Eccezione generica in fase di creazione client");
+            }
+        }
 
-	client = httpClientBuilder.build();
+        client = httpClientBuilder.build();
     }
 
     /**
@@ -122,77 +122,77 @@ public class CommonsHttpClient implements Serializable {
      * @throws IOException generic exception
      */
     public void destroy() throws IOException {
-	if (client != null) {
-	    client.close();
-	}
+        if (client != null) {
+            client.close();
+        }
     }
 
     private PoolingHttpClientConnectionManager getConnectionManager() {
 
-	PoolingHttpClientConnectionManager connManager = new PoolingHttpClientConnectionManager();
-	connManager.setDefaultMaxPerRoute(httpClientConnectionsmaxperroute);
-	connManager.setMaxTotal(httpClientConnectionsmax);
-	connManager.setDefaultSocketConfig(getSocketConfig());
+        PoolingHttpClientConnectionManager connManager = new PoolingHttpClientConnectionManager();
+        connManager.setDefaultMaxPerRoute(httpClientConnectionsmaxperroute);
+        connManager.setMaxTotal(httpClientConnectionsmax);
+        connManager.setDefaultSocketConfig(getSocketConfig());
 
-	return connManager;
+        return connManager;
     }
 
     private SocketConfig getSocketConfig() {
-	SocketConfig.Builder socketConfigBuilder = SocketConfig.custom();
-	socketConfigBuilder.setSoTimeout(httpClientTimeout * 1000);
-	return socketConfigBuilder.build();
+        SocketConfig.Builder socketConfigBuilder = SocketConfig.custom();
+        socketConfigBuilder.setSoTimeout(httpClientTimeout * 1000);
+        return socketConfigBuilder.build();
     }
 
     public CloseableHttpClient getHttpClient() {
-	return client;
+        return client;
     }
 
     public int getHttpClientTimeout() {
-	return httpClientTimeout;
+        return httpClientTimeout;
     }
 
     public void setHttpClientTimeout(int httpClientTimeout) {
-	this.httpClientTimeout = httpClientTimeout;
+        this.httpClientTimeout = httpClientTimeout;
     }
 
     public int getHttpClientSocketTimeout() {
-	return httpClientSocketTimeout;
+        return httpClientSocketTimeout;
     }
 
     public void setHttpClientSocketTimeout(int httpClientSocketTimeout) {
-	this.httpClientSocketTimeout = httpClientSocketTimeout;
+        this.httpClientSocketTimeout = httpClientSocketTimeout;
     }
 
     public int getHttpClientConnectionsmaxperroute() {
-	return httpClientConnectionsmaxperroute;
+        return httpClientConnectionsmaxperroute;
     }
 
     public void setHttpClientConnectionsmaxperroute(int httpClientConnectionsmaxperroute) {
-	this.httpClientConnectionsmaxperroute = httpClientConnectionsmaxperroute;
+        this.httpClientConnectionsmaxperroute = httpClientConnectionsmaxperroute;
     }
 
     public int getHttpClientConnectionsmax() {
-	return httpClientConnectionsmax;
+        return httpClientConnectionsmax;
     }
 
     public void setHttpClientConnectionsmax(int httpClientConnectionsmax) {
-	this.httpClientConnectionsmax = httpClientConnectionsmax;
+        this.httpClientConnectionsmax = httpClientConnectionsmax;
     }
 
     public long getHttpClientTimeToLive() {
-	return httpClientTimeToLive;
+        return httpClientTimeToLive;
     }
 
     public void setHttpClientTimeToLive(long httpClientTimeToLive) {
-	this.httpClientTimeToLive = httpClientTimeToLive;
+        this.httpClientTimeToLive = httpClientTimeToLive;
     }
 
     public boolean isNoSslVerify() {
-	return noSslVerify;
+        return noSslVerify;
     }
 
     public void setNoSslVerify(boolean noSslVerify) {
-	this.noSslVerify = noSslVerify;
+        this.noSslVerify = noSslVerify;
     }
 
 }

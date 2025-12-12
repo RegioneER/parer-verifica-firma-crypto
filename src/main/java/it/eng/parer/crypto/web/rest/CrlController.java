@@ -66,47 +66,47 @@ public class CrlController {
 
     @Operation(summary = "CRL", method = "Inserimento CRL")
     @ApiResponses(value = {
-	    @ApiResponse(responseCode = "200", description = "CRL inserita correttamente", content = {
-		    @Content(mediaType = "application/json", schema = @Schema(implementation = ParerCRL.class)) }),
-	    @ApiResponse(responseCode = "400", description = "Richiesta non valida", content = {
-		    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }) })
+            @ApiResponse(responseCode = "200", description = "CRL inserita correttamente", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = ParerCRL.class)) }),
+            @ApiResponse(responseCode = "400", description = "Richiesta non valida", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }) })
     @PostMapping(value = RESOURCE_CRL, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ParerCRL addCrlByUrls(@RequestBody List<String> urls) {
-	return crlService.addCrlByURL(urls);
+        return crlService.addCrlByURL(urls);
     }
 
     @Operation(summary = "Trova CRL", method = "Ottieni la crl utilizzando cerificato del firmatario codificato in base64 url encoded")
     @ApiResponses(value = {
-	    @ApiResponse(responseCode = "200", description = "CRL restituita correttamente", content = {
-		    @Content(mediaType = "application/json", schema = @Schema(implementation = ParerCRL.class)) }),
-	    @ApiResponse(responseCode = "400", description = "Richiesta non valida", content = {
-		    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }),
-	    @ApiResponse(responseCode = "404", description = "CRL non trovata", content = {
-		    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }) })
+            @ApiResponse(responseCode = "200", description = "CRL restituita correttamente", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = ParerCRL.class)) }),
+            @ApiResponse(responseCode = "400", description = "Richiesta non valida", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }),
+            @ApiResponse(responseCode = "404", description = "CRL non trovata", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }) })
     @GetMapping(value = RESOURCE_CRL, produces = MediaType.APPLICATION_JSON_VALUE)
     public ParerCRL getCrl(
-	    @RequestParam("certifFirmatarioBase64UrlEncoded") String certifFirmatarioBase64UrlEncoded,
-	    HttpServletRequest request, UriComponentsBuilder builder) {
-	log.atDebug().log("Lunghezza della stringa codificata passata come queryString: {}",
-		certifFirmatarioBase64UrlEncoded.length());
-	byte[] extvalue = Base64.getUrlDecoder().decode(certifFirmatarioBase64UrlEncoded);
-	String subjectDN = certificateService.getCertificateSubjectDN(extvalue);
-	String authKeyId = certificateService.getCertificateKeyId(extvalue);
+            @RequestParam("certifFirmatarioBase64UrlEncoded") String certifFirmatarioBase64UrlEncoded,
+            HttpServletRequest request, UriComponentsBuilder builder) {
+        log.atDebug().log("Lunghezza della stringa codificata passata come queryString: {}",
+                certifFirmatarioBase64UrlEncoded.length());
+        byte[] extvalue = Base64.getUrlDecoder().decode(certifFirmatarioBase64UrlEncoded);
+        String subjectDN = certificateService.getCertificateSubjectDN(extvalue);
+        String authKeyId = certificateService.getCertificateKeyId(extvalue);
 
-	return crlService.getCrl(subjectDN, authKeyId);
+        return crlService.getCrl(subjectDN, authKeyId);
     }
 
     @Operation(summary = "Trova CRL", method = "Ottieni la CRL utilizzando l'id composto da MD5(subjectDN + authKeyId)")
     @ApiResponses(value = {
-	    @ApiResponse(responseCode = "200", description = "CRL restituita correttamente", content = {
-		    @Content(mediaType = "application/json", schema = @Schema(implementation = ParerCRL.class)) }),
-	    @ApiResponse(responseCode = "400", description = "Richiesta non valida", content = {
-		    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }),
-	    @ApiResponse(responseCode = "404", description = "CRL non trovata", content = {
-		    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }) })
+            @ApiResponse(responseCode = "200", description = "CRL restituita correttamente", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = ParerCRL.class)) }),
+            @ApiResponse(responseCode = "400", description = "Richiesta non valida", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }),
+            @ApiResponse(responseCode = "404", description = "CRL non trovata", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }) })
     @GetMapping(value = RESOURCE_CRL + "/{crlId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ParerCRL ottieniCrlPuntuale(@PathVariable("crlId") String crlId) {
-	return crlService.getCRL(crlId);
+        return crlService.getCRL(crlId);
     }
 
 }

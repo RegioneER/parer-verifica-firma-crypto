@@ -42,7 +42,7 @@ public class SpringTikaSingleton {
 
     @PostConstruct
     protected void initSingleton() {
-	tika = new Tika();
+        tika = new Tika();
     }
 
     /**
@@ -53,22 +53,22 @@ public class SpringTikaSingleton {
      * @return il mime type identificato o null
      */
     public String detectMimeType(File document) {
-	String mimeType = null;
+        String mimeType = null;
 
-	if (document != null) {
+        if (document != null) {
 
-	    Metadata metadata = new Metadata();
-	    // Uso il TikaInputStream per riconoscere il mimetype application/msword (SUE #25694)
-	    try (InputStream is = TikaInputStream.get(document.toURI().toURL(), metadata);) {
+            Metadata metadata = new Metadata();
+            // Uso il TikaInputStream per riconoscere il mimetype application/msword (SUE #25694)
+            try (InputStream is = TikaInputStream.get(document.toURI().toURL(), metadata);) {
 
-		metadata.set(RESOURCE_NAME_KEY, null);
-		mimeType = tika.detect(is, metadata);
+                metadata.set(RESOURCE_NAME_KEY, null);
+                mimeType = tika.detect(is, metadata);
 
-	    } catch (IOException ex) {
-		log.atWarn().log("Impossibile leggere il file durante il calcolo del MimeType", ex);
-	    }
-	}
-	return mimeType;
+            } catch (IOException ex) {
+                log.atWarn().log("Impossibile leggere il file durante il calcolo del MimeType", ex);
+            }
+        }
+        return mimeType;
     }
 
 }

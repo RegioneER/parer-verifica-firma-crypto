@@ -39,32 +39,32 @@ public class WelcomeController {
     @GetMapping("/")
     public ModelAndView main(Model model) {
 
-	build(model);
+        build(model);
 
-	return new ModelAndView("index");
+        return new ModelAndView("index");
     }
 
     @GetMapping("/admin")
     public ModelAndView admin(Model model) {
 
-	build(model);
+        build(model);
 
-	return new ModelAndView("admin");
+        return new ModelAndView("admin");
     }
 
     private void build(Model model) {
-	// application properties
-	viewHelper.convertAppPropertiesAsMap(model);
+        // application properties
+        viewHelper.convertAppPropertiesAsMap(model);
 
-	// app infos
-	this.infos(model);
+        // app infos
+        this.infos(model);
     }
 
     private void infos(Model model) {
-	model.addAttribute("version", env.getProperty(Constants.BUILD_VERSION));
-	model.addAttribute("builddate", env.getProperty(Constants.BUILD_TIME));
-	model.addAttribute("engcryptolibrary",
-		buildProperties.get(Constants.CRYPTOLIBRARY_VERSION));
+        model.addAttribute("version", env.getProperty(Constants.BUILD_VERSION));
+        model.addAttribute("builddate", env.getProperty(Constants.BUILD_TIME));
+        model.addAttribute("engcryptolibrary",
+                buildProperties.get(Constants.CRYPTOLIBRARY_VERSION));
 
     }
 

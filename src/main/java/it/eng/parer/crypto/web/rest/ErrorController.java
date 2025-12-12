@@ -58,33 +58,33 @@ public class ErrorController {
 
     @Operation(summary = "Errors", method = "Lista dei codici di errore dell'applicazione")
     @ApiResponses(value = {
-	    @ApiResponse(responseCode = "200", description = "Lista codici di errore", content = {
-		    @Content(mediaType = "application/json", schema = @Schema(implementation = ParerErrorDoc[].class)) }) })
+            @ApiResponse(responseCode = "200", description = "Lista codici di errore", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = ParerErrorDoc[].class)) }) })
     @GetMapping(value = RESOURCE_ERRORS, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ParerErrorDoc>> docs(HttpServletRequest request) {
 
-	List<ParerErrorDoc> docs = new ArrayList<>();
-	for (ParerError.ErrorCode code : ParerError.ErrorCode.values()) {
-	    String selfLink = request.getRequestURL().toString() + "/" + code.urlFriendly();
-	    ParerErrorDoc doc = docService.compilaErrore(code.urlFriendly(), selfLink);
-	    docs.add(doc);
-	}
+        List<ParerErrorDoc> docs = new ArrayList<>();
+        for (ParerError.ErrorCode code : ParerError.ErrorCode.values()) {
+            String selfLink = request.getRequestURL().toString() + "/" + code.urlFriendly();
+            ParerErrorDoc doc = docService.compilaErrore(code.urlFriendly(), selfLink);
+            docs.add(doc);
+        }
 
-	return ResponseEntity.ok().lastModified(LocalDateTime.now().atZone(ZoneId.systemDefault()))
-		.eTag(ETAG).body(docs);
+        return ResponseEntity.ok().lastModified(LocalDateTime.now().atZone(ZoneId.systemDefault()))
+                .eTag(ETAG).body(docs);
     }
 
     @Operation(summary = "Documents", method = "Dettaglio codice di errore by code")
     @ApiResponses(value = {
-	    @ApiResponse(responseCode = "200", description = "Dettaglio codice di errore", content = {
-		    @Content(mediaType = "application/json", schema = @Schema(implementation = ParerErrorDoc.class)) }) })
+            @ApiResponse(responseCode = "200", description = "Dettaglio codice di errore", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = ParerErrorDoc.class)) }) })
     @GetMapping(value = RESOURCE_ERRORS + "/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ParerErrorDoc> docs(@PathVariable("code") String errorCode,
-	    HttpServletRequest request) {
-	String selfLink = request.getRequestURL().toString();
-	ParerErrorDoc body = docService.compilaErrore(errorCode, selfLink);
+            HttpServletRequest request) {
+        String selfLink = request.getRequestURL().toString();
+        ParerErrorDoc body = docService.compilaErrore(errorCode, selfLink);
 
-	return ResponseEntity.ok().lastModified(LocalDateTime.now().atZone(ZoneId.systemDefault()))
-		.eTag(ETAG).body(body);
+        return ResponseEntity.ok().lastModified(LocalDateTime.now().atZone(ZoneId.systemDefault()))
+                .eTag(ETAG).body(body);
     }
 }

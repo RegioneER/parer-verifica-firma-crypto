@@ -46,28 +46,28 @@ public class CRLHelper implements CRLHelperLocal {
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void upsertCRL(X509CRL crl) throws CryptoStorageException {
-	try {
-	    String keyId = SignerUtil.getAuthorityKeyId(crl);
-	    keyId = keyId == null ? "NON_VALORIZZATO" : keyId;
-	    CryCrlPK pk = new CryCrlPK(crl.getIssuerX500Principal().getName(), keyId);
-	    CryCrl entityCrl = null;
-	    Optional<CryCrl> res = repository.findById(pk);
-	    if (!res.isPresent()) {
-		entityCrl = new CryCrl();
-	    } else {
-		entityCrl = res.get();
-	    }
+        try {
+            String keyId = SignerUtil.getAuthorityKeyId(crl);
+            keyId = keyId == null ? "NON_VALORIZZATO" : keyId;
+            CryCrlPK pk = new CryCrlPK(crl.getIssuerX500Principal().getName(), keyId);
+            CryCrl entityCrl = null;
+            Optional<CryCrl> res = repository.findById(pk);
+            if (!res.isPresent()) {
+                entityCrl = new CryCrl();
+            } else {
+                entityCrl = res.get();
+            }
 
-	    entityCrl.setSubjectdn(crl.getIssuerX500Principal().getName());
-	    entityCrl.setUpdateData(crl.getThisUpdate());
-	    entityCrl.setNextExpiration(crl.getNextUpdate());
-	    entityCrl.setCrl(crl.getEncoded());
-	    entityCrl.setKeyId(keyId);
-	    repository.save(entityCrl);
+            entityCrl.setSubjectdn(crl.getIssuerX500Principal().getName());
+            entityCrl.setUpdateData(crl.getThisUpdate());
+            entityCrl.setNextExpiration(crl.getNextUpdate());
+            entityCrl.setCrl(crl.getEncoded());
+            entityCrl.setKeyId(keyId);
+            repository.save(entityCrl);
 
-	} catch (Exception e) {
-	    throw new CryptoStorageException(e);
-	}
+        } catch (Exception e) {
+            throw new CryptoStorageException(e);
+        }
     }
 
     /**
@@ -82,32 +82,32 @@ public class CRLHelper implements CRLHelperLocal {
      */
     @Override
     public X509CRL retriveCRL(String subjectDN, String keyId) throws CryptoStorageException {
-	X509CRL ret = null;
-	keyId = keyId == null ? "NON_VALORIZZATO" : keyId;
-	CryCrlPK pk = new CryCrlPK(subjectDN, keyId);
-	Optional<CryCrl> res = repository.findById(pk);
-	if (res.isPresent()) {
-	    try {
-		ret = CRLUtil.parse(res.get().getCrl());
-	    } catch (Exception e) {
-		throw new CryptoStorageException(e);
-	    }
-	}
-	return ret;
+        X509CRL ret = null;
+        keyId = keyId == null ? "NON_VALORIZZATO" : keyId;
+        CryCrlPK pk = new CryCrlPK(subjectDN, keyId);
+        Optional<CryCrl> res = repository.findById(pk);
+        if (res.isPresent()) {
+            try {
+                ret = CRLUtil.parse(res.get().getCrl());
+            } catch (Exception e) {
+                throw new CryptoStorageException(e);
+            }
+        }
+        return ret;
     }
 
     @Override
     public X509CRL getByUniqueId(String uniqueId) throws CryptoStorageException {
-	Optional<CryCrl> res = repository.findByUniqueId(uniqueId);
-	X509CRL result = null;
-	try {
-	    if (res.isPresent()) {
-		result = CRLUtil.parse(res.get().getCrl());
-	    }
-	} catch (Exception e) {
-	    throw new CryptoStorageException(e);
-	}
-	return result;
+        Optional<CryCrl> res = repository.findByUniqueId(uniqueId);
+        X509CRL result = null;
+        try {
+            if (res.isPresent()) {
+                result = CRLUtil.parse(res.get().getCrl());
+            }
+        } catch (Exception e) {
+            throw new CryptoStorageException(e);
+        }
+        return result;
     }
 
     /**
@@ -116,7 +116,7 @@ public class CRLHelper implements CRLHelperLocal {
      * @param em entityManager
      */
     public void setEm(EntityManager em) {
-	this.em = em;
+        this.em = em;
     }
 
 }

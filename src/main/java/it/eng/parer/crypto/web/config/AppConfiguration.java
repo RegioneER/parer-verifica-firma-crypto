@@ -95,21 +95,21 @@ public class AppConfiguration implements WebMvcConfigurer {
      */
     @Override
     public void configurePathMatch(PathMatchConfigurer configurer) {
-	UrlPathHelper urlPathHelper = new UrlPathHelper();
-	urlPathHelper.setDefaultEncoding(Charset.defaultCharset().name());
-	urlPathHelper.setUrlDecode(false);
-	configurer.setUrlPathHelper(urlPathHelper);
+        UrlPathHelper urlPathHelper = new UrlPathHelper();
+        urlPathHelper.setDefaultEncoding(Charset.defaultCharset().name());
+        urlPathHelper.setUrlDecode(false);
+        configurer.setUrlPathHelper(urlPathHelper);
     }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-	// static resources
-	registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
-	// swagger
-	registry.addResourceHandler("swagger-ui.html")
-		.addResourceLocations("classpath:/META-INF/resources/");
-	registry.addResourceHandler("/webjars/**")
-		.addResourceLocations("classpath:/META-INF/resources/webjars/");
+        // static resources
+        registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
+        // swagger
+        registry.addResourceHandler("swagger-ui.html")
+                .addResourceLocations("classpath:/META-INF/resources/");
+        registry.addResourceHandler("/webjars/**")
+                .addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 
     /**
@@ -119,14 +119,14 @@ public class AppConfiguration implements WebMvcConfigurer {
      */
     @Bean
     public ThreadPoolTaskScheduler threadPoolTaskScheduler() {
-	ThreadPoolTaskScheduler threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
-	threadPoolTaskScheduler.setWaitForTasksToCompleteOnShutdown(true);
-	threadPoolTaskScheduler.setPoolSize(threadPoolSize);
-	threadPoolTaskScheduler.setThreadNamePrefix("job-scarico-CA-CRL-");
-	threadPoolTaskScheduler.setThreadPriority(Thread.MIN_PRIORITY);
-	log.atDebug().log("Creazione pool di thread per i job di scarico CA/CRL con dimensione "
-		+ threadPoolSize);
-	return threadPoolTaskScheduler;
+        ThreadPoolTaskScheduler threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
+        threadPoolTaskScheduler.setWaitForTasksToCompleteOnShutdown(true);
+        threadPoolTaskScheduler.setPoolSize(threadPoolSize);
+        threadPoolTaskScheduler.setThreadNamePrefix("job-scarico-CA-CRL-");
+        threadPoolTaskScheduler.setThreadPriority(Thread.MIN_PRIORITY);
+        log.atDebug().log("Creazione pool di thread per i job di scarico CA/CRL con dimensione "
+                + threadPoolSize);
+        return threadPoolTaskScheduler;
     }
 
     /*
@@ -134,45 +134,45 @@ public class AppConfiguration implements WebMvcConfigurer {
      */
     @Bean
     public SignerUtil signerUtil(ApplicationContext applicationContext) {
-	return SignerUtil.newInstance(applicationContext);
+        return SignerUtil.newInstance(applicationContext);
     }
 
     @Bean
     public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
-	MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
-	List<MediaType> supportedMediaTypes = new ArrayList<>(
-		mappingJackson2HttpMessageConverter.getSupportedMediaTypes());
+        MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
+        List<MediaType> supportedMediaTypes = new ArrayList<>(
+                mappingJackson2HttpMessageConverter.getSupportedMediaTypes());
 
-	supportedMediaTypes.add(new MediaType(MediaType.TEXT_PLAIN, StandardCharsets.UTF_8));
-	supportedMediaTypes.add(new MediaType(MediaType.TEXT_PLAIN, StandardCharsets.ISO_8859_1));
+        supportedMediaTypes.add(new MediaType(MediaType.TEXT_PLAIN, StandardCharsets.UTF_8));
+        supportedMediaTypes.add(new MediaType(MediaType.TEXT_PLAIN, StandardCharsets.ISO_8859_1));
 
-	mappingJackson2HttpMessageConverter.setSupportedMediaTypes(supportedMediaTypes);
+        mappingJackson2HttpMessageConverter.setSupportedMediaTypes(supportedMediaTypes);
 
-	return mappingJackson2HttpMessageConverter;
+        return mappingJackson2HttpMessageConverter;
     }
 
     @Bean
     public OpenAPI cryptoOpenAPI() {
-	return new OpenAPI().info(new Info().title("Verifica firma CRYPTO")
-		.description("Microserivice per verifica firma basato su cryptolibrary")
-		.version((StringUtils.isNotBlank(getClass().getPackage().getImplementationVersion())
-			? getClass().getPackage().getImplementationVersion()
-			: "")));
+        return new OpenAPI().info(new Info().title("Verifica firma CRYPTO")
+                .description("Microserivice per verifica firma basato su cryptolibrary")
+                .version((StringUtils.isNotBlank(getClass().getPackage().getImplementationVersion())
+                        ? getClass().getPackage().getImplementationVersion()
+                        : "")));
     }
 
     /** CUSTOM HTTP CLIENT ! **/
     @Bean(initMethod = "init", destroyMethod = "destroy")
     public CommonsHttpClient commonsHttpClient() {
-	CommonsHttpClient commonsHttpClient = new CommonsHttpClient();
-	// NOTA timeout impostabile (da configurazione!)
-	commonsHttpClient.setHttpClientTimeout(httpClientTimeout);
-	commonsHttpClient.setHttpClientConnectionsmax(httpClientConnectionsmax);
-	commonsHttpClient.setHttpClientSocketTimeout(httpClientSocketTimeout);
-	//
-	commonsHttpClient.setHttpClientConnectionsmaxperroute(httpClientConnectionsmaxperroute);
-	commonsHttpClient.setHttpClientTimeToLive(httpClientTimeToLive);
-	//
-	commonsHttpClient.setNoSslVerify(noSslVerify);
-	return commonsHttpClient;
+        CommonsHttpClient commonsHttpClient = new CommonsHttpClient();
+        // NOTA timeout impostabile (da configurazione!)
+        commonsHttpClient.setHttpClientTimeout(httpClientTimeout);
+        commonsHttpClient.setHttpClientConnectionsmax(httpClientConnectionsmax);
+        commonsHttpClient.setHttpClientSocketTimeout(httpClientSocketTimeout);
+        //
+        commonsHttpClient.setHttpClientConnectionsmaxperroute(httpClientConnectionsmaxperroute);
+        commonsHttpClient.setHttpClientTimeToLive(httpClientTimeToLive);
+        //
+        commonsHttpClient.setNoSslVerify(noSslVerify);
+        return commonsHttpClient;
     }
 }

@@ -53,18 +53,18 @@ public class CertificateService {
      * @return l'authority key id codificato in HEX.
      */
     public String getCertificateKeyId(byte[] extvalue) {
-	try {
+        try {
 
-	    CertificateFactory fact = CertificateFactory.getInstance("X.509", "BC");
-	    // read the certificate
-	    X509Certificate x509Cert = (X509Certificate) fact
-		    .generateCertificate(new ByteArrayInputStream(extvalue));
-	    return SignerUtil.getAuthorityKeyId(x509Cert);
+            CertificateFactory fact = CertificateFactory.getInstance("X.509", "BC");
+            // read the certificate
+            X509Certificate x509Cert = (X509Certificate) fact
+                    .generateCertificate(new ByteArrayInputStream(extvalue));
+            return SignerUtil.getAuthorityKeyId(x509Cert);
 
-	} catch (NoSuchProviderException | IOException | CertificateException ex) {
-	    throw new CryptoParerException(ex).withCode(ParerError.ErrorCode.CERT_IO)
-		    .withMessage("Errore di INPUT/OUTPUT, sul certificato");
-	}
+        } catch (NoSuchProviderException | IOException | CertificateException ex) {
+            throw new CryptoParerException(ex).withCode(ParerError.ErrorCode.CERT_IO)
+                    .withMessage("Errore di INPUT/OUTPUT, sul certificato");
+        }
     }
 
     /**
@@ -75,18 +75,18 @@ public class CertificateService {
      * @return DN dell'authority che ha emesso il certificato.
      */
     public String getCertificateSubjectDN(byte[] derCertificate) {
-	try {
+        try {
 
-	    CertificateFactory fact = CertificateFactory.getInstance("X.509", "BC");
-	    // read the certificate
-	    X509Certificate x509Cert = (X509Certificate) fact
-		    .generateCertificate(new ByteArrayInputStream(derCertificate));
-	    return x509Cert.getIssuerX500Principal().getName();
+            CertificateFactory fact = CertificateFactory.getInstance("X.509", "BC");
+            // read the certificate
+            X509Certificate x509Cert = (X509Certificate) fact
+                    .generateCertificate(new ByteArrayInputStream(derCertificate));
+            return x509Cert.getIssuerX500Principal().getName();
 
-	} catch (NoSuchProviderException | CertificateException ex) {
-	    throw new CryptoParerException(ex).withCode(ParerError.ErrorCode.CERT_IO)
-		    .withMessage("Errore di INPUT/OUTPUT, sul certificato");
-	}
+        } catch (NoSuchProviderException | CertificateException ex) {
+            throw new CryptoParerException(ex).withCode(ParerError.ErrorCode.CERT_IO)
+                    .withMessage("Errore di INPUT/OUTPUT, sul certificato");
+        }
     }
 
     /**
@@ -97,19 +97,19 @@ public class CertificateService {
      * @return l'oggetto che rappresenta il certificato
      */
     public ParerCertificate addCaCertificate(byte[] derCertificate) {
-	try {
-	    CertificateFactory fact = CertificateFactory.getInstance("X.509", "BC");
-	    // read the certificate
-	    X509Certificate x509Cert = (X509Certificate) fact
-		    .generateCertificate(new ByteArrayInputStream(derCertificate));
-	    caHelper.insertCA(x509Cert);
-	    return toParerCertificate(x509Cert);
+        try {
+            CertificateFactory fact = CertificateFactory.getInstance("X.509", "BC");
+            // read the certificate
+            X509Certificate x509Cert = (X509Certificate) fact
+                    .generateCertificate(new ByteArrayInputStream(derCertificate));
+            caHelper.insertCA(x509Cert);
+            return toParerCertificate(x509Cert);
 
-	} catch (IOException | CertificateException | NoSuchProviderException
-		| CryptoStorageException ex) {
-	    throw new CryptoParerException(ex).withCode(ParerError.ErrorCode.CERT_EXCEPTION)
-		    .withMessage("Errore durante l'inserimento del certificato");
-	}
+        } catch (IOException | CertificateException | NoSuchProviderException
+                | CryptoStorageException ex) {
+            throw new CryptoParerException(ex).withCode(ParerError.ErrorCode.CERT_EXCEPTION)
+                    .withMessage("Errore durante l'inserimento del certificato");
+        }
     }
 
     /**
@@ -122,28 +122,28 @@ public class CertificateService {
      *         alcun controllo di validità temporale.
      */
     public boolean existsCaCertificate(String subjectDN, String keyId) {
-	try {
-	    X500Principal subject = new X500Principal(subjectDN);
-	    X509Certificate retriveCA = caHelper.retriveCA(subject, keyId);
-	    return retriveCA != null;
-	} catch (CryptoStorageException ex) {
-	    throw new CryptoParerException(ex).withCode(ParerError.ErrorCode.CERT_EXCEPTION)
-		    .withMessage("Errore durante il recupero del certificato");
-	}
+        try {
+            X500Principal subject = new X500Principal(subjectDN);
+            X509Certificate retriveCA = caHelper.retriveCA(subject, keyId);
+            return retriveCA != null;
+        } catch (CryptoStorageException ex) {
+            throw new CryptoParerException(ex).withCode(ParerError.ErrorCode.CERT_EXCEPTION)
+                    .withMessage("Errore durante il recupero del certificato");
+        }
 
     }
 
     private static ParerCertificate toParerCertificate(X509Certificate certificate)
-	    throws IOException, CertificateEncodingException {
-	ParerCertificate result = new ParerCertificate();
-	result.setContent(certificate.getEncoded());
-	result.setIssuerDN(certificate.getIssuerX500Principal().getName());
-	result.setKeyId(SignerUtil.getAuthorityKeyId(certificate));
-	result.setNotBefore(certificate.getNotBefore());
-	result.setNotAfter(certificate.getNotAfter());
+            throws IOException, CertificateEncodingException {
+        ParerCertificate result = new ParerCertificate();
+        result.setContent(certificate.getEncoded());
+        result.setIssuerDN(certificate.getIssuerX500Principal().getName());
+        result.setKeyId(SignerUtil.getAuthorityKeyId(certificate));
+        result.setNotBefore(certificate.getNotBefore());
+        result.setNotAfter(certificate.getNotAfter());
 
-	result.setSerialNumber(certificate.getSerialNumber());
-	result.setSubjectDN(certificate.getSubjectDN().getName());
-	return result;
+        result.setSerialNumber(certificate.getSerialNumber());
+        result.setSubjectDN(certificate.getSubjectDN().getName());
+        return result;
     }
 }

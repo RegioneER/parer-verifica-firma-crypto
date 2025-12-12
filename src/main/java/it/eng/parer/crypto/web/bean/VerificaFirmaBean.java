@@ -48,91 +48,91 @@ public class VerificaFirmaBean implements Serializable {
     private boolean includiRaw = false;
 
     public boolean isAbilitaControlloCrl() {
-	return abilitaControlloCrl;
+        return abilitaControlloCrl;
     }
 
     public void setAbilitaControlloCrl(boolean abilitaControlloCrl) {
-	this.abilitaControlloCrl = abilitaControlloCrl;
+        this.abilitaControlloCrl = abilitaControlloCrl;
     }
 
     public boolean isAbilitaControlloCatenaTrusted() {
-	return abilitaControlloCatenaTrusted;
+        return abilitaControlloCatenaTrusted;
     }
 
     public void setAbilitaControlloCatenaTrusted(boolean abilitaControlloCatenaTrusted) {
-	this.abilitaControlloCatenaTrusted = abilitaControlloCatenaTrusted;
+        this.abilitaControlloCatenaTrusted = abilitaControlloCatenaTrusted;
     }
 
     public boolean isAbilitaControlloCa() {
-	return abilitaControlloCa;
+        return abilitaControlloCa;
     }
 
     public void setAbilitaControlloCa(boolean abilitaControlloCa) {
-	this.abilitaControlloCa = abilitaControlloCa;
+        this.abilitaControlloCa = abilitaControlloCa;
     }
 
     public boolean isAbilitaControlloCrittografico() {
-	return abilitaControlloCrittografico;
+        return abilitaControlloCrittografico;
     }
 
     public void setAbilitaControlloCrittografico(boolean abilitaControlloCrittografico) {
-	this.abilitaControlloCrittografico = abilitaControlloCrittografico;
+        this.abilitaControlloCrittografico = abilitaControlloCrittografico;
     }
 
     public LocalDate getDataRiferimento() {
-	return dataRiferimento;
+        return dataRiferimento;
     }
 
     public void setDataRiferimento(LocalDate dataRiferimento) {
-	this.dataRiferimento = dataRiferimento;
+        this.dataRiferimento = dataRiferimento;
     }
 
     public LocalTime getOraRiferimento() {
-	return oraRiferimento;
+        return oraRiferimento;
     }
 
     public void setOraRiferimento(LocalTime oraRiferimento) {
-	this.oraRiferimento = oraRiferimento;
+        this.oraRiferimento = oraRiferimento;
     }
 
     public boolean isVerificaAllaDataFirma() {
-	return verificaAllaDataFirma;
+        return verificaAllaDataFirma;
     }
 
     public void setVerificaAllaDataFirma(boolean verificaAllaDataFirma) {
-	this.verificaAllaDataFirma = verificaAllaDataFirma;
+        this.verificaAllaDataFirma = verificaAllaDataFirma;
     }
 
     public MultipartFile getFileDaVerificare() {
-	return fileDaVerificare;
+        return fileDaVerificare;
     }
 
     public void setFileDaVerificare(MultipartFile fileDaVerificare) {
-	this.fileDaVerificare = fileDaVerificare;
+        this.fileDaVerificare = fileDaVerificare;
     }
 
     public List<MultipartFile> getMarcheDetached() {
-	return marcheDetached;
+        return marcheDetached;
     }
 
     public void setMarcheDetached(List<MultipartFile> marcheDetached) {
-	this.marcheDetached = marcheDetached;
+        this.marcheDetached = marcheDetached;
     }
 
     public List<MultipartFile> getFirmeDetached() {
-	return firmeDetached;
+        return firmeDetached;
     }
 
     public void setFirmeDetached(List<MultipartFile> firmeDetached) {
-	this.firmeDetached = firmeDetached;
+        this.firmeDetached = firmeDetached;
     }
 
     public boolean isIncludiRaw() {
-	return includiRaw;
+        return includiRaw;
     }
 
     public void setIncludiRaw(boolean includiRaw) {
-	this.includiRaw = includiRaw;
+        this.includiRaw = includiRaw;
     }
 
 }
