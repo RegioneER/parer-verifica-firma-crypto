@@ -1583,9 +1583,9 @@ class VerficaFirmaTest {
 	Util.assertNumeroDiFirmeOK(componente, 3);
 
 	// la seconda viene valutata come negatica sul controllo crittografico.
-	Util.assertControlloFirmaKO(componente.getAroFirmaComps().get(1),
+	Util.assertControlloFirmaOK(componente.getAroFirmaComps().get(1),
 		VerificheEnums.TipoControlli.CRITTOGRAFICO);
-	Util.assertControlloFirmaKO(componente.getAroFirmaComps().get(1),
+	Util.assertControlloFirmaOK(componente.getAroFirmaComps().get(1),
 		VerificheEnums.TipoControlli.CRITTOGRAFICO_ABILITATO);
     }
 

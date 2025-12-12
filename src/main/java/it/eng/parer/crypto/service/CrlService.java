@@ -195,7 +195,7 @@ public class CrlService {
 	BigInteger crlNum = null;
 	if (crlNumByte != null) {
 	    crlNum = org.bouncycastle.asn1.x509.CRLNumber
-		    .getInstance(X509ExtensionUtil.fromExtensionValue(crlNumByte)).getValue();
+		    .getInstance(X509ExtensionUtil.fromExtensionValue(crlNumByte)).getCRLNumber();
 	}
 
 	parerCrl.setCrlNum(crlNum);

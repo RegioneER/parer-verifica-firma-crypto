@@ -41,9 +41,9 @@ import java.util.Objects;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.mutable.MutableInt;
 import org.apache.commons.lang3.StringUtils;
-import org.bouncycastle.asn1.DERInteger;
+import org.apache.commons.lang3.mutable.MutableInt;
+import org.bouncycastle.asn1.ASN1Integer;
 import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.asn1.x500.style.BCStyle;
 import org.bouncycastle.asn1.x509.X509Extension;
@@ -1350,7 +1350,7 @@ public class VerificaFirmaService {
 	    firCrl = new CryptoFirCrl();
 	    byte[] crlNumByte = crl.getExtensionValue(X509Extension.cRLNumber.getId());
 	    BigInteger crlNum = crlNumByte != null
-		    ? DERInteger.getInstance(X509ExtensionUtil.fromExtensionValue(crlNumByte))
+		    ? ASN1Integer.getInstance(X509ExtensionUtil.fromExtensionValue(crlNumByte))
 			    .getValue()
 		    : null;
 	    firCrl.setDtIniCrl(crl.getThisUpdate());

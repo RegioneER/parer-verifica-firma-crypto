@@ -7,26 +7,27 @@
 <body>
 	<div th:replace="~{fragments/template.html :: main}"></div>
 
-	<div sec:authorize="hasRole('ROLE_ADMIN')" th:if="${@environment.getProperty('parer.crypto.admin-ui.enabled') ?: true}" class="container"
-		style="padding-top: 10px; padding-bottom: 10px;">
-		<div class="row">
-			<div class="col-sm-11">
-				<span class="glyphicon glyphicon-user" /> Utente: <strong><span
-						sec:authentication="name"></span></strong>
+    <div sec:authorize="hasRole('ROLE_ADMIN')" 
+         th:if="${@environment.getProperty('parer.crypto.admin-ui.enabled') ?: true}" 
+         class="container" style="padding-top: 10px; padding-bottom: 10px;">
+		<div class="row justify-content-end">
+			<div class="col-auto text-end">
+				<span class="fa fa-user fa-sm" /> Utente: <strong><span sec:authentication="name"></span></strong>
 			</div>
-			<div class="col-sm-1">
-				<a href="#" class="btn btn-primary btn-sm glyphicon glyphicon-off"
-						th:href="@{/logout}"> Esci</a>
+			<div class="col-auto text-end">
+				<a href="#" class="btn btn-primary btn-sm fa fa-sign-out" th:href="@{/logout}"> Esci</a>
 			</div>
 		</div>
 	</div>
-
+	
 	<div class="container" th:if="${@environment.getProperty('parer.crypto.admin-ui.enabled') ?: true}">
-		<ul class="breadcrumb">
-			<li><a href="#" th:href="@{/admin}" class="glyphicon glyphicon-asterisk"> Admin</a></li>
-		</ul>
-	</div>
-
+	 <nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li><a href="#" th:href="@{/admin}" class="fa fa-asterisk fa-sm"> Admin</a></li>		
+		</ol>				  
+	  </nav>
+	</div>	
+	
 	<div class="container">
 		<div class="panel-group" id="accordion">
 			<div th:replace="~{fragments/spring.html :: apidocs}"></div>
