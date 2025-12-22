@@ -13,7 +13,6 @@
 
 package it.eng.parer.crypto.web.rest;
 
-import static it.eng.parer.crypto.web.util.EndPointCostants.RESOURCE_FILEXML;
 import static it.eng.parer.crypto.web.util.EndPointCostants.RESOURCE_UNSIGNED_P7M;
 import static it.eng.parer.crypto.web.util.EndPointCostants.URL_API_BASE;
 
@@ -37,7 +36,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -82,35 +80,6 @@ public class P7mExtractorController {
 
     @Autowired
     CommonsHttpClient commonsHttpClient;
-
-    @Operation(summary = "P7m XML Extractor", method = "Ottieni xml originale (non firmato) a partire dal documento xml.p7m")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "File xml estratto correttamente", content = {
-                    @Content(mediaType = "application/xml", schema = @Schema(implementation = ResponseEntity.class)) }),
-            @ApiResponse(responseCode = "400", description = "Richiesta non valida", content = {
-                    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }),
-            @ApiResponse(responseCode = "500", description = "Errore generico", content = {
-                    @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }) })
-    @PostMapping(value = RESOURCE_FILEXML, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<String> extractXmlP7mMultipart(
-            @RequestPart(name = "xml-p7m", required = true) MultipartFile xmlP7mFile) {
-
-        Path xmlDaSbustare = null;
-        try {
-            xmlDaSbustare = Files.createTempFile("da-sbustare", "xml.p7m", attr);
-            xmlP7mFile.transferTo(xmlDaSbustare);
-            String xmlSbustato = service.extractXmlFromP7m(xmlDaSbustare);
-
-            return new ResponseEntity<>(xmlSbustato, HttpStatus.OK);
-
-        } catch (IOException e) {
-            throw new CryptoParerException().withCode(ParerError.ErrorCode.SIGNATURE_FORMAT)
-                    .withMessage(e.getMessage())
-                    .withDetail("Impossibile estrarre documento originale xml.p7m");
-        } finally {
-            deleteUnsignedTmp(xmlDaSbustare);
-        }
-    }
 
     @Operation(summary = "P7m Extractor", method = "Ottieni documento originale (non firmato) a partire da quello firmato p7m")
     @ApiResponses(value = {

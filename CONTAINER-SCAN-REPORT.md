@@ -1,11 +1,10 @@
 ## Container scan evidence CVE
 <strong>Image name:</strong> registry.ente.regione.emr.it/parer/okd/crypto:sast
-<br/><strong>Run date:</strong> Thu Dec 11 11:27:53 CET 2025
-<br/><strong>Produced by:</strong> <a href="https://gitlab.ente.regione.emr.it/parer/okd/crypto/-/jobs/835368">Job</a>
-<br/><strong>CVE founded:</strong> 14
+<br/><strong>Run date:</strong> Mon Dec 22 10:20:37 CET 2025
+<br/><strong>Produced by:</strong> <a href="https://gitlab.ente.regione.emr.it/parer/okd/crypto/-/jobs/844515">Job</a>
+<br/><strong>CVE founded:</strong> 13
 | CVE | Description | Severity | Solution | 
 |:---:|:---|:---:|:---|
-| [CVE-2025-59375](http://www.openwall.com/lists/oss-security/2025/09/16/2)|libexpat in Expat before 2.7.2 allows attackers to trigger large dynamic memory allocations via a small document that is submitted for parsing.|High|No solution provided|
 | [CVE-2025-64720](https://access.redhat.com/security/cve/CVE-2025-64720)|LIBPNG is a reference library for use in applications that read, create, and manipulate PNG (Portable Network Graphics) raster image files. From version 1.6.0 to before 1.6.51, an out-of-bounds read vulnerability exists in png_image_read_composite when processing palette images with PNG_FLAG_OPTIMIZE_ALPHA enabled. The palette compositing code in png_init_read_transformations incorrectly applies background compositing during premultiplication, violating the invariant component ≤ alpha × 257 required by the simplified PNG API. This issue has been patched in version 1.6.51.|High|No solution provided|
 | [CVE-2025-65018](https://access.redhat.com/security/cve/CVE-2025-65018)|LIBPNG is a reference library for use in applications that read, create, and manipulate PNG (Portable Network Graphics) raster image files. From version 1.6.0 to before 1.6.51, there is a heap buffer overflow vulnerability in the libpng simplified API function png_image_finish_read when processing 16-bit interlaced PNGs with 8-bit output format. Attacker-crafted interlaced PNG files cause heap writes beyond allocated buffer bounds. This issue has been patched in version 1.6.51.|High|No solution provided|
 | [CVE-2025-66293](http://www.openwall.com/lists/oss-security/2025/12/03/6)|LIBPNG is a reference library for use in applications that read, create, and manipulate PNG (Portable Network Graphics) raster image files. Prior to 1.6.52, an out-of-bounds read vulnerability in libpng's simplified API allows reading up to 1012 bytes beyond the png_sRGB_base[512] array when processing valid palette PNG images with partial transparency and gamma correction. The PNG files that trigger this vulnerability are valid per the PNG specification; the bug is in libpng's internal state management. Upgrade to libpng 1.6.52 or later.|High|No solution provided|
