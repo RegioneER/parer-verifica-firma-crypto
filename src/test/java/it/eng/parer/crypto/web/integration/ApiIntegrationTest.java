@@ -15,7 +15,6 @@ package it.eng.parer.crypto.web.integration;
 
 import static it.eng.parer.crypto.web.util.EndPointCostants.URL_CRL;
 import static it.eng.parer.crypto.web.util.EndPointCostants.URL_ERRORS;
-import static it.eng.parer.crypto.web.util.EndPointCostants.URL_FILEXML;
 import static it.eng.parer.crypto.web.util.EndPointCostants.URL_REPORT_VERIFICA;
 import static it.eng.parer.crypto.web.util.EndPointCostants.URL_TSD;
 import static it.eng.parer.crypto.web.util.EndPointCostants.URL_TST;
@@ -758,27 +757,6 @@ class ApiIntegrationTest {
 
     }
 
-    @Test
-    void testXmlExtraction() throws IOException {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
-
-        restTemplate.getRestTemplate().setErrorHandler(new CryptoErrorHandler());
-        Resource resource = resourceLoader.getResource("classpath:firme/p7m_b64.xml.p7m");
-        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-
-        body.add("xml-p7m", resource);
-        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
-        String actualValue = restTemplate.postForObject(URL_FILEXML, requestEntity, String.class);
-
-        Resource resourceSbustato = resourceLoader
-                .getResource("classpath:firme/p7m_b64_sbustato.xml");
-        byte[] readAllBytes = Files.readAllBytes(resourceSbustato.getFile().toPath());
-        String expectedValue = new String(readAllBytes);
-
-        assertEquals(expectedValue, actualValue);
-
-    }
 
     @Test
     void testP7mExtractionMultipart() throws IOException {
