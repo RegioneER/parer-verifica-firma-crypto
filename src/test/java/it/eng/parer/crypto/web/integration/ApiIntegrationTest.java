@@ -65,7 +65,6 @@ import org.springframework.web.client.DefaultResponseErrorHandler;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.google.common.io.Resources;
 
 import it.eng.crypto.data.type.SignerType;
 import it.eng.crypto.utils.VerificheEnums;
@@ -160,27 +159,27 @@ class ApiIntegrationTest {
         Resource pdfFirmeMultipleErroreCrittoCRLResource = resourceLoader
                 .getResource("classpath:testPdfFirmeMultipleErroreCritto-crl.crl");
 
-        byte[] caBlob = Resources.toByteArray(resource.getURL());
-        byte[] tsaInfoCertBlob = Resources.toByteArray(tsaInfoCertResource.getURL());
-        byte[] actalisCaBlob = Resources.toByteArray(actalisCaResource.getURL());
-        byte[] actalisCrlBlob = Resources.toByteArray(actalisCRLResource.getURL());
-        byte[] postecomCaBlob = Resources.toByteArray(postecomCaResource.getURL());
-        byte[] postecomCrlBlob = Resources.toByteArray(postecomCRLResource.getURL());
-        byte[] arubaCaBlob = Resources.toByteArray(arubaCaResource.getURL());
-        byte[] arubaTsaBlob = Resources.toByteArray(arubaTsaResource.getURL());
-        byte[] telecomCaBlob = Resources.toByteArray(telecomCaResource.getURL());
-        byte[] arubapecCaBlob = Resources.toByteArray(arubapecCaResource.getURL());
-        byte[] actalisXadesCaBlob = Resources.toByteArray(actalisXadesCaResource.getURL());
-        byte[] postecertCaBlob = Resources.toByteArray(postecertCaResource.getURL());
-        byte[] infocertStranoCaBlob = Resources.toByteArray(infocertStranoCaResource.getURL());
-        byte[] multicertifyActalisTsaResourceTsaBlob = Resources
+        byte[] caBlob = IOUtils.toByteArray(resource.getURL());
+        byte[] tsaInfoCertBlob = IOUtils.toByteArray(tsaInfoCertResource.getURL());
+        byte[] actalisCaBlob = IOUtils.toByteArray(actalisCaResource.getURL());
+        byte[] actalisCrlBlob = IOUtils.toByteArray(actalisCRLResource.getURL());
+        byte[] postecomCaBlob = IOUtils.toByteArray(postecomCaResource.getURL());
+        byte[] postecomCrlBlob = IOUtils.toByteArray(postecomCRLResource.getURL());
+        byte[] arubaCaBlob = IOUtils.toByteArray(arubaCaResource.getURL());
+        byte[] arubaTsaBlob = IOUtils.toByteArray(arubaTsaResource.getURL());
+        byte[] telecomCaBlob = IOUtils.toByteArray(telecomCaResource.getURL());
+        byte[] arubapecCaBlob = IOUtils.toByteArray(arubapecCaResource.getURL());
+        byte[] actalisXadesCaBlob = IOUtils.toByteArray(actalisXadesCaResource.getURL());
+        byte[] postecertCaBlob = IOUtils.toByteArray(postecertCaResource.getURL());
+        byte[] infocertStranoCaBlob = IOUtils.toByteArray(infocertStranoCaResource.getURL());
+        byte[] multicertifyActalisTsaResourceTsaBlob = IOUtils
                 .toByteArray(multicertifyActalisTsaResource.getURL());
-        byte[] multicertifyActalisTsaResourceCaBlob = Resources
+        byte[] multicertifyActalisTsaResourceCaBlob = IOUtils
                 .toByteArray(multicertifyActalisCaResource.getURL());
-        byte[] multicertifyActalisCRLResourceBlob = Resources
+        byte[] multicertifyActalisCRLResourceBlob = IOUtils
                 .toByteArray(multicertifyActalisCRLResource.getURL());
-        byte[] p7mmd5ResourceBlob = Resources.toByteArray(p7mmd5Resource.getURL());
-        byte[] pdfFirmeMultipleErroreCrittoCRLBlob = Resources
+        byte[] p7mmd5ResourceBlob = IOUtils.toByteArray(p7mmd5Resource.getURL());
+        byte[] pdfFirmeMultipleErroreCrittoCRLBlob = IOUtils
                 .toByteArray(pdfFirmeMultipleErroreCrittoCRLResource.getURL());
 
         certificateService.addCaCertificate(caBlob);
@@ -572,7 +571,7 @@ class ApiIntegrationTest {
         Resource fileFirmato = resourceLoader.getResource("classpath:firme/p7m_pem_sha256.pdf.p7m");
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(
-                new CryptoDocumentoVersato("P7M_2", Resources.toByteArray(fileFirmato.getURL())));
+                new CryptoDocumentoVersato("P7M_2", IOUtils.toByteArray(fileFirmato.getURL())));
 
         TipologiaDataRiferimento configurazioneNonCoerente = new TipologiaDataRiferimento(
                 CryptoEnums.TipoRifTemporale.RIF_TEMP_VERS, true, 42L);
@@ -596,7 +595,7 @@ class ApiIntegrationTest {
         Resource fileFirmato = resourceLoader.getResource("classpath:firme/p7m_pem_sha256.pdf.p7m");
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(
-                new CryptoDocumentoVersato("P7M_3", Resources.toByteArray(fileFirmato.getURL())));
+                new CryptoDocumentoVersato("P7M_3", IOUtils.toByteArray(fileFirmato.getURL())));
         input.setTipologiaDataRiferimento(null);
 
         HttpHeaders headers = new HttpHeaders();
@@ -670,7 +669,7 @@ class ApiIntegrationTest {
         Resource fileFirmato = resourceLoader.getResource("classpath:firme/p7m_pem_sha256.pdf.p7m");
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(
-                new CryptoDocumentoVersato("P7M_3", Resources.toByteArray(fileFirmato.getURL())));
+                new CryptoDocumentoVersato("P7M_3", IOUtils.toByteArray(fileFirmato.getURL())));
         input.setTipologiaDataRiferimento(new TipologiaDataRiferimento(
                 CryptoEnums.TipoRifTemporale.RIF_TEMP_VERS, true, 42L));
         HttpHeaders headers = new HttpHeaders();
@@ -756,7 +755,6 @@ class ApiIntegrationTest {
         assertNotNull(postForObject.getTimeStampTokens()[0].getTimeStampInfo().getGenTime());
 
     }
-
 
     @Test
     void testP7mExtractionMultipart() throws IOException {
@@ -851,7 +849,7 @@ class ApiIntegrationTest {
         // Fase 2: effettuo la ricerca utilizzando il certificato del firmatario.
         Resource resource = resourceLoader.getResource("classpath:firmatario-test.cer");
 
-        byte[] blobFilePerFirma = Resources.toByteArray(resource.getURL());
+        byte[] blobFilePerFirma = IOUtils.toByteArray(resource.getURL());
 
         String certificatoFirmatarioBase64 = Base64.getUrlEncoder()
                 .encodeToString(blobFilePerFirma);

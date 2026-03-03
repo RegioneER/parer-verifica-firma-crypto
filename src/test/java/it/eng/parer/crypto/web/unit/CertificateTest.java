@@ -19,13 +19,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.IOException;
 import java.util.Base64;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
-
-import com.google.common.io.Resources;
 
 import it.eng.parer.crypto.service.CertificateService;
 
@@ -51,7 +50,7 @@ class CertificateTest {
     @Test
     void testBase64() throws IOException {
         Resource resource = resourceLoader.getResource("classpath:firmatario-test.cer");
-        byte[] firmatarioBlob = Resources.toByteArray(resource.getURL());
+        byte[] firmatarioBlob = IOUtils.toByteArray(resource.getURL());
         String encodeToString = Base64.getEncoder().encodeToString(firmatarioBlob);
         byte[] decode = Base64.getDecoder().decode(encodeToString);
         assertEquals(firmatarioBlob.length, decode.length);
@@ -60,7 +59,7 @@ class CertificateTest {
     @Test
     void testMimeBase64() throws IOException {
         Resource resource = resourceLoader.getResource("classpath:firmatario-test.cer");
-        byte[] firmatarioBlob = Resources.toByteArray(resource.getURL());
+        byte[] firmatarioBlob = IOUtils.toByteArray(resource.getURL());
         String encodeToString = Base64.getMimeEncoder().encodeToString(firmatarioBlob);
         byte[] decode = Base64.getMimeDecoder().decode(encodeToString);
         assertEquals(firmatarioBlob.length, decode.length);
@@ -69,7 +68,7 @@ class CertificateTest {
     @Test
     void testUrlBase64() throws IOException {
         Resource resource = resourceLoader.getResource("classpath:firmatario-test.cer");
-        byte[] firmatarioBlob = Resources.toByteArray(resource.getURL());
+        byte[] firmatarioBlob = IOUtils.toByteArray(resource.getURL());
         String encodeToString = Base64.getUrlEncoder().encodeToString(firmatarioBlob);
         byte[] decode = Base64.getUrlDecoder().decode(encodeToString);
         assertEquals(firmatarioBlob.length, decode.length);
@@ -78,7 +77,7 @@ class CertificateTest {
     @Test
     void testAuthKeyId() throws IOException {
         Resource resource = resourceLoader.getResource("classpath:firmatario-test.cer");
-        byte[] firmatarioBlob = Resources.toByteArray(resource.getURL());
+        byte[] firmatarioBlob = IOUtils.toByteArray(resource.getURL());
 
         String keyId = certificateService.getCertificateKeyId(firmatarioBlob);
         assertEquals(CER_KEY_ID, keyId);
@@ -87,7 +86,7 @@ class CertificateTest {
     @Test
     void testAuthSubjectDN() throws IOException {
         Resource resource = resourceLoader.getResource("classpath:firmatario-test.cer");
-        byte[] firmatarioBlob = Resources.toByteArray(resource.getURL());
+        byte[] firmatarioBlob = IOUtils.toByteArray(resource.getURL());
 
         String subjectDN = certificateService.getCertificateSubjectDN(firmatarioBlob);
         assertEquals(CER_SUBJECT_DN, subjectDN);
@@ -96,7 +95,7 @@ class CertificateTest {
     @Test
     void testAddCA() throws IOException {
         Resource resource = resourceLoader.getResource("classpath:ca-blob.cer");
-        byte[] caBlob = Resources.toByteArray(resource.getURL());
+        byte[] caBlob = IOUtils.toByteArray(resource.getURL());
         certificateService.addCaCertificate(caBlob);
 
         final String certSubjectDN = "CN=InfoCert Firma Qualificata,OU=Certificatore Accreditato,SERIALNUMBER=07945211006,O=INFOCERT SPA,C=IT";

@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -32,7 +33,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.io.Resources;
 
 import it.eng.crypto.data.type.SignerType;
 import it.eng.crypto.exception.CryptoSignerException;
@@ -120,27 +120,27 @@ class VerficaFirmaTest {
         Resource pdfFirmeMultipleErroreCrittoCRLResource = resourceLoader
                 .getResource("classpath:testPdfFirmeMultipleErroreCritto-crl.crl");
 
-        byte[] caBlob = Resources.toByteArray(resource.getURL());
-        byte[] tsaInfoCertBlob = Resources.toByteArray(tsaInfoCertResource.getURL());
-        byte[] actalisCaBlob = Resources.toByteArray(actalisCaResource.getURL());
-        byte[] actalisCrlBlob = Resources.toByteArray(actalisCRLResource.getURL());
-        byte[] postecomCaBlob = Resources.toByteArray(postecomCaResource.getURL());
-        byte[] postecomCrlBlob = Resources.toByteArray(postecomCRLResource.getURL());
-        byte[] arubaCaBlob = Resources.toByteArray(arubaCaResource.getURL());
-        byte[] arubaTsaBlob = Resources.toByteArray(arubaTsaResource.getURL());
-        byte[] telecomCaBlob = Resources.toByteArray(telecomCaResource.getURL());
-        byte[] arubapecCaBlob = Resources.toByteArray(arubapecCaResource.getURL());
-        byte[] actalisXadesCaBlob = Resources.toByteArray(actalisXadesCaResource.getURL());
-        byte[] postecertCaBlob = Resources.toByteArray(postecertCaResource.getURL());
-        byte[] infocertStranoCaBlob = Resources.toByteArray(infocertStranoCaResource.getURL());
-        byte[] multicertifyActalisTsaResourceTsaBlob = Resources
+        byte[] caBlob = IOUtils.toByteArray(resource.getURL());
+        byte[] tsaInfoCertBlob = IOUtils.toByteArray(tsaInfoCertResource.getURL());
+        byte[] actalisCaBlob = IOUtils.toByteArray(actalisCaResource.getURL());
+        byte[] actalisCrlBlob = IOUtils.toByteArray(actalisCRLResource.getURL());
+        byte[] postecomCaBlob = IOUtils.toByteArray(postecomCaResource.getURL());
+        byte[] postecomCrlBlob = IOUtils.toByteArray(postecomCRLResource.getURL());
+        byte[] arubaCaBlob = IOUtils.toByteArray(arubaCaResource.getURL());
+        byte[] arubaTsaBlob = IOUtils.toByteArray(arubaTsaResource.getURL());
+        byte[] telecomCaBlob = IOUtils.toByteArray(telecomCaResource.getURL());
+        byte[] arubapecCaBlob = IOUtils.toByteArray(arubapecCaResource.getURL());
+        byte[] actalisXadesCaBlob = IOUtils.toByteArray(actalisXadesCaResource.getURL());
+        byte[] postecertCaBlob = IOUtils.toByteArray(postecertCaResource.getURL());
+        byte[] infocertStranoCaBlob = IOUtils.toByteArray(infocertStranoCaResource.getURL());
+        byte[] multicertifyActalisTsaResourceTsaBlob = IOUtils
                 .toByteArray(multicertifyActalisTsaResource.getURL());
-        byte[] multicertifyActalisTsaResourceCaBlob = Resources
+        byte[] multicertifyActalisTsaResourceCaBlob = IOUtils
                 .toByteArray(multicertifyActalisCaResource.getURL());
-        byte[] multicertifyActalisCRLResourceBlob = Resources
+        byte[] multicertifyActalisCRLResourceBlob = IOUtils
                 .toByteArray(multicertifyActalisCRLResource.getURL());
-        byte[] p7mmd5ResourceBlob = Resources.toByteArray(p7mmd5Resource.getURL());
-        byte[] pdfFirmeMultipleErroreCrittoCRLBlob = Resources
+        byte[] p7mmd5ResourceBlob = IOUtils.toByteArray(p7mmd5Resource.getURL());
+        byte[] pdfFirmeMultipleErroreCrittoCRLBlob = IOUtils
                 .toByteArray(pdfFirmeMultipleErroreCrittoCRLResource.getURL());
 
         certificateService.addCaCertificate(caBlob);
@@ -170,7 +170,7 @@ class VerficaFirmaTest {
         CryptoDataToValidate input = new CryptoDataToValidate();
 
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(cadesBesPadesT.getURL())));
+                IOUtils.toByteArray(cadesBesPadesT.getURL())));
         input.setTipologiaDataRiferimento(TipologiaDataRiferimento.verificaAllaDataDiFirma());
 
         CryptoAroCompDoc output = verificaFirmaService.verificaFirma(input);
@@ -187,7 +187,7 @@ class VerficaFirmaTest {
         Resource fileFirmato = resourceLoader.getResource("classpath:firme/xades_T_1.xml");
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
         input.setTipologiaDataRiferimento(TipologiaDataRiferimento.verificaAllaDataDiFirma());
 
         CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
@@ -231,7 +231,7 @@ class VerficaFirmaTest {
                 .getResource("classpath:firme/xml_sig_controfirma_cert_rev.xml");
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaDataVersamento(dataTest.getTime()));
 
@@ -267,7 +267,7 @@ class VerficaFirmaTest {
                 .getResource("classpath:firme/xml_sig_controfirma_cert_rev.xml");
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
         Date rifVersato = Util.getDate(8, Calendar.SEPTEMBER, 2013);
 
         input.setTipologiaDataRiferimento(
@@ -302,7 +302,7 @@ class VerficaFirmaTest {
         Resource fileFirmato = resourceLoader.getResource("classpath:firme/p7m_pem_sha256.pdf.p7m");
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
 
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaDataVersamento(dataTest.getTime()));
@@ -341,7 +341,7 @@ class VerficaFirmaTest {
         Resource fileFirmato = resourceLoader.getResource("classpath:firme/xml_sig_enveloping.xml");
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaDataVersamento(dataTest.getTime()));
 
@@ -414,7 +414,7 @@ class VerficaFirmaTest {
         Resource fileFirmato = resourceLoader.getResource("classpath:firme/cades_bes.pdf.p7m");
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
         // input.setReferenceDateType(CryptoEnums.TipoRifTemporale.RIF_TEMP_VERS);
         Date rifVersato = Util.getDate(8, Calendar.SEPTEMBER, 2013);
         // input.setReferenceDate(rifVersato.getTime());
@@ -446,7 +446,7 @@ class VerficaFirmaTest {
                 .getResource("classpath:firme/cades+cades_crl_non_conforme.pdf.p7m");
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
         // input.setReferenceDateType(CryptoEnums.TipoRifTemporale.RIF_TEMP_VERS);
         Date rifVersato = Util.getDate(8, Calendar.SEPTEMBER, 2013);
         // input.setReferenceDate(rifVersato.getTime());
@@ -487,7 +487,7 @@ class VerficaFirmaTest {
                 .getResource("classpath:firme/cades_bes_controfirma.doc.p7m");
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
         // input.setReferenceDateType(CryptoEnums.TipoRifTemporale.RIF_TEMP_VERS);
         Date rifVersato = Util.getDate(8, Calendar.SEPTEMBER, 2013);
         // input.setReferenceDate(rifVersato.getTime());
@@ -528,7 +528,7 @@ class VerficaFirmaTest {
                 .getResource("classpath:firme/cades_bes_controfirma_cades_t.pdf.p7m");
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
         Date rifVersato = Util.getDate(8, Calendar.SEPTEMBER, 2013);
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaAllaDataSpecifica(rifVersato.getTime()));
@@ -568,7 +568,7 @@ class VerficaFirmaTest {
                 .getResource("classpath:firme/cades_bes+pades_t.pdf.p7m");
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
         Date rifVersato = Util.getDate(8, Calendar.SEPTEMBER, 2013);
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaAllaDataSpecifica(rifVersato.getTime()));
@@ -603,7 +603,7 @@ class VerficaFirmaTest {
         Resource fileFirmato = resourceLoader.getResource("classpath:firme/p7m_b64.xml.p7m");
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
         input.setTipologiaDataRiferimento(TipologiaDataRiferimento.verificaAllaDataDiFirma());
 
         input.setProfiloVerifica(new CryptoProfiloVerifica().setControlloCrlAbilitato(true));
@@ -649,7 +649,7 @@ class VerficaFirmaTest {
         Resource fileFirmato = resourceLoader.getResource("classpath:firme/p7m_b64.xml.p7m");
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
         Date rifVersato = Util.getDate(8, Calendar.SEPTEMBER, 2013);
 
         input.setTipologiaDataRiferimento(
@@ -682,7 +682,7 @@ class VerficaFirmaTest {
         Resource fileFirmato = resourceLoader.getResource("classpath:firme/p7m_b64.xml.p7m");
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
         Date rifVersato = Util.getDate(8, Calendar.SEPTEMBER, 2013);
 
         input.setTipologiaDataRiferimento(
@@ -725,7 +725,7 @@ class VerficaFirmaTest {
         Resource fileFirmato = resourceLoader.getResource("classpath:firme/cades_T_1.pdf.p7m");
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
         input.setTipologiaDataRiferimento(TipologiaDataRiferimento.verificaAllaDataDiFirma());
 
         CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
@@ -768,10 +768,10 @@ class VerficaFirmaTest {
 
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
         input.setSottoComponentiMarca(Arrays.asList(new CryptoDocumentoVersato[] {
                 new CryptoDocumentoVersato("tsr-versato",
-                        Resources.toByteArray(marcaDetached.getURL())) }));
+                        IOUtils.toByteArray(marcaDetached.getURL())) }));
         // input.setReferenceDateType(CryptoEnums.TipoRifTemporale.DATA_VERS);
         // input.setReferenceDate(dataTest.getTime());
 
@@ -829,10 +829,10 @@ class VerficaFirmaTest {
 
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
         input.setSottoComponentiMarca(Arrays.asList(new CryptoDocumentoVersato[] {
                 new CryptoDocumentoVersato("tsr-versato",
-                        Resources.toByteArray(marcaDetached.getURL())) }));
+                        IOUtils.toByteArray(marcaDetached.getURL())) }));
         // input.setReferenceDateType(CryptoEnums.TipoRifTemporale.DATA_VERS);
         // input.setReferenceDate(dataTest.getTime());
 
@@ -871,10 +871,10 @@ class VerficaFirmaTest {
 
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
         input.setSottoComponentiMarca(Arrays.asList(new CryptoDocumentoVersato[] {
                 new CryptoDocumentoVersato("tsr-detached",
-                        Resources.toByteArray(marcaDetached.getURL())) }));
+                        IOUtils.toByteArray(marcaDetached.getURL())) }));
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaDataVersamento(dataTest.getTime()));
 
@@ -919,7 +919,7 @@ class VerficaFirmaTest {
 
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaDataVersamento(dataTest.getTime()));
 
@@ -956,7 +956,7 @@ class VerficaFirmaTest {
 
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
         Date rifVersato = Util.getDate(8, Calendar.SEPTEMBER, 2013);
 
         input.setTipologiaDataRiferimento(
@@ -992,7 +992,7 @@ class VerficaFirmaTest {
 
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
         Date rifVersato = Util.getDate(8, Calendar.SEPTEMBER, 2013);
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaAllaDataSpecifica(rifVersato.getTime()));
@@ -1025,7 +1025,7 @@ class VerficaFirmaTest {
                 .getResource("classpath:firme/tsd_cades_T.pdf.p7m.tsd");
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaDataVersamento(dataTest.getTime()));
 
@@ -1077,10 +1077,10 @@ class VerficaFirmaTest {
 
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
         input.setSottoComponentiMarca(Arrays.asList(new CryptoDocumentoVersato[] {
                 new CryptoDocumentoVersato("marca-detached",
-                        Resources.toByteArray(marcaDetached.getURL())) }));
+                        IOUtils.toByteArray(marcaDetached.getURL())) }));
 
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaDataVersamento(dataTest.getTime()));
@@ -1140,12 +1140,12 @@ class VerficaFirmaTest {
 
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
         input.setSottoComponentiMarca(Arrays.asList(new CryptoDocumentoVersato[] {
                 new CryptoDocumentoVersato("marca-detached1",
-                        Resources.toByteArray(marcaDetached1.getURL())),
+                        IOUtils.toByteArray(marcaDetached1.getURL())),
                 new CryptoDocumentoVersato("marca-detached2",
-                        Resources.toByteArray(marcaDetached2.getURL())) }));
+                        IOUtils.toByteArray(marcaDetached2.getURL())) }));
 
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaDataVersamento(dataTest.getTime()));
@@ -1180,7 +1180,7 @@ class VerficaFirmaTest {
 
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(
-                new CryptoDocumentoVersato("pades", Resources.toByteArray(fileFirmato.getURL())));
+                new CryptoDocumentoVersato("pades", IOUtils.toByteArray(fileFirmato.getURL())));
         // input.setReferenceDateType(CryptoEnums.TipoRifTemporale.DATA_FIRMA);
         //// Date dataRiferimento = Util.getDate(10, Calendar.JUNE, 2014);
         // input.setReferenceDate(dataTest.getTime());
@@ -1218,7 +1218,7 @@ class VerficaFirmaTest {
 
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("test-pdf-dsig",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
         // input.setReferenceDateType(CryptoEnums.TipoRifTemporale.DATA_FIRMA);
         // input.setReferenceDate(dataTest.getTime());
         // input.setUseSigningDate(true);
@@ -1251,7 +1251,7 @@ class VerficaFirmaTest {
 
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("test-pdf-dsig-scaduto",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
         // input.setReferenceDateType(CryptoEnums.TipoRifTemporale.DATA_FIRMA);
         // input.setReferenceDate(dataTest.getTime());
         // input.setUseSigningDate(true);
@@ -1294,8 +1294,8 @@ class VerficaFirmaTest {
                 .getResource("classpath:firme/cades_bes_errore_critto.p7m");
 
         CryptoDataToValidate input = new CryptoDataToValidate();
-        input.setContenuto(new CryptoDocumentoVersato("cades-bes",
-                Resources.toByteArray(fileFirmato.getURL())));
+        input.setContenuto(
+                new CryptoDocumentoVersato("cades-bes", IOUtils.toByteArray(fileFirmato.getURL())));
         // input.setReferenceDateType(CryptoEnums.TipoRifTemporale.DATA_FIRMA);
         // input.setReferenceDate(dataTest.getTime());
         // input.setUseSigningDate(true);
@@ -1333,7 +1333,7 @@ class VerficaFirmaTest {
 
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
         // input.setReferenceDateType(CryptoEnums.TipoRifTemporale.MT_VERS_NORMA);
         Date rifVersato = Util.getDate(8, Calendar.SEPTEMBER, 2013);
         // input.setReferenceDate(rifVersato.getTime());
@@ -1370,10 +1370,10 @@ class VerficaFirmaTest {
 
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
         input.setSottoComponentiMarca(Arrays.asList(new CryptoDocumentoVersato[] {
                 new CryptoDocumentoVersato("documento-secondario",
-                        Resources.toByteArray(marcaDetached.getURL())) }));
+                        IOUtils.toByteArray(marcaDetached.getURL())) }));
 
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaDataVersamento(dataTest.getTime()));
@@ -1404,10 +1404,10 @@ class VerficaFirmaTest {
 
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
         input.setSottoComponentiFirma(Arrays.asList(new CryptoDocumentoVersato[] {
                 new CryptoDocumentoVersato("sottocomponente",
-                        Resources.toByteArray(fileDetached.getURL())) }));
+                        IOUtils.toByteArray(fileDetached.getURL())) }));
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaDataVersamento(dataTest.getTime()));
 
@@ -1444,7 +1444,7 @@ class VerficaFirmaTest {
                 .getResource("classpath:firme/xades_con_signeddataobjectproperties.xml");
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
         Date dataRif = Util.getDate(20, Calendar.FEBRUARY, 2016);
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaAllaDataSpecifica(dataRif.getTime()));
@@ -1484,7 +1484,7 @@ class VerficaFirmaTest {
         Resource fileFirmato = resourceLoader.getResource("classpath:firme/xml_sig_conteso.xml");
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaDataVersamento(dataTest.getTime()));
 
@@ -1519,7 +1519,7 @@ class VerficaFirmaTest {
                 .getResource("classpath:firme/pdfNullPointerEx_comunitaEuropea.pdf");
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaDataVersamento(dataTest.getTime()));
 
@@ -1547,7 +1547,7 @@ class VerficaFirmaTest {
         Resource fileFirmato = resourceLoader.getResource("classpath:firme/pades_non_conforme.pdf");
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
         input.setTipologiaDataRiferimento(TipologiaDataRiferimento.verificaAllaDataDiFirma());
 
         CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
@@ -1572,7 +1572,7 @@ class VerficaFirmaTest {
                 .getResource("classpath:firme/pades_3_firme_errore_contr_crittografico.pdf");
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
         Date rifVersato = Util.getDate(12, Calendar.DECEMBER, 2017);
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaAllaDataSpecifica(rifVersato.getTime()));
@@ -1594,7 +1594,7 @@ class VerficaFirmaTest {
         Resource fileFirmato = resourceLoader.getResource("classpath:firme/office_non_firmato");
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
         input.setTipologiaDataRiferimento(TipologiaDataRiferimento.verificaAllaDataDiFirma());
 
         CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
@@ -1633,7 +1633,7 @@ class VerficaFirmaTest {
                 .getResource("classpath:firme/xades_con_signeddataobjectproperties.xml");
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
         Date dataRif = Util.getDate(20, Calendar.FEBRUARY, 2016);
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaAllaDataSpecifica(dataRif.getTime()));
@@ -1651,10 +1651,10 @@ class VerficaFirmaTest {
 
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
         input.setSottoComponentiMarca(Arrays.asList(new CryptoDocumentoVersato[] {
                 new CryptoDocumentoVersato("tsr-versato",
-                        Resources.toByteArray(marcaDetached.getURL())) }));
+                        IOUtils.toByteArray(marcaDetached.getURL())) }));
         // input.setReferenceDateType(CryptoEnums.TipoRifTemporale.DATA_VERS);
         // input.setReferenceDate(dataTest.getTime());
 
@@ -1668,7 +1668,7 @@ class VerficaFirmaTest {
         Resource fileFirmato = resourceLoader.getResource("classpath:firme/cavor.xml.p7m");
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
-                Resources.toByteArray(fileFirmato.getURL())));
+                IOUtils.toByteArray(fileFirmato.getURL())));
 
         CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
         String expectedSubjectCA = "CN=ArubaPEC S.p.A. NG CA 3,OU=Certification AuthorityC,O=ArubaPEC S.p.A.,C=IT";
@@ -1683,7 +1683,7 @@ class VerficaFirmaTest {
 
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("componente-tsr",
-                Resources.toByteArray(componenteTsrResource.getURL())));
+                IOUtils.toByteArray(componenteTsrResource.getURL())));
 
         CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
         // sono 3 firme

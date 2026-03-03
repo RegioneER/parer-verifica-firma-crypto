@@ -1,4 +1,4 @@
-## 2.2.0 (22-12-2025)
+## 2.3.0 (03-03-2026)
 
 ### Novità: 1
-- [#34860](https://parermine.regione.emilia-romagna.it/issues/34860) Revisione API RESTFul esposte
+- [#39964](https://parermine.regione.emilia-romagna.it/issues/39964) Patch di sicurezza per interventi legati a CVE

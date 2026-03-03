@@ -20,13 +20,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
-
-import com.google.common.io.Resources;
 
 import it.eng.parer.crypto.model.ParerCRL;
 import it.eng.parer.crypto.service.CrlService;
@@ -98,7 +97,7 @@ class CrlTest {
     @Test
     void testAddCrlByBlob() throws IOException {
         Resource resource = resourceLoader.getResource("classpath:p7m_b64.xml.p7m.actalis-crl.cer");
-        byte[] crlBlob = Resources.toByteArray(resource.getURL());
+        byte[] crlBlob = IOUtils.toByteArray(resource.getURL());
         crlService.addCRL(crlBlob);
         final String subjectDN = "CN=Actalis S.p.A. - Direzione Commerciale Firma,OU=Certification Service Provider,O=Actalis S.p.A.,C=IT";
         final String authKeyId = "a078dbfacff761773800b7530cac40103111ed4a";
