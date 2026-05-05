@@ -22,8 +22,12 @@ import java.util.List;
 import java.util.Set;
 
 import javax.security.auth.x500.X500Principal;
-import org.bouncycastle.asn1.x509.X509Extension;
-import org.bouncycastle.x509.extension.X509ExtensionUtil;
+
+import org.bouncycastle.asn1.ASN1InputStream;
+import org.bouncycastle.asn1.ASN1OctetString;
+import org.bouncycastle.asn1.ASN1Primitive;
+import org.bouncycastle.asn1.x509.CRLNumber;
+import org.bouncycastle.asn1.x509.Extension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -206,18 +210,27 @@ public class CrlService {
             }
         }
 
-        byte[] crlNumByte = cryptoCrl.getExtensionValue(X509Extension.cRLNumber.getId());
+        // Use the new Extension class instead of deprecated X509Extension
+        String crlNumberOid = Extension.cRLNumber.getId();
+        byte[] crlNumByte = cryptoCrl.getExtensionValue(crlNumberOid);
         parerCrl.setNumBytes(crlNumByte);
 
         BigInteger crlNum = null;
         if (crlNumByte != null) {
-            crlNum = org.bouncycastle.asn1.x509.CRLNumber
-                    .getInstance(X509ExtensionUtil.fromExtensionValue(crlNumByte)).getCRLNumber();
+            // Parse the extension value using ASN1InputStream (standard Bouncy Castle
+            // approach)
+            try (ASN1InputStream aIn = new ASN1InputStream(crlNumByte)) {
+                ASN1OctetString octs = (ASN1OctetString) aIn.readObject();
+                try (ASN1InputStream aIn2 = new ASN1InputStream(octs.getOctets())) {
+                    ASN1Primitive value = aIn2.readObject();
+                    crlNum = CRLNumber.getInstance(value).getCRLNumber();
+                }
+            }
         }
 
         parerCrl.setCrlNum(crlNum);
 
         return parerCrl;
-
     }
+
 }

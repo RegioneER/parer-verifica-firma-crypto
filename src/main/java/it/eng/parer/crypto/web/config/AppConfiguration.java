@@ -13,29 +13,18 @@
 
 package it.eng.parer.crypto.web.config;
 
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
-import org.springframework.http.MediaType;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
-import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.util.UrlPathHelper;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -54,9 +43,6 @@ import it.eng.parer.crypto.service.util.CommonsHttpClient;
 public class AppConfiguration implements WebMvcConfigurer {
 
     private final Logger log = LoggerFactory.getLogger(AppConfiguration.class);
-
-    @Autowired
-    Environment env;
 
     @Value("${cron.thread.pool.size}")
     int threadPoolSize;
@@ -87,19 +73,6 @@ public class AppConfiguration implements WebMvcConfigurer {
     // default false
     @Value("${parer.crypto.uriloader.httpclient.no-ssl-verify:false}")
     boolean noSslVerify;
-
-    /**
-     *
-     * FIXME : da gestire diversamente (problematica chiamate con '/')
-     * https://stackoverflow.com/questions/13482020/encoded-slash-2f-with-spring-requestmapping-path-param-gives-http-400
-     */
-    @Override
-    public void configurePathMatch(PathMatchConfigurer configurer) {
-        UrlPathHelper urlPathHelper = new UrlPathHelper();
-        urlPathHelper.setDefaultEncoding(Charset.defaultCharset().name());
-        urlPathHelper.setUrlDecode(false);
-        configurer.setUrlPathHelper(urlPathHelper);
-    }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -135,20 +108,6 @@ public class AppConfiguration implements WebMvcConfigurer {
     @Bean
     public SignerUtil signerUtil(ApplicationContext applicationContext) {
         return SignerUtil.newInstance(applicationContext);
-    }
-
-    @Bean
-    public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
-        MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
-        List<MediaType> supportedMediaTypes = new ArrayList<>(
-                mappingJackson2HttpMessageConverter.getSupportedMediaTypes());
-
-        supportedMediaTypes.add(new MediaType(MediaType.TEXT_PLAIN, StandardCharsets.UTF_8));
-        supportedMediaTypes.add(new MediaType(MediaType.TEXT_PLAIN, StandardCharsets.ISO_8859_1));
-
-        mappingJackson2HttpMessageConverter.setSupportedMediaTypes(supportedMediaTypes);
-
-        return mappingJackson2HttpMessageConverter;
     }
 
     @Bean

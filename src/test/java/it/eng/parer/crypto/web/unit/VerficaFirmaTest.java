@@ -24,6 +24,7 @@ import java.util.Date;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
@@ -118,7 +119,11 @@ class VerficaFirmaTest {
                 .getResource("classpath:test_non_firma.xml.crl.cer");
         Resource p7mmd5Resource = resourceLoader.getResource("classpath:p7m_md5.pdf.p7m.cer");
         Resource pdfFirmeMultipleErroreCrittoCRLResource = resourceLoader
-                .getResource("classpath:testPdfFirmeMultipleErroreCritto-crl.crl");
+                .getResource("classpath:testPdfFirmeMultipleErroreCritto-crl.crl");        
+        Resource tsaArubaPECResource = resourceLoader
+                .getResource("classpath:tsa/arubapec_tsa.cer");
+        Resource crlArubaPECResource = resourceLoader
+                .getResource("classpath:crl/arubapec.crl");
 
         byte[] caBlob = IOUtils.toByteArray(resource.getURL());
         byte[] tsaInfoCertBlob = IOUtils.toByteArray(tsaInfoCertResource.getURL());
@@ -142,6 +147,11 @@ class VerficaFirmaTest {
         byte[] p7mmd5ResourceBlob = IOUtils.toByteArray(p7mmd5Resource.getURL());
         byte[] pdfFirmeMultipleErroreCrittoCRLBlob = IOUtils
                 .toByteArray(pdfFirmeMultipleErroreCrittoCRLResource.getURL());
+        byte[] tsaArubaPECBlob = IOUtils
+                .toByteArray(tsaArubaPECResource.getURL());
+        byte[] crlArubaPECBlob = IOUtils
+                .toByteArray(crlArubaPECResource.getURL());
+        
 
         certificateService.addCaCertificate(caBlob);
         certificateService.addCaCertificate(tsaInfoCertBlob);
@@ -161,6 +171,9 @@ class VerficaFirmaTest {
         certificateService.addCaCertificate(p7mmd5ResourceBlob);
         crlService.addCRL(multicertifyActalisCRLResourceBlob);
         crlService.addCRL(pdfFirmeMultipleErroreCrittoCRLBlob);
+
+        certificateService.addCaCertificate(tsaArubaPECBlob);
+        crlService.addCRL(crlArubaPECBlob);
     }
 
     @Test

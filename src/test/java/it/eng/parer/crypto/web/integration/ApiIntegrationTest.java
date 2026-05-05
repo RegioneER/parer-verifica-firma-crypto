@@ -38,15 +38,16 @@ import java.util.List;
 import javax.xml.bind.DatatypeConverter;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -61,6 +62,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.client.DefaultResponseErrorHandler;
+import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -102,8 +104,17 @@ import it.eng.parer.crypto.web.Util;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class ApiIntegrationTest {
 
-    @Autowired
-    private TestRestTemplate restTemplate;
+    private RestTemplate restTemplate;
+
+    @Value("${server.servlet.context-path:/}")
+    private String contextPath;
+
+    @LocalServerPort
+    private int port;
+
+    private String getBaseUrl() {
+        return "http://localhost:" + port + contextPath;
+    }
 
     @Autowired
     private ResourceLoader resourceLoader;
@@ -114,7 +125,11 @@ class ApiIntegrationTest {
     @Autowired
     private CrlService crlService;
 
-    private String uriWithCtxPath;
+    @BeforeAll
+    void init() {
+        restTemplate = new RestTemplate();
+        restTemplate.setErrorHandler(new CryptoErrorHandler());
+    }
 
     /**
      * Aggiungo manualmente alcuni dei certificati CA/CRL che mi servono per verificare le firme. Il
@@ -200,18 +215,13 @@ class ApiIntegrationTest {
         certificateService.addCaCertificate(p7mmd5ResourceBlob);
         crlService.addCRL(multicertifyActalisCRLResourceBlob);
         crlService.addCRL(pdfFirmeMultipleErroreCrittoCRLBlob);
-
-        // define base URL
-        final String rootUri = restTemplate.getRootUri();
-        uriWithCtxPath = rootUri.concat(rootUri.endsWith("/") ? StringUtils.EMPTY : "/"); // complete
-        // URL
     }
 
     @Test
     void testGetErrorDocument() {
 
-        ResponseEntity<ParerErrorDoc> entity = restTemplate
-                .getForEntity(URL_ERRORS + "/unhandled-exception", ParerErrorDoc.class);
+        ResponseEntity<ParerErrorDoc> entity = restTemplate.getForEntity(
+                getBaseUrl() + URL_ERRORS + "/unhandled-exception", ParerErrorDoc.class);
         ParerErrorDoc errorDocument = entity.getBody();
         assertNotNull(errorDocument.getDescription());
         assertEquals(ParerError.ErrorCode.GENERIC_ERROR.urlFriendly(), errorDocument.getCode());
@@ -242,8 +252,8 @@ class ApiIntegrationTest {
 
         HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(body, headers);
 
-        CryptoAroCompDoc componente = restTemplate.postForObject(URL_REPORT_VERIFICA, entity,
-                CryptoAroCompDoc.class);
+        CryptoAroCompDoc componente = restTemplate.postForObject(getBaseUrl() + URL_REPORT_VERIFICA,
+                entity, CryptoAroCompDoc.class);
 
         Util.assertNumeroDiFirmeOK(componente, 2);
         Util.assertNumeroDiMarcheOK(componente, 0);
@@ -288,8 +298,8 @@ class ApiIntegrationTest {
 
         HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(body, headers);
 
-        CryptoAroCompDoc componente = restTemplate.postForObject(URL_REPORT_VERIFICA, entity,
-                CryptoAroCompDoc.class);
+        CryptoAroCompDoc componente = restTemplate.postForObject(getBaseUrl() + URL_REPORT_VERIFICA,
+                entity, CryptoAroCompDoc.class);
 
         Util.assertNumeroDiFirmeOK(componente, 1);
         Util.assertNumeroDiMarcheOK(componente, 0);
@@ -325,8 +335,8 @@ class ApiIntegrationTest {
 
         HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(body, headers);
 
-        CryptoAroCompDoc componente = restTemplate.postForObject(URL_REPORT_VERIFICA, entity,
-                CryptoAroCompDoc.class);
+        CryptoAroCompDoc componente = restTemplate.postForObject(getBaseUrl() + URL_REPORT_VERIFICA,
+                entity, CryptoAroCompDoc.class);
 
         Util.assertNumeroDiFirmeOK(componente, 2);
         Util.assertNumeroDiMarcheOK(componente, 0);
@@ -372,8 +382,8 @@ class ApiIntegrationTest {
         body.add("marche", marcaDetachedRes);
 
         HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(body, headers);
-        CryptoAroCompDoc componente = restTemplate.postForObject(URL_REPORT_VERIFICA, entity,
-                CryptoAroCompDoc.class);
+        CryptoAroCompDoc componente = restTemplate.postForObject(getBaseUrl() + URL_REPORT_VERIFICA,
+                entity, CryptoAroCompDoc.class);
 
         Util.assertNumeroDiFirmeOK(componente, 3);
         Util.assertNumeroDiMarcheOK(componente, 2);
@@ -432,8 +442,8 @@ class ApiIntegrationTest {
         body.add("marche", marcaDetachedRes);
 
         HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(body, headers);
-        CryptoAroCompDoc componente = restTemplate.postForObject(URL_REPORT_VERIFICA, entity,
-                CryptoAroCompDoc.class);
+        CryptoAroCompDoc componente = restTemplate.postForObject(getBaseUrl() + URL_REPORT_VERIFICA,
+                entity, CryptoAroCompDoc.class);
 
         Util.assertNumeroDiFirmeOK(componente, 3);
         Util.assertNumeroDiMarcheOK(componente, 2);
@@ -500,10 +510,10 @@ class ApiIntegrationTest {
         body.add("marche", marcaDetachedRes);
 
         HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(body, headers);
-        restTemplate.getRestTemplate().setErrorHandler(new CryptoErrorHandler());
 
         assertThrows(CryptoParerException.class, () -> {
-            restTemplate.postForObject(URL_REPORT_VERIFICA, entity, CryptoAroCompDoc.class);
+            restTemplate.postForObject(getBaseUrl() + URL_REPORT_VERIFICA, entity,
+                    CryptoAroCompDoc.class);
         });
     }
 
@@ -511,8 +521,8 @@ class ApiIntegrationTest {
     void testVerificaFirmaJson() {
 
         CryptoDataToValidateDataUri data = new CryptoDataToValidateDataUri();
-        data.setContenuto(URI.create(uriWithCtxPath + "cades_T_1.pdf.p7m"));
-        data.setMarche(Arrays.asList(URI.create(uriWithCtxPath + "cades_T_1.pdf.p7m.tsr")));
+        data.setContenuto(URI.create(getBaseUrl() + "/" + "cades_T_1.pdf.p7m"));
+        data.setMarche(Arrays.asList(URI.create(getBaseUrl() + "/" + "cades_T_1.pdf.p7m.tsr")));
 
         CryptoDataToValidateMetadata metadata = new CryptoDataToValidateMetadata();
         metadata.setTipologiaDataRiferimento(TipologiaDataRiferimento.verificaAllaDataDiFirma());
@@ -530,8 +540,8 @@ class ApiIntegrationTest {
 
         HttpEntity<CryptoDataToValidateBody> entity = new HttpEntity<>(body, headers);
 
-        CryptoAroCompDoc componente = restTemplate.postForObject(URL_REPORT_VERIFICA, entity,
-                CryptoAroCompDoc.class);
+        CryptoAroCompDoc componente = restTemplate.postForObject(getBaseUrl() + URL_REPORT_VERIFICA,
+                entity, CryptoAroCompDoc.class);
 
         Util.assertNumeroDiFirmeOK(componente, 3);
         Util.assertNumeroDiMarcheOK(componente, 2);
@@ -583,9 +593,9 @@ class ApiIntegrationTest {
 
         HttpEntity<CryptoDataToValidate> entity = new HttpEntity<>(input, headers);
 
-        restTemplate.getRestTemplate().setErrorHandler(new CryptoErrorHandler());
         Assertions.assertThrows(CryptoParerException.class, () -> {
-            restTemplate.postForObject(URL_REPORT_VERIFICA, entity, CryptoAroCompDoc.class);
+            restTemplate.postForObject(getBaseUrl() + URL_REPORT_VERIFICA, entity,
+                    CryptoAroCompDoc.class);
         });
 
     }
@@ -602,9 +612,9 @@ class ApiIntegrationTest {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         HttpEntity<CryptoDataToValidate> entity = new HttpEntity<>(input, headers);
-        restTemplate.getRestTemplate().setErrorHandler(new CryptoErrorHandler());
         assertThrows(CryptoParerException.class, () -> {
-            restTemplate.postForObject(URL_REPORT_VERIFICA, entity, CryptoAroCompDoc.class);
+            restTemplate.postForObject(getBaseUrl() + URL_REPORT_VERIFICA, entity,
+                    CryptoAroCompDoc.class);
         });
     }
 
@@ -612,7 +622,7 @@ class ApiIntegrationTest {
     void testProfiloDefault() {
 
         CryptoDataToValidateDataUri data = new CryptoDataToValidateDataUri();
-        data.setContenuto(URI.create(uriWithCtxPath + "p7m_pem_sha256.pdf.p7m"));
+        data.setContenuto(URI.create(getBaseUrl() + "p7m_pem_sha256.pdf.p7m"));
 
         CryptoDataToValidateMetadata metadata = new CryptoDataToValidateMetadata();
 
@@ -627,9 +637,8 @@ class ApiIntegrationTest {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         HttpEntity<CryptoDataToValidateBody> entity = new HttpEntity<>(body, headers);
-        restTemplate.getRestTemplate().setErrorHandler(new CryptoErrorHandler());
-        CryptoAroCompDoc postForObject = restTemplate.postForObject(URL_REPORT_VERIFICA, entity,
-                CryptoAroCompDoc.class);
+        CryptoAroCompDoc postForObject = restTemplate
+                .postForObject(getBaseUrl() + URL_REPORT_VERIFICA, entity, CryptoAroCompDoc.class);
         assertEquals(profiloVerifica, postForObject.getProfiloValidazione());
 
     }
@@ -638,7 +647,7 @@ class ApiIntegrationTest {
     void testProfiloCustom() {
 
         CryptoDataToValidateDataUri data = new CryptoDataToValidateDataUri();
-        data.setContenuto(URI.create(uriWithCtxPath + "p7m_pem_sha256.pdf.p7m"));
+        data.setContenuto(URI.create(getBaseUrl() + "p7m_pem_sha256.pdf.p7m"));
 
         CryptoDataToValidateMetadata metadata = new CryptoDataToValidateMetadata();
 
@@ -657,9 +666,8 @@ class ApiIntegrationTest {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         HttpEntity<CryptoDataToValidateBody> entity = new HttpEntity<>(body, headers);
-        restTemplate.getRestTemplate().setErrorHandler(new CryptoErrorHandler());
-        CryptoAroCompDoc postForObject = restTemplate.postForObject(URL_REPORT_VERIFICA, entity,
-                CryptoAroCompDoc.class);
+        CryptoAroCompDoc postForObject = restTemplate
+                .postForObject(getBaseUrl() + URL_REPORT_VERIFICA, entity, CryptoAroCompDoc.class);
         assertEquals(profiloVerificaCustom, postForObject.getProfiloValidazione());
 
     }
@@ -676,10 +684,9 @@ class ApiIntegrationTest {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         HttpEntity<CryptoDataToValidate> entity = new HttpEntity<>(input, headers);
-        restTemplate.getRestTemplate().setErrorHandler(new CryptoErrorHandler());
-
         CryptoParerException ex = assertThrows(CryptoParerException.class, () -> {
-            restTemplate.postForObject(URL_REPORT_VERIFICA, entity, CryptoAroCompDoc.class);
+            restTemplate.postForObject(getBaseUrl() + URL_REPORT_VERIFICA, entity,
+                    CryptoAroCompDoc.class);
         });
         assertEquals(ParerError.ErrorCode.VALIDATION_ERROR, ex.getCode());
     }
@@ -691,10 +698,9 @@ class ApiIntegrationTest {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         HttpEntity<CryptoDataToValidate> entity = new HttpEntity<>(input, headers);
-        restTemplate.getRestTemplate().setErrorHandler(new CryptoErrorHandler());
-
         CryptoParerException ex = assertThrows(CryptoParerException.class, () -> {
-            restTemplate.postForObject(URL_REPORT_VERIFICA, entity, CryptoAroCompDoc.class);
+            restTemplate.postForObject(getBaseUrl() + URL_REPORT_VERIFICA, entity,
+                    CryptoAroCompDoc.class);
         });
         assertEquals(ParerError.ErrorCode.VALIDATION_ERROR, ex.getCode());
     }
@@ -706,7 +712,6 @@ class ApiIntegrationTest {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
-        restTemplate.getRestTemplate().setErrorHandler(new CryptoErrorHandler());
         byte[] fileVerSerie = {
                 67, 105, 97, 111, 33 };
 
@@ -722,7 +727,8 @@ class ApiIntegrationTest {
         body.add("file", resource);
         HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 
-        ParerTST postForObject = restTemplate.postForObject(URL_TST, requestEntity, ParerTST.class);
+        ParerTST postForObject = restTemplate.postForObject(getBaseUrl() + URL_TST, requestEntity,
+                ParerTST.class);
 
         assertNotNull(postForObject.getTimeStampInfo().getGenTime());
 
@@ -735,7 +741,6 @@ class ApiIntegrationTest {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
-        restTemplate.getRestTemplate().setErrorHandler(new CryptoErrorHandler());
         byte[] fileVerSerie = {
                 67, 105, 97, 111, 33 };
 
@@ -750,7 +755,8 @@ class ApiIntegrationTest {
         body.add("description", "TEST-TSD");
         body.add("file", resource);
         HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
-        ParerTSD postForObject = restTemplate.postForObject(URL_TSD, requestEntity, ParerTSD.class);
+        ParerTSD postForObject = restTemplate.postForObject(getBaseUrl() + URL_TSD, requestEntity,
+                ParerTSD.class);
 
         assertNotNull(postForObject.getTimeStampTokens()[0].getTimeStampInfo().getGenTime());
 
@@ -761,15 +767,13 @@ class ApiIntegrationTest {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
-        restTemplate.getRestTemplate().setErrorHandler(new CryptoErrorHandler());
         Resource resource = resourceLoader.getResource("classpath:firme/p7m_pem_sha256.pdf.p7m");
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
 
         body.add("signed-p7m", resource);
         HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
-        restTemplate.getRestTemplate().setErrorHandler(new CryptoErrorHandler());
-        Resource actualValue = restTemplate.postForObject(URL_UNSIGNEDP7M, requestEntity,
-                Resource.class);
+        Resource actualValue = restTemplate.postForObject(getBaseUrl() + URL_UNSIGNEDP7M,
+                requestEntity, Resource.class);
 
         Resource resourceSbustato = resourceLoader
                 .getResource("classpath:firme/p7m_pem_sha256_sbustato.pdf");
@@ -784,15 +788,14 @@ class ApiIntegrationTest {
     void testP7mExtractionJson() throws IOException {
 
         CryptoSignedP7mUri data = new CryptoSignedP7mUri();
-        data.setUri(URI.create(uriWithCtxPath + "cades_T_1.pdf.p7m"));
+        data.setUri(URI.create(getBaseUrl() + "/" + "cades_T_1.pdf.p7m"));
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         HttpEntity<CryptoSignedP7mUri> requestEntity = new HttpEntity<>(data, headers);
-        restTemplate.getRestTemplate().setErrorHandler(new CryptoErrorHandler());
-        Resource actualValue = restTemplate.postForObject(URL_UNSIGNEDP7M, requestEntity,
-                Resource.class);
+        Resource actualValue = restTemplate.postForObject(getBaseUrl() + URL_UNSIGNEDP7M,
+                requestEntity, Resource.class);
 
         Resource resourceSbustato = resourceLoader
                 .getResource("classpath:firme/cades_T_1_sbustato.pdf");
@@ -812,10 +815,9 @@ class ApiIntegrationTest {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         HttpEntity<CryptoSignedP7mUri> requestEntity = new HttpEntity<>(data, headers);
-        restTemplate.getRestTemplate().setErrorHandler(new CryptoErrorHandler());
-
         CryptoParerException ex = assertThrows(CryptoParerException.class, () -> {
-            restTemplate.postForObject(URL_UNSIGNEDP7M, requestEntity, Resource.class);
+            restTemplate.postForObject(getBaseUrl() + URL_UNSIGNEDP7M, requestEntity,
+                    Resource.class);
         });
         assertEquals(ParerError.ErrorCode.VALIDATION_ERROR, ex.getCode());
     }
@@ -842,9 +844,8 @@ class ApiIntegrationTest {
         HttpEntity<String> requestEntity = new HttpEntity<String>(createArrayNode.toString(),
                 headers);
 
-        restTemplate.getRestTemplate().setErrorHandler(new CryptoErrorHandler());
-        final ParerCRL expectedCrl = restTemplate.postForObject(URL_CRL, requestEntity,
-                ParerCRL.class);
+        final ParerCRL expectedCrl = restTemplate.postForObject(getBaseUrl() + URL_CRL,
+                requestEntity, ParerCRL.class);
 
         // Fase 2: effettuo la ricerca utilizzando il certificato del firmatario.
         Resource resource = resourceLoader.getResource("classpath:firmatario-test.cer");
@@ -854,7 +855,8 @@ class ApiIntegrationTest {
         String certificatoFirmatarioBase64 = Base64.getUrlEncoder()
                 .encodeToString(blobFilePerFirma);
 
-        String url = URL_CRL + "?certifFirmatarioBase64UrlEncoded=" + certificatoFirmatarioBase64;
+        String url = getBaseUrl() + URL_CRL + "?certifFirmatarioBase64UrlEncoded="
+                + certificatoFirmatarioBase64;
 
         ResponseEntity<ParerCRL> crlEntity = restTemplate.getForEntity(url, ParerCRL.class);
         ParerCRL parerCrl = crlEntity.getBody();
