@@ -44,12 +44,13 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.mutable.MutableInt;
 import org.bouncycastle.asn1.ASN1Integer;
+import org.bouncycastle.asn1.ASN1OctetString;
+import org.bouncycastle.asn1.ASN1Primitive;
 import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.asn1.x500.style.BCStyle;
-import org.bouncycastle.asn1.x509.X509Extension;
+import org.bouncycastle.asn1.x509.Extension;
 import org.bouncycastle.cms.SignerInformation;
 import org.bouncycastle.tsp.TimeStampToken;
-import org.bouncycastle.x509.extension.X509ExtensionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -127,13 +128,14 @@ public class VerificaFirmaService {
      * nuova versione "/api" con multipart (quella che suppporta il multipart).
      *
      * @param input Bean di input per la versione v1
-     *              ({@link #verificaFirma(it.eng.parer.crypto.service.model.CryptoDataToValidateData, it.eng.parer.crypto.model.verifica.input.CryptoDataToValidateMetadata) }
+     *              ({@link #verificaFirmaAndOrMimetype(it.eng.parer.crypto.service.model.CryptoDataToValidateData, it.eng.parer.crypto.model.verifica.input.CryptoDataToValidateMetadata) }
      *
      * @return Modello del report di verifica (comune alla versione 1 e 2).
      *
      * @throws CryptoParerException in caso di errore grave
      */
-    public CryptoAroCompDoc verificaFirma(CryptoDataToValidate input) throws CryptoParerException {
+    public CryptoAroCompDoc verificaFirmaAndOrMimetype(CryptoDataToValidate input)
+            throws CryptoParerException {
         CryptoDataToValidateMetadata metadata = new CryptoDataToValidateMetadata();
         metadata.setProfiloVerifica(input.getProfiloVerifica());
         metadata.setTipologiaDataRiferimento(input.getTipologiaDataRiferimento());
@@ -177,7 +179,7 @@ public class VerificaFirmaService {
             data.setSottoComponentiFirma(detachedSignature);
             data.setSottoComponentiMarca(detachedTimeStamp);
 
-            return verificaFirma(data, metadata);
+            return verificaFirmaAndOrMimetype(data, metadata);
 
         } catch (IOException ex) {
             throw new CryptoParerException(ex)
@@ -259,7 +261,7 @@ public class VerificaFirmaService {
      *
      * @throws CryptoParerException In caso di errore.
      */
-    public CryptoAroCompDoc verificaFirma(CryptoDataToValidateData data,
+    public CryptoAroCompDoc verificaFirmaAndOrMimetype(CryptoDataToValidateData data,
             CryptoDataToValidateMetadata metadata) throws CryptoParerException {
         CryptoAroCompDoc result = new CryptoAroCompDoc();
         final LocalDateTime inizioValidazione = LocalDateTime.now(ZoneId.systemDefault());
@@ -282,13 +284,25 @@ public class VerificaFirmaService {
             if (result.getAroMarcaComps() == null) {
                 result.setAroMarcaComps(new ArrayList<>());
             }
-            MutableInt pgFirma = new MutableInt(0);
-            MutableInt pgMarca = new MutableInt(0);
 
-            // Firme embedded e marche detached
-            processaFirmeEmbedded(data, metadata, pgFirma, pgMarca, result);
-            // Firme detached
-            processaFirmeDetached(data, metadata, pgFirma, pgMarca, result);
+            /*
+             * Se il profilo di verifica prevede la verifica delle firme (embedded e detached)
+             * allora effettua la verifica altrimenti si limita a rilevare il formato del documento
+             * principale
+             */
+            if (!metadata.getProfiloVerifica().isSkipDocumentSignVerification()) {
+                MutableInt pgFirma = new MutableInt(0);
+                MutableInt pgMarca = new MutableInt(0);
+                // Firme embedded e marche detached
+                processaFirmeEmbedded(data, metadata, pgFirma, pgMarca, result);
+                // Firme detached
+                processaFirmeDetached(data, metadata, pgFirma, pgMarca, result);
+            } else {
+                // formato documento principale
+                String tikaDetect = tika.detectMimeType(data.getContenuto().getContenuto());
+                result.setTikaMimeComponentePrincipale(tikaDetect);
+            }
+
             result.setValidatorVersion(validatorVersion());
             result.setLibraryVersion(libraryVersion());
             return result;
@@ -1348,11 +1362,11 @@ public class VerificaFirmaService {
         CryptoFirCrl firCrl = null;
         if (crl != null) {
             firCrl = new CryptoFirCrl();
-            byte[] crlNumByte = crl.getExtensionValue(X509Extension.cRLNumber.getId());
-            BigInteger crlNum = crlNumByte != null
-                    ? ASN1Integer.getInstance(X509ExtensionUtil.fromExtensionValue(crlNumByte))
-                            .getValue()
-                    : null;
+            byte[] crlNumByte = crl.getExtensionValue(Extension.cRLNumber.getId());
+            BigInteger crlNum = crlNumByte != null ? ASN1Integer
+                    .getInstance(ASN1Primitive
+                            .fromByteArray(ASN1OctetString.getInstance(crlNumByte).getOctets()))
+                    .getValue() : null;
             firCrl.setDtIniCrl(crl.getThisUpdate());
             firCrl.setDtScadCrl(crl.getNextUpdate());
             firCrl.setNiSerialCrl(crlNum != null ? new BigDecimal(crlNum) : null);

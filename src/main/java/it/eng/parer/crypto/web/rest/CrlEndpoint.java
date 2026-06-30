@@ -55,9 +55,9 @@ import jakarta.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping(URL_API_BASE)
 @Deprecated(forRemoval = true, since = "Non più invocato, verificare se migrare su altro microservice")
-public class CrlController {
+public class CrlEndpoint {
 
-    private final Logger log = LoggerFactory.getLogger(CrlController.class);
+    private final Logger log = LoggerFactory.getLogger(CrlEndpoint.class);
 
     @Autowired
     CrlService crlService;
@@ -65,7 +65,7 @@ public class CrlController {
     @Autowired
     CertificateService certificateService;
 
-    @Operation(summary = "CRL", method = "Inserimento CRL")
+    @Operation(summary = "CRL", description = "Inserimento CRL")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "CRL inserita correttamente", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = ParerCRL.class)) }),
@@ -76,7 +76,7 @@ public class CrlController {
         return crlService.addCrlByURL(urls);
     }
 
-    @Operation(summary = "Trova CRL", method = "Ottieni la crl utilizzando cerificato del firmatario codificato in base64 url encoded")
+    @Operation(summary = "Trova CRL", description = "Ottieni la crl utilizzando cerificato del firmatario codificato in base64 url encoded")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "CRL restituita correttamente", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = ParerCRL.class)) }),
@@ -115,7 +115,7 @@ public class CrlController {
         return crlService.getCrl(subjectDN, authKeyId);
     }
 
-    @Operation(summary = "Trova CRL", method = "Ottieni la CRL utilizzando l'id composto da MD5(subjectDN + authKeyId)")
+    @Operation(summary = "Trova CRL", description = "Ottieni la CRL utilizzando l'id composto da MD5(subjectDN + authKeyId)")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "CRL restituita correttamente", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = ParerCRL.class)) }),

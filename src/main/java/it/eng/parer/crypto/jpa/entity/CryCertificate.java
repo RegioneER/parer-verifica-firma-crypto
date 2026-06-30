@@ -14,10 +14,10 @@
 package it.eng.parer.crypto.jpa.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.TimeZone;
 
-import it.eng.parer.crypto.jpa.entity.converter.NeverendingDateConverter;
+import it.eng.parer.crypto.service.util.DateConverter;
 import jakarta.persistence.Cacheable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,8 +27,6 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 
 /**
  * The persistent class for the CRY_CERTIFICATE database table.
@@ -44,7 +42,7 @@ public class CryCertificate implements Serializable {
     private String keyId;
     private String active;
     private byte[] certificate;
-    private Date expirationDate;
+    private LocalDateTime expirationDate;
 
     public CryCertificate() {
         // document why this constructor is empty
@@ -76,13 +74,12 @@ public class CryCertificate implements Serializable {
         this.certificate = certificate;
     }
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "EXPIRATION_DATE")
-    public Date getExpirationDate() {
+    public LocalDateTime getExpirationDate() {
         return this.expirationDate;
     }
 
-    public void setExpirationDate(Date expirationDate) {
+    public void setExpirationDate(LocalDateTime expirationDate) {
         this.expirationDate = expirationDate;
     }
 
@@ -105,13 +102,13 @@ public class CryCertificate implements Serializable {
      */
     @PrePersist
     void preInsert() {
-        this.expirationDate = NeverendingDateConverter.verifyOverZoneId(this.expirationDate,
+        this.expirationDate = DateConverter.verifyOverZoneId(this.expirationDate,
                 TimeZone.getTimeZone("UTC").toZoneId());
     }
 
     @PreUpdate
     void preUpdate() {
-        this.expirationDate = NeverendingDateConverter.verifyOverZoneId(this.expirationDate,
+        this.expirationDate = DateConverter.verifyOverZoneId(this.expirationDate,
                 TimeZone.getTimeZone("UTC").toZoneId());
     }
 

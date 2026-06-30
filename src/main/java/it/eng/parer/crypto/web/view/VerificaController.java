@@ -65,6 +65,7 @@ import it.eng.parer.crypto.model.verifica.input.TipologiaDataRiferimento;
 import it.eng.parer.crypto.service.VerificaFirmaService;
 import it.eng.parer.crypto.service.model.CryptoDataToValidateData;
 import it.eng.parer.crypto.service.model.CryptoDataToValidateFile;
+import it.eng.parer.crypto.service.util.Constants;
 import it.eng.parer.crypto.web.bean.VerificaFirmaBean;
 import it.eng.parer.crypto.web.bean.VerificaFirmaResultBean;
 import jakarta.validation.Valid;
@@ -138,11 +139,12 @@ public class VerificaController {
         try {
             // compila metadati
             compilaMetadati(verificafirmaBean, metadati);
-            MDC.put("uuid", metadati.getUuid());
+            MDC.put(Constants.UUID_LOG_MDC, metadati.getUuid());
             // compila dati
             compilaDati(verificafirmaBean, dati);
 
-            CryptoAroCompDoc verificaFirma = verificaService.verificaFirma(dati, metadati);
+            CryptoAroCompDoc verificaFirma = verificaService.verificaFirmaAndOrMimetype(dati,
+                    metadati);
             String reportTree = creaStringaXml(verificaFirma);
             risultato.setReportTree(reportTree);
 
@@ -153,7 +155,7 @@ public class VerificaController {
         } finally {
             // pulisci dati
             pulisciDati(dati);
-
+            MDC.remove(Constants.UUID_LOG_MDC);
         }
 
         model.addAttribute(RISULTATO_VERIFICA, risultato);

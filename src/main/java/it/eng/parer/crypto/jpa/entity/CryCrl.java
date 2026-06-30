@@ -16,12 +16,11 @@ package it.eng.parer.crypto.jpa.entity;
 import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.HexFormat;
 import java.util.TimeZone;
 
-import javax.xml.bind.DatatypeConverter;
-
-import it.eng.parer.crypto.jpa.entity.converter.NeverendingDateConverter;
+import it.eng.parer.crypto.service.util.DateConverter;
 import jakarta.persistence.Cacheable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,8 +31,6 @@ import jakarta.persistence.PersistenceException;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import jakarta.persistence.UniqueConstraint;
 
 /**
@@ -49,10 +46,11 @@ import jakarta.persistence.UniqueConstraint;
 public class CryCrl implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     private String subjectdn;
     private byte[] crl;
-    private Date updateData;
-    private Date nextExpiration;
+    private LocalDateTime updateData;
+    private LocalDateTime nextExpiration;
     private String keyId;
     private String uniqueId;
 
@@ -78,23 +76,21 @@ public class CryCrl implements Serializable {
         this.crl = crl;
     }
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "UPDATE_DATA")
-    public Date getUpdateData() {
+    public LocalDateTime getUpdateData() {
         return this.updateData;
     }
 
-    public void setUpdateData(Date updateData) {
+    public void setUpdateData(LocalDateTime updateData) {
         this.updateData = updateData;
     }
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "NEXT_EXPIRATION")
-    public Date getNextExpiration() {
+    public LocalDateTime getNextExpiration() {
         return nextExpiration;
     }
 
-    public void setNextExpiration(Date nextExpiration) {
+    public void setNextExpiration(LocalDateTime nextExpiration) {
         this.nextExpiration = nextExpiration;
     }
 
@@ -130,22 +126,22 @@ public class CryCrl implements Serializable {
             MessageDigest md = MessageDigest.getInstance("MD5");
             String toHash = subjectdn + keyId;
             md.update(toHash.getBytes());
-            uniqueId = DatatypeConverter.printHexBinary(md.digest()).toLowerCase();
+            uniqueId = HexFormat.of().formatHex(md.digest());
         } catch (NoSuchAlgorithmException ex) {
             throw new PersistenceException(ex);
         }
         //
-        this.updateData = NeverendingDateConverter.verifyOverZoneId(this.updateData,
+        this.updateData = DateConverter.verifyOverZoneId(this.updateData,
                 TimeZone.getTimeZone("UTC").toZoneId());
-        this.nextExpiration = NeverendingDateConverter.verifyOverZoneId(this.nextExpiration,
+        this.nextExpiration = DateConverter.verifyOverZoneId(this.nextExpiration,
                 TimeZone.getTimeZone("UTC").toZoneId());
     }
 
     @PreUpdate
     void preUpdate() {
-        this.updateData = NeverendingDateConverter.verifyOverZoneId(this.updateData,
+        this.updateData = DateConverter.verifyOverZoneId(this.updateData,
                 TimeZone.getTimeZone("UTC").toZoneId());
-        this.nextExpiration = NeverendingDateConverter.verifyOverZoneId(this.nextExpiration,
+        this.nextExpiration = DateConverter.verifyOverZoneId(this.nextExpiration,
                 TimeZone.getTimeZone("UTC").toZoneId());
     }
 }

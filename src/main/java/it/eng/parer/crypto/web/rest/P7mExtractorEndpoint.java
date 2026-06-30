@@ -68,9 +68,9 @@ import jakarta.validation.Valid;
 @Tag(name = "P7m", description = "Documento originale a partire da P7M")
 @RestController
 @RequestMapping(URL_API_BASE)
-public class P7mExtractorController {
+public class P7mExtractorEndpoint {
 
-    private final Logger log = LoggerFactory.getLogger(P7mExtractorController.class);
+    private final Logger log = LoggerFactory.getLogger(P7mExtractorEndpoint.class);
 
     private static final FileAttribute<Set<PosixFilePermission>> attr = PosixFilePermissions
             .asFileAttribute(PosixFilePermissions.fromString("rw-------"));
@@ -81,7 +81,7 @@ public class P7mExtractorController {
     @Autowired
     CommonsHttpClient commonsHttpClient;
 
-    @Operation(summary = "P7m Extractor", method = "Ottieni documento originale (non firmato) a partire da quello firmato p7m")
+    @Operation(summary = "P7m Extractor", description = "Ottieni documento originale (non firmato) a partire da quello firmato p7m")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "File estratto correttamente", content = {
                     @Content(mediaType = "application/xml", schema = @Schema(implementation = ResponseEntity.class)) }),
@@ -115,7 +115,7 @@ public class P7mExtractorController {
         }
     }
 
-    @Operation(summary = "P7m Extractor", method = "Ottieni documento originale (non firmato) a partire da quello firmato p7m")
+    @Operation(summary = "P7m Extractor", description = "Ottieni documento originale (non firmato) a partire da quello firmato p7m")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "File estratto correttamente", content = {
                     @Content(mediaType = "application/xml", schema = @Schema(implementation = ResponseEntity.class)) }),

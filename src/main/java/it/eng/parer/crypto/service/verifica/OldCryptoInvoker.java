@@ -226,43 +226,29 @@ public class OldCryptoInvoker {
             HttpClientBuilder customClientBuilder) throws IOException, TSPException {
         TimeStampResponse timeStampResponse = null;
 
-        CloseableHttpClient httpclient = customClientBuilder.build();
-        try {
+        // POST method con configurazione "expect continue"
+        // (https://httpstatusdogs.com/100-continue)
+        HttpPost post = new HttpPost(postUrl);
+        RequestConfig enableExpectContinue = RequestConfig.custom().setExpectContinueEnabled(true)
+                .build();
+        post.setConfig(enableExpectContinue);
 
-            // POST method con configurazione "expect continue"
-            // (https://httpstatusdogs.com/100-continue)
-            HttpPost post = new HttpPost(postUrl);
-            RequestConfig enableExpectContinue = RequestConfig.custom()
-                    .setExpectContinueEnabled(true).build();
-            post.setConfig(enableExpectContinue);
+        // aggiungi l'entità
+        ByteArrayEntity ent = new ByteArrayEntity(encodedRequest);
+        ent.setContentType("application/timestamp-query");
+        post.setEntity(ent);
 
-            // aggiungi l'entità
-            ByteArrayEntity ent = new ByteArrayEntity(encodedRequest);
-            ent.setContentType("application/timestamp-query");
-            post.setEntity(ent);
-
-            CloseableHttpResponse response = httpclient.execute(post);
-            try {
-
-                HttpEntity entity = response.getEntity();
-                if (entity != null) {
-                    InputStream instream = entity.getContent();
-                    try {
-                        timeStampResponse = new TimeStampResponse(instream);
-                    } finally {
-                        instream.close();
-                    }
+        try (CloseableHttpClient httpclient = customClientBuilder.build();
+                CloseableHttpResponse response = httpclient.execute(post)) {
+            HttpEntity entity = response.getEntity();
+            if (entity != null) {
+                try (InputStream instream = entity.getContent()) {
+                    timeStampResponse = new TimeStampResponse(instream);
                 }
-            } finally {
-                response.close();
             }
-
-        } finally {
-            httpclient.close();
         }
 
         return timeStampResponse;
-
     }
 
     private HttpClientBuilder configureCustomBuilder(TSAConfiguration tsaConfiguration,

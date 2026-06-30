@@ -53,7 +53,7 @@ import jakarta.servlet.http.HttpServletRequest;
 @Tag(name = "Info", description = "Informazioni applicativo")
 @RestController
 @RequestMapping(URL_ADMIN_BASE)
-public class AppInfosController {
+public class AppInfosEndpoint {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     private Map<String, Map<String, String>> infos = Collections
@@ -79,7 +79,7 @@ public class AppInfosController {
 
     @SuppressWarnings({
             "rawtypes", "unchecked" })
-    @Operation(summary = "Info", method = "Informazioni applicativo")
+    @Operation(summary = "Info", description = "Informazioni applicativo")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Informazioni applicativo", content = {
                     @Content(mediaType = "application/json") }) })

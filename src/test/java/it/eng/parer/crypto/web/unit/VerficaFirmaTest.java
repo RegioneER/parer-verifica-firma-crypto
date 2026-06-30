@@ -16,15 +16,15 @@ package it.eng.parer.crypto.web.unit;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.io.IOUtils;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
@@ -84,7 +84,7 @@ class VerficaFirmaTest {
      *
      * @throws IOException nel caso non trovi il file
      */
-    @BeforeEach
+    @BeforeAll
     void fillTrustedCADatabase() throws IOException {
         Resource resource = resourceLoader.getResource("classpath:ca-blob.cer");
         Resource tsaInfoCertResource = resourceLoader
@@ -119,11 +119,9 @@ class VerficaFirmaTest {
                 .getResource("classpath:test_non_firma.xml.crl.cer");
         Resource p7mmd5Resource = resourceLoader.getResource("classpath:p7m_md5.pdf.p7m.cer");
         Resource pdfFirmeMultipleErroreCrittoCRLResource = resourceLoader
-                .getResource("classpath:testPdfFirmeMultipleErroreCritto-crl.crl");        
-        Resource tsaArubaPECResource = resourceLoader
-                .getResource("classpath:tsa/arubapec_tsa.cer");
-        Resource crlArubaPECResource = resourceLoader
-                .getResource("classpath:crl/arubapec.crl");
+                .getResource("classpath:testPdfFirmeMultipleErroreCritto-crl.crl");
+        Resource tsaArubaPECResource = resourceLoader.getResource("classpath:tsa/arubapec_tsa.cer");
+        Resource crlArubaPECResource = resourceLoader.getResource("classpath:crl/arubapec.crl");
 
         byte[] caBlob = IOUtils.toByteArray(resource.getURL());
         byte[] tsaInfoCertBlob = IOUtils.toByteArray(tsaInfoCertResource.getURL());
@@ -147,11 +145,8 @@ class VerficaFirmaTest {
         byte[] p7mmd5ResourceBlob = IOUtils.toByteArray(p7mmd5Resource.getURL());
         byte[] pdfFirmeMultipleErroreCrittoCRLBlob = IOUtils
                 .toByteArray(pdfFirmeMultipleErroreCrittoCRLResource.getURL());
-        byte[] tsaArubaPECBlob = IOUtils
-                .toByteArray(tsaArubaPECResource.getURL());
-        byte[] crlArubaPECBlob = IOUtils
-                .toByteArray(crlArubaPECResource.getURL());
-        
+        byte[] tsaArubaPECBlob = IOUtils.toByteArray(tsaArubaPECResource.getURL());
+        byte[] crlArubaPECBlob = IOUtils.toByteArray(crlArubaPECResource.getURL());
 
         certificateService.addCaCertificate(caBlob);
         certificateService.addCaCertificate(tsaInfoCertBlob);
@@ -186,7 +181,7 @@ class VerficaFirmaTest {
                 IOUtils.toByteArray(cadesBesPadesT.getURL())));
         input.setTipologiaDataRiferimento(TipologiaDataRiferimento.verificaAllaDataDiFirma());
 
-        CryptoAroCompDoc output = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc output = verificaFirmaService.verificaFirmaAndOrMimetype(input);
         assertNotNull(output);
         // FIXME assertEquals(2, output.getAroBustaCrittogs().size());
     }
@@ -203,7 +198,7 @@ class VerficaFirmaTest {
                 IOUtils.toByteArray(fileFirmato.getURL())));
         input.setTipologiaDataRiferimento(TipologiaDataRiferimento.verificaAllaDataDiFirma());
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         Util.assertNumeroDiFirmeOK(componente, 3);
         Util.assertNumeroDiMarcheOK(componente, 2);
@@ -248,7 +243,7 @@ class VerficaFirmaTest {
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaDataVersamento(dataTest.getTime()));
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         Util.assertNumeroDiFirmeOK(componente, 2);
         Util.assertNumeroDiMarcheOK(componente, 0);
@@ -286,7 +281,7 @@ class VerficaFirmaTest {
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaAllaDataSpecifica(rifVersato.getTime()));
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         Util.assertNumeroDiFirmeOK(componente, 2);
         Util.assertNumeroDiMarcheOK(componente, 0);
@@ -320,7 +315,7 @@ class VerficaFirmaTest {
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaDataVersamento(dataTest.getTime()));
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         Util.assertNumeroDiFirmeOK(componente, 1);
         Util.assertNumeroDiMarcheOK(componente, 0);
@@ -358,7 +353,7 @@ class VerficaFirmaTest {
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaDataVersamento(dataTest.getTime()));
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         Util.assertNumeroDiFirmeOK(componente, 1);
         Util.assertNumeroDiMarcheOK(componente, 0);
@@ -398,7 +393,8 @@ class VerficaFirmaTest {
         metadata.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaAllaDataSpecifica(rifVersato.getTime()));
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(data, metadata);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(data,
+                metadata);
 
         Util.assertNumeroDiFirmeOK(componente, 1);
         Util.assertNumeroDiMarcheOK(componente, 0);
@@ -434,7 +430,7 @@ class VerficaFirmaTest {
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaAllaDataSpecifica(rifVersato.getTime()));
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         Util.assertNumeroDiFirmeOK(componente, 1);
         Util.assertNumeroDiMarcheOK(componente, 0);
@@ -466,7 +462,7 @@ class VerficaFirmaTest {
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaAllaDataSpecifica(rifVersato.getTime()));
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         Util.assertNumeroDiFirmeOK(componente, 2);
         Util.assertNumeroDiMarcheOK(componente, 0);
@@ -507,7 +503,7 @@ class VerficaFirmaTest {
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaAllaDataSpecifica(rifVersato.getTime()));
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         Util.assertNumeroDiFirmeOK(componente, 2);
         Util.assertNumeroDiMarcheOK(componente, 0);
@@ -546,7 +542,7 @@ class VerficaFirmaTest {
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaAllaDataSpecifica(rifVersato.getTime()));
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         Util.assertNumeroDiFirmeOK(componente, 2);
         Util.assertNumeroDiMarcheOK(componente, 1);
@@ -586,7 +582,7 @@ class VerficaFirmaTest {
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaAllaDataSpecifica(rifVersato.getTime()));
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         Util.assertNumeroDiFirmeOK(componente, 2);
         Util.assertNumeroDiMarcheOK(componente, 1);
@@ -621,7 +617,7 @@ class VerficaFirmaTest {
 
         input.setProfiloVerifica(new CryptoProfiloVerifica().setControlloCrlAbilitato(true));
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         Util.assertNumeroDiFirmeOK(componente, 1);
         Util.assertNumeroDiMarcheOK(componente, 0);
@@ -668,7 +664,7 @@ class VerficaFirmaTest {
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaAllaDataSpecifica(rifVersato.getTime()));
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         Util.assertNumeroDiFirmeOK(componente, 1);
         Util.assertNumeroDiMarcheOK(componente, 0);
@@ -703,7 +699,7 @@ class VerficaFirmaTest {
         input.setProfiloVerifica(new CryptoProfiloVerifica().setControlloCatenaTrustAbilitato(false)
                 .setControlloCertificatoAbilitato(false));
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         Util.assertNumeroDiFirmeOK(componente, 1);
         Util.assertNumeroDiMarcheOK(componente, 0);
@@ -741,7 +737,7 @@ class VerficaFirmaTest {
                 IOUtils.toByteArray(fileFirmato.getURL())));
         input.setTipologiaDataRiferimento(TipologiaDataRiferimento.verificaAllaDataDiFirma());
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         Util.assertNumeroDiFirmeOK(componente, 3);
         Util.assertNumeroDiMarcheOK(componente, 1);
@@ -782,13 +778,12 @@ class VerficaFirmaTest {
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
                 IOUtils.toByteArray(fileFirmato.getURL())));
-        input.setSottoComponentiMarca(Arrays.asList(new CryptoDocumentoVersato[] {
-                new CryptoDocumentoVersato("tsr-versato",
-                        IOUtils.toByteArray(marcaDetached.getURL())) }));
+        input.setSottoComponentiMarca(List.of(new CryptoDocumentoVersato("tsr-versato",
+                IOUtils.toByteArray(marcaDetached.getURL()))));
         // input.setReferenceDateType(CryptoEnums.TipoRifTemporale.DATA_VERS);
         // input.setReferenceDate(dataTest.getTime());
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         Util.assertNumeroDiFirmeOK(componente, 3);
         Util.assertNumeroDiMarcheOK(componente, 2);
@@ -843,16 +838,15 @@ class VerficaFirmaTest {
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
                 IOUtils.toByteArray(fileFirmato.getURL())));
-        input.setSottoComponentiMarca(Arrays.asList(new CryptoDocumentoVersato[] {
-                new CryptoDocumentoVersato("tsr-versato",
-                        IOUtils.toByteArray(marcaDetached.getURL())) }));
+        input.setSottoComponentiMarca(List.of(new CryptoDocumentoVersato("tsr-versato",
+                IOUtils.toByteArray(marcaDetached.getURL()))));
         // input.setReferenceDateType(CryptoEnums.TipoRifTemporale.DATA_VERS);
         // input.setReferenceDate(dataTest.getTime());
 
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaDataVersamento(dataTest.getTime()));
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         Util.assertNumeroDiFirmeOK(componente, 0);
         Util.assertNumeroDiMarcheOK(componente, 1);
@@ -885,13 +879,12 @@ class VerficaFirmaTest {
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
                 IOUtils.toByteArray(fileFirmato.getURL())));
-        input.setSottoComponentiMarca(Arrays.asList(new CryptoDocumentoVersato[] {
-                new CryptoDocumentoVersato("tsr-detached",
-                        IOUtils.toByteArray(marcaDetached.getURL())) }));
+        input.setSottoComponentiMarca(List.of(new CryptoDocumentoVersato("tsr-detached",
+                IOUtils.toByteArray(marcaDetached.getURL()))));
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaDataVersamento(dataTest.getTime()));
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         Util.assertNumeroDiFirmeOK(componente, 1);
         Util.assertNumeroDiMarcheOK(componente, 2);
@@ -936,7 +929,7 @@ class VerficaFirmaTest {
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaDataVersamento(dataTest.getTime()));
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         Util.assertNumeroDiFirmeOK(componente, 1);
         Util.assertNumeroDiMarcheOK(componente, 0);
@@ -975,7 +968,7 @@ class VerficaFirmaTest {
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaAllaDataSpecifica(rifVersato.getTime()));
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         Util.assertNumeroDiFirmeOK(componente, 1);
         Util.assertNumeroDiMarcheOK(componente, 1);
@@ -1010,7 +1003,7 @@ class VerficaFirmaTest {
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaAllaDataSpecifica(rifVersato.getTime()));
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         Util.assertNumeroDiFirmeOK(componente, 0);
         Util.assertNumeroDiMarcheOK(componente, 1);
@@ -1042,7 +1035,7 @@ class VerficaFirmaTest {
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaDataVersamento(dataTest.getTime()));
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         Util.assertNumeroDiFirmeOK(componente, 3);
         Util.assertNumeroDiMarcheOK(componente, 2);
@@ -1091,14 +1084,13 @@ class VerficaFirmaTest {
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
                 IOUtils.toByteArray(fileFirmato.getURL())));
-        input.setSottoComponentiMarca(Arrays.asList(new CryptoDocumentoVersato[] {
-                new CryptoDocumentoVersato("marca-detached",
-                        IOUtils.toByteArray(marcaDetached.getURL())) }));
+        input.setSottoComponentiMarca(List.of(new CryptoDocumentoVersato("marca-detached",
+                IOUtils.toByteArray(marcaDetached.getURL()))));
 
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaDataVersamento(dataTest.getTime()));
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         Util.assertNumeroDiFirmeOK(componente, 3);
         Util.assertNumeroDiMarcheOK(componente, 3);
@@ -1154,16 +1146,16 @@ class VerficaFirmaTest {
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
                 IOUtils.toByteArray(fileFirmato.getURL())));
-        input.setSottoComponentiMarca(Arrays.asList(new CryptoDocumentoVersato[] {
+        input.setSottoComponentiMarca(List.of(
                 new CryptoDocumentoVersato("marca-detached1",
                         IOUtils.toByteArray(marcaDetached1.getURL())),
                 new CryptoDocumentoVersato("marca-detached2",
-                        IOUtils.toByteArray(marcaDetached2.getURL())) }));
+                        IOUtils.toByteArray(marcaDetached2.getURL()))));
 
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaDataVersamento(dataTest.getTime()));
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         Util.assertNumeroDiFirmeOK(componente, 2);
         Util.assertNumeroDiMarcheOK(componente, 2);
@@ -1200,7 +1192,7 @@ class VerficaFirmaTest {
         // input.setUseSigningDate(true);
         input.setTipologiaDataRiferimento(TipologiaDataRiferimento.verificaAllaDataDiFirma());
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         Util.assertNumeroDiFirmeOK(componente, 1);
         Util.assertNumeroDiMarcheOK(componente, 0);
@@ -1237,7 +1229,7 @@ class VerficaFirmaTest {
         // input.setUseSigningDate(true);
         input.setTipologiaDataRiferimento(TipologiaDataRiferimento.verificaAllaDataDiFirma());
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         Util.assertNumeroDiFirmeOK(componente, 1);
         Util.assertNumeroDiMarcheOK(componente, 0);
@@ -1270,7 +1262,7 @@ class VerficaFirmaTest {
         // input.setUseSigningDate(true);
         input.setTipologiaDataRiferimento(TipologiaDataRiferimento.verificaAllaDataDiFirma());
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         Util.assertNumeroDiFirmeOK(componente, 1);
         Util.assertNumeroDiMarcheOK(componente, 0);
@@ -1314,7 +1306,7 @@ class VerficaFirmaTest {
         // input.setUseSigningDate(true);
         input.setTipologiaDataRiferimento(TipologiaDataRiferimento.verificaAllaDataDiFirma());
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         Util.assertNumeroDiFirmeOK(componente, 1);
         Util.assertNumeroDiMarcheOK(componente, 0);
@@ -1354,7 +1346,7 @@ class VerficaFirmaTest {
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaAllaDataSpecifica(rifVersato.getTime()));
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         Util.assertNumeroDiFirmeOK(componente, 1);
         Util.assertNumeroDiMarcheOK(componente, 1);
@@ -1384,14 +1376,13 @@ class VerficaFirmaTest {
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
                 IOUtils.toByteArray(fileFirmato.getURL())));
-        input.setSottoComponentiMarca(Arrays.asList(new CryptoDocumentoVersato[] {
-                new CryptoDocumentoVersato("documento-secondario",
-                        IOUtils.toByteArray(marcaDetached.getURL())) }));
+        input.setSottoComponentiMarca(List.of(new CryptoDocumentoVersato("documento-secondario",
+                IOUtils.toByteArray(marcaDetached.getURL()))));
 
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaDataVersamento(dataTest.getTime()));
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         Util.assertNumeroDiFirmeOK(componente, 0);
         Util.assertNumeroDiMarcheOK(componente, 1);
@@ -1418,13 +1409,12 @@ class VerficaFirmaTest {
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
                 IOUtils.toByteArray(fileFirmato.getURL())));
-        input.setSottoComponentiFirma(Arrays.asList(new CryptoDocumentoVersato[] {
-                new CryptoDocumentoVersato("sottocomponente",
-                        IOUtils.toByteArray(fileDetached.getURL())) }));
+        input.setSottoComponentiFirma(List.of(new CryptoDocumentoVersato("sottocomponente",
+                IOUtils.toByteArray(fileDetached.getURL()))));
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaDataVersamento(dataTest.getTime()));
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         // FIXME!! ATTUALMENTE IL SOTTOCOMPONENTE MUORE DENTRO LA VERIFICA FIRMA!!!
         Util.assertNumeroDiFirmeOK(componente, 1);
@@ -1462,7 +1452,7 @@ class VerficaFirmaTest {
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaAllaDataSpecifica(dataRif.getTime()));
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         Util.assertNumeroDiFirmeOK(componente, 1);
         Util.assertNumeroDiMarcheOK(componente, 0);
@@ -1501,7 +1491,7 @@ class VerficaFirmaTest {
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaDataVersamento(dataTest.getTime()));
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         Util.assertNumeroDiFirmeOK(componente, 1);
         Util.assertNumeroDiMarcheOK(componente, 0);
@@ -1536,7 +1526,7 @@ class VerficaFirmaTest {
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaDataVersamento(dataTest.getTime()));
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
         Util.assertNumeroDiFirmeOK(componente, 0);
         // Util.assertControlloFirmaErrore(componente.getAroFirmaComps().get(0));
 
@@ -1563,7 +1553,7 @@ class VerficaFirmaTest {
                 IOUtils.toByteArray(fileFirmato.getURL())));
         input.setTipologiaDataRiferimento(TipologiaDataRiferimento.verificaAllaDataDiFirma());
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         Util.assertNumeroDiFirmeOK(componente, 1);
         Util.assertNumeroDiMarcheOK(componente, 0);
@@ -1590,7 +1580,7 @@ class VerficaFirmaTest {
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaAllaDataSpecifica(rifVersato.getTime()));
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         // sono 3 firme
         Util.assertNumeroDiFirmeOK(componente, 3);
@@ -1610,7 +1600,7 @@ class VerficaFirmaTest {
                 IOUtils.toByteArray(fileFirmato.getURL())));
         input.setTipologiaDataRiferimento(TipologiaDataRiferimento.verificaAllaDataDiFirma());
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         String expetedMimeType = "application/msword";
         String actualMimeType = componente.getTikaMimeComponentePrincipale();
@@ -1636,7 +1626,7 @@ class VerficaFirmaTest {
         input.setUuid("TEST-UUID");
         ObjectMapper mapper = new ObjectMapper();
         String inputAsJsonString = mapper.writeValueAsString(input);
-        final String expectedOutput = "{\"contenuto\":{\"nome\":\"id_42\",\"contenuto\":\"dGVzdA==\"},\"uuid\":\"TEST-UUID\",\"sottoComponentiFirma\":[],\"sottoComponentiMarca\":[],\"profiloVerifica\":{\"controlloCrittograficoAbilitato\":true,\"controlloCatenaTrustAbilitato\":true,\"controlloCertificatoAbilitato\":true,\"controlloCrlAbilitato\":true,\"includeCertificateAndRevocationValues\":true},\"tipologiaDataRiferimento\":{\"referenceDateType\":\"RIF_TEMP_VERS\",\"useSigningDate\":false,\"dataRiferimento\":42}}";
+        final String expectedOutput = "{\"contenuto\":{\"nome\":\"id_42\",\"contenuto\":\"dGVzdA==\"},\"uuid\":\"TEST-UUID\",\"sottoComponentiFirma\":[],\"sottoComponentiMarca\":[],\"profiloVerifica\":{\"controlloCrittograficoAbilitato\":true,\"controlloCatenaTrustAbilitato\":true,\"controlloCertificatoAbilitato\":true,\"controlloCrlAbilitato\":true,\"includeCertificateAndRevocationValues\":true,\"skipDocumentSignVerification\":false},\"tipologiaDataRiferimento\":{\"referenceDateType\":\"RIF_TEMP_VERS\",\"useSigningDate\":false,\"dataRiferimento\":42}}";
         assertEquals(expectedOutput, inputAsJsonString);
     }
 
@@ -1651,7 +1641,7 @@ class VerficaFirmaTest {
         input.setTipologiaDataRiferimento(
                 TipologiaDataRiferimento.verificaAllaDataSpecifica(dataRif.getTime()));
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
 
         assertNotNull(componente.getValidatorVersion());
     }
@@ -1665,13 +1655,12 @@ class VerficaFirmaTest {
         CryptoDataToValidate input = new CryptoDataToValidate();
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
                 IOUtils.toByteArray(fileFirmato.getURL())));
-        input.setSottoComponentiMarca(Arrays.asList(new CryptoDocumentoVersato[] {
-                new CryptoDocumentoVersato("tsr-versato",
-                        IOUtils.toByteArray(marcaDetached.getURL())) }));
+        input.setSottoComponentiMarca(List.of(new CryptoDocumentoVersato("tsr-versato",
+                IOUtils.toByteArray(marcaDetached.getURL()))));
         // input.setReferenceDateType(CryptoEnums.TipoRifTemporale.DATA_VERS);
         // input.setReferenceDate(dataTest.getTime());
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
         String tikaMimeComponentePrincipale = componente.getTikaMimeComponentePrincipale();
         assertEquals("application/pdf", tikaMimeComponentePrincipale);
     }
@@ -1683,7 +1672,7 @@ class VerficaFirmaTest {
         input.setContenuto(new CryptoDocumentoVersato("documento-principale",
                 IOUtils.toByteArray(fileFirmato.getURL())));
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
         String expectedSubjectCA = "CN=ArubaPEC S.p.A. NG CA 3,OU=Certification AuthorityC,O=ArubaPEC S.p.A.,C=IT";
         String actualSubjectCA = componente.getAroFirmaComps().get(0).getFirCertifFirmatario()
                 .getFirCertifCa().getFirIssuer().getDlDnSubjectCertifCa();
@@ -1698,10 +1687,90 @@ class VerficaFirmaTest {
         input.setContenuto(new CryptoDocumentoVersato("componente-tsr",
                 IOUtils.toByteArray(componenteTsrResource.getURL())));
 
-        CryptoAroCompDoc componente = verificaFirmaService.verificaFirma(input);
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(input);
         // sono 3 firme
         Util.assertNumeroDiMarcheOK(componente, 1);
 
+    }
+
+    private CryptoProfiloVerifica buildSkipSignVerificationProfile() {
+        CryptoProfiloVerifica profilo = new CryptoProfiloVerifica();
+        profilo.setSkipDocumentSignVerification(true);
+        return profilo;
+    }
+
+    /**
+     * Verifica che con skipDocumentSignVerification=true su un file p7m (contenente un PDF) il
+     * campo tikaMimeComponentePrincipale sia valorizzato con il mimetype del documento sbustato. Le
+     * firme non vengono verificate (aroFirmaComps e aroMarcaComps devono essere vuote).
+     */
+    @Test
+    void testSkipDocumentSignVerificationTikaMimeP7m() throws IOException {
+        Resource fileFirmato = resourceLoader.getResource("classpath:firme/cades_T_1.pdf.p7m");
+
+        CryptoDataToValidateData data = new CryptoDataToValidateData();
+        data.setContenuto(new CryptoDataToValidateFile("documento-principale.pdf.p7m",
+                fileFirmato.getFile()));
+
+        CryptoDataToValidateMetadata metadata = new CryptoDataToValidateMetadata();
+        metadata.setProfiloVerifica(buildSkipSignVerificationProfile());
+
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(data,
+                metadata);
+
+        assertNotNull(componente);
+        assertNotNull(componente.getTikaMimeComponentePrincipale());
+        assertEquals("application/pkcs7-signature", componente.getTikaMimeComponentePrincipale());
+        assertTrue(componente.getAroFirmaComps().isEmpty());
+        assertTrue(componente.getAroMarcaComps().isEmpty());
+    }
+
+    /**
+     * Verifica che con skipDocumentSignVerification=true su un file PDF non firmato il campo
+     * tikaMimeComponentePrincipale sia valorizzato correttamente.
+     */
+    @Test
+    void testSkipDocumentSignVerificationTikaMimePdf() throws IOException {
+        Resource filePdf = resourceLoader.getResource("classpath:firme/cades_T_1_sbustato.pdf");
+
+        CryptoDataToValidateData data = new CryptoDataToValidateData();
+        data.setContenuto(
+                new CryptoDataToValidateFile("documento-principale.pdf", filePdf.getFile()));
+
+        CryptoDataToValidateMetadata metadata = new CryptoDataToValidateMetadata();
+        metadata.setProfiloVerifica(buildSkipSignVerificationProfile());
+
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(data,
+                metadata);
+
+        assertNotNull(componente);
+        assertNotNull(componente.getTikaMimeComponentePrincipale());
+        assertEquals("application/pdf", componente.getTikaMimeComponentePrincipale());
+        assertTrue(componente.getAroFirmaComps().isEmpty());
+        assertTrue(componente.getAroMarcaComps().isEmpty());
+    }
+
+    /**
+     * Verifica che con skipDocumentSignVerification=true il profilo di verifica sia riportato
+     * nell'esito con skipDocumentSignVerification=true.
+     */
+    @Test
+    void testSkipDocumentSignVerificationProfiloNelRisultato() throws IOException {
+        Resource fileFirmato = resourceLoader.getResource("classpath:firme/cades_T_1.pdf.p7m");
+
+        CryptoDataToValidateData data = new CryptoDataToValidateData();
+        data.setContenuto(new CryptoDataToValidateFile("documento-principale.pdf.p7m",
+                fileFirmato.getFile()));
+
+        CryptoDataToValidateMetadata metadata = new CryptoDataToValidateMetadata();
+        metadata.setProfiloVerifica(buildSkipSignVerificationProfile());
+
+        CryptoAroCompDoc componente = verificaFirmaService.verificaFirmaAndOrMimetype(data,
+                metadata);
+
+        assertNotNull(componente.getProfiloValidazione());
+        assertTrue(componente.getProfiloValidazione().isSkipDocumentSignVerification());
+        assertNotNull(componente.getTikaMimeComponentePrincipale());
     }
 
 }

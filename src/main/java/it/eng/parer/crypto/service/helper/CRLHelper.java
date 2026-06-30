@@ -28,6 +28,7 @@ import it.eng.crypto.exception.CryptoStorageException;
 import it.eng.parer.crypto.jpa.entity.CryCrl;
 import it.eng.parer.crypto.jpa.entity.CryCrlPK;
 import it.eng.parer.crypto.jpa.repository.CryCrlRepository;
+import it.eng.parer.crypto.service.util.DateConverter;
 import jakarta.persistence.EntityManager;
 
 /**
@@ -59,8 +60,8 @@ public class CRLHelper implements CRLHelperLocal {
             }
 
             entityCrl.setSubjectdn(crl.getIssuerX500Principal().getName());
-            entityCrl.setUpdateData(crl.getThisUpdate());
-            entityCrl.setNextExpiration(crl.getNextUpdate());
+            entityCrl.setUpdateData(DateConverter.asLocalDateTime(crl.getThisUpdate()));
+            entityCrl.setNextExpiration(DateConverter.asLocalDateTime(crl.getNextUpdate()));
             entityCrl.setCrl(crl.getEncoded());
             entityCrl.setKeyId(keyId);
             repository.save(entityCrl);

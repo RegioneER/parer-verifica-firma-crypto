@@ -39,6 +39,7 @@ import it.eng.crypto.storage.ICAStorage;
 import it.eng.parer.crypto.jpa.entity.CryCertificate;
 import it.eng.parer.crypto.jpa.entity.CryCertificatePK;
 import it.eng.parer.crypto.jpa.repository.CryCertificateRepository;
+import it.eng.parer.crypto.service.util.DateConverter;
 import jakarta.persistence.EntityManager;
 
 /**
@@ -71,7 +72,6 @@ public class CAHelper implements ICAStorage {
             byte[] dati = certificate.getEncoded();
             try {
                 certificate.checkValidity();
-                active = true;
             } catch (CertificateException e) {
                 active = false;
             }
@@ -87,7 +87,7 @@ public class CAHelper implements ICAStorage {
             }
             cert.setActive(active ? "Y" : "N");
             cert.setCertificate(dati);
-            cert.setExpirationDate(data);
+            cert.setExpirationDate(DateConverter.asLocalDateTime(data));
             cert.setSubjectdn(subjectDN);
             cert.setKeyId(keyId);
             if (isNew) {

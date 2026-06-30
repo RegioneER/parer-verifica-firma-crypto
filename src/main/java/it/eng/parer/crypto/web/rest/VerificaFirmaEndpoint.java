@@ -78,13 +78,13 @@ import jakarta.validation.Valid;
  *
  * @author Snidero_L
  */
-@Tag(name = "Verifica", description = "Report verifica firma")
+@Tag(name = "Verifica", description = "Verifica firma digitale / formato")
 @RestController
 @Validated
 @RequestMapping(URL_API_BASE)
-public class VerificaFirmaController {
+public class VerificaFirmaEndpoint {
 
-    private final Logger log = LoggerFactory.getLogger(VerificaFirmaController.class);
+    private final Logger log = LoggerFactory.getLogger(VerificaFirmaEndpoint.class);
 
     private static final FileAttribute<Set<PosixFilePermission>> attr = PosixFilePermissions
             .asFileAttribute(PosixFilePermissions.fromString("rw-------"));
@@ -157,7 +157,7 @@ public class VerificaFirmaController {
      *
      * @return report della verifica crypto
      */
-    @Operation(summary = "Report Verifica", method = "Effettua la verifica dei file passati in input. La risorsa ottenuta da questa chiamata è il report di verifica")
+    @Operation(summary = "Report Verifica firma e mimetype", description = "Endpoint per la verifica di un documento firmato e/o del relativo mimetype/formato. Il file da verificare è l'unico elemento obbligatorio, mentre le firme e le marche sono opzionali. I metadati sono opzionali ma se presenti devono essere coerenti con i file caricati.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Esito verifica documento firmato", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = CryptoAroCompDoc.class)) }),
@@ -168,7 +168,7 @@ public class VerificaFirmaController {
             @ApiResponse(responseCode = "500", description = "Documento firmato non riconosciuto", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }) })
     @PostMapping(value = RESOURCE_REPORT_VERIFICA, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CryptoAroCompDoc> verificaFirmaMultipart(
+    public ResponseEntity<CryptoAroCompDoc> verificaFirmaAndOrMimetypeMultipart(
             @Valid @RequestPart(name = "metadati", required = false) @Parameter(schema = @Schema(type = "string", format = "binary")) CryptoDataToValidateMetadata metadati,
             @RequestPart(name = "contenuto", required = true) MultipartFile contenuto,
             @RequestPart(name = "firme", required = false) List<MultipartFile> firme,
@@ -244,7 +244,8 @@ public class VerificaFirmaController {
             dati.setSottoComponentiFirma(detachedSignature);
             dati.setSottoComponentiMarca(detachedTimeStamp);
 
-            CryptoAroCompDoc verificaFirma = verificaFirmaService.verificaFirma(dati, metadati);
+            CryptoAroCompDoc verificaFirma = verificaFirmaService.verificaFirmaAndOrMimetype(dati,
+                    metadati);
             String selfLink = request.getRequestURL().toString();
             // HATEOAS de no attri
             verificaFirma.setLink(selfLink);
@@ -277,6 +278,7 @@ public class VerificaFirmaController {
                     log.atWarn().log(CANT_DELETE, s.getContenuto().getName());
                 }
             });
+            MDC.remove(Constants.UUID_LOG_MDC);
 
         }
     }
@@ -296,7 +298,7 @@ public class VerificaFirmaController {
      *
      * @return report della verifica crypto
      */
-    @Operation(summary = "Report Verifica", method = "Effettua la verifica dei file passati in input. La risorsa ottenuta da questa chiamata è il report di verifica")
+    @Operation(summary = "Report Verifica firma e mimetype", description = "Endpoint per la verifica di un documento firmato e/o del relativo mimetype/formato. Il file da verificare è l'unico elemento obbligatorio, mentre le firme e le marche sono opzionali. I metadati sono opzionali ma se presenti devono essere coerenti con i file caricati.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Esito verifica documento firmato", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = CryptoAroCompDoc.class)) }),
@@ -307,7 +309,7 @@ public class VerificaFirmaController {
             @ApiResponse(responseCode = "500", description = "Documento firmato non riconosciuto", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = RestExceptionResponse.class)) }) })
     @PostMapping(value = RESOURCE_REPORT_VERIFICA, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CryptoAroCompDoc> verificaFirmaJson(
+    public ResponseEntity<CryptoAroCompDoc> verificaFirmaAndOrMimetypeJson(
             @Valid @RequestBody(required = true) CryptoDataToValidateBody body,
             HttpServletRequest request) {
 
@@ -395,8 +397,8 @@ public class VerificaFirmaController {
             datiVerifica.setSottoComponentiFirma(detachedSignature);
             datiVerifica.setSottoComponentiMarca(detachedTimeStamp);
 
-            CryptoAroCompDoc verificaFirma = verificaFirmaService.verificaFirma(datiVerifica,
-                    metadati);
+            CryptoAroCompDoc verificaFirma = verificaFirmaService
+                    .verificaFirmaAndOrMimetype(datiVerifica, metadati);
             String selfLink = request.getRequestURL().toString();
             // HATEOAS de no attri
             verificaFirma.setLink(selfLink);
@@ -429,6 +431,7 @@ public class VerificaFirmaController {
                     log.atWarn().log(CANT_DELETE, s.getContenuto().getName());
                 }
             });
+            MDC.remove(Constants.UUID_LOG_MDC);
 
         }
     }

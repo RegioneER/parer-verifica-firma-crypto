@@ -59,9 +59,9 @@ import it.eng.parer.crypto.web.bean.RestExceptionResponse;
 @RestController
 @RequestMapping(URL_API_BASE)
 @Deprecated(forRemoval = true, since = "Non più invocato, verificare se migrare su altro microservice")
-public class TimestampController {
+public class TimestampEndpoint {
 
-    private final Logger log = LoggerFactory.getLogger(TimestampController.class);
+    private final Logger log = LoggerFactory.getLogger(TimestampEndpoint.class);
 
     private static final FileAttribute<Set<PosixFilePermission>> attr = PosixFilePermissions
             .asFileAttribute(PosixFilePermissions.fromString("rw-------"));
@@ -69,7 +69,7 @@ public class TimestampController {
     @Autowired
     TimeService timeService;
 
-    @Operation(summary = "Timestamp", method = "Ottieni un timestamp per lo stream di dati passato in input")
+    @Operation(summary = "Timestamp", description = "Ottieni un timestamp per lo stream di dati passato in input")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Timestamp inserito correttamente", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = ParerTST.class)) }),
@@ -93,7 +93,7 @@ public class TimestampController {
         return timeService.getTst(content);
     }
 
-    @Operation(summary = "Timestamp", method = "Ottieni l'oggetto passato in input stream marcato")
+    @Operation(summary = "Timestamp", description = "Ottieni l'oggetto passato in input stream marcato")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "TSD inserito correttamente", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = ParerTSD.class)) }),

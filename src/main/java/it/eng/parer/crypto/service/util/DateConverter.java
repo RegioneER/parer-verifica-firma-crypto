@@ -11,7 +11,7 @@
  * see <https://www.gnu.org/licenses/>.
  */
 
-package it.eng.parer.crypto.jpa.entity.converter;
+package it.eng.parer.crypto.service.util;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -23,9 +23,9 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeverendingDateConverter {
+public class DateConverter {
 
-    private static final Logger LOG = LoggerFactory.getLogger(NeverendingDateConverter.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DateConverter.class);
 
     /*
      * MAX DATE supported by Oracle DB
@@ -36,34 +36,38 @@ public class NeverendingDateConverter {
             59, 59);
 
     /**
-     * Verifica se una certa data (ZoneId di sistema) convertita con lo zoneIdToCheck se oltre la
-     * data massima permessa NEVERENDING altrimenti restituisce NEVERENDING
-     *
-     * @param dateToCheck   data da verificare
-     * @param zoneIdToCheck id Locale
-     *
-     * @return date
-     */
-    public static Date verifyOverZoneId(Date dateToCheck, ZoneId zoneIdToCheck) {
-        // equals OR after
-        Date dateToCheckOverZid = convert(dateToCheck, zoneIdToCheck);
-        if (dateToCheckOverZid.equals(asDate(NEVERENDING))
-                || dateToCheckOverZid.after(asDate(NEVERENDING))) {
-            LOG.warn("Data: {} oltre il limite massimo consentito {}", dateToCheck, NEVERENDING);
-            return asDate(NEVERENDING);
-        }
-        return dateToCheck;
-    }
-
-    /**
      * Come sopra ma con il default ZoneId
      *
      * @param dateToCheck da verificare
      *
      * @return date da verificare
      */
-    public static Date verifyOverZoneId(Date dateToCheck) {
+    public static LocalDateTime verifyOverZoneId(LocalDateTime dateToCheck) {
         return verifyOverZoneId(dateToCheck, ZoneId.systemDefault());
+    }
+
+    /**
+     * Verifica se una certa LocalDateTime (ZoneId di sistema) convertita con lo zoneIdToCheck se
+     * oltre la data massima permessa NEVERENDING altrimenti restituisce NEVERENDING
+     *
+     * @param dateToCheck   data da verificare
+     * @param zoneIdToCheck id Locale
+     *
+     * @return LocalDateTime
+     */
+    public static LocalDateTime verifyOverZoneId(LocalDateTime dateToCheck, ZoneId zoneIdToCheck) {
+        if (dateToCheck == null) {
+            return null;
+        }
+        // Convert to Date for checking
+        Date dateAsDate = asDate(dateToCheck);
+        Date dateToCheckOverZid = convert(dateAsDate, zoneIdToCheck);
+        if (dateToCheckOverZid.equals(asDate(NEVERENDING))
+                || dateToCheckOverZid.after(asDate(NEVERENDING))) {
+            LOG.warn("Data: {} oltre il limite massimo consentito {}", dateToCheck, NEVERENDING);
+            return NEVERENDING;
+        }
+        return dateToCheck;
     }
 
     private static Date convert(Date dateToCheck, ZoneId zid) {
@@ -82,11 +86,25 @@ public class NeverendingDateConverter {
         return Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
     }
 
-    private static LocalDateTime asLocalDateTime(Date date) {
-        return asLocalDateTime(date, ZoneId.systemDefault());
+    /**
+     * Converts a Date to LocalDateTime using the system default ZoneId
+     *
+     * @param date the date to convert
+     * @return LocalDateTime or null if date is null
+     */
+    public static LocalDateTime asLocalDateTime(Date date) {
+        return date == null ? null : asLocalDateTime(date, ZoneId.systemDefault());
     }
 
-    private static LocalDateTime asLocalDateTime(Date date, ZoneId zid) {
-        return Instant.ofEpochMilli(date.getTime()).atZone(zid).toLocalDateTime();
+    /**
+     * Converts a Date to LocalDateTime using the specified ZoneId
+     *
+     * @param date the date to convert
+     * @param zid  the zone ID to use for conversion
+     * @return LocalDateTime or null if date is null
+     */
+    public static LocalDateTime asLocalDateTime(Date date, ZoneId zid) {
+        return date == null ? null
+                : Instant.ofEpochMilli(date.getTime()).atZone(zid).toLocalDateTime();
     }
 }
