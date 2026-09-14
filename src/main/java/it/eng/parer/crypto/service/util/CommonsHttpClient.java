@@ -139,7 +139,7 @@ public class CommonsHttpClient implements Serializable {
 
     private SocketConfig getSocketConfig() {
         SocketConfig.Builder socketConfigBuilder = SocketConfig.custom();
-        socketConfigBuilder.setSoTimeout(httpClientTimeout * 1000);
+        socketConfigBuilder.setSoTimeout(httpClientSocketTimeout * 1000);
         return socketConfigBuilder.build();
     }
 

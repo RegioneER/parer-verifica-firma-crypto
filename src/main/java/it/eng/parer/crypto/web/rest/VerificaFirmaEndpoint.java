@@ -95,45 +95,6 @@ public class VerificaFirmaEndpoint {
     @Autowired
     CommonsHttpClient commonsHttpClient;
 
-    // default 60 s
-    @Value("${parer.crypto.uriloader.webclient.timeout:60}")
-    long webClientTimeout;
-
-    // default 5 times
-    @Value("${parer.crypto.uriloader.webclient.backoff:5}")
-    long webClientBackoff;
-
-    // default 3 s
-    @Value("${parer.crypto.uriloader.webclient.backofftime:3}")
-    long webClientBackoffTime;
-
-    /*
-     * Standard httpclient
-     */
-    // default 60 s
-    @Value("${parer.crypto.uriloader.httpclient.timeout:60}")
-    int httpClientTimeout;
-
-    // default 60 s
-    @Value("${parer.crypto.uriloader.httpclient.timeoutsocket:60}")
-    int httpClientSocketTimeout;
-
-    // default 4
-    @Value("${parer.crypto.uriloader.httpclient.connectionsmaxperroute:4}")
-    int httpClientConnectionsmaxperroute;
-
-    // default 40
-    @Value("${parer.crypto.uriloader.httpclient.connectionsmax:40}")
-    int httpClientConnectionsmax;
-
-    // defult 60s
-    @Value("${parer.crypto.uriloader.httpclient.timetolive:60}")
-    long httpClientTimeToLive;
-
-    // default false
-    @Value("${parer.v.uriloader.httpclient.no-ssl-verify:false}")
-    boolean noSslVerify;
-
     /**
      * Metodo per effettuare la verifica delle firme.
      *

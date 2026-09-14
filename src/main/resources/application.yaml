@@ -87,5 +87,11 @@ parer:
         propstoskip: .*H2_USER.*|.*H2_PWD.*|.*ADMIN_USER.*|.*ADMIN_PWD.*|.*user.*|.*password.*|.*email.*      
     verifica-ui:
       enabled: true
-
+    # HTTP + LDAP standard client (timeout in seconds)
+    uriloader:
+      httpclient: 
+        timeout: 20
+        timeoutsocket: 20
+        timetolive: 300
+        connectionsmaxperroute: 10
          
